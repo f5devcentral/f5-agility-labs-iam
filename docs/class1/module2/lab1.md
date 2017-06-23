@@ -1,4 +1,4 @@
-Lab 1.1 – Markdown files are also supported
+Lab 2.1 – Markdown files are also supported
 ===========================================
 
 Task 1 – The First Task

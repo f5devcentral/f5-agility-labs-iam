@@ -132,6 +132,8 @@ html_theme_options = {
                         'next_prev_link': True
                      }
 
+def setup(app):
+    app.add_stylesheet('css/f5_agility_theme.css')
 
 if on_rtd:
     templates_path = ['_templates']
