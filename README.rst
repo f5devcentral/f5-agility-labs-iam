@@ -29,8 +29,37 @@ To use this template:
    - ``classname = "Your Class Name"``
    - ``github_repo = "https://github.com/f5devcentral/your-class-repo"``
 
-#. Build docs ``./containthedocs-build.sh``
+#. Build docs ``./containthedocs-build.sh`` (*see :ref:`scripts` for additional 
+   build scripts)*
 #. Open the ``docs/_build/html/index.html`` file on you system in a web browser
 #. Edit the ``*.rst`` files as needed for your class
 #. Rebuild docs as needed using ``./containthedocs-build.sh``
+
+Converting from Microsoft Word
+------------------------------
+
+To convert a ``.docx`` file from Microsoft Work to reStructuredText:
+
+#. Copy your ``.docx`` file in the f5-agility-lab-template directory
+#. Run ``./containthedocs-convert <filename.docx>``
+#. Your converted file will be named ``filename.rst``
+#. Images in your document will be extracted and placed in the ``media`` 
+   directory
+   
+.. _scripts:
+
+Build Scripts
+-------------
+
+The repo includes build scripts for common operations:
+
+- ``containthedocs-bash.sh``: Run to container with a BASH prompt
+- ``containthedocs-build.sh``: Build HTML docs using ``make -C docs html`` to
+  ``docs/_build/html``
+- ``containthedocs-clean.sh``: Clean the build director using 
+  ``make -C docs clean``
+- ``containthedocs-convert.sh``: Convert a Word ``.docx`` file to rST
+- ``containthedocs-pdf.sh``: Build PDF docs using ``make -C docs latexpdf`` to
+  ``docs/_build/latex``
+
 

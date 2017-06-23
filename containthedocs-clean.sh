@@ -2,7 +2,7 @@
 
 set -x
 
-COMMAND="make -C docs html"
+COMMAND="make -C docs clean"
 
 . ./containthedocs-image
 

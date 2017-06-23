@@ -2,7 +2,12 @@
 
 set -x
 
-COMMAND="make -C docs html"
+if [ "$#" -ne 1 ]; then
+	echo "Usage $0 <file.docx>"
+	exit 1
+fi
+
+COMMAND="scripts/convertdocx.sh $1"
 
 . ./containthedocs-image
 
