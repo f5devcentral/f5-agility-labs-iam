@@ -29,8 +29,7 @@ To use this template:
    - ``classname = "Your Class Name"``
    - ``github_repo = "https://github.com/f5devcentral/your-class-repo"``
 
-#. Build docs ``./containthedocs-build.sh`` (*see :ref:`scripts` for additional 
-   build scripts)*
+#. Build docs ``./containthedocs-build.sh`` (*see Build Scripts below*)
 #. Open the ``docs/_build/html/index.html`` file on you system in a web browser
 #. Edit the ``*.rst`` files as needed for your class
 #. Rebuild docs as needed using ``./containthedocs-build.sh``
