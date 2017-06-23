@@ -39,8 +39,8 @@ Converting from Microsoft Word
 
 To convert a ``.docx`` file from Microsoft Work to reStructuredText:
 
-#. Copy your ``.docx`` file in the f5-agility-lab-template directory
-#. Run ``./containthedocs-convert <filename.docx>``
+#. Copy your ``.docx`` file into the f5-agility-lab-template directory
+#. Run ``./containthedocs-convert.sh <filename.docx>``
 #. Your converted file will be named ``filename.rst``
 #. Images in your document will be extracted and placed in the ``media`` 
    directory
