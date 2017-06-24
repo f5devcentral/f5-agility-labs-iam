@@ -1,7 +1,7 @@
 Examples of Common Formatting
 =============================
 
-This page has examples of many different types of formatting that can be 
+This page has examples of many different types of formatting that can be
 achieved using reStrcuturedText.  Complete documentation is available at:
 
 http://www.sphinx-doc.org/en/stable/rest.html
@@ -45,16 +45,19 @@ Code block without syntax highlighting:
    -rw-r--r--  1 user  staff   152 Jun 22 21:32 index.rst
    -rw-r--r--  1 user  staff   995 Jun 22 20:55 intro.rst
    -rw-r--r--  1 user  staff   817 Jun 22 17:51 make.bat
-   $   
+   $
 
 Code block with syntax highlighting:
+
+.. NOTE:: A list of supported languages can be found at
+   `here <http://build-me-the-docs-please.readthedocs.io/en/latest/Using_Sphinx/ShowingCodeExamplesInSphinx.html#pygments-lexers>`__
 
 .. code-block:: python
 
    import math
    a = 1
    b = 2
-   sum = a + b 
+   sum = a + b
    print 'Sum: %s' % sum
 
 
@@ -66,7 +69,7 @@ Code block with highlighting and line numbers:
    import math
    a = 1
    b = 2
-   sum = a + b 
+   sum = a + b
    print 'Sum: %s' % sum
 
 
@@ -79,7 +82,7 @@ Code block with highlighting, line numbers, and line highlighting:
    import math
    a = 1
    b = 2
-   sum = a + b 
+   sum = a + b
    print 'Sum: %s' % sum
 
 Substitutions
@@ -128,12 +131,12 @@ External
 ~~~~~~~~
 
 - Bare URL: https://www.f5.com
-- Named Link: Click `here <https://www.f5.com>`_ to goto F5's website
+- Named Link: Click `here <https://www.f5.com>`__ to goto F5's website
 
 Internal
 ~~~~~~~~
 
-- Reference section headers in this document: `Hyperlinks <#hyperlinks>`_
+- Reference section headers in this document: `Hyperlinks <#hyperlinks>`__
 - Reference other pages: :ref:`Welcome <label-welcome>`
 
 
@@ -146,7 +149,7 @@ Unordered Lists
 
 - This
 - Is
-- A 
+- A
 - List
 
 Ordered Lists
@@ -169,7 +172,7 @@ Nested Lists
      - Bravo
      - Charlie
 
-- Is 
+- Is
 
   - 1
   - 2

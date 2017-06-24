@@ -1,12 +1,3 @@
-.. _label-welcome:
-
-Welcome
--------
-
-Welcome to the |classbold| lab at F5 Agility |year|
-
-|repoinfo|
-
 Getting Started
 ---------------
 
@@ -19,7 +10,7 @@ lab and access your jump host.
 	required.
 
 Lab Topology
-------------
+~~~~~~~~~~~~
 
 The following components have been included in your lab environment:
 
@@ -27,6 +18,9 @@ The following components have been included in your lab environment:
 - 1 x F5 iWorkflow VE (v2.1)
 - 1 x Linux LAMP Webserver (xubuntu 14.04)
 - 1 x Windows Jumphost
+
+Lab Components
+^^^^^^^^^^^^^^
 
 The following table lists VLANS, IP Addresses and Credentials for all
 components:
