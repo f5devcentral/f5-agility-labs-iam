@@ -1,4 +1,10 @@
 img {
 	width: 100%;
 	max-width: 650px;
+	margin-bottom: 12px;
 }
+
+table {
+	margin-bottom: 12px;
+}
+

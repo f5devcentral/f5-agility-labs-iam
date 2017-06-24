@@ -28,6 +28,7 @@ rst_prolog = """
 .. |ltm| replace:: Local Traffic Manager
 .. |adc| replace:: Application Delivery Controller
 .. |gtm| replace:: Global Traffic Manager
+.. |dns| replace:: DNS
 .. |asm| replace:: Application Security Manager
 .. |afm| replace:: Advanced Firewall Manager
 .. |apm| replace:: Access Policy Manager
