@@ -1,4 +1,4 @@
-Module 1 – This is the First Module
+Module – This is the First Module
 ===================================
 
 Describe what this module teaches here

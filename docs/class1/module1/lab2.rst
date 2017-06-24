@@ -1,7 +1,7 @@
-Lab 1.2 – The Second Lab
+Lab – The Second Lab
 ------------------------
 
-Task 1 – The First Task
+Task – The First Task
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 Describe what this task accomplishes here
@@ -16,7 +16,7 @@ Describe what this task accomplishes here
 
 #. Step n
 
-Task 2 – The Second Task
+Task – The Second Task
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 Describe what this task accomplishes here

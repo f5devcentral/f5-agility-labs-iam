@@ -1,4 +1,4 @@
-Module 2 – This is the Second Module
+Module – This is the Second Module
 ====================================
 
 Describe what this module teaches here
