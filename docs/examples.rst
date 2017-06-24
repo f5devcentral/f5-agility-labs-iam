@@ -105,24 +105,48 @@ Result:
 Pre-configured Substitutions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-A number of common substitutions are pre-configured for convinience:
+A number of common substitutions are pre-configured for convenience:
 
-- \|classname\|: |classname|
-- \|classbold\|: |classbold|
-- \|classitalic\|: |classitalic|
-- \|ltm\|: |ltm|
-- \|adc\|: |adc|
-- \|gtm\|: |gtm|
-- \|asm\|: |asm|
-- \|afm\|: |afm|
-- \|apm\|: |apm|
-- \|ipi\|: |ipi|
-- \|iwf\|: |iwf|
-- \|biq\|: |biq|
-- \|bip\|: |bip|
-- \|f5\|: |f5|
-- \|f5i\|: |f5i|
-- \|year\|: |year|
+.. list-table::
+   :header-rows: 1
+   :widths: 20 80
+
+   * - Name
+     - Value
+   * - ``|classname|``
+     - |classname|
+   * - ``|classbold|``
+     - |classbold|
+   * - ``|classitalic|``
+     - |classitalic|
+   * - ``|ltm|``
+     - |ltm|
+   * - ``|adc|``
+     - |adc|
+   * - ``|gtm|``
+     - |gtm|
+   * - ``|dns|``
+     - |dns|
+   * - ``|asm|``
+     - |asm|
+   * - ``|afm|``
+     - |afm|
+   * - ``|apm|``
+     - |apm|
+   * - ``|ipi|``
+     - |ipi|
+   * - ``|iwf|``
+     - |iwf|
+   * - ``|biq|``
+     - |biq|
+   * - ``|bip|``
+     - |bip|
+   * - ``|f5|``
+     - |f5|
+   * - ``|f5i|``
+     - |f5i|
+   * - ``|year|``
+     - |year|
 
 Hyperlinks
 ----------
