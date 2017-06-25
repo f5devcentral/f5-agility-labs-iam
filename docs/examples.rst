@@ -7,7 +7,7 @@ achieved using reStrcuturedText.  Complete documentation is available at:
 http://www.sphinx-doc.org/en/stable/rest.html
 
 .. HINT::
-   To view the source code open ``examples.rst`` in a text editor
+   `Click here to view the source of this page <_sources/examples.rst.txt>`__
 
 Text Markup
 -----------
@@ -90,7 +90,8 @@ Substitutions
 
 
 rST:
-.. code::
+
+.. code-block:: rst
 
    .. |name| replace:: replacement *text*
 
@@ -211,10 +212,30 @@ Tables
 List Tables
 ~~~~~~~~~~~
 
+With Stub Column
+^^^^^^^^^^^^^^^^
+
 .. list-table::
     :widths: 20 40 40
     :header-rows: 1
     :stub-columns: 1
+
+    * - **Column 1 (Stub)**
+      - **Column 2**
+      - **Column 3**
+    * - Row 1
+      - Value 1
+      - Value 2
+    * - Row 2
+      - Value 1
+      - Value 2
+
+Without Stub Column
+^^^^^^^^^^^^^^^^^^^
+
+.. list-table::
+    :widths: 20 40 40
+    :header-rows: 1
 
     * - **Column 1**
       - **Column 2**
@@ -235,8 +256,30 @@ Grid Tables
 +========================+============+==========+==========+
 | body row 1, column 1   | column 2   | column 3 | column 4 |
 +------------------------+------------+----------+----------+
-| body row 2             | ...        | ...      |          |
+| body row 2             | Cells may span columns.          |
++------------------------+------------+---------------------+
+| body row 3             | Cells may  | - Table cells       |
++------------------------+ span rows. | - contain           |
+| body row 4             |            | - body elements.    |
 +------------------------+------------+----------+----------+
+| body row 5             | Cells may also be     |          |
+|                        | empty: ``-->``        |          |
++------------------------+-----------------------+----------+
+
+Giant Tables
+^^^^^^^^^^^^
+
++------------+------------+-----------+------------+------------+-----------+------------+------------+-----------+------------+------------+-----------+
+| Header 1   | Header 2   | Header 3  | Header 1   | Header 2   | Header 3  | Header 1   | Header 2   | Header 3  | Header 1   | Header 2   | Header 3  |
++============+============+===========+============+============+===========+============+============+===========+============+============+===========+
+| body row 1 | column 2   | column 3  | body row 1 | column 2   | column 3  | body row 1 | column 2   | column 3  | body row 1 | column 2   | column 3  |
++------------+------------+-----------+------------+------------+-----------+------------+------------+-----------+------------+------------+-----------+
+| body row 1 | column 2   | column 3  | body row 1 | column 2   | column 3  | body row 1 | column 2   | column 3  | body row 1 | column 2   | column 3  |
++------------+------------+-----------+------------+------------+-----------+------------+------------+-----------+------------+------------+-----------+
+| body row 1 | column 2   | column 3  | body row 1 | column 2   | column 3  | body row 1 | column 2   | column 3  | body row 1 | column 2   | column 3  |
++------------+------------+-----------+------------+------------+-----------+------------+------------+-----------+------------+------------+-----------+
+| body row 1 | column 2   | column 3  | body row 1 | column 2   | column 3  | body row 1 | column 2   | column 3  | body row 1 | column 2   | column 3  |
++------------+------------+-----------+------------+------------+-----------+------------+------------+-----------+------------+------------+-----------+
 
 Simple Tables
 ~~~~~~~~~~~~~
@@ -253,23 +296,35 @@ True   True   True
 Admonitions
 -----------
 
+Admonitions (a.k.a Callouts) can be used to make important information stand
+out.  Examples of different admonitions are shown below.
+
+**When including TMSH commands please use the TMSH admonition**
+
+TMSH
+~~~~
+
+.. admonition:: TMSH
+
+   tmsh show sys hardware
+
 Hint
 ~~~~
 
 .. HINT::
    This is a HINT admonition
 
-Tip
-~~~
-
-.. TIP::
-   This is a TIP admonition
-
 Important
 ~~~~~~~~~
 
 .. IMPORTANT::
    This is a IMPORTANT admonition
+
+Tip
+~~~
+
+.. TIP::
+   This is a TIP admonition
 
 Note
 ~~~~
@@ -308,6 +363,43 @@ Danger
 .. DANGER::
    This is a DANGER admonition
 
+TODO's
+------
+
+TODO items can be marked in your docs.  By default the item will be included
+in the generated docs and a build warning will be printed.
+
+To change the defaults edit ``conf.py`` and look modify
+
+.. code-block:: python
+
+   todo_emit_warnings = True
+   todo_include_todos = True
+
+Here is the rST code for a TODO:
+
+.. code-block:: rst
+
+   .. TODO:: This is my example todo.  Please ignore me.
+
+   .. TODO:: This is my second example todo.  Please ignore me.
+
+And the TODO themselves:
+
+.. TODO:: This is my first example todo.  Please ignore me.
+
+.. TODO:: This is my second example todo.  Please ignore me.
+
+You can also get a list of TODO's:
+
+rST:
+
+.. code-block:: rst
+
+   .. TODOLIST::
+
+.. TODOLIST::
+
 Font-Awesome Icons
 ------------------
 
@@ -326,6 +418,7 @@ For example:
    * :fonticon:`fa fa-home fa-3x`
    * :fonticon:`fa fa-home fa-4x`
    * :fonticon:`fa fa-gear fa-spin fa-4x`
+   * :fonticon:`fa fa-gear fa-spin fa-4x text-success`
 
 * :fonticon:`fa fa-home`
 * :fonticon:`fa fa-home fa-lg`

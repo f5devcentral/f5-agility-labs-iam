@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# 
+#
 # BEGIN CONFIG
 # ------------
 #
@@ -24,7 +24,7 @@ import f5_sphinx_theme
 rst_prolog = """
 .. |classname| replace:: %s
 .. |classbold| replace:: **%s**
-.. |classitalic| replace:: *%s* 
+.. |classitalic| replace:: *%s*
 .. |ltm| replace:: Local Traffic Manager
 .. |adc| replace:: Application Delivery Controller
 .. |gtm| replace:: Global Traffic Manager
@@ -46,9 +46,9 @@ rst_prolog = """
 
 if 'github_repo' in locals() and len(github_repo) > 0:
     rst_prolog += """
-.. |repoinfo| replace:: The content contained here leverages a full DevOps CI/CD 
-              pipieline and is sourced from the GitHub repository at %s.  
-              Bugs and Requests for enhancements can be made using by 
+.. |repoinfo| replace:: The content contained here leverages a full DevOps CI/CD
+              pipieline and is sourced from the GitHub repository at %s.
+              Bugs and Requests for enhancements can be made using by
               opening an Issue within the repository.
 """ % (github_repo)
 else:
@@ -69,8 +69,10 @@ print "on_snops = %s" % on_snops
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = []
-extensions += ['sphinxjp.themes.basicstrap']
+extensions = [
+  'sphinxjp.themes.basicstrap',
+  'sphinx.ext.todo'
+]
 
 source_parsers = {
    '.md': 'recommonmark.parser.CommonMarkParser',
@@ -117,7 +119,8 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 pygments_style = 'sphinx'
 
 # If true, `todo` and `todoList` produce output, else they produce nothing.
-todo_include_todos = False
+todo_emit_warnings = True
+todo_include_todos = True
 
 
 # -- Options for HTML output ----------------------------------------------
