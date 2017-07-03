@@ -1,37 +1,33 @@
-Lab – The Second Lab
-------------------------
+Lab – Power-on the |bip| Appliance
+----------------------------------
 
-Task – The First Task
-~~~~~~~~~~~~~~~~~~~~~~~
+.. TODO:: Needs lab description
 
-Describe what this task accomplishes here
+In this lab we will connect the power cord and turn on the |bip| Appliance.
 
-#. Step 1
+Task – Connect the Power Cord
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-   |image1|
+.. TODO:: Needs task description
 
-#. Step 2
+In this task you will connect the appropriate power cord.
 
-#. Step ...
+.. IMPORTANT:: Be sure to use the appropriate power cord for your region.
+   Follow all applicable electrical guidelines and codes.
 
-#. Step n
+Follow these steps to complete this task:
 
-Task – The Second Task
-~~~~~~~~~~~~~~~~~~~~~~~~
+#. Connect one end to the |bip|
+#. Connect the other end to the power source
 
-Describe what this task accomplishes here
+Task – Turn on the |bip| Appliance
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Step 1
+.. TODO:: Needs task description
 
-   |image1_100|
+In this task you turn on the |bip| Appliance.
 
-#. Step 2
+Follow these steps to complete this task:
 
-#. Step ...
-
-#. Step n
-
-.. |image1| image:: /_static/image001.png
-
-.. |image1_100| image:: /_static/image001.png
-   :scale: 100%
+#. Push the 'On' button
+#. Verify the red F5 ball lights up

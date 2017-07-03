@@ -1,38 +1,39 @@
-Lab – The Second Lab
-------------------------
+Lab – Install a |bip| |ve| image on a Hypervisor
+------------------------------------------------
 
-Task – The First Task
-~~~~~~~~~~~~~~~~~~~~~~~
+.. TODO:: Needs lab description
 
-Describe what this task accomplishes here
+In the previous lab we learned how to download the |bip| |ve| image.  Now, we
+can install the image onto a hypervisor.
 
-#. Step 1
+Task – Upload the image to your Hypervisor
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-   |image1|
+.. TODO:: Needs task description
 
-#. Step 2
+In this task you will upload the image to your hypervisor.
 
-#. Step ...
+Follow these steps to complete this task:
 
-#. Step n
+.. rst-class:: task-stepsx
 
-Task – The Second Task
-~~~~~~~~~~~~~~~~~~~~~~~~
+#. Open your hypervisor management console
+#. Figure out how to upload the image
 
-Describe what this task accomplishes here
+   .. ERROR:: These are bad instructions...
 
-#. Step 1
+#. Great!  You're done
 
-   |image1_100|
+Task – Start a |bip| |ve| Instance
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Step 2
+.. TODO:: Needs task description
 
-#. Step ...
+In this task we will start and instance of |bip| using the image uploaded in
+the previous task.
 
-#. Step n
+Follow these steps to complete this task:
 
-.. |image1| image:: /_static/image001.png
-   :scale: 75%
-
-.. |image1_100| image:: /_static/image001.png
-   :scale: 100%
+#. Open your hypervisor management console
+#. Click the |bip| image
+#. Click the 'Start' button (or it's equivalent)

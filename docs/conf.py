@@ -5,10 +5,13 @@
 # ------------
 #
 # REQUIRED: Your class/lab name
-classname = "Your Class Name"
+classname = "Getting Started with F5 BIG-IP"
 
 # OPTIONAL: The URL to the GitHub Repository for this class
 github_repo = "https://github.com/f5devcentral/your-class-repo"
+
+# OPTIONAL: Google Analytics
+# googleanalytics_id = 'UA-85156643-4'
 
 #
 # END CONFIG
@@ -32,10 +35,15 @@ rst_prolog = """
 .. |asm| replace:: Application Security Manager
 .. |afm| replace:: Advanced Firewall Manager
 .. |apm| replace:: Access Policy Manager
+.. |pem| replace:: Policy Enforcement Manager
 .. |ipi| replace:: IP Intelligence
 .. |iwf| replace:: iWorkflow
 .. |biq| replace:: BIG-IQ
 .. |bip| replace:: BIG-IP
+.. |aiq| replace:: APP-IQ
+.. |ve|  replace:: Virtual Edition
+.. |icr| replace:: iControl REST API
+.. |ics| replace:: iControl SOAP API
 .. |f5|  replace:: F5 Networks
 .. |f5i| replace:: F5 Networks, Inc.
 .. |year| replace:: %s
@@ -71,8 +79,13 @@ print "on_snops = %s" % on_snops
 # ones.
 extensions = [
   'sphinxjp.themes.basicstrap',
-  'sphinx.ext.todo'
+  'sphinx.ext.todo',
+  'sphinx.ext.autosectionlabel'
 ]
+
+if 'googleanalytics_id' in locals() and len(googleanalytics_id) > 0:
+  extensions += ['sphinxcontrib.googleanalytics']
+  googleanalytics_enabled = True
 
 source_parsers = {
    '.md': 'recommonmark.parser.CommonMarkParser',

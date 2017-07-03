@@ -1,6 +1,13 @@
 Examples of Common Formatting
 =============================
 
+.. TODO:: Examples need to be removed from your class
+
+.. HINT:: To remove this page:
+
+   #. Edit the ``index.rst`` file and remove the ``examples`` line
+   #. Delete the ``examples.rst`` file
+
 This page has examples of many different types of formatting that can be
 achieved using reStrcuturedText.  Complete documentation is available at:
 
@@ -162,7 +169,7 @@ Internal
 ~~~~~~~~
 
 - Reference section headers in this document: `Hyperlinks <#hyperlinks>`__
-- Reference other pages: :ref:`Welcome <label-welcome>`
+- Reference other pages: :ref:`Welcome`
 
 
 

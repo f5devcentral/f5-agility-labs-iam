@@ -1,7 +1,10 @@
-Module – This is the Second Module
-====================================
+Module – Installing a BIG-IP Appliance
+======================================
 
-Describe what this module teaches here
+.. TODO:: Needs module description
+
+In this module you will learn how to install a |f5| |bip| Applicance into your
+datacenter.
 
 .. toctree::
    :maxdepth: 1

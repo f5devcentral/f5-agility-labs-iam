@@ -1,38 +1,49 @@
-Lab – The First Lab
------------------------
+Lab – Download the |bip| |ve| Image
+-----------------------------------
 
-Task – The First Task
-~~~~~~~~~~~~~~~~~~~~~~~
+.. TODO:: Needs lab description
 
-Describe what this task accomplishes here
+This lab will teach you how to download the |bip| |ve| image to your system.
 
-#. Step 1
+Task – Open a Web Browser
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. TODO:: Needs task description
+
+In this task you will open a web browser and navigate to the |f5| Downloads
+site.
+
+.. NOTE:: An account is required to download software.  You can create one at
+   https://login.f5.com/resource/registerEmail.jsp
+
+Follow these steps to complete this task:
+
+#. Open your web browser
+#. Navigate to https://downloads.f5.com
+#. Login with your username and password.
+#. After logging in you should see the following window:
 
    |image1|
 
-#. Step 2
+Task – Download the Image
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Step ...
+.. TODO:: Needs task description
 
-#. Step n
+In this task we will download the |f5| |bip| |ve| image to your system
 
-Task – The Second Task
-~~~~~~~~~~~~~~~~~~~~~~~~
+Follow these steps to complete this task:
 
-Describe what this task accomplishes here
+#. Click the 'Find a Download' button.
 
-#. Step 1
+   .. image:: /_static/image002.png
 
-   |image1_100|
+#. Click the link that contains the |bip| TMOS software version you would like
+   to download.
 
-#. Step 2
+   .. IMPORTANT:: Be sure to click a link that has "\ |ve|" in the name
 
-#. Step ...
-
-#. Step n
+#. Find the image appropriate for your hypervisor
+#. Download the image and save it to you local system
 
 .. |image1| image:: /_static/image001.png
-   :scale: 75%
-
-.. |image1_100| image:: /_static/image001.png
-   :scale: 100%

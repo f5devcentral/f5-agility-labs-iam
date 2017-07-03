@@ -1,16 +1,20 @@
 Getting Started
 ---------------
 
+.. TODO:: Complete getting started instructions
+
 Please follow the instructions provided by the instructor to start your
 lab and access your jump host.
 
 .. NOTE::
-	All work for this lab will be performed exclusively from the Windows
-	jumphost. No installation or interaction with your local system is
-	required.
+	 All work for this lab will be performed exclusively from the Windows
+	 jumphost. No installation or interaction with your local system is
+	 required.
 
 Lab Topology
 ~~~~~~~~~~~~
+
+.. TODO:: Complete lab topology
 
 The following components have been included in your lab environment:
 
@@ -21,6 +25,8 @@ The following components have been included in your lab environment:
 
 Lab Components
 ^^^^^^^^^^^^^^
+
+.. TODO:: Complete lab components table
 
 The following table lists VLANS, IP Addresses and Credentials for all
 components:

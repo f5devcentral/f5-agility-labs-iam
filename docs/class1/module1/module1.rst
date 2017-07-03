@@ -1,7 +1,10 @@
-Module – This is the First Module
-===================================
+Module – Installing a BIG-IP Virtual Edition
+=============================================
 
-Describe what this module teaches here
+.. TODO:: Needs module description
+
+In this module you will learn how to install a |f5| |bip| |ve| into your
+environment.
 
 .. toctree::
    :maxdepth: 1
