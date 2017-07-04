@@ -9,7 +9,7 @@ Examples of Common Formatting
    #. Delete the ``examples.rst`` file
 
 This page has examples of many different types of formatting that can be
-achieved using reStrcuturedText.  Complete documentation is available at:
+achieved using reStructuredText.  Complete documentation is available at:
 
 http://www.sphinx-doc.org/en/stable/rest.html
 

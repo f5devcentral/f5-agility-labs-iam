@@ -21,6 +21,7 @@ import os
 import sys
 import time
 import re
+import pkgutil
 sys.path.insert(0, os.path.abspath('.'))
 import f5_sphinx_theme
 
@@ -55,7 +56,7 @@ rst_prolog = """
 if 'github_repo' in locals() and len(github_repo) > 0:
     rst_prolog += """
 .. |repoinfo| replace:: The content contained here leverages a full DevOps CI/CD
-              pipieline and is sourced from the GitHub repository at %s.
+              pipeline and is sourced from the GitHub repository at %s.
               Bugs and Requests for enhancements can be made using by
               opening an Issue within the repository.
 """ % (github_repo)
@@ -86,6 +87,21 @@ extensions = [
 if 'googleanalytics_id' in locals() and len(googleanalytics_id) > 0:
   extensions += ['sphinxcontrib.googleanalytics']
   googleanalytics_enabled = True
+
+eggs_loader = pkgutil.find_loader('sphinxcontrib.spelling')
+found = eggs_loader is not None
+
+if found:
+  extensions += ['sphinxcontrib.spelling']
+  spelling_lang='en_US'
+  spelling_word_list_filename='../wordlist'
+  spelling_show_suggestions=True
+  spelling_ignore_pypi_package_names=False
+  spelling_ignore_wiki_words=True
+  spelling_ignore_acronyms=True
+  spelling_ignore_python_builtins=True
+  spelling_ignore_importable_modules=True
+  spelling_filters=[]
 
 source_parsers = {
    '.md': 'recommonmark.parser.CommonMarkParser',
@@ -134,7 +150,6 @@ pygments_style = 'sphinx'
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_emit_warnings = True
 todo_include_todos = True
-
 
 # -- Options for HTML output ----------------------------------------------
 

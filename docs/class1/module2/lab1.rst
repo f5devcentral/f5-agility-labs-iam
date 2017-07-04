@@ -29,7 +29,7 @@ Task – Install the |bip| Appliance in a Datacenter Rack
 
 .. TODO:: Needs task description
 
-In this task you will install the |bip| Appliance into a Rack.  You will need 
+In this task you will install the |bip| Appliance into a Rack.  You will need
 the following tools:
 
 - Phillips Screwdriver
@@ -41,7 +41,7 @@ the following tools:
 
 Follow these steps to complete this task:
 
-#. Intall the rackmount rails onto the appliance using the included hardware
+#. Install the rackmount rails onto the appliance using the included hardware
 #. Lift the appliance into place
 #. Complete installation by using your tools to secure the appliance.
 
