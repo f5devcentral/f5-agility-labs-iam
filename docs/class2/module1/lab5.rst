@@ -1,5 +1,5 @@
-Lab 5 SWG iApp - Transparent Proxy for HTTP and HTTPS
-=====================================================
+Lab 5: SWG iApp - Transparent Proxy for HTTP and HTTPS
+======================================================
 
 In this lab exercise, you will configure SWG in transparent proxy mode
 to support environments where clients do not leverage an explicit proxy.

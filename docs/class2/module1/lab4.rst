@@ -1,5 +1,5 @@
-Lab 4 SWG Reporting with BIG-IQ
-===============================
+Lab 4: SWG Reporting with BIG-IQ
+================================
 
 In this lab exercise, you will explore SWG Reporting with Big-IQ Access.
 

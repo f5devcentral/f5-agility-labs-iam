@@ -1,5 +1,5 @@
-Lab 7 SSL Visibility for DLP (ICAP)
-===================================
+Lab 7: SSL Visibility for DLP (ICAP)
+====================================
 
 In this lab exercise, you will send decrypted traffic to an ICAP-based
 Data Loss Prevention (DLP) service for inspection. The DLP will block

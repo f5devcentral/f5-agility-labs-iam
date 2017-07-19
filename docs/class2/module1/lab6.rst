@@ -1,5 +1,5 @@
-Lab 6 Captive Portal Authentication
-===================================
+Lab 6: Captive Portal Authentication
+====================================
 
 In this lab exercise, you will a captive portal to authenticate client
 connecting to the Internet through the SWG transparent proxy.

@@ -1,5 +1,5 @@
-Lab 3 Explicit Proxy Authentication – NTLM
-==========================================
+Lab 3: Explicit Proxy Authentication – NTLM
+===========================================
 
 In this lab exercise, you will reconfigure authentication for seamless
 login of AD domain-joined client using NTLM.
