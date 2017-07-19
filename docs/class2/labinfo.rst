@@ -1,5 +1,5 @@
-Lab Environment Setup
----------------------
+Lab Environment
+---------------
 
 In the interest of time, the following components have been set up with
 basic configurations for you in a cloud-based virtual lab environment
