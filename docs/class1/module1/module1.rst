@@ -1,5 +1,5 @@
-Lab 1 - SAML Service Provider (SP) Lab
-======================================
+Lab 1: SAML Service Provider (SP) Lab
+=====================================
 
 .. toctree::
    :maxdepth: 1
@@ -19,7 +19,7 @@ Objective:
 
 Lab Requirements:
 
--  All Lab requirements will be noted in the tasks that follow
+-  All Lab requirements will be noted inƒ the tasks that follow
 
 Estimated completion time: 25 minutes
 
@@ -259,28 +259,28 @@ TASK 4 ‑ Test the SAML SP
 
    <br />
 
-.. |image1| image:: media/image3.png
-.. |image2| image:: media/image4.png
-.. |image3| image:: media/image5.png
-.. |image4| image:: media/image6.png
-.. |image5| image:: media/image7.png
-.. |image6| image:: media/image8.png
-.. |image7| image:: media/image9.png
-.. |image8| image:: media/image10.png
-.. |image9| image:: media/image11.png
-.. |image10| image:: media/image12.png
-.. |image11| image:: media/image13.png
-.. |image12| image:: media/image14.png
-.. |image13| image:: media/image15.png
-.. |image14| image:: media/image16.png
-.. |image15| image:: media/image17.png
-.. |image16| image:: media/image18.png
-.. |image17| image:: media/image19.png
-.. |image18| image:: media/image20.png
-.. |image19| image:: media/image21.png
-.. |image20| image:: media/image22.png
-.. |image21| image:: media/image23.png
-.. |image22| image:: media/image24.png
-.. |image23| image:: media/image25.png
-.. |image24| image:: media/image26.png
-.. |image25| image:: media/image27.png
+.. |image1| image:: /_static/class1/image3.png
+.. |image2| image:: /_static/class1/image4.png
+.. |image3| image:: /_static/class1/image5.png
+.. |image4| image:: /_static/class1/image6.png
+.. |image5| image:: /_static/class1/image7.png
+.. |image6| image:: /_static/class1/image8.png
+.. |image7| image:: /_static/class1/image9.png
+.. |image8| image:: /_static/class1/image10.png
+.. |image9| image:: /_static/class1/image11.png
+.. |image10| image:: /_static/class1/image12.png
+.. |image11| image:: /_static/class1/image13.png
+.. |image12| image:: /_static/class1/image14.png
+.. |image13| image:: /_static/class1/image15.png
+.. |image14| image:: /_static/class1/image16.png
+.. |image15| image:: /_static/class1/image17.png
+.. |image16| image:: /_static/class1/image18.png
+.. |image17| image:: /_static/class1/image19.png
+.. |image18| image:: /_static/class1/image20.png
+.. |image19| image:: /_static/class1/image21.png
+.. |image20| image:: /_static/class1/image22.png
+.. |image21| image:: /_static/class1/image23.png
+.. |image22| image:: /_static/class1/image24.png
+.. |image23| image:: /_static/class1/image25.png
+.. |image24| image:: /_static/class1/image26.png
+.. |image25| image:: /_static/class1/image27.png

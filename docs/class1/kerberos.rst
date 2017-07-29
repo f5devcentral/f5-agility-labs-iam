@@ -40,11 +40,11 @@ Kerberos AAA Object
 5. Browse to locate the **Keytab File**
 6. Click **Finished** to complete creation of the AAA object
 
-|image 115|
+|image115|
 
 7. Review the AAA server configuration at **Access ‑> Authentication**
 
-.. |image113| image:: media/image100.png
-.. |image114| image:: media/image101.png
-.. |image115| image:: media/image102.png
-.. |image116| image:: media/image103.png
+.. |image113| image:: /_static/class1/image100.png
+.. |image114| image:: /_static/class1/image101.png
+.. |image115| image:: /_static/class1/image102.png
+.. |image116| image:: /_static/class1/image103.png

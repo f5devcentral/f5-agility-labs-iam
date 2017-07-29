@@ -1,5 +1,5 @@
-Lab 2 - SAML Identity Provider (IdP) Lab
-========================================
+Lab 2: SAML Identity Provider (IdP) Lab
+=======================================
 
 .. toctree::
    :maxdepth: 1
@@ -362,47 +362,47 @@ TASK 4 - Test the SAML IdP
 
    <br />
 
-.. |image26| image:: media/image28.png
-.. |image27| image:: media/image29.png
-.. |image28| image:: media/image30.png
-.. |image29| image:: media/image31.png
-.. |image30| image:: media/image32.png
-.. |image31| image:: media/image33.png
-.. |image32| image:: media/image34.png
-.. |image33| image:: media/image35.png
-.. |image34| image:: media/image36.png
-.. |image35| image:: media/image37.png
-.. |image36| image:: media/image38.png
-.. |image37| image:: media/image39.png
-.. |image38| image:: media/image40.png
-.. |image39| image:: media/image41.png
-.. |image40| image:: media/image42.png
-.. |image41| image:: media/image10.png
-.. |image42| image:: media/image43.png
-.. |image43| image:: media/image44.png
-.. |image44| image:: media/image45.png
-.. |image45| image:: media/image46.png
-.. |image46| image:: media/image47.png
-.. |image47| image:: media/image48.png
-.. |image48| image:: media/image49.png
-.. |image49| image:: media/image50.png
-.. |image50| image:: media/image51.png
-.. |image51| image:: media/image52.png
-.. |image52| image:: media/image53.png
-.. |image53| image:: media/image54.png
-.. |image54| image:: media/image55.png
-.. |image55| image:: media/image56.png
-.. |image56| image:: media/image57.png
-.. |image57| image:: media/image58.png
-.. |image58| image:: media/image59.png
-.. |image59| image:: media/image60.png
-.. |image60| image:: media/image61.png
-.. |image61| image:: media/image62.png
-.. |image62| image:: media/image63.png
-.. |image63| image:: media/image64.png
-.. |image64| image:: media/image65.png
-.. |image65| image:: media/image66.png
-.. |image66| image:: media/image23.png
-.. |image67| image:: media/image67.png
-.. |image68| image:: media/image68.png
-.. |image69| image:: media/image69.png
+.. |image26| image:: /_static/class1/image28.png
+.. |image27| image:: /_static/class1/image29.png
+.. |image28| image:: /_static/class1/image30.png
+.. |image29| image:: /_static/class1/image31.png
+.. |image30| image:: /_static/class1/image32.png
+.. |image31| image:: /_static/class1/image33.png
+.. |image32| image:: /_static/class1/image34.png
+.. |image33| image:: /_static/class1/image35.png
+.. |image34| image:: /_static/class1/image36.png
+.. |image35| image:: /_static/class1/image37.png
+.. |image36| image:: /_static/class1/image38.png
+.. |image37| image:: /_static/class1/image39.png
+.. |image38| image:: /_static/class1/image40.png
+.. |image39| image:: /_static/class1/image41.png
+.. |image40| image:: /_static/class1/image42.png
+.. |image41| image:: /_static/class1/image10.png
+.. |image42| image:: /_static/class1/image43.png
+.. |image43| image:: /_static/class1/image44.png
+.. |image44| image:: /_static/class1/image45.png
+.. |image45| image:: /_static/class1/image46.png
+.. |image46| image:: /_static/class1/image47.png
+.. |image47| image:: /_static/class1/image48.png
+.. |image48| image:: /_static/class1/image49.png
+.. |image49| image:: /_static/class1/image50.png
+.. |image50| image:: /_static/class1/image51.png
+.. |image51| image:: /_static/class1/image52.png
+.. |image52| image:: /_static/class1/image53.png
+.. |image53| image:: /_static/class1/image54.png
+.. |image54| image:: /_static/class1/image55.png
+.. |image55| image:: /_static/class1/image56.png
+.. |image56| image:: /_static/class1/image57.png
+.. |image57| image:: /_static/class1/image58.png
+.. |image58| image:: /_static/class1/image59.png
+.. |image59| image:: /_static/class1/image60.png
+.. |image60| image:: /_static/class1/image61.png
+.. |image61| image:: /_static/class1/image62.png
+.. |image62| image:: /_static/class1/image63.png
+.. |image63| image:: /_static/class1/image64.png
+.. |image64| image:: /_static/class1/image65.png
+.. |image65| image:: /_static/class1/image66.png
+.. |image66| image:: /_static/class1/image23.png
+.. |image67| image:: /_static/class1/image67.png
+.. |image68| image:: /_static/class1/image68.png
+.. |image69| image:: /_static/class1/image69.png

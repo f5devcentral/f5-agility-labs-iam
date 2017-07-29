@@ -1,5 +1,5 @@
-Lab 4 [Optional] – SaaS Federation iApp Lab
-===========================================
+Lab 4: [Optional] SaaS Federation iApp Lab
+==========================================
 
 .. toctree::
    :maxdepth: 1
@@ -172,21 +172,21 @@ TASK 4 - Test the SaaS Federation Application
 
    <br />
 
-.. |image95| image:: media/image34.png
-.. |image96| image:: media/image85.png
-.. |image97| image:: media/image86.png
-.. |image98| image:: media/image87.png
-.. |image99| image:: media/image88.png
-.. |image100| image:: media/image89.png
-.. |image101| image:: media/image90.png
-.. |image102| image:: media/image91.png
-.. |image103| image:: media/image92.png
-.. |image104| image:: media/image93.png
-.. |image105| image:: media/image94.png
-.. |image106| image:: media/image95.png
-.. |image107| image:: media/image44.png
-.. |image108| image:: media/image96.png
-.. |image109| image:: media/image97.png
-.. |image110| image:: media/image98.png
-.. |image111| image:: media/image99.png
-.. |image112| image:: media/image84.png
+.. |image95| image:: /_static/class1/image34.png
+.. |image96| image:: /_static/class1/image85.png
+.. |image97| image:: /_static/class1/image86.png
+.. |image98| image:: /_static/class1/image87.png
+.. |image99| image:: /_static/class1/image88.png
+.. |image100| image:: /_static/class1/image89.png
+.. |image101| image:: /_static/class1/image90.png
+.. |image102| image:: /_static/class1/image91.png
+.. |image103| image:: /_static/class1/image92.png
+.. |image104| image:: /_static/class1/image93.png
+.. |image105| image:: /_static/class1/image94.png
+.. |image106| image:: /_static/class1/image95.png
+.. |image107| image:: /_static/class1/image44.png
+.. |image108| image:: /_static/class1/image96.png
+.. |image109| image:: /_static/class1/image97.png
+.. |image110| image:: /_static/class1/image98.png
+.. |image111| image:: /_static/class1/image99.png
+.. |image112| image:: /_static/class1/image84.png

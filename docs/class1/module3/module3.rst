@@ -1,5 +1,5 @@
-Lab 3 – Kerberos to SAML Lab
-============================
+Lab 3: Kerberos to SAML Lab
+===========================
 
 .. toctree::
    :maxdepth: 1
@@ -180,28 +180,28 @@ TASK 2 - Test the Kerberos to SAML Configuration
 
    <br />
 
-.. |image70| image:: media/image44.png
-.. |image71| image:: media/image70.png
-.. |image72| image:: media/image71.png
-.. |image73| image:: media/image72.png
-.. |image74| image:: media/image73.png
-.. |image75| image:: media/image74.png
-.. |image76| image:: media/image75.png
-.. |image77| image:: media/image76.png
-.. |image78| image:: media/image77.png
-.. |image79| image:: media/image78.png
-.. |image80| image:: media/image79.png
-.. |image81| image:: media/image53.png
-.. |image82| image:: media/image54.png
-.. |image83| image:: media/image80.png
-.. |image84| image:: media/image56.png
-.. |image85| image:: media/image81.png
-.. |image86| image:: media/image58.png
-.. |image87| image:: media/image60.png
-.. |image88| image:: media/image61.png
-.. |image89| image:: media/image62.png
-.. |image90| image:: media/image63.png
-.. |image91| image:: media/image82.png
-.. |image92| image:: media/image65.png
-.. |image93| image:: media/image83.png
-.. |image94| image:: media/image84.png
+.. |image70| image:: /_static/class1/image44.png
+.. |image71| image:: /_static/class1/image70.png
+.. |image72| image:: /_static/class1/image71.png
+.. |image73| image:: /_static/class1/image72.png
+.. |image74| image:: /_static/class1/image73.png
+.. |image75| image:: /_static/class1/image74.png
+.. |image76| image:: /_static/class1/image75.png
+.. |image77| image:: /_static/class1/image76.png
+.. |image78| image:: /_static/class1/image77.png
+.. |image79| image:: /_static/class1/image78.png
+.. |image80| image:: /_static/class1/image79.png
+.. |image81| image:: /_static/class1/image53.png
+.. |image82| image:: /_static/class1/image54.png
+.. |image83| image:: /_static/class1/image80.png
+.. |image84| image:: /_static/class1/image56.png
+.. |image85| image:: /_static/class1/image81.png
+.. |image86| image:: /_static/class1/image58.png
+.. |image87| image:: /_static/class1/image60.png
+.. |image88| image:: /_static/class1/image61.png
+.. |image89| image:: /_static/class1/image62.png
+.. |image90| image:: /_static/class1/image63.png
+.. |image91| image:: /_static/class1/image82.png
+.. |image92| image:: /_static/class1/image65.png
+.. |image93| image:: /_static/class1/image83.png
+.. |image94| image:: /_static/class1/image84.png

@@ -24,7 +24,7 @@ If you wish to replicate these labs in your environment you will need to
 perform these steps accordingly. Additional lab resources are provided
 as illustrated in the diagram below:
 
-.. image:: media/image2.png
+.. image:: /_static/class1/image2.png
 
 Timing for labs
 ~~~~~~~~~~~~~~~
