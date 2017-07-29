@@ -1,4 +1,4 @@
-APM 231: SWG - Securing Outbound Internet Access
+Class 2: SWG - Securing Outbound Internet Access
 ================================================
 
 Welcome to the APM 231: SWG - Securing Outbound Internet Access lab.
