@@ -76,6 +76,6 @@ Task 2 – Testing
    **https://10.1.20.150/logs**. Log in as ``mydlp`` with password
    ``mydlp``.
 
-.. |image37| image:: /_static/class2/image39.png
+.. |image37| image:: /_static/class3/image39.png
    :width: 6.04375in
    :height: 2.25347in

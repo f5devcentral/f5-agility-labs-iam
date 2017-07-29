@@ -109,9 +109,9 @@ Task 3 – Testing
    accept the policy by clicking **Go**, then prompted to
    provide your email address before being allowed through.
 
-.. |image35| image:: /_static/class2/image37.png
+.. |image35| image:: /_static/class3/image37.png
    :width: 5.96528in
    :height: 4.12222in
-.. |image36| image:: /_static/class2/image38.png
+.. |image36| image:: /_static/class3/image38.png
    :width: 4.54167in
    :height: 1.09167in

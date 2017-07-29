@@ -108,6 +108,6 @@ You class instructor will provide additional lab access details.
 
 -  Password: admin
 
-.. |image0| image:: /_static/class2/image2.png
+.. |image0| image:: /_static/class3/image2.png
    :width: 7.10764in
    :height: 3.26458in

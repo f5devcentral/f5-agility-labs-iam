@@ -57,15 +57,15 @@ Task 2 – View SWG Reporting Data
 
    |image34|
 
-.. |image31| image:: /_static/class2/image33.png
+.. |image31| image:: /_static/class3/image33.png
    :width: 6.73333in
    :height: 3.25444in
-.. |image32| image:: /_static/class2/image34.png
+.. |image32| image:: /_static/class3/image34.png
    :width: 6.64035in
    :height: 2.84982in
-.. |image33| image:: /_static/class2/image35.png
+.. |image33| image:: /_static/class3/image35.png
    :width: 6.98947in
    :height: 2.76667in
-.. |image34| image:: /_static/class2/image36.png
+.. |image34| image:: /_static/class3/image36.png
    :width: 6.97758in
    :height: 3.24167in

@@ -357,72 +357,72 @@ Test 3:
 
    |image23|
 
-.. |image1| image:: /_static/class2/image3.png
+.. |image1| image:: /_static/class3/image3.png
    :width: 3.69928in
    :height: 4.01600in
-.. |image2| image:: /_static/class2/image4.png
+.. |image2| image:: /_static/class3/image4.png
    :width: 5.30417in
    :height: 1.38264in
-.. |image3| image:: /_static/class2/image5.png
+.. |image3| image:: /_static/class3/image5.png
    :width: 5.30417in
    :height: 1.69583in
-.. |image4| image:: /_static/class2/image6.png
+.. |image4| image:: /_static/class3/image6.png
    :width: 3.31806in
    :height: 3.78403in
-.. |image5| image:: /_static/class2/image7.png
+.. |image5| image:: /_static/class3/image7.png
    :width: 2.99375in
    :height: 2.42569in
-.. |image6| image:: /_static/class2/image8.png
+.. |image6| image:: /_static/class3/image8.png
    :width: 2.97778in
    :height: 2.66458in
-.. |image7| image:: /_static/class2/image9.png
+.. |image7| image:: /_static/class3/image9.png
    :width: 5.30694in
    :height: 3.12847in
-.. |image8| image:: /_static/class2/image10.png
+.. |image8| image:: /_static/class3/image10.png
    :width: 5.35833in
    :height: 4.54097in
-.. |image9| image:: /_static/class2/image11.png
+.. |image9| image:: /_static/class3/image11.png
    :width: 3.50000in
    :height: 1.58889in
-.. |image10| image:: /_static/class2/image12.png
+.. |image10| image:: /_static/class3/image12.png
    :width: 5.22083in
    :height: 4.91736in
-.. |image11| image:: /_static/class2/image13.png
+.. |image11| image:: /_static/class3/image13.png
    :width: 5.40278in
    :height: 1.57222in
-.. |image12| image:: /_static/class2/image14.png
+.. |image12| image:: /_static/class3/image14.png
    :width: 4.91458in
    :height: 3.24722in
-.. |image13| image:: /_static/class2/image15.png
+.. |image13| image:: /_static/class3/image15.png
    :width: 5.19653in
    :height: 3.96181in
-.. |image14| image:: /_static/class2/image16.png
+.. |image14| image:: /_static/class3/image16.png
    :width: 5.58958in
    :height: 2.93333in
-.. |image15| image:: /_static/class2/image17.png
+.. |image15| image:: /_static/class3/image17.png
    :width: 4.96736in
    :height: 1.67153in
-.. |image16| image:: /_static/class2/image18.png
+.. |image16| image:: /_static/class3/image18.png
    :width: 1.90556in
    :height: 2.55139in
-.. |image17| image:: /_static/class2/image19.png
+.. |image17| image:: /_static/class3/image19.png
    :width: 4.91459in
    :height: 5.05600in
-.. |image18| image:: /_static/class2/image20.png
+.. |image18| image:: /_static/class3/image20.png
    :width: 3.93600in
    :height: 3.97152in
-.. |image19| image:: /_static/class2/image21.png
+.. |image19| image:: /_static/class3/image21.png
    :width: 2.44262in
    :height: 2.39685in
-.. |image20| image:: /_static/class2/image22.png
+.. |image20| image:: /_static/class3/image22.png
    :width: 4.83200in
    :height: 2.86912in
-.. |image21| image:: /_static/class2/image23.png
+.. |image21| image:: /_static/class3/image23.png
    :width: 5.31000in
    :height: 2.48000in
-.. |image22| image:: /_static/class2/image24.png
+.. |image22| image:: /_static/class3/image24.png
    :width: 4.17000in
    :height: 2.10168in
-.. |image23| image:: /_static/class2/image25.png
+.. |image23| image:: /_static/class3/image25.png
    :width: 5.33000in
    :height: 2.17000in

@@ -113,9 +113,9 @@ Test 1:
 
 |image25|
 
-.. |image24| image:: /_static/class2/image26.png
+.. |image24| image:: /_static/class3/image26.png
    :width: 6.92014in
    :height: 2.76250in
-.. |image25| image:: /_static/class2/image27.png
+.. |image25| image:: /_static/class3/image27.png
    :width: 5.30833in
    :height: 1.78333in

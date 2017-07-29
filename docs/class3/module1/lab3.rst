@@ -146,18 +146,18 @@ GUI under **Access > Overview > Active Sessions**
 
 |image29|\ |image30|
 
-.. |image26| image:: /_static/class2/image28.png
+.. |image26| image:: /_static/class3/image28.png
    :width: 3.79000in
    :height: 2.88000in
-.. |image27| image:: /_static/class2/image29.png
+.. |image27| image:: /_static/class3/image29.png
    :width: 4.37000in
    :height: 3.20000in
-.. |image28| image:: /_static/class2/image30.png
+.. |image28| image:: /_static/class3/image30.png
    :width: 4.52348in
    :height: 1.70149in
-.. |image29| image:: /_static/class2/image31.png
+.. |image29| image:: /_static/class3/image31.png
    :width: 6.80278in
    :height: 1.92500in
-.. |image30| image:: /_static/class2/image32.png
+.. |image30| image:: /_static/class3/image32.png
    :width: 5.64236in
    :height: 3.35556in
