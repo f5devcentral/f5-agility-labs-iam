@@ -420,6 +420,595 @@ Setup a Facebook Project
 
 .. Note:: If you want Facebook Auth to work for users other than the developer you will need to publish the project
 
+Configure Access Policy Manager (APM) to authenticate with Facebook
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1. Configure the **OAuth** **Server** Object: Go to **Access -> Federation -> OAuth Client / Resource Server -> OAuth Server** and click **Create**
+
+|image66|
+
+2. Enter the values as shown below for the **OAuth Server** and click **Finished**
+
+**Name**: Facebook
+
+**Mode:** Client + Resource Server
+
+**Type:** Facebook
+
+**OAuth Provider:** Facebook
+
+**DNS Resolver:** oauth-dns *(configured for you)*
+
+**Client ID:** <App ID from Facebook>
+
+**Client Secret:** <App Secret from Facebook>
+
+**Client’s ServerSSL Profile Name:** apm-default-serverssl
+
+**Resource Server ID:**  App ID from Facebook>
+
+**Resource Server Secret:** <App Secret from Facebook>
+
+**Resource Server’s ServerSSL Profile Name:** apm-default-serverssl
+
+|image67|
+
+3. Configure the VPE for Facebook: Go to **Access -> Profiles / Policies -> Access Profiles (Per Session Policies)** and click **Edit** on **social-ap**, a new browser tab will open
+
+|image68|
+
+4. Click the + on the **Facebook** provider’s branch after the **OAuth Logon Page**
+
+|image69|
+
+5. Select **OAuth Client** from the **Authentication** tab and click **Add Item**
+
+|image70|
+
+6. Enter the following in the **OAuth Client** input screen and click **Save**
+
+**Name:** Facebook OAuth Client
+
+**Server:** /Common/Facebook
+
+**Grant Type:** Authorization Code
+
+**Authentication Redirect Request:** /Common/FacebookAuthRedirectRequest
+
+**Token Request:** /Common/FacebookTokenRequest
+
+**Refresh Token Request:** None
+
+**Validate Token Request:**  /Common/FacebookValidationScopesRequest
+
+**Redirection URI:** https://%{session.server.network.name}/oauth/client/redirect
+
+**Scope:** public\_profile *(Note underscore)*
+
+|image71|
+
+7. Click **+** on the **Successful** branch after the **Facebook OAuth Client**
+
+|image72|
+
+8. Select **OAuth Scope** from the **Authentication** tab, and click **Add Item**
+
+|image73|
+
+9. Enter the following on the **OAuth Scope** input screen and click **Save**
+
+**Name**: Facebook OAuth Scope
+
+**Server:** /Common/Facebook
+
+**Scopes Request:** /Common/FacebookValidationScopesRequest
+
+Click **Add New Entry**
+
+**Scope Name:** public\_profile
+
+**Request:** /Common/FacebookScopePublicProfile
+
+|image74|
+
+10. Click the **+** on the **Successful** branch after the **Facebook OAuth Scope** object
+
+|image75|
+
+11. Select **Variable Assign** from the **Assignment** tab, and click **Add Item**
+
+|image76|
+
+12. Name it Facebook Variable Assign and click **Add New Entry** then **change**
+
+|image77|
+
+13. Enter the following values and click **Finished**
+
+Left Side **Type:** Custom Variable
+
+Left Side **Security**: Unsecure
+
+Left Side **Value**: session.logon.last.username
+
+Right Side **Type**: Session Variable
+
+Right Side **Session Variable:** session.oauth.scope.last.scope\_data.public\_profile.name
+
+|image78|
+
+14. Review the **Facebook Variable Assign** object and click **Save**
+
+|image79|
+
+15. Click **Deny** on the **Fallback** branch after the **Facebook Variable Assign** object, select **Allow** in the pop up window and click **Save**
+
+|image80|
+
+16. Click **Apply Access Policy** in the top left and then close the tab
+
+|image81|
+
+Test Configuration
+------------------
+
+1. Test by opening Chrome in the jump host and browsing to *https://social.f5agility.com*, select the provider and attempt logon.
+
+|image82|
+
+.. Note:: You are able to login and reach the app now, but SSO to the app has not been setup so you get an application error.
+
+.. Note:: You may also be prompted for additional security measures as you are logging in from a new location
+
+.. Note:: You may need to start a Chrome New Incognito Window so no session data carries over.
+
+2. You should be prompted to authorize your request. Click **Continue as <Account>** (Where <Account> is your Facebook Profile name)
+
+|image83|
+
+Task 6: LinkedIn (Custom Provider)
+----------------------------------
+
+1. Login at https://www.linkedin.com/secure/developer
+
+|image84|
+
+.. Note:: This portion of the exercise requires a LinkedIn Account. You may use an existing one or create one for the purposes of this lab*
+
+2. Click **Create Application**
+
+|image85|
+
+3. In the “\ *Create a New Application”* screen fill in the required values an click **Submit**
+
+|image86|
+
+.. Note:: Generic values have been shown. You may use the values you deem appropriate
+
+.. Note:: An Application logo has been provided on your desktop ‘OAuth2.png’
+
+4. In the *“Authentication Keys”* screen, check the boxes for **r\_basicprofile** and **r\_emailaddress**. In the **Authorized Redirect URLs**, enter https://social.f5agility.com/oauth/client/redirect
+5. Click **Add**. Finally, click **Update** at the bottom of the screen.
+
+|image87|
+
+Configure Access Policy Manager (APM) to authenticate with LinkedIn
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1. Configure the **OAuth** **Server** Object: Go to **Access -> Federation -> OAuth Client / Resource Server -> Provider** and click **Create**
+
+|image88|
+
+.. Note:: You are creating a “Provider”
+
+2. Enter the values as shown below for the **OAuth Provider** and click **Finished**
+
+**Name**: LinkedIn
+
+**Type:** Custom
+
+**Authentication URI:** https://www.linkedin.com/oauth/v2/authorization
+
+**Token URI:** https://www.linkedin.com/oauth/v2/accessToken
+
+**Token Validation Scope URI:** https://www.linkedin.com/v1/people/~
+
+|image89|
+
+3. Configure the **OAuth** **Redirect** **Request** Profile Object: Go to **Access -> Federation -> OAuth Client / Resource Server -> Request** and click **Create**
+
+|image90|
+
+4. Enter the values as shown for the **OAuth** **Request** and click **Finished**
+
+**Name:** LinkedInAuthRedirectRequest
+
+**HTTP Method:** GET
+
+**Type:** auth-redirect-request
+
+|image91|
+
+5. Add the following request parameters and click **Add** after entering the values for each:
+
+**Parameter Type:** custom
+
+**Parameter Name:** response\_type
+
+**Parameter Value:** code
+
+**Parameter Type:** client-id
+
+**Parameter Name:** client\_id
+
+**Parameter Type:** redirect-uri
+
+**Parameter Name:** redirect\_uri
+
+**Parameter Type:** scope
+
+**Parameter Name:** scope
+
+.. Note:: LinkedIn requires a state parameter, but we already insert it by default.
+
+|image92|
+
+6. Configure the **OAuth** **Token** **Request** Profile Object: Go to **Access -> Federation -> OAuth Client / Resource Server -> Request** and click **Create**
+
+|image93|
+
+7. Enter the values as shown for the **OAuth** **Request** and click **Finished**
+
+**Name:** LinkedInTokenRequest
+
+**HTTP Method:** POST
+
+**Type:** token-request
+
+|image94|
+
+8. Add the following request parameters and click **Add** after entering the values for each:
+
+**Parameter Type:** grant-type
+
+**Parameter Name:** grant\_type
+
+**Parameter Type:** redirect-uri
+
+**Parameter Name:** redirect\_uri
+
+**Parameter Type:** client-id
+
+**Parameter Name:** client\_id
+
+**Parameter Type:** client-secret
+
+**Parameter Name:** client\_secret
+
+|image95|
+
+9. Configure the **OAuth** **Validation Scopes Request** Profile Object: Go to **Access -> Federation -> OAuth Client / Resource Server -> Request** and click **Create**
+
+|image96|
+
+10. Enter the values as shown for the **OAuth** **Request** and click **Finished**
+
+**Name:** LinkedInValidationScopesRequest
+
+**HTTP Method:** GET
+
+**Type:** validation-scopes-request
+
+|image97|
+
+11. Add the following request parameters and click **Add** after entering the values for each:
+
+**Parameter Type:** custom
+
+**Parameter Name:** oauth2\_access\_token
+
+**Parameter Value:** %{session.oauth.client.last.access\_token}
+
+**Parameter Type:** custom
+
+**Parameter Name:** format
+
+**Parameter Value:** json
+
+|image98|
+
+12. Configure the **OAuth** **Scope Data Request** Profile Object: Go to **Access -> Federation -> OAuth Client / Resource Server -> Request** and click **Create**
+
+|image99|
+
+12. Enter the values as shown for the **OAuth** **Request** and click **Finished**
+
+**Name:** LinkedInScopeBasicProfile
+
+**HTTP Method:** GET
+
+**URI:** https://api.linkedin.com/v1/people/~
+
+**Type:** scope-data-request
+
+|image100|
+
+14. Add the following request parameters and click **Add** after entering the values for each:
+
+**Parameter Type:** custom
+
+**Parameter Name:**   oauth2\_access\_token
+
+**Parameter Value:** %{session.oauth.client.last.access\_token}
+
+**Parameter Type:** custom
+
+**Parameter Name:** format
+
+**Parameter Value:** json
+
+|image101|
+
+15. Configure the **OAuth** **Server** Object: Go to **Access -> Federation -> OAuth Client / Resource Server -> OAuth Server** and click **Create**
+
+|image102|
+
+16. Enter the values as shown below for the **OAuth Server** and click **Finished**
+
+**Name**: LinkedIn
+
+**Mode:** Client + Resource Server
+
+**Type:** Custom
+
+**OAuth Provider:** LinkedIn
+
+**DNS Resolver:** oauth-dns *(configured for you)*
+
+**Client ID:** <App ID from LinkedIn>
+
+**Client Secret:** <App Secret from LinkedIn >
+
+**Client’s ServerSSL Profile Name:** apm-default-serverssl
+
+**Resource Server ID:** <App ID from LinkedIn >
+
+**Resource Server Secret:** <App Secret from LinkedIn >
+
+**Resource Server’s ServerSSL Profile Name:** apm-default-serverssl
+
+|image103|
+
+17. Configure the VPE for LinkedIn: Go to **Access -> Profiles / Policies -> Access Profiles (Per Session Policies)** and click **Edit** on **social-ap**, a new browser tab will open
+
+|image104|
+
+18. Click on the link **OAuth Logon Page** as shown
+
+|image105|
+
+19. Click on the **Values** area of **Line #1** as shown. A pop-up window will appear
+
+|image106|
+
+20. Click **Add Option**. In the new **Line 3**, type LinkedIn in both the **Value** and **Text (Optional)** fields and click **Finished**
+
+|image107|
+
+21. Click on the **Branch Rules** tab of the **OAuth Logon Page** screen
+
+|image108|
+
+22. Click **Add Branch Rule**. In the resulting new line enter LinkedIn for the **Name** field and click the **Change** link on the **Expression** line
+
+|image109|
+
+23. Click **Add Expression** on the **Simple** tab
+
+|image110|
+
+24. Select OAuth Logon Page in the **Agent Sel**: drop down. Select OAuth provider type from the **Condition** drop down. In the **OAuth provider** field enter LinkedIn and then click **Add Expression**
+
+|image111|
+
+25. Click **Finished** on the **Simple** Expression tab
+
+|image112|
+
+26. Click **Save** on the completed **Branch Rules** tab
+
+|image113|
+
+27. Click the + on the **LinkedIn** provider’s branch after the **OAuth Logon Page**
+
+|image114|
+
+.. Note:: If not still in the VPE: Go to
+  **Access -> Profiles / Policies -> Access Profiles (Per Session Policies)**. Click **Edit** on **social-ap**, a new browser tab will open*
+
+28. Select **OAuth Client** from the **Authentication** tab and click **Add Item**
+
+|image115|
+
+29. Enter the following in the **OAuth Client** input screen and click **Save**
+
+**Name:** LinkedIn OAuth Client
+
+**Server:** /Common/LinkedIn
+
+**Grant Type:** Authorization Code
+
+**Authentication Redirect Request:** /Common/LinkedInAuthRedirectRequest
+
+**Token Request:** /Common/LinkedInTokenRequest
+
+**Refresh Token Request:** None
+
+**Validate Token Request:** /Common/LinkedInValidationScopesRequest
+
+**Redirection URI:** https://%{session.server.network.name}/oauth/client/redirect
+
+**Scope:** r\_basicprofile *(Note underscore)*
+
+|image116|
+
+30. Click **+** on the **Successful** branch after the **LinkedIn OAuth Client**
+
+|image117|
+
+31. Select **OAuth Scope** from the **Authentication** tab, and click **Add Item**
+
+|image118|
+
+32. Enter the following on the **OAuth Scope** input screen and click **Save**
+
+**Name**: LinkedIn OAuth Scope
+
+**Server:** /Common/LinkedIn
+
+**Scopes Request:** /Common/LinkedInValidationScopesRequest
+
+Click **Add New Entry**
+
+**Scope Name:** r\_basicprofile
+
+**Request:** /Common/LinkedInScopeBasicProfile
+
+|image119|
+
+33. Click the **+** on the **Successful** branch after the **LinkedIn OAuth Scope** object
+
+|image120|
+
+34. Select **Variable Assign** from the **Assignment** tab, and click **Add Item**
+
+|image121|
+
+35. Name it LinkedIn Variable Assign and click **Add New Entry** then **change**
+
+|image122|
+
+36. Enter the following values and click **Finished**
+
+Left Side **Type:** Custom Variable
+
+Left Side **Security**: Unsecure
+
+Left Side **Value**: session.logon.last.username
+
+Right Side **Type**: Session Variable
+
+Right Side **Session Variable:** session.oauth.scope.last.firstName
+
+|image123|
+
+37. Review the **LinkedIn Variable Assign** object and click **Save**
+
+|image124|
+
+38. Click **Deny** on the **Fallback** branch after the **LinkedIn Variable Assign** object, select **Allow** in the pop up window and click **Save**
+
+|image125|
+
+39. Click **Apply Access Policy** in the top left and then close the tab
+
+|image126|
+
+Test Configuration
+~~~~~~~~~~~~~~~~~~
+
+1. Test by opening Chrome in the jump host and browsing to *https://social.f5agility.com*, select the provider and attempt logon.
+
+|image127|
+
+.. Note:: You are able to login and reach the app now, but SSO to the app has not been setup so you get an application error.
+
+.. Note:: You may also be prompted for additional security measures as you are logging in from a new location.
+
+.. Note:: You may need to start a Chrome New Incognito Window so no session data carries over.
+
+2. You will be prompted to authorize your request. Click **Allow.**
+
+|image128|
+
+Task 7: Add Header Insertion for SSO to the App
+-----------------------------------------------
+
+In this task you will create a policy that runs on every request. It
+will insert a header into the serverside HTTP Requests that contains the
+username. The application will use this to identify who the user is,
+providing Single Sign On (SSO).
+
+Configure the Per Request Policy
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1. Go to **Access** -> **Profiles/Policies** -> **Per Request Policies** and click **Create**
+
+|image129|
+
+2. Enter prp-x-user-insertion the Name field and click **Finished**
+
+|image130|
+
+3. Click **Edit** on the **prp-x-user-insertion policy** line
+
+|image131|
+
+4. Click the **+** symbol between **Start** and **Allow**
+
+|image132|
+
+5. Under the **General Purpose** tab select **HTTP Headers** and click **Add Item**
+
+|image133|
+
+6. Under the HTTP Header Modify section, click Add New Entry to add the following two headers and then click Save
+
+**Header Operation**: replace
+
+**Header Name:** X-User
+
+**Header Value:** %{session.logon.last.username}
+
+**Header Operation**: replace
+
+**Header Name:** X-Provider
+
+**Header Value:** %{session.logon.last.oauthprovidertype}
+
+|image134|
+
+.. Note:: Replace instead of Insert has been selected for Header Operation to
+  improve security. A malicious user might insert their own X-User header. As
+  using Insert would simply add another header. Using Replace will add a header
+  if it does not exist, or replace one if it does.
+
+7. You do not need to Apply Policy on per request policies. You may simply close the browser tab
+
+|image135|
+
+Add the Per Request Policy to the Virtual Server
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1. Go to **Local Traffic -> Virtual Servers** and click on **social.f5agility.com-vs**
+
+|image136|
+
+2. Scroll to the **Access Policy** section of the Virtual Server and select prp-x-user-insertion from the **Per-Request Policy** drop down. Scroll to the bottom of the page and click **Update**
+
+|image137|
+
+Test Configuration
+~~~~~~~~~~~~~~~~~~
+
+1. Go to https://social.f5agility.com in your browser and logon using one of
+the social logon providers. This time you should see your name appear in the
+top right corner. You can also click “Headers” in the webapp and look at the
+headers presented to the client. You will see x-user present here with your
+name as the value. You’ll also see the x-provider header you inserted
+indicating where the data is coming from.
+
+|image138|
 
 
 .. |br| raw:: html
