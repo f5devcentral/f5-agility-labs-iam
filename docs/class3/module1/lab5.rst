@@ -61,10 +61,10 @@ Task 2 – Reconfigure SWG iApp to apply Transparent Access Policy
 -  Find the section **Which SWG-Transparent Access Policy do you want
    to use?**
 
--  Change **Access Policy** to **AP_Transparent**
+-  Change **Access Policy** to **AP\_Transparent**
 
 -  Find the section **Which Per-Request Access Policy do you want to
-   use?
+   use?**
 
 -  Change the **per-request policy** to **Lab_Per_Request**
 

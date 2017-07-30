@@ -28,145 +28,188 @@ Estimated completion time: 25 minutes
 TASK 1 – Create a new SaaS SAML Service Provider (SP)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1. Navigate to  **Access ‑> Federation ‑> SAML Identity Provider ‑> External SP Connectors**
-2. Click specifically on the **Down Arrow** next to the **Create** button (far right)
-3. Select **From Metadata** from the drop down menu
+#. Navigate to  **Access ‑> Federation ‑> SAML Identity Provider ‑> External
+   SP Connectors**
 
-|image95|
+#. Click specifically on the **Down Arrow** next to the **Create** button
+   (far right)
 
-4. In the **Create New SAML Service Provider** dialogue box, click **Browse** and select the *SAMLSP-00D36000000jjkp.xml* file from the Desktop of your jump host
-5. In the **Service Provider Name** field, enter: *salesforce*
-6. Click **OK** on the dialog box
+#. Select **From Metadata** from the drop down menu
 
-|image96|
+   |image95|
+
+#. In the **Create New SAML Service Provider** dialogue box, click **Browse**
+   and select the ``SAMLSP-00D36000000jjkp.xml`` file from the Desktop of your
+   jump host
+
+#. In the **Service Provider Name** field, enter: ``salesforce``
+
+#. Click **OK** on the dialog box
+
+   |image96|
 
 TASK 2 - Deploy the SaaS Federation iApp
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1. Navigate to **iApps ‑> Application Services -> Applications** and click on the **Plus (+) Sign** as shown
+#. Navigate to **iApps ‑> Application Services -> Applications** and click
+   on the **Plus (+) Sign** as shown
 
-|image97|
+   |image97|
 
-2. In the resulting **New Application Service** window, enter *saas* as the *Name*
-3. Select *f5.saas_idp.v1.0.rc1* from the **Template** drop down menu
+#. In the resulting **New Application Service** window, enter *saas* as the
+   *Name*
 
-|image98|
+#. Select ``f5.saas_idp.v1.0.rc1`` from the **Template** drop down menu
 
-.. NOTE:: The iApp template has already been downloaded and imported for this lab. You can download the latest iApp templates from https://downloads.f5.com/
+   |image98|
 
-4. Configure the iApp template as follows:
+   .. NOTE:: The iApp template has already been downloaded and imported
+      for this lab. You can download the latest iApp templates from
+      https://downloads.f5.com/
 
-+---------------+---------------------------------------------------+
-| SaaS Applications                                                 |
-+===============+===================================================+
-| Application:  | *New federation relationship with salesforce.com* |
-+---------------+---------------------------------------------------+
-| SP:           | *salesforce*                                      |
-+---------------+---------------------------------------------------+
-| Display Name: | *SalesForce*                                      |
-+---------------+---------------------------------------------------+
-| SP Initiated: | *No*                                              |
-+---------------+---------------------------------------------------+
+#. Configure the iApp template as follows:
 
-|image99|
+   +---------------+-----------------------------------------------------+
+   | SaaS Applications                                                   |
+   +===============+=====================================================+
+   | Application:  | ``New federation relationship with salesforce.com`` |
+   +---------------+-----------------------------------------------------+
+   | SP:           | ``salesforce``                                      |
+   +---------------+-----------------------------------------------------+
+   | Display Name: | ``SalesForce``                                      |
+   +---------------+-----------------------------------------------------+
+   | SP Initiated: | ``No``                                              |
+   +---------------+-----------------------------------------------------+
 
-+-----------------------------------------------------------------+----------------------------------+
-| BIG-IP APM Configuration                                                                           |
-+=================================================================+==================================+
-| What EntityID do you want to use for your SaaS applications?    | *https://idp.f5demo.com/idp/f5/* |
-+-----------------------------------------------------------------+----------------------------------+
-| Should the iApp create a new AAA server or use an existing one? | *f5demo_ad*                      |
-+-----------------------------------------------------------------+----------------------------------+
+   |image99|
 
-|image100|
+   +-----------------------------------------------------------------+------------------------------------+
+   | BIG-IP APM Configuration                                                                             |
+   +=================================================================+====================================+
+   | What EntityID do you want to use for your SaaS applications?    | ``https://idp.f5demo.com/idp/f5/`` |
+   +-----------------------------------------------------------------+------------------------------------+
+   | Should the iApp create a new AAA server or use an existing one? | ``f5demo_ad``                      |
+   +-----------------------------------------------------------------+------------------------------------+
 
-+------------------------------------------------------------------------------------+----------------------+
-| BIG-IP Virtual Server                                                                                     |
-+====================================================================================+======================+
-| What is the IP address clients will use to access the BIG-IP IdP Service?          | *10.1.10.120*        |
-+------------------------------------------------------------------------------------+----------------------+
-| What port do you want to use for the virtual server?                               | *443*                |
-+------------------------------------------------------------------------------------+----------------------+
-| Which certificate do you want this BIG-IP system to use for client authentication? | *idp.f5demo.com.crt* |
-+------------------------------------------------------------------------------------+----------------------+
-| What is the associated private key?                                                | *idp.f5demo.com.key* |
-+------------------------------------------------------------------------------------+----------------------+
+   |image100|
 
-|image101|
+   +------------------------------------------------------------------------------------+------------------------+
+   | BIG-IP Virtual Server                                                                                       |
+   +====================================================================================+========================+
+   | What is the IP address clients will use to access the BIG-IP IdP Service?          | ``10.1.10.120``        |
+   +------------------------------------------------------------------------------------+------------------------+
+   | What port do you want to use for the virtual server?                               | ``443``                |
+   +------------------------------------------------------------------------------------+------------------------+
+   | Which certificate do you want this BIG-IP system to use for client authentication? | ``idp.f5demo.com.crt`` |
+   +------------------------------------------------------------------------------------+------------------------+
+   | What is the associated private key?                                                | ``idp.f5demo.com.key`` |
+   +------------------------------------------------------------------------------------+------------------------+
 
-.. NOTE:: We are deploying the iApp on a different IP so that you can see how everything is built out; however, this IdP will not work, as the idp.f5demo.com FQDN resolves to another IP.
-  We are going to use the iApp to create the SAML resource that we will assign to our existing access policy from Lab 3.
+   |image101|
 
-+----------------------------------------------------------------------+------------+
-| IdP Encryption Certificate and Key                                                |
-+======================================================================+============+
-| Which certificate do you want to use to encrypt your SAML Assertion? | *SAML.crt* |
-+----------------------------------------------------------------------+------------+
-| What is the associated private key?                                  | *SAML.key* |
-+----------------------------------------------------------------------+------------+
+   .. NOTE:: We are deploying the iApp on a different IP so that you can see
+      how everything is built out; however, this IdP will not work, as the
+      ``idp.f5demo.com`` FQDN resolves to another IP.
+      We are going to use the iApp to create the SAML resource that we will
+      assign to our existing access policy from Lab 3.
 
-|image102|
+   +----------------------------------------------------------------------+--------------+
+   | IdP Encryption Certificate and Key                                                  |
+   +======================================================================+==============+
+   | Which certificate do you want to use to encrypt your SAML Assertion? | ``SAML.crt`` |
+   +----------------------------------------------------------------------+--------------+
+   | What is the associated private key?                                  | ``SAML.key`` |
+   +----------------------------------------------------------------------+--------------+
 
-5. Scroll to the bottom of the configuration template and click **Finished**
-6. Once deployed, you can review the built out SaaS Federation iApp at **iApps ‑> Application Services ‑> Applications ‑> saas**
+   |image102|
 
-|image103|
+#. Scroll to the bottom of the configuration template and click **Finished**
 
-7. Review the new virtual servers created by the iApp at **Local Traffic ‑> Virtual Server ‑> Virtual Server List**
+#. Once deployed, you can review the built out SaaS Federation iApp at
+   **iApps ‑> Application Services ‑> Applications ‑> saas**
 
-|image104|
+   |image103|
 
-8. Review the new Access Policy built by the iApp at **Access ‑> Profiles/Policies ‑> Access Profiles (Per-Session Policies)** and select the **Edit** link next to the *saas* Access Policy
+#. Review the new virtual servers created by the iApp at **Local Traffic ‑>
+   Virtual Server ‑> Virtual Server List**
 
-|image105|
+   |image104|
 
-9. Test the SaaS iApp by clicking on the bookmark in your browser.
+#. Review the new Access Policy built by the iApp at **Access ‑>
+   Profiles/Policies ‑> Access Profiles (Per-Session Policies)** and select
+   the **Edit** link next to the *saas* Access Policy
 
-|image106|
+   |image105|
 
-.. NOTE:: Navigating to the virtual server by IP will produce a certificate warning. This is expected. Click through the warning to see the resulting page.
+#. Test the SaaS iApp by clicking on the bookmark in your browser.
+
+   |image106|
+
+   .. NOTE:: Navigating to the virtual server by IP will produce a
+      certificate warning. This is expected. Click through the warning
+      to see the resulting page.
 
 TASK 3 - Modify the SAML IdP Access Policy
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The previous task, Task 2, was to provide you an understanding of how the SaaS Federation iApp can automatically build a configuration for you.
+The previous task, Task 2, was to provide you an understanding of how the
+SaaS Federation iApp can automatically build a configuration for you.
 
-In this task we will be modifying the existing Webtop from prior labs to add the SaaS SalesForce application.  The purpose of the task is so you can see the F5Demo App and SalesForce in the same Webtop.
+In this task we will be modifying the existing Webtop from prior labs to
+add the SaaS SalesForce application.  The purpose of the task is so you
+can see the F5Demo App and SalesForce in the same Webtop.
 
-1. Using the same Access Policy from Lab 3, navigate to **Access ‑> Profiles/Policies ‑> Access Profiles (Per-Session Policies)** and click the **Edit** link next to the previously created *idp.f5demo.com-policy*
+#. Using the same Access Policy from Lab 3, navigate to **Access ‑>
+   Profiles/Policies ‑> Access Profiles (Per-Session Policies)** and
+   click the **Edit** link next to the previously created
+   ``idp.f5demo.com-policy``
 
-|image107|
+   |image107|
 
-2. In the **Visual Policy Editor** window for */Common/idp.f5demo.com‑policy*, click the **Advanced Resource Assign** object.
+#. In the **Visual Policy Editor** window for ``/Common/idp.f5demo.com‑policy``,
+   click the **Advanced Resource Assign** object.
 
-|image108|
+   |image108|
 
-3. Click the **Add/Delete** link on the Resource Assignment item
+#. Click the **Add/Delete** link on the Resource Assignment item
 
-|image109|
+   |image109|
 
-4. Click the **SAML** tab, and select the checkbox next to */Common/saas.app/saas_SalesForce_saml_resource_sso*
+#. Click the **SAML** tab, and select the checkbox next to
+   ``/Common/saas.app/saas_SalesForce_saml_resource_sso``
 
-|image110|
+   |image110|
 
-5. Click the **Update** button at the bottom of the window to complete the Resource Assignment entry
-6. Click the **Save** button at the bottom of the **Advanced Resource Assign** window
-7. Repeat steps 2 - 6 with the **Advanced Resource Assign (1)** object
-8. In the **Visual Policy Editor**, click **Apply Access Policy** (top left), and close the **Visual Policy Editor**
+#. Click the **Update** button at the bottom of the window to complete
+   the Resource Assignment entry
 
-|image111|
+#. Click the **Save** button at the bottom of the
+   **Advanced Resource Assign** window
+
+#. Repeat steps 2 - 6 with the **Advanced Resource Assign (1)** object
+
+#. In the **Visual Policy Editor**, click **Apply Access Policy**
+   (top left), and close the **Visual Policy Editor**
+
+   |image111|
 
 TASK 4 - Test the SaaS Federation Application
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1. Using your browser from the jump host, navigate to the SAML IdP previously configured at *https://idp.f5demo.com* (or click the provided bookmark)
+#. Using your browser from the jump host, navigate to the SAML IdP previously
+   configured at ``https://idp.f5demo.com`` (or click the provided bookmark)
 
-|image112|
+   |image112|
 
-2. Were you prompted for credentials? Were you successfully authenticated? Did you see the webtop with the new SaaS SP application?
-3. Click on the SalesForce icon. Were you successfully authenticated (via SAML) to the SP?
-4. Review your Active Sessions **(Access ‑> Overview ‑> Active Sessions­­­)**
-5. Review your Access Report Logs **(Access ‑> Overview ‑> Access Reports)**
+#. Were you prompted for credentials? Were you successfully authenticated?
+   Did you see the webtop with the new SaaS SP application?
+
+#. Click on the SalesForce icon. Were you successfully authenticated
+   (via SAML) to the SP?
+
+#. Review your Active Sessions **(Access ‑> Overview ‑> Active Sessions­­­)**
+
+#. Review your Access Report Logs **(Access ‑> Overview ‑> Access Reports)**
 
 .. |br| raw:: html
 

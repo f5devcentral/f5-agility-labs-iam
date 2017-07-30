@@ -28,153 +28,197 @@ Estimated completion time: 25 minutes
 TASK 1 – Modify the SAML Identity Provider (IdP) Access Policy
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1. Using the existing Access Policy from Lab 2, navigate to **Access ‑> Profiles/Policies ‑> Access Profiles (Per-Session Policies)**, and click the **Edit** link next to the previously created *idp.f5demo.com-policy*
+#. Using the existing Access Policy from Lab 2, navigate to **Access ‑>
+   Profiles/Policies ‑> Access Profiles (Per-Session Policies)**, and click
+   the **Edit** link next to the previously created *idp.f5demo.com-policy*
 
-|image70|
+   |image70|
 
-2. Delete the **Logon Page** object by clicking on the **X** as shown
+#. Delete the **Logon Page** object by clicking on the **X** as shown
 
-|image71|
+   |image71|
 
-3. In the resulting **Item Deletion Confirmation** dialog, ensure that the previous node is connect to the **fallback** branch, and click the **Delete** button
+#. In the resulting **Item Deletion Confirmation** dialog, ensure that the
+   previous node is connect to the **fallback** branch, and click the
+   **Delete** button
 
-|image72|
+   |image72|
 
-4. In the **Visual Policy Editor** window for */Common/idp.f5demo.com‑policy*, click the **Plus (+) Sign** between **Start** and **AD Auth**
+#. In the **Visual Policy Editor** window for ``/Common/idp.f5demo.com‑policy``,
+   click the **Plus (+) Sign** between **Start** and **AD Auth**
 
-|image73|
+   |image73|
 
-5. In the pop-up dialog box, select the **Logon** tab and then select the **Radio** next to **HTTP 401 Response**, and click the **Add Item** button
+#. In the pop-up dialog box, select the **Logon** tab and then select the
+   **Radio** next to **HTTP 401 Response**, and click the **Add Item** button
 
-|image74|
+   |image74|
 
-6. In the **HTTP 401 Response** dialog box, enter the following information:
+#. In the **HTTP 401 Response** dialog box, enter the following information:
 
-+-------------------+-------------------------------+
-| Basic Auth Realm: | *f5demo.com*                  |
-+-------------------+-------------------------------+
-| HTTP Auth Level:  | *basic+negotiate* (drop down) |
-+-------------------+-------------------------------+
+   +-------------------+---------------------------------+
+   | Basic Auth Realm: | ``f5demo.com``                  |
+   +-------------------+---------------------------------+
+   | HTTP Auth Level:  | ``basic+negotiate`` (drop down) |
+   +-------------------+---------------------------------+
 
-7. Click the **Save** button at the bottom of the dialog box
+#. Click the **Save** button at the bottom of the dialog box
 
-|image75|
+   |image75|
 
-8. In the **Visual Policy Editor** window for */Common/idp.f5demo.com‑policy*, click the **Plus (+) Sign** on the **Negotiate** branch between **HTTP 401 Response** and **Deny**
-9. In the pop-up dialog box, select the **Authentication** tab and then select the **Radio** next to **Kerberos Auth**, and click the **Add Item** button
+#. In the **Visual Policy Editor** window for ``/Common/idp.f5demo.com‑policy``,
+   click the **Plus (+) Sign** on the **Negotiate** branch between
+   **HTTP 401 Response** and **Deny**
 
-|image76|
+#. In the pop-up dialog box, select the **Authentication** tab and then
+   select the **Radio** next to **Kerberos Auth**, and click the
+   **Add Item** button
 
-10. In the **Kerberos Auth** dialog box, enter the following information:
+   |image76|
 
-+----------------------+-----------------------------------+
-| AAA Server:          | */Common/apm-krb-aaa* (drop down) |
-+----------------------+-----------------------------------+
-| Request Based Auth:  | *Disabled* (drop down)            |
-+----------------------+-----------------------------------+
+#. In the **Kerberos Auth** dialog box, enter the following information:
 
-11. Click the **Save** button at the bottom of the dialog box
+   +----------------------+-------------------------------------+
+   | AAA Server:          | ``/Common/apm-krb-aaa`` (drop down) |
+   +----------------------+-------------------------------------+
+   | Request Based Auth:  | ``Disabled`` (drop down)            |
+   +----------------------+-------------------------------------+
 
-|image77|
+#. Click the **Save** button at the bottom of the dialog box
 
-.. NOTE:: The *apm-krb-aaa* object was pre-created for you in this lab. More details on the configuration of Kerberos AAA are included in the Learn More section at the end of this guide.
+   |image77|
 
-12. In the **Visual Policy Editor** window for */Common/idp.f5demo.com‑policy*, click the **Plus (+) Sign** on the **Successful** branch between **Kerberos Auth** and **Deny**
+   .. NOTE:: The *apm-krb-aaa* object was pre-created for you in this lab.
+      More details on the configuration of Kerberos AAA are included in
+      the Learn More section at the end of this guide.
 
-|image78|
+#. In the **Visual Policy Editor** window for
+   ``/Common/idp.f5demo.com‑policy``, click the **Plus (+) Sign** on the
+   **Successful** branch between **Kerberos Auth** and **Deny**
 
-13. In the pop-up dialog box, select the **Authentication** tab and then select the **Radio** next to **AD Query**, and click the **Add Item** button
+   |image78|
 
-|image79|
+#. In the pop-up dialog box, select the **Authentication** tab and then
+   select the **Radio** next to **AD Query**, and click the **Add Item** button
 
-14. In the resulting **AD Query(1)** pop-up window, select */Commmon/f5demo_ad* from the **Server** drop down menu
-15. In the **SearchFilter** field, enter the following value: *userPrincipalName=%{session.logon.last.username}*
+   |image79|
 
-|image80|
+#. In the resulting **AD Query(1)** pop-up window, select
+   ``/Commmon/f5demo_ad`` from the **Server** drop down menu
 
-16. In the **AD Query(1)** window, click the **Branch Rules** tab
-17. Change the **Name** of the branch to *Successful*.
-18. Click the **Change** link next to the **Expression**
+#. In the **SearchFilter** field, enter the following value:
+   ``userPrincipalName=%{session.logon.last.username}``
 
-|image81|
+   |image80|
 
-19. In the resulting pop-up window, delete the existing expression by clicking the **X** as shown
+#. In the **AD Query(1)** window, click the **Branch Rules** tab
 
-|image82|
+#. Change the **Name** of the branch to *Successful*.
 
-20. Create a new **Simple** expression by clicking the **Add Expression** button
+#. Click the **Change** link next to the **Expression**
 
-|image83|
+   |image81|
 
-21. In the resulting menu, select the following from the drop down menus:
+#. In the resulting pop-up window, delete the existing expression by clicking
+   the **X** as shown
 
-+------------+-------------------+
-| Agent Sel: | *AD Query*        |
-+------------+-------------------+
-| Condition: | *AD Query Passed* |
-+------------+-------------------+
+   |image82|
 
-22. Click the **Add Expression** Button
+#. Create a new **Simple** expression by clicking the **Add Expression** button
 
-|image84|
+   |image83|
 
-23. Click the **Finished** button to complete the expression
+#. In the resulting menu, select the following from the drop down menus:
 
-|image85|
+   +------------+---------------------+
+   | Agent Sel: | ``AD Query``        |
+   +------------+---------------------+
+   | Condition: | ``AD Query Passed`` |
+   +------------+---------------------+
 
-24. Click the **Save** button to complete the **AD Query**
+#. Click the **Add Expression** Button
 
-|image86|
+   |image84|
 
-25. In the **Visual Policy Editor** window for */Common/idp.f5demo.com‑policy*, click the **Plus (+) Sign** on the **Successful** branch between **AD Query(1)** and **Deny**
-26. In the pop-up dialog box, select the **Assignment** tab and then select the **Radio** next to **Advanced Resource Assign**, and click the **Add Item** button
+#. Click the **Finished** button to complete the expression
 
-|image87|
+   |image85|
 
-27. In the resulting **Advanced Resource Assign(1)** pop-up window, click the **Add New Entry** button
-28. In the new Resource Assignment entry, click the **Add/Delete** link
+#. Click the **Save** button to complete the **AD Query**
 
-|image88|
+   |image86|
 
-29. In the resulting pop-up window, click the **SAML** tab, and select the **Checkbox** next to */Common/partner-app*
+#. In the **Visual Policy Editor** window for ``/Common/idp.f5demo.com‑policy``,
+   click the **Plus (+) Sign** on the **Successful** branch between
+   **AD Query(1)** and **Deny**
 
-|image89|
+#. In the pop-up dialog box, select the **Assignment** tab and then select
+   the **Radio** next to **Advanced Resource Assign**, and click the
+   **Add Item** button
 
-30. Click the **Webtop** tab, and select the **Checkbox** next to */Common/full_webtop*
+   |image87|
 
-|image90|
+#. In the resulting **Advanced Resource Assign(1)** pop-up window, click
+   the **Add New Entry** button
 
-31. Click the **Update** button at the bottom of the window to complete the Resource Assignment entry
-32. Click the **Save** button at the bottom of the **Advanced Resource Assign(1)** window
+#. In the new Resource Assignment entry, click the **Add/Delete** link
 
-33. In the **Visual Policy Editor**, select the **Deny** ending on the fallback branch following **Advanced Resource Assign**
+   |image88|
 
-|image91|
+#. In the resulting pop-up window, click the **SAML** tab, and select the
+   **Checkbox** next to */Common/partner-app*
 
-34. In the **Select Ending** dialog box, selet the **Allow** radio button and then click **Save**
+   |image89|
 
-|image92|
+#. Click the **Webtop** tab, and select the **Checkbox** next to
+   ``/Common/full_webtop``
 
-35. In the **Visual Policy Editor**, click **Apply Access Policy** (top left), and close the **Visual Policy Editor**
+   |image90|
 
-|image93|
+#. Click the **Update** button at the bottom of the window to complete
+   the Resource Assignment entry
+
+#. Click the **Save** button at the bottom of the
+   **Advanced Resource Assign(1)** window
+
+#. In the **Visual Policy Editor**, select the **Deny** ending on the
+   fallback branch following **Advanced Resource Assign**
+
+   |image91|
+
+#. In the **Select Ending** dialog box, selet the **Allow** radio button
+   and then click **Save**
+
+   |image92|
+
+#. In the **Visual Policy Editor**, click **Apply Access Policy**
+   (top left), and close the **Visual Policy Editor**
+
+   |image93|
 
 TASK 2 - Test the Kerberos to SAML Configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. NOTE:: In the following Lab Task it is recommended that you use Microsoft
-  Internet Explorer.  While other browsers also support Kerberos
-  (if configured), for the purposes of this Lab Microsoft Internet
-  Explorer has been configured and will be used.
+   Internet Explorer.  While other browsers also support Kerberos
+   (if configured), for the purposes of this Lab Microsoft Internet
+   Explorer has been configured and will be used.
 
-1. Using Internet Explorer from the jump host, navigate to the SAML IdP you previously configured at *https://idp.f5demo.com* (or click the provided bookmark)
+#. Using Internet Explorer from the jump host, navigate to the SAML IdP you
+   previously configured at *https://idp.f5demo.com* (or click the
+   provided bookmark)
 
-|image94|
+   |image94|
 
-2. Were you prompted for credentials? Were you successfully authenticated? Did you see the webtop with the SP application?
-3. Click on the Partner App icon. Were you successfully authenticated (via SAML) to the SP?
-4. Review your Active Sessions **(Access ‑> Overview ‑> Active Sessions­­­)**
-5. Review your Access Report Logs **(Access ‑> Overview ‑> Access Reports)**
+#. Were you prompted for credentials? Were you successfully authenticated?
+   Did you see the webtop with the SP application?
+
+#. Click on the Partner App icon. Were you successfully authenticated
+   (via SAML) to the SP?
+
+#. Review your Active Sessions **(Access ‑> Overview ‑> Active Sessions­­­)**
+
+#. Review your Access Report Logs **(Access ‑> Overview ‑> Access Reports)**
 
 .. |br| raw:: html
 

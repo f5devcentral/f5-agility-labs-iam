@@ -1,5 +1,5 @@
-SWG – Securing Outbound Internet Access
-=======================================
+SWG: Securing Outbound Internet Access
+======================================
 
 .. toctree::
    :maxdepth: 1

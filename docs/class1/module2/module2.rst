@@ -28,100 +28,128 @@ TASK 1 ‑ Configure the SAML Identity Provider (IdP)
 IdP Service
 -----------
 
-1. Begin by selecting: **Access ‑> Federation ‑> SAML Identity Provider ‑> Local IdP Services**
-2. Click the **Create** button (far right)
+#. Begin by selecting: **Access ‑> Federation ‑> SAML Identity Provider
+   ‑> Local IdP Services**
 
-|image26|
+#. Click the **Create** button (far right)
 
-3. In the **Create New SAML IdP Service** dialog box, click **General Settngs**
-in the left navigation pane and key in the following:
+   |image26|
 
-+-------------------+------------------------------+
-| IdP Service Name: | *idp.f5demo.com‑app*         |
-+-------------------+------------------------------+
-| IdP Entity ID:    | *https://idp.f5demo.com/app* |
-+-------------------+------------------------------+
+#. In the **Create New SAML IdP Service** dialog box, click **General Settngs**
+   in the left navigation pane and key in the following:
 
-|image27|
+   +-------------------+--------------------------------+
+   | IdP Service Name: | ``idp.f5demo.com‑app``         |
+   +-------------------+--------------------------------+
+   | IdP Entity ID:    | ``https://idp.f5demo.com/app`` |
+   +-------------------+--------------------------------+
 
-.. NOTE:: The yellow box on "Host" will disappear when the Entity ID is entered
+   |image27|
 
-4. In the **Create New SAML IdP Service** dialog box, click **Assertion
-Settings** in the left navigation pane and key in the following:
+   .. NOTE:: The yellow box on "Host" will disappear when the Entity ID is
+      entered
 
-+--------------------------+----------------------------------------------+
-| Assertion Subject Type:  | *Persistent Identifier* (drop down)          |
-+--------------------------+----------------------------------------------+
-| Assertion Subject Value: | *%{session.logon.last.username}* (drop down) |
-+--------------------------+----------------------------------------------+
+#. In the **Create New SAML IdP Service** dialog box, click **Assertion
+   Settings** in the left navigation pane and key in the following:
 
-|image28|
+   +--------------------------+------------------------------------------------+
+   | Assertion Subject Type:  | ``Persistent Identifier`` (drop down)          |
+   +--------------------------+------------------------------------------------+
+   | Assertion Subject Value: | ``%{session.logon.last.username}`` (drop down) |
+   +--------------------------+------------------------------------------------+
 
-5. In the **Create New SAML IdP Service** dialog box, click **SAML Attributes** in the left navigation pane and click the **Add** button as shown
-6. In the **Name** field in the resulting pop-up window, enter the following: *emailaddress*
-7. Under **Attribute Values**, click the **Add** button
-8. In the **Values** line, enter the following: *%{session.ad.last.attr.mail}*
-9. Click the **Update** button
-10. Click the **OK** button
+   |image28|
 
-|image29|
+#. In the **Create New SAML IdP Service** dialog box, click
+   **SAML Attributes** in the left navigation pane and click the
+   **Add** button as shown
 
-|br|
+#. In the **Name** field in the resulting pop-up window, enter the
+   following: ``emailaddress``
 
-|image30|
+#. Under **Attribute Values**, click the **Add** button
 
-11. In the **Create New SAML IdP Service** dialog box, click **Security Settings** in the left navigation pane and key in the following:
+#. In the **Values** line, enter the following: ``%{session.ad.last.attr.mail}``
 
-+----------------------+--------------------------------+
-| Signing Key:         | */Common/SAML.key* (drop down) |
-+----------------------+--------------------------------+
-| Signing Certificate: | */Common/SAML.crt* (drop down) |
-+----------------------+--------------------------------+
+#. Click the **Update** button
 
-.. NOTE:: The certificate and key were previously imported
+#. Click the **OK** button
 
-12. Click **OK** to complete the creation of the IdP service
+   |image29|
 
-|image31|
+   |br|
+
+   |image30|
+
+#. In the **Create New SAML IdP Service** dialog box, click
+   **Security Settings** in the left navigation pane and key in
+   the following:
+
+   +----------------------+----------------------------------+
+   | Signing Key:         | ``/Common/SAML.key`` (drop down) |
+   +----------------------+----------------------------------+
+   | Signing Certificate: | ``/Common/SAML.crt`` (drop down) |
+   +-----------------------+---------------------------------+
+
+   .. NOTE:: The certificate and key were previously imported
+
+#. Click **OK** to complete the creation of the IdP service
+
+   |image31|
 
 SP Connector
 ------------
 
-1. Click on **External SP Connectors** (under the **SAML Identity Provider** tab) in the horizontal navigation menu
-2. Click specifically on the **Down Arrow** next to the **Create** button (far right)
-3. Select **From Metadata** from the drop down menu
+#. Click on **External SP Connectors** (under the **SAML Identity Provider**
+   tab) in the horizontal navigation menu
 
-|image32|
+#. Click specifically on the **Down Arrow** next to the **Create** button
+   (far right)
 
-4. In the **Create New SAML Service Provider** dialogue box, click **Browse** and select the *app.partner.com_metadata.xml* file from the Desktop of your jump host
-5. In the **Service Provider Name** field, enter the following: *app.partner.com*
-6. Click **OK** on the dialog box
+#. Select **From Metadata** from the drop down menu
 
-|image33|
+   |image32|
 
-.. NOTE:: The app.partner.com_metadata.xml file was created previously. Oftentimes
-  SP providers will have a metadata file representing their SP service. This can be
-  imported to save object creation time as has been done in this lab.
+#. In the **Create New SAML Service Provider** dialogue box, click **Browse**
+   and select the *app.partner.com_metadata.xml* file from the Desktop of
+   your jump host
 
-7. Click on **Local IdP Services** (under the **SAML Identity Provider** tab) in the horizontal navigation menu
-8. Select the **Checkbox** next to the previously created *idp.f5demo.com* and click the **Bind/Unbind SP Connectors** button at the bottom of the GUI
+#. In the **Service Provider Name** field, enter the following:
+   ``app.partner.com``
 
-|image34|
+#. Click **OK** on the dialog box
 
-9. In the **Edit SAML SP's that use this IdP** dialog, select the */Common/app.partner.com* SAML SP Connection Name created previously
-10. Click the **OK** button at the bottom of the dialog box
+   |image33|
 
-|image35|
+   .. NOTE:: The app.partner.com_metadata.xml file was created previously.
+      Oftentimes SP providers will have a metadata file representing their
+      SP service. This can be imported to save object creation time as has
+      been done in this lab.
 
-11. Under the **Access ‑> Federation ‑> SAML Identity Provider ‑> Local IdP Services** menu you should now see the following (as shown):
+#. Click on **Local IdP Services** (under the **SAML Identity Provider** tab)
+   in the horizontal navigation menu
+#. Select the **Checkbox** next to the previously created ``idp.f5demo.com``
+   and click the **Bind/Unbind SP Connectors** button at the bottom of the GUI
 
-+---------------------+----------------------+
-| Name:               | *idp.f5demo.com-app* |
-+---------------------+----------------------+
-| SAML SP Connectors: | *app.partner.com*    |
-+---------------------+----------------------+
+   |image34|
 
-|image36|
+#. In the **Edit SAML SP's that use this IdP** dialog, select the
+   ``/Common/app.partner.com`` SAML SP Connection Name created previously
+
+#. Click the **OK** button at the bottom of the dialog box
+
+   |image35|
+
+#. Under the **Access ‑> Federation ‑> SAML Identity Provider ‑>
+   Local IdP Services** menu you should now see the following (as shown):
+
+   +---------------------+------------------------+
+   | Name:               | ``idp.f5demo.com-app`` |
+   +---------------------+------------------------+
+   | SAML SP Connectors: | ``app.partner.com``    |
+   +---------------------+------------------------+
+
+   |image36|
 
 TASK 2 ‑ Create SAML Resource, Webtop, and SAML IdP Access Policy
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -129,234 +157,282 @@ TASK 2 ‑ Create SAML Resource, Webtop, and SAML IdP Access Policy
 SAML Resource
 -------------
 
-1. Begin by selecting **Access ‑> Federation ‑> SAML Resources**
-2. Click the **Create** button (far right)
-3. In the **New SAML Resource** window, enter the following values:
+#. Begin by selecting **Access ‑> Federation ‑> SAML Resources**
 
-+--------------------+----------------------+
-| Name:              | *partner‑app*        |
-+--------------------+----------------------+
-| SSO Configuration: | *idp.f5demo.com‑app* |
-+--------------------+----------------------+
-| Caption:           | *Partner App*        |
-+--------------------+----------------------+
+#. Click the **Create** button (far right)
 
-4. Click **Finished** at the bottom of the configuration window
+#. In the **New SAML Resource** window, enter the following values:
 
-|image37|
+   +--------------------+------------------------+
+   | Name:              | ``partner‑app``        |
+   +--------------------+------------------------+
+   | SSO Configuration: | ``idp.f5demo.com‑app`` |
+   +--------------------+------------------------+
+   | Caption:           | ``Partner App``        |
+   +--------------------+------------------------+
 
-|br|
+#. Click **Finished** at the bottom of the configuration window
 
-|image38|
+   |image37|
+
+   |br|
+
+   |image38|
 
 Webtop
 ------
 
-1. Select **Access ‑> Webtops ‑> Webtop List**
-2. Click the **Create** button (far right)
+#. Select **Access ‑> Webtops ‑> Webtop List**
 
-|image39|
+#. Click the **Create** button (far right)
 
-3. In the resulting window, enter the following values:
+   |image39|
 
-+-------+--------------------+
-| Name: | *full_webtop*      |
-+-------+--------------------+
-| Type: | *Full* (drop down) |
-+-------+--------------------+
+#. In the resulting window, enter the following values:
 
-4. Click **Finished** at the bottom of the GUI
+   +-------+----------------------+
+   | Name: | ``full_webtop``      |
+   +-------+----------------------+
+   | Type: | ``Full`` (drop down) |
+   +-------+----------------------+
 
-|image40|
+#. Click **Finished** at the bottom of the GUI
+
+   |image40|
 
 SAML IdP Access Policy
 ----------------------
 
-1. Select **Access ‑> Profiles/Policies ‑> Access Profiles (Per-Session Policies)**
-2. Click the **Create** button (far right)
+#. Select **Access ‑> Profiles/Policies ‑> Access Profiles
+   (Per-Session Policies)**
 
-|image41|
+#. Click the **Create** button (far right)
 
-3. In the **New Profile** window, enter the following information:
+   |image41|
 
-+----------------+-------------------------+
-| Name:          | *idp.f5demo.com‑policy* |
-+----------------+-------------------------+
-| Profile Type:  | *All* (drop down)       |
-+----------------+-------------------------+
-| Profile Scope: | *Profile* (default)     |
-+----------------+-------------------------+
+#. In the **New Profile** window, enter the following information:
 
-4. Scroll to the bottom of the **New Profile** window to the **Language Settings** section
-5. Select *English* from the **Factory Built‑in Languages** menu on the right and click the **Double Arrow (<<)**, then click the **Finished** button.
-6. The **Default Language** should be automatically set
+   +----------------+---------------------------+
+   | Name:          | ``idp.f5demo.com‑policy`` |
+   +----------------+---------------------------+
+   | Profile Type:  | ``All`` (drop down)       |
+   +----------------+---------------------------+
+   | Profile Scope: | ``Profile`` (default)     |
+   +----------------+---------------------------+
 
-|image42|
+#. Scroll to the bottom of the **New Profile** window to the
+   **Language Settings** section
 
-7. From the **Access ‑> Profiles/Policies ‑> Access Profiles (Per-Session Policies) screen**, click the **Edit** link on the previously created *idp.f5demo.com‑policy* line
+#. Select *English* from the **Factory Built‑in Languages** menu on the
+   right and click the **Double Arrow (<<)**, then click the **Finished**
+   button.
 
-|image43|
+#. The **Default Language** should be automatically set
 
-8. In the **Visual Policy Editor** window for */Common/idp.f5demo.com‑policy*, click the **Plus (+) Sign** between **Start** and **Deny**
+   |image42|
 
-|image44|
+#. From the **Access ‑> Profiles/Policies ‑> Access Profiles
+   (Per-Session Policies) screen**, click the **Edit** link on the previously
+   created ``idp.f5demo.com‑policy`` line
 
-9. In the pop-up dialog box, select the **Logon** tab and then select the **Radio** next to **Logon Page**, and click the **Add Item** button
-10. Click **Save** in the resulting Logon Page dialog box
+   |image43|
 
-|image45|
+#. In the **Visual Policy Editor** window for ``/Common/idp.f5demo.com‑policy``,
+   click the **Plus (+) Sign** between **Start** and **Deny**
 
-11. In the **Visual Policy Editor** window for */Common/idp.f5demo.com‑policy*, click the **Plus (+) Sign** between **Logon Page** and **Deny**
+   |image44|
 
-|image46|
+#. In the pop-up dialog box, select the **Logon** tab and then select the
+   **Radio** next to **Logon Page**, and click the **Add Item** button
 
-12. In the pop-up dialog box, select the **Authentication** tab and then select the **Radio** next to **AD Auth**, and click the **Add Item** button
+#. Click **Save** in the resulting Logon Page dialog box
 
-|image47|
+   |image45|
 
-13. In the resulting **AD Auth** pop-up window, select */Common/f5demo_ad* from the **Server** drop down menu
-14. Click **Save** at the bottom of the window
+#. In the **Visual Policy Editor** window for ``/Common/idp.f5demo.com‑policy``,
+   click the **Plus (+) Sign** between **Logon Page** and **Deny**
 
-|image48|
+   |image46|
 
-15. In the **Visual Policy Editor** window for */Common/idp.f5demo.com‑policy*, click the **Plus (+) Sign** on the successful branch between **AD Auth** and **Deny**
+#. In the pop-up dialog box, select the **Authentication** tab and then
+   select the **Radio** next to **AD Auth**, and click the **Add Item** button
 
-|image49|
+   |image47|
 
-16. In the pop-up dialog box, select the **Authentication** tab and then select the **Radio** next to **AD Query**, and click the **Add Item** button
+#. In the resulting **AD Auth** pop-up window, select ``/Common/f5demo_ad``
+   from the **Server** drop down menu
 
-|image50|
+#. Click **Save** at the bottom of the window
 
-17. In the resulting **AD Query** pop-up window, select */Common/f5demo_ad* from the **Server** drop down menu
+   |image48|
 
-|image51|
+#. In the **Visual Policy Editor** window for ``/Common/idp.f5demo.com‑policy``,
+   click the **Plus (+) Sign** on the successful branch between **AD Auth**
+   and **Deny**
 
-18. In the **AD Query** pop‑up window, select the **Branch Rules** tab
-19. Change the **Name** of the branch to *Successful*.
-20. Click the **Change** link next to the **Expression**
+   |image49|
 
-|image52|
+#. In the pop-up dialog box, select the **Authentication** tab and then
+   select the **Radio** next to **AD Query**, and click the **Add Item** button
 
-21. In the resulting pop-up window, delete the existing expression by clicking the **X** as shown
+   |image50|
 
-|image53|
+#. In the resulting **AD Query** pop-up window, select ``/Common/f5demo_ad``
+   from the **Server** drop down menu
 
-22. Create a new **Simple** expression by clicking the **Add Expression** button
+   |image51|
 
-|image54|
+#. In the **AD Query** pop‑up window, select the **Branch Rules** tab
 
-23. In the resulting menu, select the following from the drop down menus:
+#. Change the **Name** of the branch to *Successful*.
 
-+------------+-------------------+
-| Agent Sel: | *AD Query*        |
-+------------+-------------------+
-| Condition: | *AD Query Passed* |
-+------------+-------------------+
+#. Click the **Change** link next to the **Expression**
 
-24. Click the **Add Expression** Button
+   |image52|
 
-|image55|
+#. In the resulting pop-up window, delete the existing expression by
+   clicking the **X** as shown
 
-25. Click the **Finished** button to complete the expression
+   |image53|
 
-|image56|
+#. Create a new **Simple** expression by clicking the **Add Expression** button
 
-|br|
+   |image54|
 
-|image57|
+#. In the resulting menu, select the following from the drop down menus:
 
-26. Click the **Save** button to complete the **AD Query**
-27. In the **Visual Policy Editor** window for */Common/idp.f5demo.com‑policy*, click the **Plus (+) Sign** on the successful branch between **AD Query** and **Deny**
+   +------------+---------------------+
+   | Agent Sel: | ``AD Query``        |
+   +------------+---------------------+
+   | Condition: | ``AD Query Passed`` |
+   +------------+---------------------+
 
-|image58|
+#. Click the **Add Expression** Button
 
-28. In the pop-up dialog box, select the **Assignment** tab and then select the **Radio** next to **Advanced Resource Assign**, and click the **Add Item** button
+   |image55|
 
-|image59|
+#. Click the **Finished** button to complete the expression
 
-29. In the resulting **Advanced Resource Assign** pop-up window, click the **Add New Entry** button
-30. In the new Resource Assignment entry, click the **Add/Delete** link
+   |image56|
 
-|image60|
+   |br|
 
-31. In the resulting pop-up window, click the **SAML** tab, and select the **Checkbox** next to */Common/partner-app*
+   |image57|
 
-|image61|
+#. Click the **Save** button to complete the **AD Query**
 
-32. Click the **Webtop** tab, and select the **Checkbox** next to */Common/full_webtop*
+#. In the **Visual Policy Editor** window for ``/Common/idp.f5demo.com‑policy``,
+   click the **Plus (+) Sign** on the successful branch between **AD Query** and **Deny**
 
-|image62|
+   |image58|
 
-33. Click the **Update** button at the bottom of the window to complete the Resource Assignment entry
-34. Click the **Save** button at the bottom of the **Advanced Resource Assign** window
-35. In the **Visual Policy Editor**, select the **Deny** ending on the fallback branch following **Advanced Resource Assign**
+#. In the pop-up dialog box, select the **Assignment** tab and then select
+   the **Radio** next to **Advanced Resource Assign**, and click the
+   **Add Item** button
 
-|image63|
+   |image59|
 
-36. In the **Select Ending** dialog box, selet the **Allow** radio button and then click **Save**
+#. In the resulting **Advanced Resource Assign** pop-up window, click the
+   **Add New Entry** button
 
-|image64|
+#. In the new Resource Assignment entry, click the **Add/Delete** link
 
-37. In the **Visual Policy Editor**, click **Apply Access Policy** (top left), and close the **Visual Policy Editor**
+   |image60|
 
-|image65|
+#. In the resulting pop-up window, click the **SAML** tab, and select the
+   **Checkbox** next to ``/Common/partner-app``
+
+   |image61|
+
+#. Click the **Webtop** tab, and select the **Checkbox** next to
+   ``/Common/full_webtop``
+
+   |image62|
+
+#. Click the **Update** button at the bottom of the window to complete
+   the Resource Assignment entry
+
+#. Click the **Save** button at the bottom of the
+   **Advanced Resource Assign** window
+
+#. In the **Visual Policy Editor**, select the **Deny** ending on the
+   fallback branch following **Advanced Resource Assign**
+
+   |image63|
+
+#. In the **Select Ending** dialog box, selet the **Allow** radio button
+   and then click **Save**
+
+   |image64|
+
+#. In the **Visual Policy Editor**, click **Apply Access Policy** (top left),
+   and close the **Visual Policy Editor**
+
+   |image65|
 
 TASK 3 - Create the IdP Virtual Server and Apply the IdP Access Policy
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1. Begin by selecting **Local Traffic ‑> Virtual Servers**
-2. Click the **Create** button (far right)
+#. Begin by selecting **Local Traffic ‑> Virtual Servers**
 
-|image66|
+#. Click the **Create** button (far right)
 
-3. In the **New Virtual Server** window, enter the following information:
+   |image66|
 
-+---------------------------+----------------------------+
-| General Properties                                     |
-+===========================+============================+
-| Name:                     | *idp.f5demo.com*           |
-+---------------------------+----------------------------+
-| Destination Address/Mask: | *10.1.10.110*              |
-+---------------------------+----------------------------+
-| Service Port:             | *443*                      |
-+---------------------------+----------------------------+
+#. In the **New Virtual Server** window, enter the following information:
 
-+---------------------------+----------------------------+
-| Configuration                                          |
-+===========================+============================+
-| HTTP Profile:             | *http* (drop down)         |
-+---------------------------+----------------------------+
-| SSL Profile (Client)      | *idp.f5demo.com‑clientssl* |
-+---------------------------+----------------------------+
+   +---------------------------+------------------------------+
+   | General Properties                                       |
+   +===========================+==============================+
+   | Name:                     | ``idp.f5demo.com``           |
+   +---------------------------+------------------------------+
+   | Destination Address/Mask: | ``10.1.10.110``              |
+   +---------------------------+------------------------------+
+   | Service Port:             | ``443``                      |
+   +---------------------------+------------------------------+
 
-+-----------------+-------------------------+
-| Access Policy                             |
-+=================+=========================+
-| Access Profile: | *idp.f5demo.com‑policy* |
-+-----------------+-------------------------+
+   +---------------------------+------------------------------+
+   | Configuration                                            |
+   +===========================+==============================+
+   | HTTP Profile:             | ``http`` (drop down)         |
+   +---------------------------+------------------------------+
+   | SSL Profile (Client)      | ``idp.f5demo.com‑clientssl`` |
+   +---------------------------+------------------------------+
 
-|image67|
+   +-----------------+---------------------------+
+   | Access Policy                               |
+   +=================+===========================+
+   | Access Profile: | ``idp.f5demo.com‑policy`` |
+   +-----------------+---------------------------+
 
-|br|
+   |image67|
 
-|image68|
+   |br|
 
-4. Scroll to the bottom of the configuration window and click **Finished**
+   |image68|
+
+#. Scroll to the bottom of the configuration window and click **Finished**
 
 TASK 4 - Test the SAML IdP
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1. Using your browser from the jump host, navigate to the SAML IdP you just configured at *https://idp.f5demo.com* (or click the provided bookmark)
+#. Using your browser from the jump host, navigate to the SAML IdP you just
+   configured at ``https://idp.f5demo.com`` (or click the provided bookmark)
 
-|image69|
+   |image69|
 
-2. Log in to the IdP. Were you successfully authenticated? Did you see the webtop with the SP application?
+#. Log in to the IdP. Were you successfully authenticated? Did you see the
+   webtop with the SP application?
 
-.. NOTE:: Use the credentials provided in the Authentication section at the beginning of this guide (user/Agility1)
+   .. NOTE:: Use the credentials provided in the Authentication section at
+      the beginning of this guide (user/Agility1)
 
-3. Click on the Partner App icon. Were you successfully authenticated (via SAML) to the SP?
-4. Review your Active Sessions **(Access ‑> Overview ‑> Active Sessions­­­)**
-5. Review your Access Report Logs **(Access ‑> Overview ‑> Access Reports)**
+#. Click on the Partner App icon. Were you successfully authenticated
+   (via SAML) to the SP?
+
+#. Review your Active Sessions **(Access ‑> Overview ‑> Active Sessions­­­)**
+
+#. Review your Access Report Logs **(Access ‑> Overview ‑> Access Reports)**
 
 .. |br| raw:: html
 
