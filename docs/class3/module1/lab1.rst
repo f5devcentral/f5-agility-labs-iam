@@ -171,8 +171,8 @@ Task 3 – Create a "Per-Request" Access Policy
 
    |image14|
 
--  .. IMPORTANT:: Change the Ending of the **Allow**
-   outcome on the "fallback" branch from “Reject” to **Allow**
+   .. IMPORTANT:: Change the Ending of the **Allow**
+      outcome on the "fallback" branch from “Reject” to **Allow**
 
    |image15|
 
@@ -293,7 +293,7 @@ origin server) to domain-joined machines.
 Task 6 – Testing
 ----------------
 
- Configure your browser with a “Proxy Server”
+Configure your browser with a “Proxy Server”
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 -  Go to the **Connections** tab and click **LAN settings**
