@@ -11,6 +11,8 @@ Authorization Server providing the OAuth tokens.
 Task 1: Setup Virtual Server for the API
 ----------------------------------------
 
+.. Note:: This task is performed on Big-IP #1 (RS)
+
 Create the Virtual Server
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -77,6 +79,8 @@ Test Configuration
 
 Task 2: Authorization Server
 ----------------------------
+
+.. Note:: This task is performed on Big-IP #2 (AS)
 
 Configure the Database Instance
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -296,6 +300,8 @@ Create the Authorization Virtual Server
 
 Task 3: Resource Server
 ------------------------
+
+.. Note:: This task is performed on Big-IP #1 (RS)
 
 Configure the OAuth Provider
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -612,6 +618,9 @@ Task 3: Verify
 
 Task 4: Testing Session and Token States
 ----------------------------------------
+
+.. Note:: Parts of this task are performed on both Big-IP devices. Check
+  each step to make sure you are working on the correct device.
 
 Invalidate the Session
 ~~~~~~~~~~~~~~~~~~~~~~

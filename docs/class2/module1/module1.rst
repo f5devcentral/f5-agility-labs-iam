@@ -1103,8 +1103,8 @@ Configure the Per Request Policy
    using Insert would simply add another header. Using Replace will add a header
    if it does not exist, or replace one if it does.
 
-#. You do not need to Apply Policy on per request policies. You may simply
-   close the browser tab
+- You do not need to Apply Policy on per request policies. You may simply
+  close the browser tab
 
    |image135|
 
