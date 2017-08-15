@@ -14,3 +14,4 @@ Expected time to complete: **3 hours**
 
    labinfo
    module*/module*
+   conclusion
