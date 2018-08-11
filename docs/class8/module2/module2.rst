@@ -162,15 +162,3 @@ Local Traffic (LTM) Virtual Server Creation (TMSH)
 .. |image252| image:: /_static/class8/image252.png
    :width: 589px
    :height: 83px
-.. |image253| image:: /_static/class8/image253.png
-   :width: 603px
-   :height: 33px
-.. |image254| image:: /_static/class8/image254.png
-   :width: 264px
-   :height: 191px
-.. |image255| image:: /_static/class8/image255.png
-   :width: 718px
-   :height: 127px
-.. |image256| image:: /_static/class8/image256.png
-   :width: 759px
-   :height: 337px
