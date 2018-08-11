@@ -18,3 +18,4 @@ configuring federation relationships in your own environment.
    :glob:
 
    class*/class*
+   class6/lab*
