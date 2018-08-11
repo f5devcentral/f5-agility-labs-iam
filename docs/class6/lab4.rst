@@ -28,19 +28,19 @@ TASK 1: Create/Review New Application Registration
 
 Refer to the instructions and screen shots below:
 
-+----------------------------------------------------------------------------------------------+
-| *Note: The following steps in this task can just be "REVIEWED". As setting up a free Azure*  |
-|                                                                                              |
-| *account requires the entry of billing information, setting up an account and performing the*|
-|                                                                                              |
-| *steps below is a [REVIEW] task. For those desiring to set up an account refer to the*       |
-|                                                                                              |
-| *"APPENDIX: Setting up an Azure Development Account". For those with existing accounts*      |
-|                                                                                              |
-| *these steps may be followed if desired. For all others, simply review the steps in*         |
-|                                                                                              |
-| *Task1 and proceed to Task 2.*                                                               |
-+----------------------------------------------------------------------------------------------+
++-----------------------------------------------------------------------------------------------+
+| *Note: The following steps in this task can just be "REVIEWED". As setting up a free Azure*   |
+|                                                                                               |
+| *account requires the entry of billing information, setting up an account and performing the* |
+|                                                                                               |
+| *steps below is a [REVIEW] task. For those desiring to set up an account refer to the*        |
+|                                                                                               |
+| *"APPENDIX: Setting up an Azure Development Account". For those with existing accounts*       |
+|                                                                                               |
+| *these steps may be followed if desired. For all others, simply review the steps in*          |
+|                                                                                               |
+| *Task1 and proceed to Task 2.*                                                                |
++-----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
 | **[REVIEW]**                                                                                 |
@@ -360,17 +360,17 @@ Refer to the instructions and screen shots below:
 | |image121|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
-+-----------------------------------------------------------------------------------------------+
-| 5. In the **AzureAD\_OAuth** Access Policy, click the “\ **+**\ ” between **Start** & **Deny**|
-|                                                                                               |
-| 6. Click the **Authentication** tab in the events window.                                     |
-|                                                                                               |
-| 7. Scroll down and click the radio button for **OAuth Client**.                               |
-|                                                                                               |
-| 8. Click **Add Item**.                                                                             |
-+-----------------------------------------------------------------------------------------------+
-| |image122|                                                                                    |
-+-----------------------------------------------------------------------------------------------+
++------------------------------------------------------------------------------------------------+
+| 5. In the **AzureAD\_OAuth** Access Policy, click the “\ **+**\ ” between **Start** & **Deny** |
+|                                                                                                |
+| 6. Click the **Authentication** tab in the events window.                                      |
+|                                                                                                |
+| 7. Scroll down and click the radio button for **OAuth Client**.                                |
+|                                                                                                |
+| 8. Click **Add Item**.                                                                         |
++------------------------------------------------------------------------------------------------+
+| |image122|                                                                                     |
++------------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
 | 9. In the ***OAuth\_Client*** window enter the following values as shown:                    |
@@ -512,7 +512,7 @@ Refer to the instructions and screen shots below:
 |                                                                                              |
 | 6. Click **Add** then Click **Update**.                                                      |
 |                                                                                              |
-| *Note: We are using a DataGroup control to minimize lab resources and steps. AD or LDAP      |
+| *Note: We are using a DataGroup control to minimize lab resources and steps. AD or LDAP*     |
 |                                                                                              |
 | *Group memberships, Session variables, other user attributes and various other access*       |
 |                                                                                              |

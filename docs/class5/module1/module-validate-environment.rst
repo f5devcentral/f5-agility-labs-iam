@@ -25,7 +25,7 @@ Change Client to Point at ADFS-1 Direct (BIG-IP not in traffic flow)
 |image3|
 
 Open the BIG-IP Management Interface
-----------------------------------
+------------------------------------
 
 1. Open Chrome
 
