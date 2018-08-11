@@ -84,7 +84,7 @@ because BIG-IP supports MS-ADFSPIP.
       i. **10.1.10.100**
 
       10.1.10.x is the external/DMZ network in this environment. Notice this
-is .10 not .20 this time.
+      is .10 not .20 this time.
 
 a. **Which FQDN will clients use to access AD FS?**
 

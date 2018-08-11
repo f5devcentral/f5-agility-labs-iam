@@ -2,7 +2,7 @@ Lab 2.1: Modify the Access Profile
 ----------------------------------
 
 Task 1 - Launching the Visual Policy Editor 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #. Navigate to :menuselection:`Access --> Profiles/Policies --> Access
    Profiles (Per-Session Policies)`
