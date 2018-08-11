@@ -1,12 +1,7 @@
-F5 Agility Labs - Index
-=======================
-
-Welcome
--------
+Class 6: Federating Common Services
+===================================
 
 Welcome to the Common Federation lab at F5 Agility |year|
-
-|repoinfo|
 
 .. toctree::
    :maxdepth: 2
