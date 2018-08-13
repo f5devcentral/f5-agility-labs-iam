@@ -26,7 +26,6 @@ components:
 .. list-table::
     :widths: 20 50 20 40
     :header-rows: 1
-    :stub-columns: 1
 
     * - **Component**
       - **VLAN/IP Address(es)**
