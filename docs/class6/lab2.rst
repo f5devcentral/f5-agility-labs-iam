@@ -518,3 +518,10 @@ Refer to the instructions and screen shots below:
 .. |image57| image:: media/image59.png
    :width: 3.22424in
    :height: 2.40961in
+.. |image58| image:: media/image60.png
+   :width: 2.23039in
+   :height: 2.36979in
+.. |image59| image:: media/image61.png
+   :width: 3.49268in
+   :height: 1.22650in
+   
