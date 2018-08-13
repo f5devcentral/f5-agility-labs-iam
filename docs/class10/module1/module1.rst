@@ -100,7 +100,7 @@ A blank APM policy is created and attached to the web top vs “pua_webtop”, t
 out for the pua_webtop service to operate correctly.
 
 .. NOTE::
-   For this lab, the scripts have been preloaded to /tmp, and we will be using build_pua_offline.sh and using Offline Installation Method.  The online instructions, in the event you wish to deploy in your own environment, can be located here:  https://raw.githubusercontent.com/billchurch/f5-pua/master/docs/PUA%20Solution%20Install%20Guide.docx
+   For this lab, the scripts have been preloaded to /tmp, and we will be using build_pua_offline.sh and using Offline Installation Method.  The online instructions, in the event you wish to deploy in your own environment, can be located here:  https://raw.githubusercontent.com/billchurch/f5-pua/master/docs/PUA%20Solution%20Install%20Guide.docx  If the scripts do not appear in /tmp, they have also been copied to /root.
 
 
 Offline Installation Method
@@ -120,7 +120,7 @@ Run Installation Script
 
    Additionally, most of the variables set in the top of pua_config.sh and pua_config_offline.sh may be overridden by this file.
 
-1. Run **/tmp/build_pua_offline.sh**
+1. Run **/tmp/build_pua_offline.sh** or **/root/build_pua_offline.sh**
 2. Win.
 
 Validation
@@ -129,9 +129,9 @@ Validation
 WebSSH2 Client
 ~~~~~~~~~~~~~~
 
-1. Open a web browser and navigate to the first URL given by the script.
+1. Open a web browser and DO NOT navigate to the first URL given by the script.  The IP show in the script is internal and will not be accessible externally.  Instead, you will have to use the IP from the Student Portal "Webtop" link.
 
-example: https://[virtual_server_IP]:2222/ssh/host/10.1.0.240
+example: https://[VS_IP]:2222/ssh/host/10.1.0.240
 
 2. Enter the username **testuser** with any password and click login.
 
