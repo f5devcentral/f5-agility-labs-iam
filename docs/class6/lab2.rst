@@ -40,31 +40,37 @@ Refer to the instructions and screen shots below:
 +----------------------------------------------------------------------------------------------+
 | 1. Sign Up for an OKTA developer account by navigating to:                                   |
 |                                                                                              |
-|  **https://developer.okta.com/signup/** and using a VALID email and click **Get Started**    |
+|    **https://developer.okta.com/signup/** and using a VALID email and click **Get Started**  |
 |                                                                                              |
-| 2. Additional instructions will be sent to the email address provided.                       |     
+| 2. Upon registration, you will be directed to a hyperlink (hostname) for your developer      |     
+|                                                                                              |
+|    account. This link should be saved for future use.                                        |     
+|                                                                                              |
+| 3. Additional instructions will be sent to the email address provided during account setup.  |     
 +----------------------------------------------------------------------------------------------+
-| |image26|                                                                                    |
+| |image022|                                                                                   |
+|                                                                                              |
+| |image023|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
-| 3. Following the instructions received from the generated email, sign on to the OKTA         |
+| 4. Following the instructions received from the generated email, sign into the OKTA          |
 |                                                                                              |
 |    development environment with your provided, temporary password.                           |
 +----------------------------------------------------------------------------------------------+
-| |image27|                                                                                    |
+| |image024|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
-| 4. Enter a **New Password** and the **Repeat New Password**                                  |
+| 5. Enter a **New Password** and the **Repeat New Password**                                  |
 |                                                                                              |
-| 5. Use the drop down to select a **Forgot Password Question** and provide the Answer         |
+| 6. Use the drop down to select a **Forgot Password Question** and provide the Answer         |
 |                                                                                              |
-| 6. Click a **Security Image**                                                                |
+| 7. Click a **Security Image**                                                                |
 |                                                                                              |
-| 7. Click **Create My Account**                                                               |
+| 8. Click **Create My Account**                                                               |
 +----------------------------------------------------------------------------------------------+
-| |image28|                                                                                    |
+| |image025|                                                                                   |
 +----------------------------------------------------------------------------------------------+
  
 TASK 2: OKTA Classic UI 
@@ -75,40 +81,52 @@ Refer to the instructions and screen shots below:
 +----------------------------------------------------------------------------------------------+
 | 1. For the purposes of the lab and SAML development, we will be using the OKTA Classic UI    |
 |                                                                                              |
-|   which provides access to SAML configurations. *(Note: At lab publication, the Developer*   |
+|    which provides access to SAML configurations. *(Note: At lab publication, the Developer*  |
 |                                                                                              |
-|   *Console did not have SAML resources.)*                                                    |
+|    *Console did not have SAML resources.)*                                                   |
 |                                                                                              |     
 | 2. In the top, left hand corner click the **<>** & select **Classic UI** from the drop down. |
 +----------------------------------------------------------------------------------------------+
-| |image29|                                                                                    |
+| |image026|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 TASK 3: Enable OKTA Multi-Factor Authentication [OPTIONAL]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Refer to the instructions and screen shots below:
+Refer to the instructions and screen shots below. This task will require a mobile app to enable a second factor.
 
 +----------------------------------------------------------------------------------------------+
+| **[OPTIONAL]**                                                                               |
+|                                                                                              |
 | *Note: Enabling MFA will require a Smart Device with the appropriate OKTA client for your OS*|
 |                                                                                              |
 | *The step can be skipped if you prefer to just use UserID/Password*                          |
 |                                                                                              |
 | 1. Click **Security** from the top navigation, then click **Multifactor**                    |
 +----------------------------------------------------------------------------------------------+
-| |image30|                                                                                    |
+| |image027|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
-| 2. Check **OKTA Verify**                                                                     |
+| **[OPTIONAL]**                                                                               |
 |                                                                                              |
-| 3. Ensure that **Enable Push Verification** & (optionally) that                              |
+| 2. Under **OKTA Verify**, change the dropdown from **Inactive** to **Active**                |
 |                                                                                              |
-|    **Require TouchID for OKTA Verify** is checked.                                           |
-|                                                                                              |
-| 4. Click **Save**                                                                            |
+| 3. Click the **Edit** button next to ***OKTA Verify Settings**                               |
 +----------------------------------------------------------------------------------------------+
-| |image31|                                                                                    |
+| |image028|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| **[OPTIONAL]**                                                                               |
+|                                                                                              |
+| 4. Check **Enable Push Verification**                                                        |
+|                                                                                              |
+| 5. Check **Require TouchID for OKTA Verify** (optional)                                      |
+|                                                                                              |
+| 6. Click **Save**                                                                            |
++----------------------------------------------------------------------------------------------+
+| |image029|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 TASK 4: Build SAML Application - OKTA 
@@ -117,15 +135,23 @@ TASK 4: Build SAML Application - OKTA
 Refer to the instructions and screen shots below:
 
 +----------------------------------------------------------------------------------------------+
-| 1. In the main menu, click **Applications** in the top navigation.                           |
+| 1. In the main menu, click **Applications**, and **Applications** from the dropdown in the   |
+|                                                                                              |
+|    top navigation.                                                                           |
 +----------------------------------------------------------------------------------------------+
-| |image32|                                                                                    |
+| |image030|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
-| 2. Click **Create New App** in the **Add Application Menu**                                  |
+| 2. Click **Add Application** in the **Applications** dialogue window.                        |
 +----------------------------------------------------------------------------------------------+
-| |image33|                                                                                    |
+| |image031|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 3. Click **Create New App** in the **Add Application Menu**                                  |
++----------------------------------------------------------------------------------------------+
+| |image032|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
@@ -135,7 +161,7 @@ Refer to the instructions and screen shots below:
 |                                                                                              |
 | 4. Select the **SAML 2.0** radio button for **Sign on Method** and click **Create**.         |
 +----------------------------------------------------------------------------------------------+
-| |image34|                                                                                    |
+| |image033|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
@@ -143,43 +169,43 @@ Refer to the instructions and screen shots below:
 |                                                                                              |
 | 6. Leave all other values as default and click **Next**.                                     |
 +----------------------------------------------------------------------------------------------+
-| |image35|                                                                                    |
+| |image034|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
-| 7. In the **Edit SAML Integration** screen, enter the following values                       |
+| 7. In the **Create SAML Integration** screen, enter the following values                       |
 |                                                                                              |
 | 8. In the **SAML Setting** section                                                           |
 |                                                                                              |
-|   -  **Single Sign on URL:** **https://app.f5demo.com/saml/sp/profile/post/acs**             |
+|    -  **Single Sign on URL:** **https://app.f5demo.com/saml/sp/profile/post/acs**            |
 |                                                                                              |
-|   -  **Audience URI (SP Entity ID):** **https://app.f5demo.com**                             |
+|    -  **Audience URI (SP Entity ID):** **https://app.f5demo.com**                            |
 |                                                                                              |
 | 9. Leave all other values as default and click **Next**.                                     |
 +----------------------------------------------------------------------------------------------+
-| |image36|                                                                                    |
+| |image035|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
 | 10. In the **Create SAML Integration** screen, select the:                                   |
 |                                                                                              |
-|    **“I’m an OKTA customer adding an internal app”** radio button for                        |
+|     **“I’m an OKTA customer adding an internal app”** radio button for                       |
 |                                                                                              |
-|    **Are you a customer or partner?**                                                        |
+|     **Are you a customer or partner?**                                                       |
 |                                                                                              |
 | 11. In the resulting expanded window, select:                                                |
 |                                                                                              |
-|    **“This is an internal app that we have created”** for **App Type**                       |
+|     **“This is an internal app that we have created”** for **App Type**                      |
 |                                                                                              |
-|    and click **Finish**.                                                                     |
+|     and click **Finish**.                                                                    |
 +----------------------------------------------------------------------------------------------+
-| |image37|                                                                                    |
+| |image036|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
 | 12. In the resulting application screen for **app.f5demo.com**, navigate to the              |
 |                                                                                              |
-|    **SAML 2.0 section**.                                                                     |
+|     **SAML 2.0 section**.                                                                    |
 |                                                                                              |
 | 13. Right Click the **Identity Provider Metadata** hyperlink and click **Save Link As …**    |
 |                                                                                              |
@@ -187,7 +213,7 @@ Refer to the instructions and screen shots below:
 |                                                                                              |
 |     in the Lab.                                                                              |
 +----------------------------------------------------------------------------------------------+
-| |image38|                                                                                    |
+| |image037|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 TASK 5: Add User to SAML Application 
@@ -197,29 +223,43 @@ Refer to the instructions and screen shots below:
 
 +----------------------------------------------------------------------------------------------+
 | 1. Within the **app.f5demo.com** application screen, Click **Assignments** then **Assign**   |
+|                                                                                              |
+|    and then **Assign to People** from the dropdown.                                          |
 +----------------------------------------------------------------------------------------------+
-| |image39|                                                                                    |
+| |image038|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
-| 2. In the **Assign app.f5demo.com to People** dialogue box, select your **User ID** and then |
+| 2. In the **Assign app.f5demo.com to People** dialogue box, select your **User ID**, click   |
 |                                                                                              |
-|    click **Done**.                                                                           |
+|    **Assign**, then **Done**.                                                                |
 +----------------------------------------------------------------------------------------------+
-| |image40|                                                                                    |
+| |image039|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 3. Click **Save and Go Back**.                                                               |
++----------------------------------------------------------------------------------------------+
+| |image040|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 4. Click **Done**.                                                                           |
++----------------------------------------------------------------------------------------------+
+| |image041|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 TASK 6: Add Multi-Factor Authentication Sign-On Policy [OPTIONAL]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Refer to the instructions and screen shots below:
+Refer to the instructions and screen shots below.  This section requires that **Task 3** be completed.
 
 +----------------------------------------------------------------------------------------------+
 | **[OPTIONAL]**                                                                               |
 |                                                                                              |
 | 1. Within the **app.f5demo.com** application screen, Click **Sign On**                       |
 +----------------------------------------------------------------------------------------------+
-| |image41|                                                                                    |
+| |image042|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
@@ -227,7 +267,7 @@ Refer to the instructions and screen shots below:
 |                                                                                              |
 | 2. Scroll down to the **Sign On Policy** section and click **Add Rule**                      |
 +----------------------------------------------------------------------------------------------+
-| |image42|                                                                                    |
+| |image043|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
@@ -236,12 +276,6 @@ Refer to the instructions and screen shots below:
 | 3. In the **Add Sign On Rule** dialogue box, enter **MFA** for the **Rule Name**.            |
 |                                                                                              |
 | 4. Scroll down to the **Actions** section.                                                   |
-+----------------------------------------------------------------------------------------------+
-| |image43|                                                                                    |
-+----------------------------------------------------------------------------------------------+
-
-+----------------------------------------------------------------------------------------------+
-| **[OPTIONAL]**                                                                               |
 |                                                                                              |
 | 5. In the **Actions** section, under **Access**, check the box for **Prompt for factor**.    |
 |                                                                                              |
@@ -249,15 +283,7 @@ Refer to the instructions and screen shots below:
 |                                                                                              |
 | 7. Click **Save**.                                                                           |
 +----------------------------------------------------------------------------------------------+
-| |image44|                                                                                    |
-+----------------------------------------------------------------------------------------------+
-
-+----------------------------------------------------------------------------------------------+
-| **[OPTIONAL]**                                                                               |
-|                                                                                              |
-| 8. Review and verify the completed **Sign On Policy**.                                       |
-+----------------------------------------------------------------------------------------------+
-| |image45|                                                                                    |
+| |image044|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 TASK 7: Create the External IDP Connector
@@ -272,7 +298,7 @@ Refer to the instructions and screen shots below:
 |                                                                                              |
 |    **External IdP Connectors**.                                                              |
 +----------------------------------------------------------------------------------------------+
-| |image46|                                                                                    |
+| |image045|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
@@ -282,7 +308,7 @@ Refer to the instructions and screen shots below:
 |                                                                                              |
 | 4. Select **From Metadata** from the drop down menu                                          |
 +----------------------------------------------------------------------------------------------+
-| |image47|                                                                                    |
+| |image046|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
@@ -294,7 +320,7 @@ Refer to the instructions and screen shots below:
 |                                                                                              |
 | 7. Click **OK**.                                                                             |
 +----------------------------------------------------------------------------------------------+
-| |image48|                                                                                    |
+| |image047|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 TASK 8: Change the SAML SP Binding
@@ -308,12 +334,16 @@ Refer to the instructions and screen shots below:
 |                                                                                              |
 | 2. Select the checkbox next to **app.f5demo.com** and click **Bind\\UnBind IdP Connectors**  |
 +----------------------------------------------------------------------------------------------+
-| |image49|                                                                                    |
+| |image048|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
-| 3. Delete/Remove the existing binding                                                        |
-|                                                                                              |
+| 3. Check the existing binding and click **Delete**.                                          |
++----------------------------------------------------------------------------------------------+
+| |image049|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
 | 4. Click **Add New Row** and use the following values                                        |
 |                                                                                              |
 |    -  **SAML IdP Connectors:** **/Common/OKTA\_SaaS-iDP**                                    |
@@ -324,7 +354,7 @@ Refer to the instructions and screen shots below:
 |                                                                                              |
 | 5. Click **Update** then **OK**.                                                             |
 +----------------------------------------------------------------------------------------------+
-| |image50|                                                                                    |
+| |image050|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 TASK 9: Apply Access Policy Changes
@@ -334,13 +364,13 @@ Refer to the instructions and screen shots below:
 +----------------------------------------------------------------------------------------------+
 | 1. Click the **Apply Access Policy** link in the top left corner of the Admin GUI            |
 +----------------------------------------------------------------------------------------------+
-| |image51|                                                                                    |
+| |image051|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
 | 2. Ensure **app.f5demo.com-policy** is checked and click **Apply**                           |
 +----------------------------------------------------------------------------------------------+
-| |image52|                                                                                    |
+| |image052|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 TASK 10 – Test Access to the app.f5demo.com application
@@ -349,39 +379,38 @@ TASK 10 – Test Access to the app.f5demo.com application
 Refer to the instructions and screen shots below:
 
 +----------------------------------------------------------------------------------------------+
-| *Note: Those who enabled MFA access will be required to activate their second factor for*    |
-|                                                                                              |
-| *application access.*                                                                        |
-|                                                                                              |
-| 1. Follow the necessary prompts as directed.                                                 |
-+----------------------------------------------------------------------------------------------+
-| |image53|                                                                                    |
-| |image54|                                                                                    |
-| |image55|                                                                                    |
-+----------------------------------------------------------------------------------------------+
-
-+----------------------------------------------------------------------------------------------+
-| 2. Using your browser from the Jump Host click on the provided bookmark or navigate to:      |
+| 1. Using your browser from the Jump Host click on the provided bookmark or navigate to:      |
 |                                                                                              |
 |    https://app.f5demo.com                                                                    |
 +----------------------------------------------------------------------------------------------+
-| |image56|                                                                                    |
+| |image053|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
-| 3. Did you successfully redirect to the OKTA SaaS IdP?                                       |
+| 2. Follow the necessary prompts as directed.                                                 |
 |                                                                                              |
-| 4. Login to the iDP, were you successfully authenticated? Were you prompted for MFA          |
+|    *Note: Those who enabled MFA access will be required to activate their second factor for* |
+|                                                                                              |
+|    *application access. Requires Task 3 & Task be completed.*                                                                     |
++----------------------------------------------------------------------------------------------+
+| |image054|                                                                                   |
+| |image055|                                                                                   |
+| |image056|                                                                                   |
++----------------------------------------------------------------------------------------------+
++----------------------------------------------------------------------------------------------+
+| 4. Did you successfully redirect to the OKTA SaaS IdP?                                       |
+|                                                                                              |
+| 5. Login to the iDP, were you successfully authenticated? Were you prompted for MFA          |
 |                                                                                              |
 |    if configured?                                                                            |
 |                                                                                              |
-| 5. After successful authentication, were you returned to the SAML SP?                        |
+| 6. After successful authentication, were you returned to the SAML SP?                        |
 |                                                                                              |
-| 6. Were you successfully authenticated (SAML)?                                               |
+| 7. Were you successfully authenticated (SAML)?                                               |
 |                                                                                              |
-| 7. Review your **Active Sessions** (**Access Overview** -> **Active Sessions**).             |
+| 8. Review your **Active Sessions** (**Access Overview** -> **Active Sessions**).             |
 |                                                                                              |
-| 8. Review your Access Report Logs (**Access Overview** -> **Access Reports**).               |
+| 9. Review your Access Report Logs (**Access Overview** -> **Access Reports**).               |
 +----------------------------------------------------------------------------------------------+
 | |image57|                                                                                    |
 +----------------------------------------------------------------------------------------------+
@@ -524,4 +553,3 @@ Refer to the instructions and screen shots below:
 .. |image59| image:: media/image61.png
    :width: 3.49268in
    :height: 1.22650in
-   
