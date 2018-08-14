@@ -17,4 +17,5 @@ configuring federation relationships in your own environment.
    :caption: Contents:
    :glob:
 
-   class*/class*
+   class?/class*
+   class??/class*

@@ -43,7 +43,6 @@ The following credentials will be utilized throughout this Lab guide:
 .. list-table::
     :widths: 20 40 40
     :header-rows: 1
-    :stub-columns: 1
 
     * - **HOST/RESOURCE**
       - **USERNAME**

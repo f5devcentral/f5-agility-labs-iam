@@ -412,145 +412,144 @@ Refer to the instructions and screen shots below:
 |                                                                                              |
 | 9. Review your Access Report Logs (**Access Overview** -> **Access Reports**).               |
 +----------------------------------------------------------------------------------------------+
-| |image057|                                                                                   |
+| |image57|                                                                                    |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
-| 10. Destroy your Active Session by nagivating to **Access Overview** -> **Active Sessions**  |
+| 9. Destroy your Active Session by nagivating to **Access Overview** -> **Active Sessions**   |
 |                                                                                              |
-|     Select the checkbox next to your session and click the **Kill Selected Session** button. |
+|    Select the checkbox next to your session and click the **Kill Selected Session** button.  |
 +----------------------------------------------------------------------------------------------+
-| |image058|                                                                                   |
-+----------------------------------------------------------------------------------------------+
-
-+----------------------------------------------------------------------------------------------+
-| 11. Close your browser and logon to your **https://dev-<Dev-ID>.oktapreview.com** account.   |
-|                                                                                              |
-|     Click on your **app.f5demo.com** application for IDP initiated Access.                   |
-|                                                                                              |
-| 12. After successful authentication, were you returned to the SAML SP?                       |
-|                                                                                              |
-| 13. Were you successfully authenticated (SAML)?                                              |
-|                                                                                              |
-| 14. Review your **Active Sessions** (**Access Overview** -> **Active Sessions**).            |
-|                                                                                              |
-| 15. Review your Access Report Logs (**Access Overview** -> **Access Reports**).              |
-+----------------------------------------------------------------------------------------------+
-| |image059|                                                                                   |
+| |image58|                                                                                    |
 +----------------------------------------------------------------------------------------------+
 
-.. |image022| image:: media/image022.png
-   :width: 4.5in
-   :height: 2.32in
-.. |image023| image:: media/image023.png
-   :width: 4.5in
-   :height: 2.37in
-.. |image024| image:: media/image024.png
-   :width: 1.75in
-   :height: 2.75in
-.. |image025| image:: media/image025.png
-   :width: 2.5in
-   :height: 4.5in
-.. |image026| image:: media/image026.png
-   :width: 4.5in
-   :height: 0.74in
-.. |image027| image:: media/image027.png
-   :width: 4.5in
-   :height: 1.03in
-.. |image028| image:: media/image028.png
-   :width: 4.5in
-   :height: 2.58in
-.. |image029| image:: media/image029.png
-   :width: 4.5in
-   :height: 2.56in
-.. |image030| image:: media/image030.png
-   :width: 4.5in
-   :height: 0.80in
-.. |image031| image:: media/image031.png
-   :width: 4.5in
-   :height: 1.66in
-.. |image032| image:: media/image032.png
-   :width: 4.5in
-   :height: 1.64in
-.. |image033| image:: media/image033.png
-   :width: 4.5in
-   :height: 2.64in
-.. |image034| image:: media/image034.png
-   :width: 4.5in
-   :height: 2.71in
-.. |image035| image:: media/image035.png
-   :width: 4.0in
-   :height: 3.75in
-.. |image036| image:: media/image036.png
-   :width: 4.5in
-   :height: 2.56in
-.. |image037| image:: media/image037.png
-   :width: 4.5in
-   :height: 3.40in
-.. |image038| image:: media/image038.png
-   :width: 4.5in
-   :height: 1.89in
-.. |image039| image:: media/image039.png
-   :width: 4.5in
-   :height: 1.72in
-.. |image040| image:: media/image040.png
-   :width: 4.5in
-   :height: 1.69in
-.. |image041| image:: media/image041.png
-   :width: 4.5in
-   :height: 1.73in
-.. |image042| image:: media/image042.png
-   :width: 4.5in
-   :height: 1.22in
-.. |image043| image:: media/image043.png
-   :width: 4.5in
-   :height: 1.68in
-.. |image044| image:: media/image044.png
-   :width: 2.5in
-   :height: 3.25in
-.. |image045| image:: media/image045.png
-   :width: 4.5in
-   :height: 2.30in
-.. |image046| image:: media/image046.png
-   :width: 4.5in
-   :height: 0.77in
-.. |image047| image:: media/image047.png
-   :width: 4.5in
-   :height: 3.38in
-.. |image048| image:: media/image048.png
-   :width: 4.5in
-   :height: 1.15in
-.. |image049| image:: media/image049.png
-   :width: 4.5in
-   :height: 2.04in
-.. |image050| image:: media/image050.png
-   :width: 4.5in
-   :height: 2.33in
-.. |image051| image:: media/image051.png
-   :width: 4.5in
-   :height: 1.10in
-.. |image052| image:: media/image052.png
-   :width: 4.5in
-   :height: 1.66in
-.. |image053| image:: media/image053.png
-   :width: 4.5in
-   :height: 1.03in
-.. |image054| image:: media/image054.png
-   :width: 2.0in
-   :height: 1.75in
-.. |image055| image:: media/image055.png
-   :width: 2.0in
-   :height: 1.75in
-.. |image056| image:: media/image056.png
-   :width: 2.0in
-   :height: 1.75in
-.. |image057| image:: media/image057.png
-   :width: 4.5in
-   :height: 3.03in
-.. |image058| image:: media/image058.png
-   :width: 2.5in
-   :height: 2.5in
-.. |image059| image:: media/image059.png
-   :width: 4.5in
-   :height: 1.08in
++----------------------------------------------------------------------------------------------+
+| 10. Close your browser and logon to your **https://dev-<Dev-ID>.oktapreview.com** account.   |
+|                                                                                              |
+|    Click on your **app.f5demo.com** application for IDP initiated Access.                    |
+|                                                                                              |
+| 11. After successful authentication, were you returned to the SAML SP?                       |
+|                                                                                              |
+| 12. Were you successfully authenticated (SAML)?                                              |
+|                                                                                              |
+| 13. Review your **Active Sessions** (**Access Overview** -> **Active Sessions**).            |
+|                                                                                              |
+| 14. Review your Access Report Logs (**Access Overview** -> **Access Reports**).              |
++----------------------------------------------------------------------------------------------+
+| |image59|                                                                                    |
++----------------------------------------------------------------------------------------------+
 
+.. |image22| image:: media/image24.png
+   :width: 3.12075in
+   :height: 1.43714in
+.. |image23| image:: media/image25.png
+   :width: 3.15875in
+   :height: 2.08094in
+.. |image24| image:: media/image26.png
+   :width: 3.54320in
+   :height: 0.50920in
+.. |image25| image:: media/image27.png
+   :width: 3.48173in
+   :height: 2.62090in
+.. |image26| image:: media/image28.png
+   :width: 3.65172in
+   :height: 1.65644in
+.. |image27| image:: media/image29.png
+   :width: 1.37770in
+   :height: 1.79508in
+.. |image28| image:: media/image30.png
+   :width: 3.20000in
+   :height: 6.06388in
+.. |image29| image:: media/image31.png
+   :width: 3.56825in
+   :height: 0.33742in
+.. |image30| image:: media/image32.png
+   :width: 3.40491in
+   :height: 1.18125in
+.. |image31| image:: media/image33.png
+   :width: 2.92025in
+   :height: 3.13718in
+.. |image32| image:: media/image34.png
+   :width: 3.52521in
+   :height: 1.67580in
+.. |image33| image:: media/image35.png
+   :width: 3.42355in
+   :height: 1.57385in
+.. |image34| image:: media/image36.png
+   :width: 3.32812in
+   :height: 1.90502in
+.. |image35| image:: media/image37.png
+   :width: 3.31187in
+   :height: 2.30806in
+.. |image36| image:: media/image38.png
+   :width: 3.24757in
+   :height: 2.40753in
+.. |image37| image:: media/image39.png
+   :width: 3.31528in
+   :height: 1.80296in
+.. |image38| image:: media/image40.png
+   :width: 3.33472in
+   :height: 3.67040in
+.. |image39| image:: media/image41.png
+   :width: 3.27878in
+   :height: 0.92046in
+.. |image40| image:: media/image42.png
+   :width: 3.12813in
+   :height: 1.69163in
+.. |image41| image:: media/image43.png
+   :width: 3.22523in
+   :height: 0.52038in
+.. |image42| image:: media/image44.png
+   :width: 3.23750in
+   :height: 1.20928in
+.. |image43| image:: media/image45.png
+   :width: 3.29965in
+   :height: 2.28233in
+.. |image44| image:: media/image46.png
+   :width: 3.35967in
+   :height: 2.30729in
+.. |image45| image:: media/image47.png
+   :width: 3.33229in
+   :height: 1.96747in
+.. |image46| image:: media/image48.png
+   :width: 3.23750in
+   :height: 2.11911in
+.. |image47| image:: media/image49.png
+   :width: 3.46226in
+   :height: 0.55215in
+.. |image48| image:: media/image50.png
+   :width: 3.34429in
+   :height: 2.45452in
+.. |image49| image:: media/image51.png
+   :width: 3.55668in
+   :height: 0.58963in
+.. |image50| image:: media/image52.png
+   :width: 3.55455in
+   :height: 1.80809in
+.. |image51| image:: media/image53.png
+   :width: 3.50192in
+   :height: 0.74026in
+.. |image52| image:: media/image54.png
+   :width: 3.46558in
+   :height: 1.04152in
+.. |image53| image:: media/image55.png
+   :width: 1.18229in
+   :height: 1.49240in
+.. |image54| image:: media/image56.png
+   :width: 1.01568in
+   :height: 1.50521in
+.. |image55| image:: media/image57.png
+   :width: 1.07076in
+   :height: 1.47917in
+.. |image56| image:: media/image58.png
+   :width: 3.47185in
+   :height: 0.49895in
+.. |image57| image:: media/image59.png
+   :width: 3.22424in
+   :height: 2.40961in
+.. |image58| image:: media/image60.png
+   :width: 2.23039in
+   :height: 2.36979in
+.. |image59| image:: media/image61.png
+   :width: 3.49268in
+   :height: 1.22650in

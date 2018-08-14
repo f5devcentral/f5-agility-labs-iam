@@ -586,3 +586,10 @@ Refer to the instructions and screen shots below:
 .. |image96| image:: media/image98.png
    :width: 3.64074in
    :height: 1.05961in
+.. |image97| image:: media/image99.png
+   :width: 3.62160in
+   :height: 1.84971in
+.. |image98| image:: media/image100.png
+   :width: 3.60694in
+   :height: 2.16776in
+
