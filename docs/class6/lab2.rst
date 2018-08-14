@@ -173,7 +173,7 @@ Refer to the instructions and screen shots below:
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
-| 7. In the **Create SAML Integration** screen, enter the following values                       |
+| 7. In the **Create SAML Integration** screen, enter the following values                     |
 |                                                                                              |
 | 8. In the **SAML Setting** section                                                           |
 |                                                                                              |
