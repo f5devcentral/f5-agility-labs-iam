@@ -32,19 +32,19 @@ Task 1 - Create SAML Resource
 
 a. Navigate to :menuselection:`Access --> Federation --> SAML Resource` and click the :guilabel:`+` sign
 
-    |image10|
+   |image10|
 
 b. Configure the following settings:
 
-    ================= ================
-    Property          Value     
-    ================= ================
-    Name              app.f5demo.com 
-    SSO Configuration idp.f5demo.com 
-    Caption           app       
-    ================= ================
+   ================= ================
+   Property          Value     
+   ================= ================
+   Name              app.f5demo.com 
+   SSO Configuration idp.f5demo.com 
+   Caption           app       
+   ================= ================
 
-    |image11|
+   |image11|
 
 c. Click the :guilabel:`Finished` button.
 
