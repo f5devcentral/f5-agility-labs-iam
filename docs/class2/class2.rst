@@ -1,8 +1,10 @@
-WAF/APM API Security and Management
-===================================
+Access 302: Ephemeral Authentication
+====================================
 
 Welcome
 -------
+
+
 
 .. toctree::
    :maxdepth: 1
@@ -13,3 +15,4 @@ Welcome
    intro*
    module*/module*
    module*/lab*
+ 

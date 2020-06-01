@@ -1,10 +1,10 @@
-F5 Agility Labs - Index
-=======================
+Access 101: Intro to Access Foundational Concepts
+=================================================
 
 Welcome
 -------
 
-Welcome to the |classbold| lab at F5 Agility |year|
+Welcome to the |Access 101| lab at F5 Agility |2020|
 
 |repoinfo|
 
@@ -17,7 +17,6 @@ Welcome to the |classbold| lab at F5 Agility |year|
    intro*
    lab1*
    lab2*
-   lab3*
-   lab4*
    close*
    
+

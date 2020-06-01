@@ -1,44 +1,85 @@
-Class - Ephemeral Authentication
-===================================
+Getting Started
+---------------
 
-The Ephemeral Authentication lab is a combination of multiple features included in Access Policy Manager to enhance security for Authentication schemes. The first module will cover the implementation of **Client Certificate Constrained Delegation (C3D)** features enhanced in APM. This use case is often referred to as CertSSO.  The second module covers the **Privileged User Access** solution with a specific focus on ephemeral authentication for SSH access to network devices, as well integration with code respositories.
+Please follow the instructions provided by the instructor to start your
+lab and access your jump host.
 
-This class covers the following topics related to Ephemeral Authentication:
+To access your dedicated student lab environment, you will require a web browser
+and Remote Desktop Protocol (RDP) client software. The web browser will be used to
+access the Lab Training Portal. The RDP client will be used to connect to the Jump
+Host, where you will be able to access the BIG-IP management interfaces (HTTPS, SSH).
 
-- LDAP Ephemeral Authentication
-- RADIUS Ephemeral Authentication
-- HTML5 SSH
-- C3D APM Enhancements
++----------------------------------------------------------------------------------------------+
+| 1. Establish a RDP connection to your provided lab Virtual Edition: **jumphost.f5lab.local** |
+|                                                                                              |
+|    with the following credentials:                                                           |
+|                                                                                              |
+|    * **UserID: f5lab\\user1** \| **Password: user1**                                         |
+|                                                                                              |
+| 2. Access the BIG-IP GUI via https://10.1.1.4  You can also double-click on the **bigip1**   |
+|                                                                                              |
+|    bookmark from within Chrome.                                                              |
+|                                                                                              |
+| 3. Login into the BIG-IP Configuration Utility with the following credentials:               |
+|                                                                                              |
+|    * **UserID: admin** \| **Password: admin**                                                |
+|                                                                                              |
++----------------------------------------------------------------------------------------------+
+| Note: All work for this lab will be performed exclusively from the provided lab environment. |
+|                                                                                              |
+|       No installation or interaction with your local system is required.                     |
++----------------------------------------------------------------------------------------------+
 
-Expected time to complete: **1 hour**
+Lab Topology
+~~~~~~~~~~~~
+
+|image000|  
+
+The following components have been included in your lab environment:
+
+- 2 x F5 BIG-IP VE (v15.1)
+- 1 x Windows Jumphost- Server 2016
+- 1 x Windows 2016 Server hosting AD, CA, OCSP & DNS
+- 1 x Windows 2016 Server hosting IIS
+- 1 x Ubuntu 16.04 LTS 
+- 1 x Centos 7
+
+Lab Components
+^^^^^^^^^^^^^^
+
+The following table lists VLANS, IP Addresses and Credentials for all
+components:
+
++------------------------+-------------------------+--------------------------+
+| Component              | VLAN/IP Address(es)     | Credentials              |
++========================+=========================+==========================+
+| jumpbox.f5lab.local    | - Management 10.1.1.10  | - user1/user1            |
+|                        | - External   10.1.10.10 | - user2/user2            |
+|                        | - Internal   10.1.20.10 |                          |
++------------------------+-------------------------+--------------------------+
+| BIG-IP1.f5lab.local    | - Management 10.1.1.4   | - admin/admin            |
+|                        | - External   10.1.10.4  |                          |
+|                        | - Internal   10.1.20.4  |                          |
++------------------------+-------------------------+--------------------------+
+| BIG-IP3.f5lab.local    | - Management 10.1.1.5   | - admin/admin            |
+|                        | - External   10.1.10.5  |                          |
+|                        | - Internal   10.1.20.5  |                          |
++------------------------+-------------------------+--------------------------+
+| dc.f5lab.local         | - Management 10.1.1.7   | - administator/i3NqCqRQ  |
+|                        | - Internal   10.1.20.7  |                          |
++------------------------+-------------------------+--------------------------+
+| iis.f5lab.local        | - Management 10.1.1.6   | - administator/i3NqCqRQ  |
+|                        | - Internal   10.1.20.6  |                          |
++------------------------+-------------------------+--------------------------+
+| web.f5lab.local        | - Management 10.1.1.9   |                          |
+|                        | - Internal   10.1.20.9  |                          |
+|                        | - Internal   10.1.20.19 |                          |
++------------------------+-------------------------+--------------------------+
+| radius.f5lab.local     | - Management 10.1.1.8   |                          |
+|                        | - Internal   10.1.20.8  |                          |
++------------------------+-------------------------+--------------------------+
+
+.. |image000| image:: media/image000.png
+   :width: 800px
 
 
-UDF blueprint version: **44**
-
-Setup Lab Environment
-----------------------------------------
-
-#. Click the **Command Prompt** shortcut to open the command prompt on the jumphost 
-
-   |image1|
-
-#. Type the command **cd c:\\labs\\class2\\postman** to navigate the Postman collection folder.
-
-
-#. Type the command **newman run "Ephemeral Authentication Labs-setup.postman_collection.json" -e master-single-dc.postman_environment.json -k**
-
-
-#. All Steps in the collection should succeed before moving on to the lab.  If an API call fails run the collection again by repeating the previous step.  
-
-   |image2|
-
-.. |image1| image:: media/image001.png
-.. |image2| image:: media/image002.png
-
-
-.. toctree::
-   :maxdepth: 1
-   :glob:
-
-   labinfo
-   module*/module*

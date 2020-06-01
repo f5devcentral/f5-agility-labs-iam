@@ -1,671 +1,253 @@
-Lab 1: Access Guided Configuration - PerRequest Policy
-======================================================
+Lab 1: Building a Basic Access Policy
+====================================================
 
-The purpose of this lab is to leverage Access Guided Configuration (AGC) to 
-deploy an Identity Aware Proxy extended by Per Request Policies (PRP) access 
-controls. The Per Request Policies will restict access based on AD Group 
-Membership and the URI accessed. Students will configure the various aspects 
-of the application using strictly AGC, review the configuration and perform 
-tests of the deployment.
-
-Objective:
+Objectives
 ----------
 
--  Gain an understanding of Access Guided Configruration configurations and
-   its various configurations and deployment models
+The lab has a pre configured test VIP, we will use the VIP that has been pre configured in to configure a simple Access Profile using the Visual Policy Editor
+(VPE) to perform user authentication.
 
--  Gain an initial understanding of Per Request Policies and their applicability
-   in various delivery and control scenarios
+Lab Requirements
+----------------
 
-Lab Requirements:
------------------
+-  A pre existing virtual server at 10.1.10.101 or https://server1.acme.com
 
--  All Lab requirements will be noted in the tasks that follow
+Task 1: Define an Authentication Server
+---------------------------------------
 
--  Estimated completion time: 30 minutes
+Before we can create an access profile, we must create the necessary AAA
+server profile for our Active Directory.
 
-Lab 1 Tasks:
------------------
+1. From the main screen, browse to **Access > Authentication > Active
+   Directory**
 
-TASK 1: Intialize Access Guided Configuration (AGC)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+2. Click **Create…** in the upper right-hand corner
 
-+----------------------------------------------------------------------------------------------+
-| 1. Login to your provided lab Virtual Edition: **bigp1.f5lab.local**                         |
-|                                                                                              |
-| 2. Navigate to:  **Access -> Guided Configuration**                                          |
-|                                                                                              |
-| 3. Click the **Zero Trust** graphic as shown.                                                |
-+----------------------------------------------------------------------------------------------+
-| |image001|                                                                                   |
-+----------------------------------------------------------------------------------------------+
+3. Configure the new server profile as follows:
 
-+----------------------------------------------------------------------------------------------+
-| 4. Click on the **Identity Aware Proxy**  dialogue box click under **Zero Trust**            |
-|                                                                                              |
-|    in the navigation as shown.                                                               |
-+----------------------------------------------------------------------------------------------+
-| |image002|                                                                                   |
-+----------------------------------------------------------------------------------------------+
+    Name: **Lab\_SSO\_AD\_Server**
 
-+----------------------------------------------------------------------------------------------+
-| 5. Review the **Identity Aware Proxy Application** configuration example presented.          |
-|                                                                                              |
-| 6. Scroll through and review the remaining element of the dialogue box to the bottom of the  |
-|                                                                                              |
-|    screen and click "Next"                                                                   |
-+----------------------------------------------------------------------------------------------+
-| |image003|                                                                                   |
-|                                                                                              |
-| |image004|                                                                                   |
-+----------------------------------------------------------------------------------------------+
+    Domain Name: **f5lab.local*
 
-TASK 2: Name Configuration and define Device Posture  
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Server Connection: **Direct**
 
-+----------------------------------------------------------------------------------------------+
-| 1. In the **Configuration Name** dialogue box, enter **agc-app.acme.com**                    |
-|                                                                                              |
-| 2. Click **Save & Next** at the bottom of the dialogue window.                               |
-+----------------------------------------------------------------------------------------------+
-| |image005|                                                                                   |
-+----------------------------------------------------------------------------------------------+
+    Domain Controller: **10.1.20.7**
 
-TASK: 3: Configure Virtual Server Properties 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    User Name: **f5lab\\admin**
 
-+----------------------------------------------------------------------------------------------+
-| 1. Select the **Create New** radio button under **Virtual Server**                           |
-|                                                                                              |
-| 2. Select the **Host** radio button under **Destination Address**                            |
-|                                                                                              |
-| 3. Enter the IP Address **10.1.10.100** in the dialogue box for **Destination Address**.     |
-|                                                                                              |
-| 4. Confirm the **Rediect Port** is **80** and **HTTP**.                                      |
-|                                                                                              |
-| 5. Select the **Use Existing** radio button under **Client SSL Profile**                     |
-|                                                                                              |
-| 6. Move the **f5demo** Client SSL Profile to the right, **Selected**                         |
-|                                                                                              |
-| 7. Click **Save & Next** at the bottom of the dialogue window.                               |
-+----------------------------------------------------------------------------------------------+
-| |image006|                                                                                   |
-+----------------------------------------------------------------------------------------------+
+    Password: **admin**
 
-TASK: 4: Configure User Identity  
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-+----------------------------------------------------------------------------------------------+
-| 1. Enter **agc-f5lab-AD** in the **Name** field                                              |
-|                                                                                              |
-| 2. Confirm **Authentication Type** is **AAA**                                                |
-|                                                                                              |
-| 3. Confirm **Choose Authentication Server Type** is **Active Directory**                     |
-|                                                                                              |
-| 4. Select **f5lab.local** from the **Choose Authentication Server** drop down.               |
-|                                                                                              |
-| 5. Check the **Active Directory Query Properties** checkbox.                                 |
-|                                                                                              |
-| 6. Check the **Fetch Nested Group** checkbox.                                                |
-|                                                                                              |
-| 7. Move the **memberOf** to the right under **Required Attributes**                          |
-|                                                                                              |
-| 8. Click **Save** at the bottom of the dialogue window.                                      |
-+----------------------------------------------------------------------------------------------+
-| |image007|                                                                                   |
-+----------------------------------------------------------------------------------------------+
 
-+----------------------------------------------------------------------------------------------+
-| 9. In the dialogue window that follows for **User Identity**, confirm **agc-f5lab-AD** is    |
-|                                                                                              |
-|    listed, then click **Save & Next** at the bottom if the dialogue window.                  |
-+----------------------------------------------------------------------------------------------+
-| |image008|                                                                                   |
-+----------------------------------------------------------------------------------------------+
+4. Click **Finished**
 
-TASK 5: Multi Factor Authentication
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+N.B. If you wish you can simply use the **pre-built-ad-servers**.
 
-+----------------------------------------------------------------------------------------------+
-| 1. In the **Multi Factor Authentication** dialogue box, click **Save & Next** at the bottom  |
-|                                                                                              |
-|    of the dialogue window.                                                                   |
-+----------------------------------------------------------------------------------------------+
-| |image009|                                                                                   |
-+----------------------------------------------------------------------------------------------+
+Task 2: Create a Simple Access Profile
+--------------------------------------
 
-TASK 6: Single Sign-on & HTTP Header
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1. Navigate to **Access > Profiles / Policies > Access Profiles
+   (Per-Session Policies)
+   **\ |image10|
 
-+----------------------------------------------------------------------------------------------+
-| 1. Check **Enable Single Sign-on (Optional)** checkbox in the                                |
-|                                                                                              |
-|    **Single Sign-on & HTTP Header** dialogue window.                                         |
-+----------------------------------------------------------------------------------------------+
-| |image010|                                                                                   |
-+----------------------------------------------------------------------------------------------+
- 
-+----------------------------------------------------------------------------------------------+
-| 2. Enter **agc-app-header** in the **Name** field in the **Single Sign-on & HTTP Header**    |
-|                                                                                              |
-|    **Properties** dialogue window.                                                           |
-|                                                                                              |
-| 3. Select the **HTTP Headers** radio button under **Type**                                   |
-|                                                                                              |
-| 4. Click the **+ (Plus Symbol)** in the **Action** column of the **SSO Headers** section.    |
-|                                                                                              |
-| 5. In the new **SSO Headers** row, enter the following values:                               |
-|                                                                                              |
-|    - **Header Operation**: **replace**                                                       |
-|                                                                                              |
-|    - **Header Name**: **agc-app-uid**                                                        |
-|                                                                                              |
-|    - **Header Value**: **%{subsession.logon.last.username}**                                 |
-|                                                                                              |
-| 6. Repeat steps 4 & 5 with the following values:                                             |
-|                                                                                              |
-|    - **Header Operation**: **replace**                                                       |
-|                                                                                              |
-|    - **Header Name**: **agc-memberOf**                                                       |
-|                                                                                              |
-|    - **Header Value**: **%{subsession.ad.last.attr.memberOf}**                               |
-|                                                                                              |
-| 7. At the bottom of the screen, click **Save**                                               |
-+----------------------------------------------------------------------------------------------+
-| |image011|                                                                                   |
-+----------------------------------------------------------------------------------------------+
+2. From the Access Profiles screen, click **Create...** in the upper
+   right-hand corner
 
-+----------------------------------------------------------------------------------------------+
-| 8. In the dialogue window that follows for **Single Sign-on & HTTP Header**, confirm         |
-|                                                                                              |
-|    **agc-app-header** is listed, then click **Save & Next** at the bottom if the             |
-|                                                                                              |
-|    dialogue window.                                                                          |
-+----------------------------------------------------------------------------------------------+
-| |image012|                                                                                   |
-+----------------------------------------------------------------------------------------------+
+3. | In the Name field, enter “\ **MyAccessPolicy**\ ”, and for “Profile
+     Type”, select the dropdown and choose **All**
+   | |image11|
 
-TASK 7: Applications
-~~~~~~~~~~~~~~~~~~~~
-  
-+----------------------------------------------------------------------------------------------+
-| 1. In the **Application Properties** dialogue window, click **Show Advanced Setting** in the |
-|                                                                                              |
-|    upper right hand corner of the dialogue window.                                           |
-|                                                                                              |
-| 2. In the **Name** field enter **agc-app.acme.com**.                                         |
-|                                                                                              |
-| 3. In the **FQDN** field enter **agc-app.acme.com**.                                         |
-|                                                                                              |
-| 4. In the **Subpath Pattern** field enter **/apps/app1\***.                                  |
-|                                                                                              |
-| 5. On the **Subpath Pattern** row entered in Step 5, click the **+ (Plus Symbol)** twice     |
-|                                                                                              |
-|    to add to more rows.                                                                      |
-|                                                                                              |
-| 6. In the two new rows add **/apps/app2\*** and **/apps/app3\*** respectively.               |
-|                                                                                              |
-| 7. In the **Pool Configuration** section, under **Health Monitors** area move                |
-|                                                                                              |
-|    **/Common/http** to the right **Selected** side.                                          |
-|                                                                                              |
-| 8. In the **Pool Configuration** section, under **Load Balancing Method** area select        |
-|                                                                                              |
-|    **/Common/10.1.20.6** from the **IP Address/Node name**                                   |
-|                                                                                              |
-| 9. Click the **Save** button at the bottom of the dialogue window.                           |
-+----------------------------------------------------------------------------------------------+
-| |image014|                                                                                   |
-+----------------------------------------------------------------------------------------------+
+4. Under “Language Settings”, choose **English** and click the
+   “\ **<<**\ “ button to slide over to the “Accepted Languages”
+   column\ **.
+   **\ |image12|
 
-+----------------------------------------------------------------------------------------------+
-| 10. In the **Applications** dialogue window that follows, expand the **Subpaths** and ensure |
-|                                                                                              |
-|    /apps/app1*, /apps/app2*, /apps/app3* are present for the **agc-app.acme.com** row.       |
-|                                                                                              |
-| 11. Click the **Save & Next** button at the bottom of the dialogue window.                   |
-+----------------------------------------------------------------------------------------------+
-| |image015|                                                                                   |
-+----------------------------------------------------------------------------------------------+
+5. Click **Finished**, which will bring you back to the Access Profiles
+   screen.
 
-TASK 8: Application Groups
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+6. | On the Access Profiles screen, click the **Edit** link under the
+     Per-Session Policy column. |image13|
+   | The Visual Policy Editor (VPE) will open in a new tab.
 
-+----------------------------------------------------------------------------------------------+
-| 1. Check the **Enable Application Groups** checkbox in the **Application Groups**            |
-|                                                                                              |
-|    dialogue window.                                                                          |
-+----------------------------------------------------------------------------------------------+
-| |image016|                                                                                   |
-+----------------------------------------------------------------------------------------------+
+7. | On the VPE page, click the ‘\ **+**\ ’ icon on the “fallback” path,
+     to the right of the **Start** object.
+   | |image14|
 
-+----------------------------------------------------------------------------------------------+
-| 2. **Application Group Properties** dialogue window, enter **app1** in the **Field**.        |
-|                                                                                              |
-| 3. Move **/apps/app1\*** from the **Available** side to the **Selected** side under          |
-|                                                                                              |
-|    **Application List**.                                                                     |
-|                                                                                              |
-| 4. Click the **Save** button at the bottom of the dialogue window.                           |
-+----------------------------------------------------------------------------------------------+
-| |image017|                                                                                   |
-+----------------------------------------------------------------------------------------------+
+8. On the popup menu, choose the **Logon Page** radio button under the
+   Logon tab and click **Add Item.
+   **\ |image15|\ **
+   **\ |image16|
 
-+----------------------------------------------------------------------------------------------+
-| 5. Click the **Add* button in the *Application Groups** dialogue window that follows and     |
-|                                                                                              |
-|    repeat steps 2 through 4 using the following values:                                      |
-|                                                                                              |
-|    - **Name**: app2, **Selected**: **/apps/app2\***                                          |
-|                                                                                              |
-|    - **Name**: app3, **Selected**: **/apps/app3\***                                          |
-|                                                                                              |
-|    - **Name**: base, **Selected**: **/**                                                     |
-+----------------------------------------------------------------------------------------------+
-| |image018|                                                                                   |
-+----------------------------------------------------------------------------------------------+
+9. Accept the defaults and click **Save**
 
-+----------------------------------------------------------------------------------------------+
-| 6. Review the **Applications Groups** dialogue window following completion of step 5 and     |
-|                                                                                              |
-| 7. Click the **Save & Next** button at the bottom of the dialogue window.                    |
-+----------------------------------------------------------------------------------------------+
-| |image019|                                                                                   |
-+----------------------------------------------------------------------------------------------+
+Now let’s authenticate the client using the credentials to be provided
+via the “Logon Page” object.
 
-TASK 9: Contextual Access
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1. | Between the “Logon Page” and “Deny” objects, click the ‘\ **+**\ ’
+     icon, select **AD Auth** found under the **Authentication** tab,
+     and click the **Add Item** button
+   | |image17|
+   | |image18|
 
-+----------------------------------------------------------------------------------------------+
-| 1. In the **Contextual Access Properties** dialigue window, enter **app1-access** in the     |
-|                                                                                              |
-|    **Name** field.                                                                           |
-|                                                                                              |
-| 2. Select **Application Group** from the **Resource Type** drop down.                        |
-|                                                                                              |
-| 3. Select **app1** from the **Resource** drop down.                                          |
-|                                                                                              |
-| 4. Select **agc-f5lab-AD** from the **Primary Authentication** drop down.                    |
-|                                                                                              |
-| 5. Select **agc-app-header** from the **HTTP Header** drop down.                             |
-|                                                                                              |
-| 6. Check the **Enable Addtional Checks** checkbox.                                           |
-|                                                                                              |
-| 7. In the **Trigger Rules** section that appears, click the **Add** button                   |
-+----------------------------------------------------------------------------------------------+
-| |image020|                                                                                   |
-+----------------------------------------------------------------------------------------------+
+2. Accept the default for the **Name** and in the **Server** drop-down
+   menu select the AD server created above:
+   **/Common/LAB\_SSO\_AD\_Server**, then click **Save
+   **\ |image19|
 
-+----------------------------------------------------------------------------------------------+
-| 8. In the **Contextual Access Properties > Trigger > New** dialogue window, change the       |
-|                                                                                              |
-|    **Name** field to **app1-rule**.                                                          |
-|                                                                                              |
-| 9. Check the **User Group Check** checkbox.                                                  |
-+----------------------------------------------------------------------------------------------+
-| |image021|                                                                                   |
-+----------------------------------------------------------------------------------------------+
+3. | On the “Successful” branch between the **AD Auth** and **Deny**
+     objects, click on the word **Deny** to change the ending
+   | |image20|
 
-+----------------------------------------------------------------------------------------------+
-| 8. In the resulting **User Group Check** dialogue window, enter **app** in the filter box on |
-|                                                                                              |
-|    the left to filter the available AD Groups in the **Primary Authentication** section.     |
-|                                                                                              |
-| 9. Click the **Add** button in the row, where **app1** appears in the **Group Name** column. |
-|                                                                                              |
-| 10. Click the **Save** button at the bottom of the dialogue window.                          |
-+----------------------------------------------------------------------------------------------+
-| |image022|                                                                                   |
-+----------------------------------------------------------------------------------------------+
+4. Change the “Successful” branch ending to **Allow**, then click **Save
+   **\ |image21|\ **
+   **\ |image22|
 
-+----------------------------------------------------------------------------------------------+
-| 11. Review the resulting **Contextual Access Properties** for **app1-access** and click the  |
-|                                                                                              |
-|     **Save** button at the bottom of the dialogue window.                                    |
-+----------------------------------------------------------------------------------------------+
-| |image023|                                                                                   |
-+----------------------------------------------------------------------------------------------+
+5. | In the upper left-hand corner of the screen, click on the **Apply
+     Access Policy** link, then close the window using the **Close**
+     button in the upper right-hand. Click **Yes** when asked “Do you
+     want to close this tab?”
+   | |image23| |image24|
 
-+----------------------------------------------------------------------------------------------+
-| 12. Click the **Add** button in the **Contextual Access** dialogue window.                   |
-|                                                                                              |
-| 13. Repeat steps 1 through 10 for **app2** and **app3** using the following values           |
-|                                                                                              |
-|     **App2**                                                                                 |
-|                                                                                              |
-|     Contextual Access Properties                                                             |
-|                                                                                              |
-|     - **Name**: **app2-access**                                                              |
-|                                                                                              |
-|     - **Resource Type**: **Application Group**                                               |
-|                                                                                              |
-|     - **Resource**: **app2**                                                                 |
-|                                                                                              |
-|     - **Primary Authentication**: **agc-f5lab-AD**                                           |
-|                                                                                              |
-|     - **HTTP Header**: **agc-app-header**                                                    |
-|                                                                                              |
-|     Contextual Access Trigger Rules                                                          |
-|                                                                                              |
-|     - **Name**: **app2-rule**                                                                |
-|                                                                                              |
-|     User Group Check                                                                         |
-|                                                                                              |
-|     - Add AD group **app2**                                                                  |
-|                                                                                              |
-|     **App3**                                                                                 |
-|                                                                                              |
-|     Contextual Access Properties                                                             |
-|                                                                                              |
-|     - **Name**: **app3-access**                                                              |
-|                                                                                              |
-|     - **Resource Type**: **Application Group**                                               |
-|                                                                                              |
-|     - **Resource**: **app3**                                                                 |
-|                                                                                              |
-|     - **Primary Authentication**: **agc-f5lab-AD**                                           |
-|                                                                                              |
-|     - **HTTP Header**: **agc-app-header**                                                    |
-|                                                                                              |
-|     Contextual Access Trigger Rules                                                          |
-|                                                                                              |
-|     - **Name**: **app3-rule**                                                                |
-|                                                                                              |
-|     User Group Check                                                                         |
-|                                                                                              |
-|     - Add AD group **app3**                                                                  |
-+----------------------------------------------------------------------------------------------+
-| |image024|                                                                                   |
-+----------------------------------------------------------------------------------------------+
+Task 3: Associate Access Policy to Virtual Servers
+--------------------------------------------------
 
-+----------------------------------------------------------------------------------------------+
-| 14. In the **Contextual Access Properties** dialigue window, enter **base-access** in the    |
-|                                                                                              |
-|     **Name** field.                                                                          |
-|                                                                                              |
-| 15. Select **Application Group** from the **Resource Type** drop down.                       |
-|                                                                                              |
-| 16. Select **base** from the **Resource** drop down.                                         |
-|                                                                                              |
-| 17. Select **agc-f5lab-AD** from the **Primary Authentication** drop down.                   |
-|                                                                                              |
-| 18. Select **agc-app-header** from the **HTTP Header** drop down.                            |
-|                                                                                              |
-| 19. Check the **Enable Addtional Checks** checkbox.                                          |
-|                                                                                              |
-| 20. In the **Trigger Rules** section that appears, change the **Match Action** for the       |
-|                                                                                              |
-|     **Default Fallback** from **Reject** to **Allow**.                                       |
-|                                                                                              |
-| 21. Click the **Save** button at the bottom of the dialogue window.                          |
-+----------------------------------------------------------------------------------------------+
-| |image025|                                                                                   |
-|                                                                                              |
-| |image026|                                                                                   |
-+----------------------------------------------------------------------------------------------+
+Now that we have created an access policy, we must apply it to the
+appropriate virtual server to be able to use it.
 
-+----------------------------------------------------------------------------------------------+
-| 22. Review the resulting **Contextual Access** dialogue window for completion of all         |
-|                                                                                              |
-|     created access rules.                                                                    |
-|                                                                                              |
-| 23. Click the **Save & Next** button at the bottom of the dialogue window.                   |
-+----------------------------------------------------------------------------------------------+
-| |image027|                                                                                   |
-+----------------------------------------------------------------------------------------------+
+1. From the **Local Traffic** menu, navigate to the **Virtual Servers
+   List** and click the name of the virtual server created previously:
+   **demo-vs-https**.
 
-TASK 10: Customization
-~~~~~~~~~~~~~~~~~~~~~~
+2. | Scroll down to the “Access Policy” section, then for the “Access
+     Profile” dropdown, select **MyAccessPolicy**
+   | |image25|
 
-+----------------------------------------------------------------------------------------------+
-| 1. Scroll the bottom of the **Customization Properties** dialogue window, leaving all        |
-|                                                                                              |
-|    defaults and then click **Save & Next**.                                                  |
-+----------------------------------------------------------------------------------------------+
-| |image028|                                                                                   |
-|                                                                                              |
-| |image029|                                                                                   |
-+----------------------------------------------------------------------------------------------+
+3. Click **Update** at the bottom of the screen
 
-TASK 11: Logon Protection
-~~~~~~~~~~~~~~~~~~~~~~~~~
+Task 4: Testing
+---------------
 
-+----------------------------------------------------------------------------------------------+
-| 1. Click the **Save & Next** button at the bottom of the **Logon Protection Properties**     |
-|                                                                                              |
-|    dialogue window.                                                                          |
-+----------------------------------------------------------------------------------------------+
-| |image030|                                                                                   |
-+----------------------------------------------------------------------------------------------+
+Now you are ready to test.
 
-TASK 12: Summary
-~~~~~~~~~~~~~~~~
+1. Open a new browser window and open the URL for the virtual server
+   that has the access policy applied:
+   `**https://server1.acme.com** <https://server1.acme.com>`__\ **
+   **\ You will be presented with a login window\ **
+   **\ |image26|
 
-+----------------------------------------------------------------------------------------------+
-| 1. In the resulting **Summary** dialogue window, review the configured elements and then     |
-|                                                                                              |
-|    click the **Deploy** button.                                                              |
-+----------------------------------------------------------------------------------------------+
-| |image031|                                                                                   |
-+----------------------------------------------------------------------------------------------+
+2. Enter the following credentials and click **Logon**:
 
-+----------------------------------------------------------------------------------------------+
-| 2. Click the **Finish** button in the final dialogue window. Access Guided Configuration     |
-|                                                                                              |
-|    will return to the start screen and **agc-app.acme.com** will be "DEPLOYED"               |
-+----------------------------------------------------------------------------------------------+
-| |image032|                                                                                   |
-|                                                                                              |
-| |image033|                                                                                   |
-+----------------------------------------------------------------------------------------------+
+    Username: **user**
 
-TASK 13: Testing
-~~~~~~~~~~~~~~~~
+    Password: **user1**
 
-+----------------------------------------------------------------------------------------------+
-| 1. Begin a RDP session with the **Jumphost (10.1.10.10)** through the Student Portal.        |
-|                                                                                              |
-| 2. Open Firefox from the desktop and navigate to **https://agc-app.acme.com**.  A bookmark   |
-|                                                                                              |
-|    link has been provided in the toolbar.                                                    |
-|                                                                                              |
-| 3. Logon to the resulting logon page with **UserID: user1** and **Password: user1**          |
-+----------------------------------------------------------------------------------------------+
-| |image034|                                                                                   |
-+----------------------------------------------------------------------------------------------+
+| You will see a screen similar to the following:
+| |image27|
 
-+----------------------------------------------------------------------------------------------+
-| 4. Click on the **Application 1** button in the **ACME Application/Service Portal**.         |
-|                                                                                              |
-| 5. A new tab will open displaying received headers demonstrating the user has accces to the  |
-|                                                                                              |
-|    application.                                                                              |
-+----------------------------------------------------------------------------------------------+
-| |image035|                                                                                   |
-|                                                                                              |
-| |image036|                                                                                   |
-+----------------------------------------------------------------------------------------------+
 
-+----------------------------------------------------------------------------------------------+
-| 6. Return to the **ACME Application/Service Portal** and click **Application 2**.            |
-|                                                                                              |
-| 7. A new tab will open displaying a **Block Page** (customizable), restricting access to the |
-|                                                                                              |
-|    application based on AD group membership.                                                 |
-+----------------------------------------------------------------------------------------------+
-| |image037|                                                                                   |
-|                                                                                              |
-| |image038|                                                                                   |
-+----------------------------------------------------------------------------------------------+
+Task 5: Troubleshooting tips
+---------------
 
-+----------------------------------------------------------------------------------------------+
-| 8. Return to the **ACME Application/Service Portal** and click the **Logout** button and     |
-|                                                                                              |
-|    and close the browser.                                                                    |
-|                                                                                              |
-| 9. Run the **Add-User1-to-Group2** Powesrshell script link provided on the **Jumphost**      |
-|                                                                                              |
-|    desktop. The script will run and automatically close.                                     |
-+----------------------------------------------------------------------------------------------+
-| |image039|                                                                                   |
-|                                                                                              |
-| |image040|                                                                                   |
-+----------------------------------------------------------------------------------------------+
+You can view active sessions by navigating Access/Overview/Active Sessions
 
-+----------------------------------------------------------------------------------------------+
-| 10. Reopen Firefox using the desktop link on the **Jumphost** and launch the                 |
-|                                                                                              |
-|     **agc-app.acme.com** application from the link provided in the broswer.                  |
-|                                                                                              |
-| 11. Click on the **Application 2** button in the **ACME Application/Service Portal**.        |
-|                                                                                              |
-| 12. A new tab will open displaying received headers demonstrating the user has accces to the |
-|                                                                                              |
-|     application becasue of the change in the user's Group Membership.                        |
-+----------------------------------------------------------------------------------------------+
-| |image041|                                                                                   |
-+----------------------------------------------------------------------------------------------+
+| You will see a screen similar to the following:
 
-TASK 14: Review
-~~~~~~~~~~~~~~~
+Click on the session id for the active session. If the session is active it will show up as a green in the status.
+ |image30|
 
-+----------------------------------------------------------------------------------------------+
-| 1. Login to your provided lab Virtual Edition: **bigp1.f5lab.local**                         |
-|                                                                                              |
-| 2. Navigate to:  **Access -> Overview -> Active Sessions**                                   |
-|                                                                                              |
-| 3. Here you can see the active session and any subsessions created by virtue of the Per      |
-|                                                                                              |
-|    Request Policies and view their associated varibles.                                      |
-|                                                                                              |
-| 4. Click on the **View** asscoiated with the active session's subsession.                    |
-+----------------------------------------------------------------------------------------------+
-| |image042|                                                                                   |
-+----------------------------------------------------------------------------------------------+
+Click on the "session ID" next to the active session. Note every session has a unique session id. Associated with it.
+This can be used for troubleshooting specific authentication problem.
 
-+----------------------------------------------------------------------------------------------+
-| 5. In the resulting variable view, review the subsession variables created as a result of    |
-|                                                                                              |
-|    access requests performed in testing.                                                     |
-+----------------------------------------------------------------------------------------------+
-| |image043|                                                                                   |
-+----------------------------------------------------------------------------------------------+
+Once you click on the session id you wll be presented with a screen that is similar to the following.
+|image31|
 
-+----------------------------------------------------------------------------------------------+
-| 6. Navigate to: **Access -> Profiles/Policies -> Per-Request Policies** in the left-hand     |
-|                                                                                              |
-|    navigation menu.                                                                          |
-|                                                                                              |
-| 7. In the resulting dialogue window, click on the **Edit** link in the                       |
-|                                                                                              |
-|    **agc-app.acme.com_perRequestPolicy** row.                                                |
-|                                                                                              |
-| 8. Review the created Per Request Policy                                                     |
-+----------------------------------------------------------------------------------------------+
-| |image044|                                                                                   |
-|                                                                                              |
-| |image045|                                                                                   |
-+----------------------------------------------------------------------------------------------+
+Note that the screen will show all of the log messages associated with the session. This becomes useful if there is a problem authenticating users.
 
-TASK 15: End of Lab1
-~~~~~~~~~~~~~~~~~~~~
+The default log level shows limited "informational" messages but you can enable debug logging in the event that you need to increase the verbositiy of the logging 
+on the APM policy. Note you should always turn off debug logging when you are finished with trouble shooting as debug level logging can
+generate a lot of messages that will fill up log files and could lead to disk issues in the event that lgging is set to logto the
+local Big-IP.
 
-+----------------------------------------------------------------------------------------------+
-| 1. This concludes Lab1, feel free to review and test the configuration.                      |
-+----------------------------------------------------------------------------------------------+
-| |image000|                                                                                   |
-+----------------------------------------------------------------------------------------------+
+Please review the following support article that details how to enable debug logging.
 
-.. |image000| image:: media/image001.png
-   :width: 800px
-.. |image001| image:: media/lab1-001.png
-   :width: 800px
-.. |image002| image:: media/lab1-002.png
-   :width: 800px
-.. |image003| image:: media/lab1-003.png
-   :width: 800px
-.. |image004| image:: media/lab1-004.png
-   :width: 800px
-.. |image005| image:: media/lab1-005.png
-   :width: 800px
-.. |image006| image:: media/lab1-006.png
-   :width: 800px
-.. |image007| image:: media/lab1-007.png
-   :width: 800px
-.. |image008| image:: media/lab1-008.png
-   :width: 800px
-.. |image009| image:: media/lab1-009.png
-   :width: 800px
-.. |image010| image:: media/lab1-010.png
-   :width: 800px
-.. |image011| image:: media/lab1-011.png
-   :width: 800px
-.. |image012| image:: media/lab1-012.png
-   :width: 800px
-.. |image013| image:: media/lab1-013.png
-   :width: 800px
-.. |image014| image:: media/lab1-014.png
-   :width: 800px
-.. |image015| image:: media/lab1-015.png
-   :width: 800px
-.. |image016| image:: media/lab1-016.png
-   :width: 800px
-.. |image017| image:: media/lab1-017.png
-   :width: 800px
-.. |image018| image:: media/lab1-018.png
-   :width: 800px
-.. |image019| image:: media/lab1-019.png
-   :width: 800px
-.. |image020| image:: media/lab1-020.png
-   :width: 800px
-.. |image021| image:: media/lab1-021.png
-   :width: 800px
-.. |image022| image:: media/lab1-022.png
-   :width: 800px
-.. |image023| image:: media/lab1-023.png
-   :width: 800px
-.. |image024| image:: media/lab1-024.png
-   :width: 800px
-.. |image025| image:: media/lab1-025.png
-   :width: 800px
-.. |image026| image:: media/lab1-026.png
-   :width: 800px
-.. |image027| image:: media/lab1-027.png
-   :width: 800px
-.. |image028| image:: media/lab1-028.png
-   :width: 800px
-.. |image029| image:: media/lab1-029.png
-   :width: 800px
-.. |image030| image:: media/lab1-030.png
-   :width: 800px
-.. |image031| image:: media/lab1-031.png
-   :width: 800px
-.. |image032| image:: media/lab1-032.png
-   :width: 800px
-.. |image033| image:: media/lab1-033.png
-   :width: 800px
-.. |image034| image:: media/lab1-034.png
-   :width: 800px
-.. |image035| image:: media/lab1-035.png
-   :width: 800px
-.. |image036| image:: media/lab1-036.png
-   :width: 800px
-.. |image037| image:: media/lab1-037.png
-   :width: 800px
-.. |image038| image:: media/lab1-038.png
-   :width: 800px
-.. |image039| image:: media/lab1-039.png
-   :width: 800px
-.. |image040| image:: media/lab1-040.png
-   :width: 800px
-.. |image041| image:: media/lab1-041.png
-   :width: 800px
-.. |image042| image:: media/lab1-042.png
-   :width: 800px
-.. |image043| image:: media/lab1-043.png
-   :width: 800px
-.. |image044| image:: media/lab1-044.png
-   :width: 800px
-.. |image045| image:: media/lab1-045.png
-   :width: 800px
-      
+https://support.f5.com/csp/article/K45423041
+
+Lab 1 is now complete.
+
+.. 
+.. |image8| image:: media/image10.png
+   :width: 2.59124in
+   :height: 2.90971in
+.. |image9| image:: media/image11.png
+   :width: 2.49705in
+   :height: 2.49047in
+.. |image10| image:: media/image12.png
+   :width: 2.81496in
+   :height: 2.04331in
+.. |image11| image:: media/image13.png
+   :width: 3.35694in
+   :height: 1.17083in
+.. |image12| image:: media/image14.png
+   :width: 5.30972in
+   :height: 1.96914in
+.. |image13| image:: media/image15.png
+   :width: 5.30625in
+   :height: 1.20139in
+.. |image14| image:: media/image16.png
+   :width: 3.67708in
+   :height: 1.59375in
+.. |image15| image:: media/image17.png
+   :width: 5.30972in
+   :height: 2.99543in
+.. |image16| image:: media/image18.png
+   :width: 4.09422in
+   :height: 4.25486in
+.. |image17| image:: media/image19.png
+   :width: 2.75000in
+   :height: 1.32500in
+.. |image18| image:: media/image20.png
+   :width: 2.83858in
+   :height: 4.42520in
+.. |image19| image:: media/image21.png
+   :width: 5.05208in
+   :height: 2.44710in
+.. |image20| image:: media/image22.png
+   :width: 4.80000in
+   :height: 1.40000in
+.. |image21| image:: media/image23.png
+   :width: 2.17708in
+   :height: 2.73681in
+.. |image22| image:: media/image24.png
+   :width: 4.51887in
+   :height: 1.56041in
+.. |image23| image:: media/image25.png
+   :width: 2.14583in
+   :height: 0.73958in
+.. |image24| image:: media/image26.png
+   :width: 2.00000in
+   :height: 0.67921in
+.. |image25| image:: media/image27.png
+   :width: 2.40945in
+   :height: 3.52362in
+.. |image26| image:: media/image28.png
+   :width: 2.13489in
+   :height: 1.96875in
+.. |image27| image:: media/image9.png
+   :width: 5.07751in
+   :height: 2.84357in
+.. |image29| image:: media/image29.png
+   :width: 18.33in
+   :height: 3.17in
+.. |image30| image:: media/image30.png
+   :width: 14.44in
+   :height: 3.0in
+.. |image31| image:: media/image31.png
+   :width: 19.641in
+   :height: 4.65in
+   
+   
+   
+   
+   
+   
+   
