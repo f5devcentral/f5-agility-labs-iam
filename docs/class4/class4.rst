@@ -1,21 +1,22 @@
-Class 4: SAML Identity Provider (IdP) Lab
-=========================================
+F5 Agility Labs - Index
+=======================
 
-This lab covers the following topics:
+Welcome
+-------
 
-- Configuring a SAML Identity Provider (IdP)
-- Configuring Group-based Access Control
+Welcome to the |classbold| lab at F5 Agility |year|
 
-Expected time to complete: **2 hours**
-
-To continue please review the information about the Lab Environment.
-Additionally, if you are new to the F5 BIG-IP Platform we've created an overview
-in the BIG-IP Basics section.
+|repoinfo|
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
+   :numbered:
+   :caption: Contents:
    :glob:
-
-   labinfo/labinfo
-   bigipbasics
-   module*/module*
+   
+   intro*
+   lab1*
+   lab2*
+   lab3*
+   close*
+   

@@ -1,174 +1,48 @@
 Conclusion
 ==========
 
-Thank you for your participation in the 330 Access Policy Manager (APM)
-Federation Lab. This Lab Guide has highlighted several notable features
-of SAML Federation. It does not attempt to review all F5 APM Federation
-features and configurations but serves as an introduction to allow the
-student to further explore the BIG-IP platform and Access Policy Manager
-(APM), its functions & features.
+Thank you for your participation in the Access 303 - Per Request Policy Lab. 
+This Lab Guide has highlighted several notable features Per Request Policies.
+It does not attempt to review all F5 Per Request Policy (PRP) Features and  
+configurations but serves as an introduction to allow the student to further
+explore the BIG-IP platform and Access Policy Manager (APM), its functionality
+& features.
 
 Appendix
 ========
+**Access Policy Manage (APM)**:
+  * **Datasheet**: https://www.f5.com/pdf/products/big-ip-access-policy-manager-ds.pdf
+  * **Documentation Portal**: https://support.f5.com/csp/knowledge-center/software/BIG-IP?module=BIG-IP%20APM&version=15.1.0
 
-Setting up an AzureAD Developer Account
----------------------------------------
+**Per Request Policy**:
+  * **Concepts**: https://techdocs.f5.com/en-us/bigip-15-1-0/big-ip-access-policy-manager-per-request-policies.html
+  * **About zero trust**: https://techdocs.f5.com/en-us/bigip-15-1-0/big-ip-access-policy-manager-per-request-policies/per-request-policy-concepts/about-zero-trust.html
+  * **About per-request policies**: https://techdocs.f5.com/en-us/bigip-15-1-0/big-ip-access-policy-manager-per-request-policies/per-request-policy-concepts/about-per-request-policies.html
+  * **About per-request policy subroutines**: https://techdocs.f5.com/en-us/bigip-15-1-0/big-ip-access-policy-manager-per-request-policies/per-request-policy-concepts/about-per-request-policy-subroutines.html
+  * **About subsessions**: https://techdocs.f5.com/en-us/bigip-15-1-0/big-ip-access-policy-manager-per-request-policies/per-request-policy-concepts/about-subsessions.html
+  * **About gating criteria in subroutines**: https://techdocs.f5.com/en-us/bigip-15-1-0/big-ip-access-policy-manager-per-request-policies/per-request-policy-concepts/about-gating-criteria.html
 
-The following steps are for informational purposes only and maybe subject to change based on Microsoft.  
+**HTTP Connector Concepts**:
+  * **Concepts:** https://techdocs.f5.com/en-us/bigip-15-1-0/big-ip-access-policy-manager-per-request-policies/using-http-connector/about-http-connector.html
+  * **Defining an HTTP Connector Transport**: https://techdocs.f5.com/en-us/bigip-15-1-0/big-ip-access-policy-manager-per-request-policies/using-http-connector/defining-http-connector-transport.html
+  * **Creating an HTTP Connector Request for an external IP blocklist**: https://techdocs.f5.com/en-us/bigip-15-1-0/big-ip-access-policy-manager-per-request-policies/using-http-connector/creating-http-connector-request-external-IP-blocklist.html
+  * **Configuring a per-request policy for an HTTP Connector**: https://techdocs.f5.com/en-us/bigip-15-1-0/big-ip-access-policy-manager-per-request-policies/using-http-connector/configuring-http-connector-request-prp.html
+  * **Adding an HTTP Connector to a subroutine to check an external blocklist**: https://techdocs.f5.com/en-us/bigip-15-1-0/big-ip-access-policy-manager-per-request-policies/using-http-connector/configure-blocklist-check-subroutine.html
+  * **Adding the HTTP Connector subroutine to the per-request policy**: https://techdocs.f5.com/en-us/bigip-15-1-0/big-ip-access-policy-manager-per-request-policies/using-http-connector/adding-http-connector-subroutine-prp.html
+  * **Creating an allow-all per-session policy**: https://techdocs.f5.com/en-us/bigip-15-1-0/big-ip-access-policy-manager-per-request-policies/implementing-seamless-sso-azure-saml-mfa/creating-blank-per-session-policy.html
+  * **Creating a virtual server for the HTTP Connector policy**: https://techdocs.f5.com/en-us/bigip-15-1-0/big-ip-access-policy-manager-per-request-policies/using-http-connector/creating-virtual-server-http-connector.html
 
-+----------------------------------------------------------------------------------------------+
-| 1. Navigate to the following URL to begin the process then follow the prompts as shown       |
-|                                                                                              |
-|    https://azure.microsoft.com/en-us/free/                                                   |
-|                                                                                              |
-| 2. The following images show the general flow to setup a free developer account              |
-|                                                                                              |
-| *Note: This process may change as dictated by Microsoft*                                     |
-+----------------------------------------------------------------------------------------------+
-| |image143|                                                                                   |
-+----------------------------------------------------------------------------------------------+
-
-+----------------------------------------------------------------------------------------------+
-| 3. Initial Setup                                                                             |
-+----------------------------------------------------------------------------------------------+
-| |image144|                                                                                   |
-| |image145|                                                                                   |
-|                                                                                              |
-| |image146|                                                                                   | 
-| |image147|                                                                                   | 
-+----------------------------------------------------------------------------------------------+
-
-+----------------------------------------------------------------------------------------------+
-| 4. About You                                                                                 |
-+----------------------------------------------------------------------------------------------+
-| |image148|                                                                                   |
-+----------------------------------------------------------------------------------------------+
-
-+----------------------------------------------------------------------------------------------+
-| 5. Identity Verification by Phone                                                            |
-+----------------------------------------------------------------------------------------------+
-| |image149|                                                                                   |
-+----------------------------------------------------------------------------------------------+
-
-+----------------------------------------------------------------------------------------------+
-| 6. Identity Verification by Card                                                             |
-+----------------------------------------------------------------------------------------------+
-| |image150|                                                                                   |
-+----------------------------------------------------------------------------------------------+
-
-+----------------------------------------------------------------------------------------------+
-| 7. Agreement                                                                                 |
-+----------------------------------------------------------------------------------------------+
-| |image151|                                                                                   |
-+----------------------------------------------------------------------------------------------+
-
-Links & Guides
---------------
-
-The following are additional resources included for reference and assistance with
-this lab guide and other APM tasks.
-
--  **Access Policy Manager (APM) Operations Guide:**
-   https://support.f5.com/content/kb/en-us/products/big-ip_apm/manuals/product/f5-apm-operations-guide/_jcr_content/pdfAttach/download/file.res/f5-apm-operations-guide.pdf
-
--  **Access Policy Manager (APM) Authentication & Single Sign on Concepts:**
-   https://support.f5.com/kb/en-us/products/big-ip_apm/manuals/product/apm-authentication-sso-13-0-0.html
-
--  **SAML:**
-
-   -  **Introduction:**
-      https://support.f5.com/kb/en-us/products/big-ip_apm/manuals/product/apm-authentication-sso-13-0-0/28.html#guid-28f26377-6e10-42c9-883a-3ac65eab9092
-
-   -  **F5 SAML IdP (Identity Provider with Portal):**
-      https://support.f5.com/kb/en-us/products/big-ip_apm/manuals/product/apm-authentication-sso-13-0-0/29.html#guid-42e93e4b-e4fc-4c3d-ae53-910641d5755c
-
-   -  **F5 SAML IdP (Identity Provider without Portal):**
-      https://support.f5.com/kb/en-us/products/big-ip_apm/manuals/product/apm-authentication-sso-13-0-0/30.html#guid-39ffed07-65f2-40b8-85ae-c80073cc4e82
-
-   -  **F5 SAML SP (Service Provider):**
-      https://support.f5.com/kb/en-us/products/big-ip_apm/manuals/product/apm-authentication-sso-13-0-0/31.html#guid-be2cf224-727e-4a0f-aa68-676fdedba37b
-
-   -  **F5 Federation iApp (Includes o365):**
-      https://www.f5.com/pdf/deployment-guides/saml-idp-saas-dg.pdf
-
-   -  **F5 o365 Deployment Guide:**
-      https://www.f5.com/pdf/deployment-guides/microsoft-office-365-idp-dg.pdf
-
--  **OAuth**
-
-   -  **OAuth Overview:**
-      https://support.f5.com/kb/en-us/products/big-ip_apm/manuals/product/apm-authentication-sso-13-0-0/35.html#guid-c1b617a7-07b5-4ad6-9b84-29d6ecd789b4
-
-   -  **OAuth Client & Resource Server:**
-      https://support.f5.com/kb/en-us/products/big-ip_apm/manuals/product/apm-authentication-sso-13-0-0/36.html#guid-c6db081e-e8ac-454b-84c8-02a1a282a888
-
-   -  **OAuth Authorization Server:**
-      https://support.f5.com/kb/en-us/products/big-ip_apm/manuals/product/apm-authentication-sso-13-0-0/37.html#guid-be8761c9-5e2f-4ad8-b829-871c7feb2a20
-
-   -  **Troubleshooting Tips**
-
-      -  **OAuth Client & Resource Server:**
-         https://support.f5.com/kb/en-us/products/big-ip_apm/manuals/product/apm-authentication-sso-13-0-0/36.html#guid-774384bc-cf63-469d-a589-1595d0ddfba2
-
-      -  **OAuth Authorization Server:**
-         https://support.f5.com/kb/en-us/products/big-ip_apm/manuals/product/apm-authentication-sso-13-0-0/37.html#guid-8b97b512-ec2b-4bfb-a6aa-1af24842ee7a
-
--  **Kerberos**
-
-   -  **Kerberos AAA Object**: (*See Reference section below*)
-
-   -  **Kerberos Constrained Delegation:**
-      http://www.f5.com/pdf/deployment-guides/kerberos-constrained-delegation-dg.pdf
-
--  **Two-factor Integrations/Guides** (**Not a complete list**)
-
-   -  **RSA Integration:**
-      https://support.f5.com/kb/en-us/products/big-ip_apm/manuals/product/apm-authentication-single-sign-on-12-1-0/6.html#conceptid
-
-   -  **DUO Security:**
-
-      -  https://duo.com/docs/f5bigip
-
-      -  https://duo.com/docs/f5bigip-alt
-
-   -  **SafeNet MobilePass:**
-      http://www.safenet-inc.com/resources/integration-guide/data-protection/SafeNet_Authentication_Service/SafeNet_Authentication_Service__RADIUS_Authentication_on_F5_BIG-IP_APM_Integration_Guide
-
-   -  **Google Authenticator:**
-      https://devcentral.f5.com/articles/two-factor-authentication-with-google-authenticator-and-apm
-
--  **Access Policy Manager (APM) Deployment Guides:**
-
-   -  **F5 Deployment Guide for Microsoft Exchange 2010/2013:**
-      https://f5.com/solutions/deployment-guides/microsoft-exchange-server-2010-and-2013-big-ip-v11
-
-   -  **F5 Deployment Guide for Microsoft Exchange 2016:**
-      https://f5.com/solutions/deployment-guides/microsoft-exchange-server-2016-big-ip-v11-v12-ltm-apm-afm
-
-   -  **F5 Deployment Guide for Microsoft SharePoint 2010/2013:**
-      https://f5.com/solutions/deployment-guides/microsoft-sharepoint-2010-and-2013-new-supported-iapp-big-ip-v114-ltm-apm-asm-aam
-
-   -  **F5 Deployment Guide for Microsoft SharePoint 2016:**
-      https://f5.com/solutions/deployment-guides/microsoft-sharepoint-2016-big-ip-v114-v12-ltm-apm-asm-afm-aam
-
-   -  **F5 Deployment Guide for Citrix XenApp/XenDesktop:**
-      https://f5.com/solutions/deployment-guides/citrix-xenapp-or-xendesktop-release-candidate-big
-
-   -  **F5 Deployment Guide for VMWare Horizon View:**
-      https://f5.com/solutions/deployment-guides/vmware-horizon-view-52-53-60-62-70-release-candidate-iapp-big-ip-v11-v12-ltm-apm-afm?tag=VMware
-
-   -  **F5 Deployment Guide for Microsoft Remote Desktop Gateway Services:**
-      https://f5.com/solutions/deployment-guides/microsoft-remote-desktop-gateway-services-big-ip-v114-ltm-afm-apm
-
-   -  **F5 Deployment Guide for Active Directory Federated Services:**
-      https://f5.com/solutions/deployment-guides/microsoft-active-directory-federation-services-big-ip-v11-ltm-apm
+**Visual Policy Editor**:
+  * **Concepts**: https://techdocs.f5.com/en-us/bigip-15-1-0/big-ip-access-policy-manager-visual-policy-editor.html
+  * **Session Variables Reference**: https://techdocs.f5.com/en-us/bigip-15-1-0/big-ip-access-policy-manager-visual-policy-editor/session-variables/session-variables-reference.html 
+  * **Perflow and Subsession Variables**: https://techdocs.f5.com/en-us/bigip-15-1-0/big-ip-access-policy-manager-visual-policy-editor/perflow-variables/per-flow-and-subsession-variables.html 
 
 +----------------------------------------------------------------------------------------------+
 | F5 Networks, Inc. \| f5.com                                                                  |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
-| US Headquarters: 401 Elliott Ave W, Seattle, WA 98119 \| 888-882-4447                        |
+| US Headquarters: 801 5th Ave, Seattle, WA 98104 \| 888-882-4447                              |
 |                                                                                              |
 | Americas: info@f5.com                                                                        |
 |                                                                                              |
@@ -194,31 +68,3 @@ this lab guide and other APM tasks.
 |                                                                                              |
 | permission of F5.                                                                            |
 +----------------------------------------------------------------------------------------------+
-
-.. |image143| image:: media/image139.png
-   :width: 2.84352in
-   :height: 1.33129in
-.. |image144| image:: media/image140.png
-   :width: 1.65644in
-   :height: 1.35621in
-.. |image145| image:: media/image141.png
-   :width: 1.53374in
-   :height: 1.34629in
-.. |image146| image:: media/image142.png
-   :width: 1.55828in
-   :height: 1.56560in
-.. |image147| image:: media/image143.png
-   :width: 1.38650in
-   :height: 1.55496in
-.. |image148| image:: media/image144.png
-   :width: 2.00614in
-   :height: 2.21876in
-.. |image149| image:: media/image145.png
-   :width: 2.79693in
-   :height: 1.78723in
-.. |image150| image:: media/image146.png
-   :width: 2.42294in
-   :height: 2.73846in
-.. |image151| image:: media/image147.png
-   :width: 3.32514in
-   :height: 1.16922in

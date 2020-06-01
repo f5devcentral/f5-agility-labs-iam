@@ -1,18 +1,18 @@
-Class 5: AD FS Proxy Lab
-========================
+Lab Guides
+======================================
 
-This lab covers the following topics:
+Welcome
+-------
 
-- Configuring AD FS Proxy Services on F5 BIG-IP
 
-Expected time to complete: **2 hours**
-
-To continue please review the information about the Lab Environment.
 
 .. toctree::
    :maxdepth: 1
+   :caption: Contents:
    :glob:
 
-   labinfo/labinfo
+   labinfo*
+   intro*
    module*/module*
-   conclusion
+   module*/lab*
+ 

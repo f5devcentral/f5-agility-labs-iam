@@ -1,595 +1,590 @@
-Lab 3: oAuth and OpenID Connect Lab (Google)
-============================================
+Lab 3: Custom Per Request Policy - Extended
+===========================================
 
-The purpose of this lab is to better understand the F5 use cases OAuth2
-and OpenID Connect by deploying a lab based on a popular 3rd party
-login: Google. Google supports OpenID Connect with OAuth2 and JSON Web
-Tokens. This allows a user to securely log in, or to provide a secondary
-authentication factor to log in. Archive files are available for the
-completed Lab 2.
+The purpose of this lab is to change the behavior of the custom Per Request Policies
+built during Lab 2.  Lab attendees will expand policies by incorporating HTTP_Connector
+agents to query external API's and incorporate Gating Criteria to enforce policy behavior
+while accessing the lab application.
+Students will configure the various aspects of this lab using the Visual Policy Editor,
+review the configuration and perform tests of the deployment.
 
 Objective:
 ----------
 
--  Gain a better understanding of the F5 use cases OAuth2 and OpenID
-   Connect.
+-  Gain a deeper understanding of Per Request Policies and their applicability
+   in various delivery and control scenarios.
 
--  Develop an awareness of the different deployment models that OAuth2,
-   OpenID Connect and JSON Web Tokens (JWT) open up
+-  Gain a further understanding of Per Request Policy Subroutines and their
+   expandaility with HTTP_Connector and gating criteria.
 
 Lab Requirements:
 -----------------
 
 -  All Lab requirements will be noted in the tasks that follow
 
--  Estimated completion time: 25 minutes
+-  Estimated completion time: 20 minutes.
 
 Lab 3 Tasks:
-------------
+-----------------
 
-TASK 1: Setup Google’s API Credentials 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Refer to the instructions and screen shots below:
-
-+----------------------------------------------------------------------------------------------+
-| *Note: If you do not have Google/gMail account, you will need to set one up. Navigate to:*   |
-|                                                                                              |
-| * https://console.developers.google.com/apis/credentials & follow the directions for setup.* |
-+----------------------------------------------------------------------------------------------+ 
-| |image60|                                                                                    |
-| |image61|                                                                                    |
-+----------------------------------------------------------------------------------------------+ 
-   
-+----------------------------------------------------------------------------------------------+
-| 1. Navigate to https://console.developers.google.com/apis/credentials and log in with your   |
-|                                                                                              |
-|    developer account.                                                                        |
-+----------------------------------------------------------------------------------------------+
-| |image62|                                                                                    |
-+----------------------------------------------------------------------------------------------+
-
-+----------------------------------------------------------------------------------------------+
-| 2. You will be redirected to the Google API’s screen. If you are previously familiar with    |
-|                                                                                              |
-|    Google API’s you can create a new Project.                                                |
-|                                                                                              |
-| 3. If you have not been you will be prompted to create a New Project.                        |
-|                                                                                              |
-| 4. Click **Create** in the dialogue box provided.                                            |
-+----------------------------------------------------------------------------------------------+
-| |image64|                                                                                    |
-+----------------------------------------------------------------------------------------------+
-
-+----------------------------------------------------------------------------------------------+
-| 5. In the **New Project** window, provide a **Project Name**. The suggested value is:        |
-|                                                                                              |
-|    **F5 Federation oAuth**                                                                   |
-|                                                                                              |
-| *Note: If you have exceeded your project quota you may have to delete a project or*          |
-|                                                                                              |
-| *create a new account*                                                                       |
-+----------------------------------------------------------------------------------------------+
-| |image65|                                                                                    |
-+----------------------------------------------------------------------------------------------+
-
-+----------------------------------------------------------------------------------------------+
-| 6. In the next screen, select **OAuth Client ID** for the **Credentials** type and           |
-|                                                                                              |
-|    click **Create Credentials**                                                              |
-+----------------------------------------------------------------------------------------------+
-| |image66|                                                                                    |
-+----------------------------------------------------------------------------------------------+
- 
-+----------------------------------------------------------------------------------------------+
-| 7. If you have not previously accepted a Consent Screen you may be prompted to do so.        |
-|                                                                                              |
-|    Click **Configure Consent Screen**.                                                       |
-+----------------------------------------------------------------------------------------------+
-| |image67|                                                                                    |
-+----------------------------------------------------------------------------------------------+
-
-+----------------------------------------------------------------------------------------------+
-| 8. On the **OAuth Consent Screen** tab, enter the **email address** of your developer        |
-|                                                                                              |
-|    account (pre-populated) for the **Email Address**.                                        |
-|                                                                                              |
-| 9. For the **Product Name Shown to Users** enter **app.f5demo.com**.                         |
-|                                                                                              |
-| 10. Click **Save**.                                                                          |
-+----------------------------------------------------------------------------------------------+
-| |image68|                                                                                    |
-+----------------------------------------------------------------------------------------------+
-
-+----------------------------------------------------------------------------------------------+
-| 11. In the **Create OAuth Client ID*** screen select or enter the following values:          |
-|                                                                                              |
-|  -  **Application Type:** **Web Application**                                                |
-|                                                                                              |
-|  -  **Name**: **app.f5demo.com**                                                             |
-|                                                                                              |
-|  -  **Authorized JavaScript Engine:** **https://app.f5demo.com**                             |
-|                                                                                              |
-|  -  **Authorized Redirect URIs:** **https://app.f5demo.com/oauth/client/redirect**           |
-|                                                                                              |
-| 12. Click **Create**.                                                                        |
-+----------------------------------------------------------------------------------------------+
-| |image69|                                                                                    |
-+----------------------------------------------------------------------------------------------+
-
-+----------------------------------------------------------------------------------------------+
-| 13. In the **OAuth Client** pop-up window copy and paste your **Client ID** and              |
-|                                                                                              |
-|    **Client Secret** in Gedit text editor provided on your desktop.                          |
-+----------------------------------------------------------------------------------------------+
-| |image70|                                                                                    |
-+----------------------------------------------------------------------------------------------+
-
-TASK 2: Setup F5 OAuth Provider 
+TASK 1: Prepare Lab Environment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Refer to the instructions and screen shots below:
-
 +----------------------------------------------------------------------------------------------+
-| 1. Create the **OAuth Provider** by navigating to **Access** -> **Federation** ->            |
+| 1. On **bigip1.f5lab.local**, navigate to **Access -> Overview -> Active Sessions** and      |
 |                                                                                              |
-|   **OAuth Client/Resource Server** -> **Provider** and clicking **Create**.                  |
+|    confirm all active sessions have been killed.                                             |
+|                                                                                              |
+| 2. If any sessions are active, click all checkboxes by the active session and then click     |
+|                                                                                              |
+|    the **Kill Selected Sessions** button.  In the resulting dialogue window ensure the       |
+|                                                                                              |
+|    **Session ID/Subsession ID** is checked and click the **Delete** button.                  |
+|                                                                                              |
+| 3. Close any open browser windows on the Jumphost desktop.                                   |
+|                                                                                              |
+|    This prepares the environment for further user testing.                                   |
 +----------------------------------------------------------------------------------------------+
-| |image71|                                                                                    |
-+----------------------------------------------------------------------------------------------+
-
-+----------------------------------------------------------------------------------------------+
-| 2. Using the following values to complete the OAuth Provider                                 |
+| |image001|                                                                                   |
 |                                                                                              |
-| -  **Name:** **Google\_Provider**                                                            |
-|                                                                                              |
-| -  **Type:** **Google**                                                                      |
-|                                                                                              |
-| -  **Trusted Certificate Authorities:** **ca-bundle.crt**                                    |
-|                                                                                              |
-| -  **Allow Self-Signed JWK Config:**  **checked**                                            |
-|                                                                                              |
-| -  **Use Auto-discovered JWT:** **checked**                                                  |
-|                                                                                              |
-| 3. Click **Discover**.                                                                       |
-|                                                                                              |
-| 4. Accept all other defaults.                                                                |
-|                                                                                              |
-| 5. Click **Save**.                                                                           |
-+----------------------------------------------------------------------------------------------+
-| |image72|                                                                                    |
+| |image002|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
-TASK 3: Setup F5 OAuth Server (Client) 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Refer to the instructions and screen shots below:
+TASK 2: Review HTTP Connector Configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 +----------------------------------------------------------------------------------------------+
-| 1. Create the **OAuth Server (Client)** by navigating to **Access** -> **Federation** ->     |
+| 1. On **bigip1.f5lab.local**, navigate to **Access -> Authentication -> HTTP Connector ->**  |
 |                                                                                              |
-|    **OAuth Client/Resource Server** -> **OAuth Server** and clicking **Create**.             |
+|    **HTTP Connector Transport**.                                                             |
+|                                                                                              |
+| 2. Click on the **http_connector_transport** link.                                           |
+|                                                                                              |
+| **Note:** *This configured resource provides DNS resolution and HTTPS functionality*         |
+|                                                                                              |
+| *enabling access to queried Web Service and API endpoints.*                                  |
 +----------------------------------------------------------------------------------------------+
-| |image73|                                                                                    |
+| |image003|                                                                                   |
+|                                                                                              |
+| |image004|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
-| 2. Using the following values to complete the OAuth Provider                                 |
+| 1. Navigate to **Access -> Authentication -> HTTP Connector -> HTTP Connector Request**.     |
 |                                                                                              |
-| -  **Name:** **Google\_Server**                                                              |
+| 2. Click on the **MSGraphAPI_RequestToken** link.                                            |
 |                                                                                              |
-| -  **Mode:** **Client**                                                                      |
+| **Note:** *This configured resource retrieves an oAuth Bearer Token to be used to query the* |
 |                                                                                              |
-| -  **Type:** **Google**                                                                      |
+| *Microsoft Graph API.*                                                                       |
 |                                                                                              |
-| -  **OAuth Provider:** **Google\_Provider**                                                  |
+| **Note:** *While values like tenant_id, client_id & client_secret have been statically*      |
 |                                                                                              |
-| -  **DNS Resolver:** **proxy\_dns\_resolver**                                                |
+| *entered for the purposes of this lab, these could have been referenced variables set*       |
 |                                                                                              |
-| -  **Client ID:** **<your client id>**                                                       |
-|                                                                                              |
-| -  **Client Secret:** **<your client secret>**                                               |
-|                                                                                              |
-| -  **Client’s Server SSL Profile Name:** **serverssl**                                       |
-|                                                                                              |
-| 3. Click **Finished**.                                                                       |
+| *in the Per Request Policy flow.*                                                            |
 +----------------------------------------------------------------------------------------------+
-| |image74|                                                                                    |
-+----------------------------------------------------------------------------------------------+
-
-TASK 4: Setup F5 Per Session Policy (Access Policy) 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Refer to the instructions and screen shots below:
-
-+----------------------------------------------------------------------------------------------+
-| 1. Create the **Per Session Policy** by navigating to **Access -> Profile/Policies** ->      |
+| |image005|                                                                                   |
 |                                                                                              |
-|    **Access Profiles (Per Session Policies)** and clicking **Create**.                       |
-+----------------------------------------------------------------------------------------------+
-| |image75|                                                                                    |
+| |image006|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
-| 2. In the **New Profile** dialogue window enter the following values                         |
+| 1. Navigate to **Access -> Authentication -> HTTP Connector -> HTTP Connector Request**.     |
 |                                                                                              |
-| -  **Name:** **Google\_OAuth**                                                               |
+| 2. Click on the **MSGraphAPI_GetUserProfile** link.                                          |
 |                                                                                              |
-| -  **Profile Type:** **All**                                                                 |
+| **Note:** *This configured resource uses a previously obtained oAuth Bearer Token and*       |
 |                                                                                              |
-| -  **Profile Scope:** **Profile**                                                            |
+| *queries the Microsoft Graph API for the queried user's profile information.*                |
 |                                                                                              |
-| -  **Language:** **English**                                                                 |
-|                                                                                              |
-| 3. Click **Finished**.                                                                       |
+| **Note:** *The Application (client_id) has been granted API Permissions for User.Read.All*   |
 +----------------------------------------------------------------------------------------------+
-| |image76|                                                                                    |
+| |image007|                                                                                   |
+|                                                                                              |
+| |image008|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
+TASK 3: Extended Logon Subroutine
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
++----------------------------------------------------------------------------------------------+
+| 1. Navigate to **Access -> Profiles/Policies -> Per-Request Policies** and then click the    |
+|                                                                                              |
+|    **Edit** link for the **app.acme.com_prp** Per Request Policy.                            |
+|                                                                                              |
+| **Note:** *This may already be open.*                                                        |
++----------------------------------------------------------------------------------------------+
+| |image032|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
-| 4. Click **Edit** link on for the **Google\_OAuth** Access Policy.                           |
+| 2. In the resulting Visual Policy Editor window for the On  **app.acme.com_prp**, expand the |
+|                                                                                              |
+|    **Logon** subroutine and click the **+ (Plus Symbol)** on the **Successful** branch       |
+|                                                                                              |
+|    following the **AD Query** and before the **Variable Assign**.                            |
+|                                                                                              |
+| 3. In the pop-up window, select the **General Purpose** tab, then click the radio button     |
+|                                                                                              |
+|    on the **HTTP Connector** action line, then click **Add Item**.                           |
 +----------------------------------------------------------------------------------------------+
-| |image77|                                                                                    |
+| |image009|                                                                                   |
+|                                                                                              |
+| |image010|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
-| 5. In the **Google\_OAuth** Access Policy, click the “\ **+**\ ” between **Start** & **Deny**|
+| 4. In the resulting **HTTP Connector** window, change the **Name** field to **MSGraphAPI**   |
 |                                                                                              |
-| 6. Click the **Authentication** tab in the events window.                                    |
+|    **Request Token**.                                                                        |
 |                                                                                              |
-| 7. Scroll down and click the radio button for **OAuth Client**.                              |
+| 5. In the **HTTP Connector** section, Select **/Common/MSGraphAPI_RequestToken** from the    |
 |                                                                                              |
-| 8. Click **Add Item**.                                                                       |
+|    the drop down for **HTTP Connector Request** and then click **Save**.                     |
 +----------------------------------------------------------------------------------------------+
-| |image78|                                                                                    |
+| |image011|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
-| 9. In the ***OAuth\_Client*** window enter the following values as shown:                    |
+| 6. In the **Logon** subroutine and click the **+ (Plus Symbol)** on the **Successful**       |
 |                                                                                              |
-| -  **Server:** **/Common/Google\_Server**                                                    |
+|    branch following the **MSGraphAPI Request Token** and before the **Variable Assign**.     |
 |                                                                                              |
-| -  **Grant Type:** **Authorization code**                                                    |
+| 7. In the pop-up window, select the **General Purpose** tab, then click the radio button     |
 |                                                                                              |
-| -  **OpenID Connect:** **Enabled**                                                           |
-|                                                                                              |
-| -  **OpenID Connect Flow Type:** **Authorization code**                                      |
-|                                                                                              |
-| -  **Authentication Redirect Request:** **/Common/GoogleAuthRedirectRequest**                |
-|                                                                                              |
-| -  **Token Request:** **/Common/GoogleTokenRequest**                                         |
-|                                                                                              |
-| -  **Refresh Token Request:** **/Common/GoogleTokenRefreshRequest**                          |
-|                                                                                              |
-| -  **OpenID Connect UserInfo Request:** **/Common/GoogleUserinfoRequest**                    |
-|                                                                                              |
-| -  **Redirection URI:** **https://%{session.server.network.name}/oauth/client/redirect**     |
-|                                                                                              |
-| -  **Scope:** **openid profile email**                                                       |
-|                                                                                              |
-| 10. Click **Save**.                                                                          |
+|    on the **HTTP Connector** action line, then click **Add Item**.                           |
 +----------------------------------------------------------------------------------------------+
-| |image79|                                                                                    |
+| |image012|                                                                                   |
+|                                                                                              |
+| |image013|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
-| 11. Click on the **Deny** link, in the **Select Binding**, select the **Allow** radio button |
+| 8. In the resulting **HTTP Connector** window, change the **Name** field to **MSGraphAPI**   |
 |                                                                                              |
-|    and click **Save**.                                                                       |
+|    **Get User Profile**.                                                                     |
+|                                                                                              |
+| 9. In the **HTTP Connector** section, Select **/Common/MSGraphAPI_GetUserProfile** from the  |
+|                                                                                              |
+|    the drop down for **HTTP Connector Request** and then click **Save**.                     |
 +----------------------------------------------------------------------------------------------+
-| |image80|                                                                                    |
+| |image014|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
-| 12. Click on the ***Apply Access Policy*** link in the top left-hand corner.                 |
+| **Note:** *The extending of Per Request Policies using the HTTP Connector can be leveraged*  |
 |                                                                                              |
-| *Note: Additional actions can be taken in the Per Session policy (Access Policy).*           |
+| *to query any Web Service or API endpoint.  In this case, MS Graph API is being leveraged*   |
 |                                                                                              |
-| *The lab is simply completing authorization. Other access controls can be implemented based* |
-|                                                                                              |
-| *on the use case*.                                                                           |
-+----------------------------------------------------------------------------------------------+
-| |image81|                                                                                    |
-+----------------------------------------------------------------------------------------------+
-
-TASK 5: Associate Access Policy to Virtual Server 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Refer to the instructions and screen shots below:
-
-+----------------------------------------------------------------------------------------------+
-| 1. Navigate to **Local Traffic** -> **Virtual Servers** -> **Virtual Server List** and click |
-|                                                                                              |
-|    on the **app.f5demo.com** Virtual Server link.                                            |
-|                                                                                              |
-| 2. Scroll to the **Access Policy** section.                                                  |
-+----------------------------------------------------------------------------------------------+
-| |image82|                                                                                    |
+| *to retrieve additional information regarding a logged in user.*                             |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
-| 3. Use the **Access Profile** drop down to change the **Access Profile** to **Google\_OAuth**|
+| 10. In the **Logon** subroutine click the link for the **Variable Assign**.                  |
++----------------------------------------------------------------------------------------------+
+| |image015|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 11. In the resulting **Variable Assign** window, in the **Variable Assign** section, click   |
 |                                                                                              |
-| 4. Use the **Per-Request Policy** drop down to change the **Per-Request Policy** to          |
+|     the **Add new entry** button four(4) times. Click the **change** link in the first       |
 |                                                                                              |
-|    **Google\_oauth\_policy**                                                                 |
+|     **empty** row.                                                                           |
++----------------------------------------------------------------------------------------------+
+| |image016|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 12. In the resulting assignment window use the following values:                             |
 |                                                                                              |
-| 5. Scroll to the bottom of the **Virtual Server** configuration and click **Update**         |
-+----------------------------------------------------------------------------------------------+
-| |image83|                                                                                    |
-+----------------------------------------------------------------------------------------------+
-
-TASK 6: Test app.f5demo.com
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Refer to the instructions and screen shots below:
-
-+----------------------------------------------------------------------------------------------+
-| 1. Navigate in your provided browser to **https://app.f5demo.com**                           |
-+----------------------------------------------------------------------------------------------+
-| |image84|                                                                                    |
-+----------------------------------------------------------------------------------------------+
-
-+----------------------------------------------------------------------------------------------+
-| 2. Authenticate with the account you established your Google Developer account with.         |
-+----------------------------------------------------------------------------------------------+
-| |image85|                                                                                    |
-+----------------------------------------------------------------------------------------------+
-
-+----------------------------------------------------------------------------------------------+
-| 3. Did you successfully redirect to the Google?                                              |
+|     **LEFT SIDE**                                                                            |
 |                                                                                              |
-| 4. After successful authentication, were you returned to the app.f5demo.com?                 |
+|     - **Custom Variable**                                                                    |
 |                                                                                              |
-| 5. Did you successfully pass your OAuth Token?                                               |
+|     - **Unsecure**                                                                           |
+|                                                                                              |
+|     - **Text Window:** **session.custom.displayName**                                        |
+|                                                                                              |
+|     **RIGHT SIDE**                                                                           |
+|                                                                                              |
+|     - **Session Variable**                                                                   |
+|                                                                                              |
+|     - **Text Window:** **subsession.http_connector.body.displayName**                        |
+|                                                                                              |
+| 13. Click **Finished** once complete.                                                        |
 +----------------------------------------------------------------------------------------------+
-| |image86|                                                                                    |
+| |image017|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
-TASK 7: Per Request Policy Controls
++----------------------------------------------------------------------------------------------+
+| 14. Repeat the process again for the remaining two(2) **empty** rows using the values shown  |
+|                                                                                              |
+|     below.                                                                                   |
+|                                                                                              |
+| **ROW 2**                                                                                    |
+|                                                                                              |
+| - **LEFT SIDE**                                                                              |
+|                                                                                              |
+| * **Custom Variable**                                                                        |
+|                                                                                              |
+| * **Unsecure**                                                                               |
+|                                                                                              |
+| * **Text Window:** **session.custom.jobTitle**                                               |
+|                                                                                              |
+| - **RIGHT SIDE**                                                                             |
+|                                                                                              |
+| * **Session Variable**                                                                       |
+|                                                                                              |
+| * **Text Window:** **subsession.http_connector.body.jobTitle**                               |
+|                                                                                              |
+| **ROW 3**                                                                                    |
+|                                                                                              |
+| - **LEFT SIDE**                                                                              |
+|                                                                                              |
+| * **Custom Variable**                                                                        |
+|                                                                                              |
+| * **Unsecure**                                                                               |
+|                                                                                              |
+| * **Text Window:** **session.custom.mobilePhone**                                            |
+|                                                                                              |
+| - **RIGHT SIDE**                                                                             |
+|                                                                                              |
+| * **Session Variable**                                                                       |
+|                                                                                              |
+| * **Text Window:** **subsession.http_connector.body.mobilePhone**                            |
+|                                                                                              |
+| **ROW 4**                                                                                    |
+|                                                                                              |
+| - **LEFT SIDE**                                                                              |
+|                                                                                              |
+| * **Custom Variable**                                                                        |
+|                                                                                              |
+| * **Unsecure**                                                                               |
+|                                                                                              |
+| * **Text Window:** **subsession.client.ip.address**                                          |
+|                                                                                              |
+| - **RIGHT SIDE**                                                                             |
+|                                                                                              |
+| * **Session Variable**                                                                       |
+|                                                                                              |
+| * **Text Window:** **perflow.client.ip.address**                                             |
++----------------------------------------------------------------------------------------------+
+| |image018|                                                                                   |
+|                                                                                              |
+| |image019|                                                                                   |
+|                                                                                              |
+| |image042|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 15. Review the **Variable Assign** and click **Save** once completed.                        |
++----------------------------------------------------------------------------------------------+
+| |image020|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 16. In the **Per-Request Policy** section, click the **+ (Plus Symbol)** on the **Allow**    |
+|                                                                                              |
+|     branch following the **Logon** subroutine and the **URL Branching** agent.               |
++----------------------------------------------------------------------------------------------+
+| |image021|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 17. In the pop-up window, select the **General Purpose** tab, then click the radio button    |
+|                                                                                              |
+|     on the **HTTP Headers** action line, then click **Add Item**.                            |
++----------------------------------------------------------------------------------------------+
+| |image022|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 18. In the resulting **HTTP Headers** window, click the **Add new entry** button three(3)    |
+|                                                                                              |
+|     times to add three(3) rows in the **Header Modify Section**.  Use the following values   |
+|                                                                                              |
+|     to complete each added row.                                                              |
+|                                                                                              |
+| **ROW 1**                                                                                    |
+|                                                                                              |
+| - **Header Operation:** **replace**                                                          |
+|                                                                                              |
+| - **Header Name:** **displayName**                                                           |
+|                                                                                              |
+| - **Header Value:** **%{session.custom.displayName}**                                        |
+|                                                                                              |
+| **ROW 2**                                                                                    |
+|                                                                                              |
+| - **Header Operation:** **replace**                                                          |
+|                                                                                              |
+| - **Header Name:** **jobTitle**                                                              |
+|                                                                                              |
+| - **Header Value:** **%{session.custom.jobTitle}**                                           |
+|                                                                                              |
+| **ROW 3**                                                                                    |
+|                                                                                              |
+| - **Header Operation:** **replace**                                                          |
+|                                                                                              |
+| - **Header Name:** **mobilePhone**                                                           |
+|                                                                                              |
+| - **Header Value:** **%{session.custom.mobilePhone}**                                        |
+|                                                                                              |
+| 19. Click **Save** once completed.                                                           |
++----------------------------------------------------------------------------------------------+
+| |image023|                                                                                   |
+|                                                                                              |
+| |image024|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
+TASK 4: Testing & Reviewing the Extended Logon Subroutine
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
++----------------------------------------------------------------------------------------------+
+| 1. Return to Firefox on the **Jumphost** test access to the **app.acme.com** application and |
+|                                                                                              |
+|    access App1.                                                                              |
++----------------------------------------------------------------------------------------------+
+| |image025|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 2. Note the newly injected headers into **Application 1's** display page.                    |
++----------------------------------------------------------------------------------------------+
+| |image026|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 3. Return to **bigip1.f5lab.local**, navigate to **Access -> Overview -> Active Sessions**.  |
+|                                                                                              |
+|    Expand the **+ (Plus Symbol)** to see the subsession.                                     |
+|                                                                                              |
+| 4. Click on the **View** link in the **Variables** column for the listed subsession.         |
++----------------------------------------------------------------------------------------------+
+| |image027|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 5. Review the variables collected via the HTTP Connector Requests.                           |
++----------------------------------------------------------------------------------------------+
+| |image028|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 6. Navigate to **Access -> Overview -> Active Sessions**. Click on the **Session ID** link   |
+|                                                                                              |
+|    in the **Session ID** column for the listed active session.                               |
++----------------------------------------------------------------------------------------------+
+| |image034|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 7. Review the actions in the Session log, particularly those associated with HTTP Connector  |
+|                                                                                              |
+|    requests.                                                                                 |
++----------------------------------------------------------------------------------------------+
+| |image029|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
+TASK 5: Configuring Gating Criteria 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Refer to the instructions and screen shots below:
-
 +----------------------------------------------------------------------------------------------+
-| 1. In the application page for **https://app.f5demo.com** click the **Admin Link** shown     |
-+----------------------------------------------------------------------------------------------+
-| |image87|                                                                                    |
-+----------------------------------------------------------------------------------------------+
-
-+----------------------------------------------------------------------------------------------+
-| 2. You will receive an **Access to this page is blocked** (customizable) message with a      |
+| 1. Navigate to **Access -> Profiles/Policies -> Per-Request Policies** and then click the    |
 |                                                                                              |
-|    reference. You have been blocked because you do not have access on a per request basis.   |                                                                      
+|    **Edit** link for the **app.acme.com_prp** Per Request Policy.                            |
 |                                                                                              |
-| 3. Press the **Back** button in your browser to return to **https://app.f5demo.com**.        |
+| **Note:** *This may already be open.*                                                        |
 +----------------------------------------------------------------------------------------------+
-| |image88|                                                                                    |
+| |image032|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
-| 4. Navigate to **Local Traffic** -> **iRules** -> **Datagroup List** and click on the        |
+| 2. In the resulting Visual Policy Editor window for **app.acme.com_prp**, expand the         |
 |                                                                                              |
-|    **Allowed\_Users** datagroup.                                                             |
-|                                                                                              |
-| 5. Enter your **Google Account** used for this lab as the **String** value.                  |
-|                                                                                              |
-| 6. Click **Add** then Click **Update**.                                                      |
-|                                                                                              |
-| *Note: We are using a DataGroup control to minimize lab resources and steps. AD or LDAP*     |
-|                                                                                              |
-| *Group memberships, Session variables, other user attributes and various other access*       |
-|                                                                                              |
-| *control mechanisms can be used to achieve similar results.*                                 |
+|    **Logon** subroutine and click the **Subroutine Settings/Rename** link.                   |
 +----------------------------------------------------------------------------------------------+
-| |image89|                                                                                    |
+| |image030|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
-| 7. You should now be able to successfully to access the Admin Functions by clicking on the   |
+| 3. In the pop-up window, in the **Gating Criteria** field, enter                             |
 |                                                                                              |
-|    **Admin Link**.                                                                           |
-|                                                                                              | 
-| *Note: Per Request Policies are dynamic and do not require the same “Apply Policy” action as*|
-|                                                                                              |
-| *Per Session Policies.*                                                                      |
+|    **perflow.client.ip.address** and click **Save**.                                         |
 +----------------------------------------------------------------------------------------------+
-| |image90|                                                                                    |
+| |image031|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
+TASK 6: Testing Gating Criteria 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
++----------------------------------------------------------------------------------------------+
+| 1. Return to Firefox on the **Jumphost** test access to the **app.acme.com** application and |
+|                                                                                              |
+|    access **App1**. Re-login to the application if necessary.                                |
++----------------------------------------------------------------------------------------------+
+| |image025|                                                                                   |
+|                                                                                              |
+| |image040|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
-| 8. To review the Per Request Policy, navigate to **Access Profiles/Policies** ->             |
+| 2. Confirm on that your session is active on **bigip1.f5lab.local**, by navigating to        |
 |                                                                                              |
-|   **Per Request Policies** and click on the **Edit** link for the **Google\_oauth\_policy**. |
-+----------------------------------------------------------------------------------------------+
-| |image91|                                                                                    |
-+----------------------------------------------------------------------------------------------+
-
-+----------------------------------------------------------------------------------------------+
-| 9. The various Per-Request-Policy actions can be reviewed                                    |
+|    **Access -> Overview -> Active Sessions**. Expand the **+ (Plus Symbol)** to see the      |
 |                                                                                              |
-| *Note: Other actions like Step-Up Auth controls can be performed in a Per-Request Policy.*   |
+|    subsession.                                                                               |
 +----------------------------------------------------------------------------------------------+
-| |image92|                                                                                    |
+| |image033|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
-TASK 8: Review OAuth Results 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Refer to the instructions and screen shots below:
-
 +----------------------------------------------------------------------------------------------+
-| 1. Review your Active Sessions (**Access** -> **Overview** -> **Active Sessions**).          |
+| 3. Return to the **Jumphost**.  Do **NOT** close the browser and the already opened          |
 |                                                                                              |
-| 2. You can review Session activity or session variable from this window or kill the          |
+|    application.                                                                              |
 |                                                                                              |
-|    selected Session.                                                                         |
+| 4. Navigate to the Jumphost desktop and click on the **Change IP 10.1.10.11** link (Confirm  |
+|                                                                                              |
+|    the elevated Administrator privlege pop-up).                                              |
 +----------------------------------------------------------------------------------------------+
-| |image93|                                                                                    |
+| |image035|                                                                                   |
+|                                                                                              |
+| |image036|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
-| 3. Review your Access Report Logs (**Access** -> **Overview** -> **Access Reports**).        |
+| 5. Return to Firefox and the **app.acme.com** application by accessing App1 again. Note that |
+|                                                                                              |
+|    you will be re-prompted for access.                                                       |
 +----------------------------------------------------------------------------------------------+
-| |image94|                                                                                    |
+| |image025|                                                                                   |
+|                                                                                              |
+| |image100|                                                                                   |
+|                                                                                              |
+| |image041|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
-| 4. In the **Report Parameters window** click **Run Report**.                                 |
+| 6. Return to **bigip1.f5lab.local**, and navigate to **Access -> Overview -> Active**        |
+|                                                                                              |
+|    **Sessions**. Expand the **+ (Plus Symbol)** to see the two(2) subsessions now associated |
+|                                                                                              |
+|    with your session. (You may alternatively refresh the screen if already opened.)          |
 +----------------------------------------------------------------------------------------------+
-| |image95|                                                                                    |
+| |image037|                                                                                   |
+|                                                                                              |
+| |image038|                                                                                   |
+|                                                                                              |
+| |image039|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
-| 5. Look at the **SessionID** report by clicking the **Session ID** Link.                     |
-+----------------------------------------------------------------------------------------------+
-| |image96|                                                                                    |
+| **Note:** *The are multiple examples of Gating Criteria. In this example, client IP was*     |
+|                                                                                              |
+| *used to show that any changes in the connecting entity can result in establishing a new*    |
+|                                                                                              |
+| *subsession. What happens in new subsessions, the number of subsessions and how they are*    |
+|                                                                                              |
+| *controlled is based on the individual customer/application need.                            |
 +----------------------------------------------------------------------------------------------+
 
+TASK 7: End of Lab3
+~~~~~~~~~~~~~~~~~~~~
+
 +----------------------------------------------------------------------------------------------+
-| 6. Look at the **Session Variables** report by clicking the **View Session Variables** link. |
-|                                                                                              |
-|    Pay attention to the OAuth Variables.                                                     |
-|                                                                                              |
-| *Note: Any of these session variables can be used to perform further actions to improve*     |
-|                                                                                              |
-| *security or constrain access with logic in the Per-Session or Per Request VPE policies or*  |
-|                                                                                              |
-| *iRules/iRulesLX.*                                                                           |
+| 1. This concludes Lab3, feel free to review and test the configuration.                      |
 +----------------------------------------------------------------------------------------------+
-| |image97|                                                                                    |
-+----------------------------------------------------------------------------------------------+
- 
-+----------------------------------------------------------------------------------------------+
-| 7. Review your Access Report Logs (**Access** -> **Overview** -> **OAuth Reports** ->        |
-|                                                                                              |
-|    **Client/Resource Server**).                                                              |
-+----------------------------------------------------------------------------------------------+
-| |image98|                                                                                    |
+| |image000|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 
-.. |image58| image:: media/image60.png
-   :width: 2.23039in
-   :height: 2.36979in
-.. |image59| image:: media/image61.png
-   :width: 3.49268in
-   :height: 1.22650in
-.. |image60| image:: media/image62.png
-   :width: 1.37500in
-   :height: 1.42298in
-.. |image61| image:: media/image63.png
-   :width: 1.83333in
-   :height: 1.44662in
-.. |image62| image:: media/image64.png
-   :width: 3.61350in
-   :height: 0.25904in
-.. |image63| image:: media/image65.png
-   :width: 1.32012in
-   :height: 1.27746in
-.. |image64| image:: media/image66.png
-   :width: 3.45577in
-   :height: 1.25767in
-.. |image65| image:: media/image67.png
-   :width: 3.08125in
-   :height: 1.94452in
-.. |image66| image:: media/image68.png
-   :width: 3.16458in
-   :height: 1.63370in
-.. |image67| image:: media/image69.png
-   :width: 3.18021in
-   :height: 1.10982in
-.. |image68| image:: media/image70.png
-   :width: 2.88720in
-   :height: 2.00521in
-.. |image69| image:: media/image71.png
-   :width: 3.28125in
-   :height: 2.26534in
-.. |image70| image:: media/image72.png
-   :width: 3.33125in
-   :height: 1.39217in
-.. |image71| image:: media/image73.png
-   :width: 3.43558in
-   :height: 1.07255in
-.. |image72| image:: media/image74.png
-   :width: 3.49738in
-   :height: 4.78430in
-.. |image73| image:: media/image75.png
-   :width: 3.58125in
-   :height: 0.63905in
-.. |image74| image:: media/image76.png
-   :width: 3.38575in
-   :height: 2.95455in
-.. |image75| image:: media/image77.png
-   :width: 3.59729in
-   :height: 0.47370in
-.. |image76| image:: media/image78.png
-   :width: 3.58653in
-   :height: 2.84049in
-.. |image77| image:: media/image79.png
-   :width: 3.55864in
-   :height: 0.65031in
-.. |image78| image:: media/image80.png
-   :width: 3.64514in
-   :height: 1.52147in
-.. |image79| image:: media/image81.png
-   :width: 3.59509in
-   :height: 1.58711in
-.. |image80| image:: media/image82.png
-   :width: 3.55215in
-   :height: 1.16329in
-.. |image81| image:: media/image83.png
-   :width: 3.53374in
-   :height: 1.34193in
-.. |image82| image:: media/image84.png
-   :width: 3.50234in
-   :height: 2.68712in
-.. |image83| image:: media/image85.png
-   :width: 3.49738in
-   :height: 1.72209in
-.. |image84| image:: media/image86.png
-   :width: 3.57570in
-   :height: 0.25694in
-.. |image85| image:: media/image87.png
-   :width: 3.24109in
-   :height: 2.82822in
-.. |image86| image:: media/image88.png
-   :width: 3.16168in
-   :height: 2.42702in
-.. |image87| image:: media/image89.png
-   :width: 2.86751in
-   :height: 2.21224in
-.. |image88| image:: media/image90.png
-   :width: 2.80941in
-   :height: 1.35399in
-.. |image89| image:: media/image91.png
-   :width: 3.15971in
-   :height: 2.33461in
-.. |image90| image:: media/image92.png
-   :width: 3.40586in
-   :height: 1.10658in
-.. |image91| image:: media/image93.png
-   :width: 3.42307in
-   :height: 1.50171in
-.. |image92| image:: media/image94.png
-   :width: 3.45192in
-   :height: 1.33345in
-.. |image93| image:: media/image95.png
-   :width: 3.59450in
-   :height: 1.52876in
-.. |image94| image:: media/image96.png
-   :width: 2.06848in
-   :height: 1.53438in
-.. |image95| image:: media/image97.png
-   :width: 3.52761in
-   :height: 0.80655in
-.. |image96| image:: media/image98.png
-   :width: 3.64074in
-   :height: 1.05961in
-.. |image97| image:: media/image99.png
-   :width: 3.62160in
-   :height: 1.84971in
-.. |image98| image:: media/image100.png
-   :width: 3.60694in
-   :height: 2.16776in
+.. |image000| image:: media/image001.png
+   :width: 800px
+.. |image001| image:: media/lab3-001.png
+   :width: 800px
+.. |image002| image:: media/lab3-002.png
+   :width: 800px
+.. |image003| image:: media/lab3-003.png
+   :width: 800px
+.. |image004| image:: media/lab3-004.png
+   :width: 800px
+.. |image005| image:: media/lab3-005.png
+   :width: 800px
+.. |image006| image:: media/lab3-006.png
+   :width: 800px
+.. |image007| image:: media/lab3-007.png
+   :width: 800px
+.. |image008| image:: media/lab3-008.png
+   :width: 800px
+.. |image009| image:: media/lab3-009.png
+   :width: 800px
+.. |image010| image:: media/lab3-010.png
+   :width: 800px
+.. |image011| image:: media/lab3-011.png
+   :width: 800px
+.. |image012| image:: media/lab3-012.png
+   :width: 800px
+.. |image013| image:: media/lab3-013.png
+   :width: 800px
+.. |image014| image:: media/lab3-014.png
+   :width: 800px
+.. |image015| image:: media/lab3-015.png
+   :width: 800px
+.. |image016| image:: media/lab3-016.png
+   :width: 800px
+.. |image017| image:: media/lab3-017.png
+   :width: 800px
+.. |image018| image:: media/lab3-018.png
+   :width: 800px
+.. |image019| image:: media/lab3-019.png
+   :width: 800px
+.. |image020| image:: media/lab3-020.png
+   :width: 800px
+.. |image021| image:: media/lab3-021.png
+   :width: 800px
+.. |image022| image:: media/lab3-022.png
+   :width: 800px
+.. |image023| image:: media/lab3-023.png
+   :width: 800px
+.. |image024| image:: media/lab3-024.png
+   :width: 800px
+.. |image025| image:: media/lab3-025.png
+   :width: 800px
+.. |image026| image:: media/lab3-026.png
+   :width: 800px
+.. |image027| image:: media/lab3-027.png
+   :width: 800px
+.. |image028| image:: media/lab3-028.png
+   :width: 800px
+.. |image029| image:: media/lab3-029.png
+   :width: 800px
+.. |image030| image:: media/lab3-030.png
+   :width: 800px
+.. |image031| image:: media/lab3-031.png
+   :width: 800px
+.. |image032| image:: media/lab3-032.png
+   :width: 800px
+.. |image033| image:: media/lab3-033.png
+   :width: 800px
+.. |image034| image:: media/lab3-034.png
+   :width: 800px
+.. |image035| image:: media/lab3-035.png
+   :width: 800px
+.. |image036| image:: media/lab3-036.png
+   :width: 800px
+.. |image037| image:: media/lab3-037.png
+   :width: 800px
+.. |image038| image:: media/lab3-038.png
+   :width: 800px
+.. |image039| image:: media/lab3-039.png
+   :width: 800px
+.. |image040| image:: media/lab3-040.png
+   :width: 800px
+.. |image041| image:: media/lab3-041.png
+   :width: 800px
+.. |image042| image:: media/lab3-042.png
+   :width: 800px
+.. |image100| image:: media/image100.png
+   :width: 800px
 

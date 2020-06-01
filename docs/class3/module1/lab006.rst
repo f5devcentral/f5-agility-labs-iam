@@ -1,0 +1,37 @@
+Lab 1.6 - SSO & HTTP Header
+------------------------------------------------
+
+In this section you will configure HTTP Basic SSO.
+
+Task - Create a HTTP basic SSO object
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+#. Check **Enable Single Sign-On(Optional)**
+
+   |image18|
+
+#. Enter the name **basic_sso**
+#. Verify **HTTP Basic** is selected
+#. Select **Create New** from the SSO Configuration Object dropdown box
+
+   |image19|
+
+#. Verify the Username Source is **session.sso.token.last.username**
+#. Verify the Password Source is **session.sso.token.last.password**
+#. Click **Save**
+
+   |image20|
+
+
+#. Verify the **basic_sso** object was created
+#. click **Save & Next**
+
+   |image21|
+
+
+.. |image18| image:: media/image018.png
+.. |image19| image:: media/image019.png
+.. |image20| image:: media/image020.png
+.. |image21| image:: media/image021.png
+

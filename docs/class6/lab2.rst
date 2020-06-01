@@ -1,555 +1,753 @@
-Lab 2: IDaaS SAML Identity Provider (iDP) Lab (OKTA)
-====================================================
+Lab 2: Custom Per Request Policy
+================================
 
-The purpose of this lab is to configure and test a IDaaS SAML Identity
-Provider. Students will configure a IDaaS based SAML Identity Provider
-(in this case OKTA) and import and bind to a SAML Service Provider and
-test IdP-Initiated and SP-Initiated SAML Federation.
+The purpose of this lab is to build a custom Per Request Policy (PRP) flow and
+then extend that policy with additional subroutines to perform dynamic updates
+to access controls and authentication requirements. Per Request Policies will
+restrict or grant access based on dynamic queries of AD Group Membership and the
+URI accessed. Step-up authentication will also be leveraged.
+Students will configure the various aspects using the Visual Policy Editor,
+review the configuration and perform tests of the deployment.
 
 Objective:
 ----------
 
--  Gain an understanding of integrating a IDaaS SAML Identity
-   Provider(IdP)
-
--  Gain an understanding of the access flow for IdP-Initiated SAML
+-  Gain a deeper understanding of Per Request Policies and their applicability
+   in various delivery and control scenarios
+ 
+-  Gain a further understanding of Per Request Policy subroutines and their
+   use in dynamic queries and step-up authentication.
 
 Lab Requirements:
 -----------------
 
 -  All Lab requirements will be noted in the tasks that follow
 
--  Estimated completion time: 25 minutes
+-  Estimated completion time: 30 minutes
 
 Lab 2 Tasks:
-------------
+-----------------
 
-TASK 1: Sign Up for OKTA Developer Account 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Refer to the instructions and screen shots below:
+TASK 1: Prepare Lab Environment
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 +----------------------------------------------------------------------------------------------+
-| *Note: The following steps provide instruction for setting up an OKTA developer account.*    |
+| 1. From the Jumphost desktop, click on the **Remove-User1-from-App2** PowerShell Script.     |
 |                                                                                              |
-| *If you already have one, you may elect to use that account. Understand, however, that the*  |
+|    This prepares the environment for further user testing.                                   |
++----------------------------------------------------------------------------------------------+
+| |image001|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
+TASK 2: Review Existing Configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
++----------------------------------------------------------------------------------------------+
+| 1. On **bigip1.f5lab.local**, navigate to **Local Traffic -> Virtual Servers -> Virtual**    |
 |                                                                                              |
-| *instructions below may need to be modified to match your environment.*                      |
+|    **Server Lists**.                                                                         |
+|                                                                                              |
+| 2. Click on the link for the **app.acme.com_vs**.                                            |
++----------------------------------------------------------------------------------------------+
+| |image002|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
-| 1. Sign Up for an OKTA developer account by navigating to:                                   |
+| 3. Within the **app.acme.com_vs** configuration, scroll down to the **Access Policy**        |
 |                                                                                              |
-|    **https://developer.okta.com/signup/** and using a VALID email and click **Get Started**  |
+|    section, note the Per Session and Per Request policies applied.                           |
++----------------------------------------------------------------------------------------------+
+| |image003|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 4. Navigate to **Access -> Profiles/Policies -> Access Profiles (Per-Session Policies)** and |
 |                                                                                              |
-| 2. Upon registration, you will be directed to a hyperlink (hostname) for your developer      |     
+|    then click the **Edit** link for the **app.acme.com_psp** Per Session Policy.             |
++----------------------------------------------------------------------------------------------+
+| |image004|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 5. Note that the **app.acme.com_psp** Access Policy simply has **Start -> Allow**.  All      |
 |                                                                                              |
-|    account. This link should be saved for future use.                                        |     
+|    Access configurations will occur in the Per Request Policy.                               |
++----------------------------------------------------------------------------------------------+
+| |image005|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 6. Navigate to **Access -> Profiles/Policies -> Per-Request Policies** and then click the    |
 |                                                                                              |
-| 3. Additional instructions will be sent to the email address provided during account setup.  |     
+|    **Edit** link for the **app.acme.com_prp** Per Request Policy.                            |
++----------------------------------------------------------------------------------------------+
+| |image006|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 7. Review the **app.acme.com_prp** Per Request Policy and the subroutine.                    |
+|                                                                                              |
+| 8. Click on the **+ (Plus Symbol)** to expand the **Logon** Subroutine.  Then click on the   |
+|                                                                                              |
+|    **Subroutine Settings / Rename** link.                                                    |
++----------------------------------------------------------------------------------------------+
+| |image007|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 9. Review the **Logon** subroutine settings.  These settings will determine inactivity       |
+|                                                                                              |
+|    timers and session lifetime.                                                              |
++----------------------------------------------------------------------------------------------+
+| |image008|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 10. Open **Firefox**, click on the **app.acme.com** link provided in the Bookmark toolbar.   |
+|                                                                                              |
+| 11. Logon to the resulting logon page with **UserID: user1** and **Password: user1**         |
+|                                                                                              |
+| **Note:** *User1 has access to all applications even though user1 does not currently have*   |
+|                                                                                              |
+| *the necessary group access for all applications.*                                           |
++----------------------------------------------------------------------------------------------+
+| |image009|                                                                                   |
+|                                                                                              |
+| |image010|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
+TASK 3: URI Dynamic Filtering (via AD Group Membership)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
++----------------------------------------------------------------------------------------------+
+| 1. Navigate to **Access -> Profiles/Policies -> Per-Request Policies** and then click the    |
+|                                                                                              |
+|    **Edit** link for the **app.acme.com_prp** Per Request Policy.                            |
+|                                                                                              |
+| 2. In the resulting Visual Policy Editor window, click on the **+ (Plus Symbol)** on the     |
+|                                                                                              |
+|    **apps** branch following **URL Branching**.                                              |
+|                                                                                              |
+| 3. In the pop-up window, select the **General Purpose** tab, then click the radio button     |
+|                                                                                              |
+|    on the **Empty** action line, then click **Add Item**.                                    |
++----------------------------------------------------------------------------------------------+
+| |image011|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 4. Enter **URI - Dynamic Mapping** in the **Name** field.                                    |
++----------------------------------------------------------------------------------------------+
+| |image012|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 5. In the next window, click the **Add Branch Rule**.                                        |
+|                                                                                              |
+| 6. In the new section, enter **App Access** in the **Name** field.                           |
+|                                                                                              |
+| 7. Click the **change** link.                                                                |
++----------------------------------------------------------------------------------------------+
+| |image013|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 8. In the resulting window, click on the **Advanced** tab.                                   |
+|                                                                                              |
+| 9. Paste the expression below into the provided window and then click **Finished**.          |
+|                                                                                              |
+| **Explanation:** *The expression shown parses the incoming URI to extract a portion of the*  |
+|                                                                                              |
+| *URI to use as a variable in determining an AD Group Name dynamically.*                      |
++----------------------------------------------------------------------------------------------+
+| |image014|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
+**Expression is shown below for copy and paste convenience**
+
+*expr {[mcget {subsession.ad.last.attr.memberOf}] contains "CN=[findstr [mcget {perflow.category_lookup.result.url}] "http" 26 "/"],OU=Groups,DC=f5lab,DC=local"}*
+
++----------------------------------------------------------------------------------------------+
+| 10. Click **Save** in the resulting window.                                                  |
++----------------------------------------------------------------------------------------------+
+| |image015|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 11. Review the added **URI - Dynamic Mapping** agent.  Ensure the **Allow** and **Reject**   |
+|                                                                                              |
+|     endings are set as shown.                                                                |
++----------------------------------------------------------------------------------------------+
+| |image016|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
+TASK 4: URI DataGroup Filtering (via AD Group Membership)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
++----------------------------------------------------------------------------------------------+
+| 1. In the Visual Policy Editor window, click on the **+ (Plus Symbol)** on the **members**   |
+|                                                                                              |
+|    branch following **URL Branching**.                                                       |
+|                                                                                              |
+| 2. In the pop-up window, select the **General Purpose** tab, then click the radio button     |
+|                                                                                              |
+|    on the **Empty** action line, then click **Add Item**.                                    |
++----------------------------------------------------------------------------------------------+
+| |image017|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 3. Enter **URI - DataGroup Mapping** in the **Name** field.                                  |
++----------------------------------------------------------------------------------------------+
+| |image018|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 4. In the next window, click the **Add Branch Rule**.                                        |
+|                                                                                              |
+| 5. In the new section, enter **Member Access** in the **Name** field.                        |
+|                                                                                              |
+| 6. Click the **change** link.                                                                |
++----------------------------------------------------------------------------------------------+
+| |image019|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 7. In the resulting window, click on the **Advanced** tab.                                   |
+|                                                                                              |
+| 8. Paste the expression below into the provided window and then click **Finished**.          |
+|                                                                                              |
+| **Explanation:** *For environments in which URI's and AD Groups may not be standardized,*    |
+|                                                                                              |
+| *parsing the URI and then leveraging a Data Group match allows for non-standard matching*    |
+|                                                                                              |
+| *between URI and AD Groups. (Data Groups can be updated via REST (AS3 Declarations) calls.*  |
++----------------------------------------------------------------------------------------------+
+| |image020|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
+**Expression is shown below for copy and paste convenience**
+
+*expr {[mcget {subsession.ad.last.attr.memberOf}] contains "[class match -value [findstr [mcget {perflow.category_lookup.result.url}] "http" 28 "/"] eq acme_app.acme.com_dg]"}*
+
++----------------------------------------------------------------------------------------------+
+| 9. Click **Save** in the resulting window.                                                   |
++----------------------------------------------------------------------------------------------+
+| |image021|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 10. Review the added **URI - DataGroup Mapping** agent.  Ensure the **Allow** and **Reject** |
+|                                                                                              |
+|     endings are set as shown.                                                                |
 +----------------------------------------------------------------------------------------------+
 | |image022|                                                                                   |
-|                                                                                              |
-| |image023|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
-| 4. Following the instructions received from the generated email, sign into the OKTA          |
+| 11. In the administration window, navigate to **Local Traffic -> iRules -> Data Group List** |
 |                                                                                              |
-|    development environment with your provided, temporary password.                           |
+|     and then click the **acme_app.acme.com_dg** data group link.                             |
 +----------------------------------------------------------------------------------------------+
+| |image042|                                                                                   |
++----------------------------------------------------------------------------------------------+
+    
++----------------------------------------------------------------------------------------------+
+| 12. In the **String** field, enter **serviceB** and in the **Value** field enter             |
+|                                                                                              |
+|     **CN=member-services-B,OU=Groups,DC=f5lab,DC=local** then click the **Add** button.      |
+|                                                                                              |
+| 13. When correctly added, click the **Update** button.                                       |
++----------------------------------------------------------------------------------------------+
+| |image043|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
+TASK 5: Testing URI Dynamic & DataGroup Filtering
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
++----------------------------------------------------------------------------------------------+
+| 1. Return to **Firefox** test access to all the applications again.                          |
+|                                                                                              |
+| 2. Access to **App1**, **Member Services A** and the **Admin** application is still granted  |
+|                                                                                              |
+|    based on current AD Group Membership for user1.                                           |
++----------------------------------------------------------------------------------------------+
+| |image023|                                                                                   |
+|                                                                                              |
 | |image024|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
-| 5. Enter a **New Password** and the **Repeat New Password**                                  |
+| 3. Access to **App2** and **Member Services B** are denied based on current AD Group         |
 |                                                                                              |
-| 6. Use the drop down to select a **Forgot Password Question** and provide the Answer         |
-|                                                                                              |
-| 7. Click a **Security Image**                                                                |
-|                                                                                              |
-| 8. Click **Create My Account**                                                               |
+|    Membership for user1.                                                                     |
 +----------------------------------------------------------------------------------------------+
 | |image025|                                                                                   |
 +----------------------------------------------------------------------------------------------+
- 
-TASK 2: OKTA Classic UI 
-~~~~~~~~~~~~~~~~~~~~~~~
 
-Refer to the instructions and screen shots below:
+TASK 6: Adding a new Application (App3)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 +----------------------------------------------------------------------------------------------+
-| 1. For the purposes of the lab and SAML development, we will be using the OKTA Classic UI    |
+| 1. Deploy **App3** by clicking on the **Deploy App3** PowerShell link provided on the        |
 |                                                                                              |
-|    which provides access to SAML configurations. *(Note: At lab publication, the Developer*  |
-|                                                                                              |
-|    *Console did not have SAML resources.)*                                                   |
-|                                                                                              |     
-| 2. In the top, left hand corner click the **<>** & select **Classic UI** from the drop down. |
+|    jumphost desktop.                                                                         |
 +----------------------------------------------------------------------------------------------+
 | |image026|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
-TASK 3: Enable OKTA Multi-Factor Authentication [OPTIONAL]
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Refer to the instructions and screen shots below. This task will require a mobile app to enable a second factor.
-
 +----------------------------------------------------------------------------------------------+
-| **[OPTIONAL]**                                                                               |
+| 2. Return to **Firefox** to see the newly deployed **App3** and test access to it.           |
 |                                                                                              |
-| *Note: Enabling MFA will require a Smart Device with the appropriate OKTA client for your OS*|
+| 3. Even though **App3** is newly deployed, user1 access is still blocked based on AD Group   |
 |                                                                                              |
-| *The step can be skipped if you prefer to just use UserID/Password*                          |
+|    membership.                                                                               |
 |                                                                                              |
-| 1. Click **Security** from the top navigation, then click **Multifactor**                    |
+| **Note:** *No policy changes were required due to the dynamic URI mapping configured.*       |
 +----------------------------------------------------------------------------------------------+
 | |image027|                                                                                   |
-+----------------------------------------------------------------------------------------------+
-
-+----------------------------------------------------------------------------------------------+
-| **[OPTIONAL]**                                                                               |
 |                                                                                              |
-| 2. Under **OKTA Verify**, change the dropdown from **Inactive** to **Active**                |
-|                                                                                              |
-| 3. Click the **Edit** button next to ***OKTA Verify Settings**                               |
-+----------------------------------------------------------------------------------------------+
 | |image028|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
+TASK 7: Dynamic Group Checks
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 +----------------------------------------------------------------------------------------------+
-| **[OPTIONAL]**                                                                               |
+| 1. Navigate to **Access -> Profiles/Policies -> Per-Request Policies** and then click the    |
 |                                                                                              |
-| 4. Check **Enable Push Verification**                                                        |
+|    **Edit** link for the **app.acme.com_prp** Per Request Policy (or use the already open    |
 |                                                                                              |
-| 5. Check **Require TouchID for OKTA Verify** (optional)                                      |
+|    browser tab).                                                                             |
 |                                                                                              |
-| 6. Click **Save**                                                                            |
+| 2. In the resulting Visual Policy Editor window, click on the **Add New Subroutine** link.   |
 +----------------------------------------------------------------------------------------------+
 | |image029|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
-TASK 4: Build SAML Application - OKTA 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Refer to the instructions and screen shots below:
-
 +----------------------------------------------------------------------------------------------+
-| 1. In the main menu, click **Applications**, and **Applications** from the dropdown in the   |
-|                                                                                              |
-|    top navigation.                                                                           |
+| 3. Enter **Dynamic GroupCheck** in the **Name** field and then click **Save**.               |
 +----------------------------------------------------------------------------------------------+
 | |image030|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
-| 2. Click **Add Application** in the **Applications** dialogue window.                        |
+| 4. Click on the **+ (Plus Symbol)** to expand the **Dynamic GroupCheck** Subroutine.  Then   |
+|                                                                                              |
+|    click on the **+ (Plus Symbol)** between the **In** and **Out** tags.                     |
 +----------------------------------------------------------------------------------------------+
 | |image031|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
-| 3. Click **Create New App** in the **Add Application Menu**                                  |
+| 5. In the resulting window, click the **Assignment** tab, then select the radio button on    |
+|                                                                                              |
+|    the **Variable Assign** row, then the click **Add Item** button.                          |
++----------------------------------------------------------------------------------------------+
+| |image061|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 6. In the **Variable Assign** window, click the **Add new entry** button.                    |
++----------------------------------------------------------------------------------------------+
+| |image062|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 7. Modify the empty assignment as follows, then click the **Finished** button.               |
+|                                                                                              |
+|    - **Custom Variable: subsession.logon.last.username**                                     |
+|                                                                                              |
+|    - **Session Variable: session.logon.last.username**                                       |
++----------------------------------------------------------------------------------------------+
+| |image063|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 8. Verify the variable assignment, then click the **Save** button.                           |
++----------------------------------------------------------------------------------------------+
+| |image064|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 9. In the **Dynamic GroupCheck** Subroutine click the **+ (Plus Symbol)** following the      |
+|                                                                                              |
+|    **Variable Assign**                                                                       |                                                              
++----------------------------------------------------------------------------------------------+
+| |image060|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 10. In the resulting window, click the **Authentication** tab, then select the radio button  |
+|                                                                                              |
+|     on the **AD Query** row, then click **Add Item**.                                        |
 +----------------------------------------------------------------------------------------------+
 | |image032|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
-| 3. In the **Create a New Application Integration** dialogue box, select **Web** from the     |
+| 11. In the resulting **AD Query** window, select **/Common/f5lab.local** from the **Server** |
 |                                                                                              |
-|    drop down for **Platform**.                                                               |
+|     dropdown.                                                                                |
 |                                                                                              |
-| 4. Select the **SAML 2.0** radio button for **Sign on Method** and click **Create**.         |
+| 12. Enter the following **sAMAccountName=%{subsession.logon.last.username}** in the          |
+|                                                                                              |
+|     **SearchFilter** field.                                                                  |
+|                                                                                              |
+| 13. Under the **Required Attributes** section click the **X** icon for all attributes except |
+|                                                                                              |
+|     **memberOf** (row 9).                                                                    |
+|                                                                                              |
+| 14. Click the **Save** button when completed.                                                |
 +----------------------------------------------------------------------------------------------+
 | |image033|                                                                                   |
-+----------------------------------------------------------------------------------------------+
-
-+----------------------------------------------------------------------------------------------+
-| 5. In the **Create SAML Integration** screen, enter **app.f5demo.com** for the **App Name**. |
 |                                                                                              |
-| 6. Leave all other values as default and click **Next**.                                     |
-+----------------------------------------------------------------------------------------------+
 | |image034|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
-| 7. In the **Create SAML Integration** screen, enter the following values                       |
-|                                                                                              |
-| 8. In the **SAML Setting** section                                                           |
-|                                                                                              |
-|    -  **Single Sign on URL:** **https://app.f5demo.com/saml/sp/profile/post/acs**            |
-|                                                                                              |
-|    -  **Audience URI (SP Entity ID):** **https://app.f5demo.com**                            |
-|                                                                                              |
-| 9. Leave all other values as default and click **Next**.                                     |
+| 15. In the **Dynamic GroupCheck** Subroutine, click the **Subroutine Settings/Rename** link. |
 +----------------------------------------------------------------------------------------------+
 | |image035|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
-| 10. In the **Create SAML Integration** screen, select the:                                   |
+| 16. In the **Dynamic GroupCheck** Subroutine Settings change the following values:           |
 |                                                                                              |
-|     **“I’m an OKTA customer adding an internal app”** radio button for                       |
+| - **Inactivity Timeout (sec): 60**                                                           |
 |                                                                                              |
-|     **Are you a customer or partner?**                                                       |
+| - **Max Subsession Life (sec): 60**                                                          |
 |                                                                                              |
-| 11. In the resulting expanded window, select:                                                |
+| - **Subroutine Timeout (sec): 120**                                                          |
 |                                                                                              |
-|     **“This is an internal app that we have created”** for **App Type**                      |
-|                                                                                              |
-|     and click **Finish**.                                                                    |
+| 17. Click the **Save** button.                                                               |
 +----------------------------------------------------------------------------------------------+
 | |image036|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
-| 12. In the resulting application screen for **app.f5demo.com**, navigate to the              |
+| 18. Verify the **Dynamic GroupCheck** Subroutine contains both AD Query and Variable Assign  |
+|     objects.                                                                                 |
++----------------------------------------------------------------------------------------------+
+| |image065|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 19. In the main section of the **app.acme.com_prp** policy click the **+ (Plus Symbol)** in  |
 |                                                                                              |
-|     **SAML 2.0 section**.                                                                    |
+|     both the **apps** and **member** branches.                                               |
 |                                                                                              |
-| 13. Right Click the **Identity Provider Metadata** hyperlink and click **Save Link As …**    |
+| 20. In the resulting pop-up window, click the **Subroutines** tab, the click the radio       |
 |                                                                                              |
-| 14. Save the **metadata.xml** to your jumphost desktop. We will be using it in a later step  |
+|     button on the **Dynamic GroupCheck** and then click the **Add Item** button. Do this     |
 |                                                                                              |
-|     in the Lab.                                                                              |
+|     for both branches.                                                                       |
 +----------------------------------------------------------------------------------------------+
 | |image037|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
-TASK 5: Add User to SAML Application 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Refer to the instructions and screen shots below:
-
 +----------------------------------------------------------------------------------------------+
-| 1. Within the **app.f5demo.com** application screen, Click **Assignments** then **Assign**   |
-|                                                                                              |
-|    and then **Assign to People** from the dropdown.                                          |
+| 21. Review the policy changes to confirm subroutines have been added correctly.              |
 +----------------------------------------------------------------------------------------------+
 | |image038|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
+TASK 8: Testing Dynamic Group Checks
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 +----------------------------------------------------------------------------------------------+
-| 2. In the **Assign app.f5demo.com to People** dialogue box, select your **User ID**, click   |
+| 1. Add **user1** to the **app2**, **app3** and **member-service-B** AD Groups by clicking    |
 |                                                                                              |
-|    **Assign**, then **Done**.                                                                |
+|    on the **Add-User1-to-App2**, **Add-User1-to-App3** and **Add-User1-to-MemberServiceB**   |
+|                                                                                              |
+|    PowerShell scripts on the jumphost desktop.                                               |
 +----------------------------------------------------------------------------------------------+
 | |image039|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
-| 3. Click **Save and Go Back**.                                                               |
+| 2. Return to **Firefox** test access to applications **app1**, **app2** and **app3**.        |
+|                                                                                              |
+|    **Note:** *60 seconds should elapse (the subsession timeout) before testing access to*    |
+|                                                                                              |
+|    *the applications begin.*                                                                 |
 +----------------------------------------------------------------------------------------------+
 | |image040|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
-| 4. Click **Done**.                                                                           |
-+----------------------------------------------------------------------------------------------+
-| |image041|                                                                                   |
-+----------------------------------------------------------------------------------------------+
-
-TASK 6: Add Multi-Factor Authentication Sign-On Policy [OPTIONAL]
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Refer to the instructions and screen shots below.  This section requires that **Task 3** be completed.
-
-+----------------------------------------------------------------------------------------------+
-| **[OPTIONAL]**                                                                               |
+| 3. Test access to the **ServiceB** application.                                              |
 |                                                                                              |
-| 1. Within the **app.f5demo.com** application screen, Click **Sign On**                       |
-+----------------------------------------------------------------------------------------------+
-| |image042|                                                                                   |
-+----------------------------------------------------------------------------------------------+
-
-+----------------------------------------------------------------------------------------------+
-| **[OPTIONAL]**                                                                               |
+|    **Note:** *60 seconds should elapse (the subsession timeout) before testing access to*    |
 |                                                                                              |
-| 2. Scroll down to the **Sign On Policy** section and click **Add Rule**                      |
-+----------------------------------------------------------------------------------------------+
-| |image043|                                                                                   |
-+----------------------------------------------------------------------------------------------+
-
-+----------------------------------------------------------------------------------------------+
-| **[OPTIONAL]**                                                                               |
-|                                                                                              | 
-| 3. In the **Add Sign On Rule** dialogue box, enter **MFA** for the **Rule Name**.            |
-|                                                                                              |
-| 4. Scroll down to the **Actions** section.                                                   |
-|                                                                                              |
-| 5. In the **Actions** section, under **Access**, check the box for **Prompt for factor**.    |
-|                                                                                              |
-| 6. Ensure **Every Sign On** radio button is selected.                                        |
-|                                                                                              |
-| 7. Click **Save**.                                                                           |
-+----------------------------------------------------------------------------------------------+
-| |image044|                                                                                   |
-+----------------------------------------------------------------------------------------------+
-
-TASK 7: Create the External IDP Connector
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Refer to the instructions and screen shots below:
-
-+----------------------------------------------------------------------------------------------+
-| 1. Login to your lab provided **Virtual Edition BIG-IP**                                     |
-|                                                                                              |
-| 2. Begin by selecting: **Access** -> **Federation** -> **SAML Service Provider** ->          |
-|                                                                                              |
-|    **External IdP Connectors**.                                                              |
+|    *the application begins.*                                                                 |
 +----------------------------------------------------------------------------------------------+
 | |image045|                                                                                   |
-+----------------------------------------------------------------------------------------------+
-
-+----------------------------------------------------------------------------------------------+
-| 3. In the **External IdP Connectors** screen, click the **downward arrow** next to the word  |
 |                                                                                              |
-|    **Create** on the **Create** button (right side)                                          |
-|                                                                                              |
-| 4. Select **From Metadata** from the drop down menu                                          |
-+----------------------------------------------------------------------------------------------+
 | |image046|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
-| 5. In the **Create New SAML IdP Connector** dialogue box, use the **Browse** button to       |
+| 4. Return to Jumphost desktop and run the **Remove-User1-from-App2**.                        |
 |                                                                                              |
-|    select the **metadata.xml** from the desktop (created in Task 4).                         | 
+| 5. Return to **Firefox** test access to application **app2**. **Note:** *60 seconds should*  |
 |                                                                                              |
-| 6. Name the **Identity Provider Name**: **OKTA\_SaaS-iDP**.                                  |
+|    *elapse (the subsession timeout) before testing to the application begins.*               |
++----------------------------------------------------------------------------------------------+
+| |image041|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
+TASK 9: Step-Up Authentication (Client Cert Auth)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
++----------------------------------------------------------------------------------------------+
+| 1. Navigate to **Access -> Profiles/Policies -> Per-Request Policies** and then click the    |
 |                                                                                              |
-| 7. Click **OK**.                                                                             |
+|    **Edit** link for the **app.acme.com_prp** Per Request Policy (or use the already open    |
+|                                                                                              |
+|    browser tab).                                                                             |
+|                                                                                              |
+| 2. In the resulting Visual Policy Editor window, click on the **Add New Subroutine** link    |
 +----------------------------------------------------------------------------------------------+
 | |image047|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
-TASK 8: Change the SAML SP Binding
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Refer to the instructions and screen shots below:
-
 +----------------------------------------------------------------------------------------------+
-| 1. Begin by selecting: **Access** -> **Federation** -> **SAML Service Provider** ->          |
-|                                                                                              |
-|    **Local SP Services**                                                                     |
-|                                                                                              |
-| 2. Select the checkbox next to **app.f5demo.com** and click **Bind\\UnBind IdP Connectors**  |
+| 3. Enter **CertAuth** in the **Name** field and then click **Save**.                         |
 +----------------------------------------------------------------------------------------------+
 | |image048|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
-| 3. Check the existing binding and click **Delete**.                                          |
+| 4. Click on the **+ (Plus Symbol)** to expand the **CertAuth** Subroutine.  Then click on    |
+|                                                                                              |
+|    the **+ (Plus Symbol)** between the **In** and **Out** tags.                              |
 +----------------------------------------------------------------------------------------------+
 | |image049|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
-| 4. Click **Add New Row** and use the following values                                        |
+| 5. In the resulting window, click the **Authentication** tab, then select the radio button   |
 |                                                                                              |
-|    -  **SAML IdP Connectors:** **/Common/OKTA\_SaaS-iDP**                                    |
-|                                                                                              |
-|    -  **Matching Source:** **%{session.server.landinguri}**                                  |
-|                                                                                              |
-|    -  **Matching Value:** /*                                                                 |
-|                                                                                              |
-| 5. Click **Update** then **OK**.                                                             |
+|    on the **0n-Demand Cert Auth** row, then click **Add Item**.                              |
 +----------------------------------------------------------------------------------------------+
 | |image050|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
-TASK 9: Apply Access Policy Changes
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Refer to the instructions and screen shots below:
-
 +----------------------------------------------------------------------------------------------+
-| 1. Click the **Apply Access Policy** link in the top left corner of the Admin GUI            |
+| 6. In the resulting **On-Demand Cert Auth**** window, select **Require** from the            |
+|                                                                                              |
+|    **Auth Mode** dropdown and click **Save**.                                                |
 +----------------------------------------------------------------------------------------------+
 | |image051|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
-| 2. Ensure **app.f5demo.com-policy** is checked and click **Apply**                           |
+| 7. In the **On-Demand Cert Auth** Subroutine, click the **Edit Terminals** link.             |
 +----------------------------------------------------------------------------------------------+
 | |image052|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
-TASK 10 – Test Access to the app.f5demo.com application
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Refer to the instructions and screen shots below:
-
 +----------------------------------------------------------------------------------------------+
-| 1. Using your browser from the Jump Host click on the provided bookmark or navigate to:      |
+| 8. In the **Terminals** window, click the **Add Terminal** link.                             |
 |                                                                                              |
-|    https://app.f5demo.com                                                                    |
+| 9. In the resulting section, change the **Name** to **Fail**, select the red color (#2) from |
+|                                                                                              |
+|    the dropdown and then click **Save**.                                                     |
 +----------------------------------------------------------------------------------------------+
 | |image053|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
-| 2. Follow the necessary prompts as directed.                                                 |
+| 10. In the **On-Demand Cert Auth** Subroutine, click the **Out** terminal link and change    |
 |                                                                                              |
-|    *Note: Those who enabled MFA access will be required to activate their second factor for* |
-|                                                                                              |
-|    *application access. Requires Task 3 & Task be completed.*                                                                     |
+|     the value the **Fail** by clicking the radio button and then clicking **Save**.          |
 +----------------------------------------------------------------------------------------------+
 | |image054|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 11. In the main section of the **app.acme.com_prp** policy click the **+ (Plus Symbol)** in  |
+|                                                                                              |
+|     the **admin** branch.                                                                    |
+|                                                                                              |
+| 12. In the resulting pop-up window, click the **Subroutines** tab, the click the radio       |
+|                                                                                              |
+|     button on the **CertAuth** and then click the **Add Item** button.                       |
++----------------------------------------------------------------------------------------------+
 | |image055|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 13. Review the added **CertAuth** Subroutine.  Ensure the **Allow** and **Reject**           |
+|                                                                                              |
+|     endings are set as shown.                                                                |
++----------------------------------------------------------------------------------------------+
 | |image056|                                                                                   |
 +----------------------------------------------------------------------------------------------+
+
+TASK 10: Testing Step-Up Authentication (Client Cert Auth)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 +----------------------------------------------------------------------------------------------+
-| 4. Did you successfully redirect to the OKTA SaaS IdP?                                       |
-|                                                                                              |
-| 5. Login to the iDP, were you successfully authenticated? Were you prompted for MFA          |
-|                                                                                              |
-|    if configured?                                                                            |
-|                                                                                              |
-| 6. After successful authentication, were you returned to the SAML SP?                        |
-|                                                                                              |
-| 7. Were you successfully authenticated (SAML)?                                               |
-|                                                                                              |
-| 8. Review your **Active Sessions** (**Access Overview** -> **Active Sessions**).             |
-|                                                                                              |
-| 9. Review your Access Report Logs (**Access Overview** -> **Access Reports**).               |
+| 1. Return to **Firefox**. Test access to the **Admin** application.                          |
 +----------------------------------------------------------------------------------------------+
 | |image057|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
-| 10. Destroy your Active Session by nagivating to **Access Overview** -> **Active Sessions**  |
+| 2. A Certificate Authentication prompt will now display. Review the certificate and click    |
 |                                                                                              |
-|     Select the checkbox next to your session and click the **Kill Selected Session** button. |
+|    the **OK** button.                                                                        |
 +----------------------------------------------------------------------------------------------+
 | |image058|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
-| 11. Close your browser and logon to your **https://dev-<Dev-ID>.oktapreview.com** account.   |
-|                                                                                              |
-|     Click on your **app.f5demo.com** application for IDP initiated Access.                   |
-|                                                                                              |
-| 12. After successful authentication, were you returned to the SAML SP?                       |
-|                                                                                              |
-| 13. Were you successfully authenticated (SAML)?                                              |
-|                                                                                              |
-| 14. Review your **Active Sessions** (**Access Overview** -> **Active Sessions**).            |
-|                                                                                              |
-| 15. Review your Access Report Logs (**Access Overview** -> **Access Reports**).              |
+| 3. Access is now correctly granted to the **Admin** application.                             |
 +----------------------------------------------------------------------------------------------+
 | |image059|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
-.. |image022| image:: media/image022.png
-   :width: 4.5in
-   :height: 2.32in
-.. |image023| image:: media/image023.png
-   :width: 4.5in
-   :height: 2.37in
-.. |image024| image:: media/image024.png
-   :width: 1.75in
-   :height: 2.75in
-.. |image025| image:: media/image025.png
-   :width: 2.5in
-   :height: 4.5in
-.. |image026| image:: media/image026.png
-   :width: 4.5in
-   :height: 0.74in
-.. |image027| image:: media/image027.png
-   :width: 4.5in
-   :height: 1.03in
-.. |image028| image:: media/image028.png
-   :width: 4.5in
-   :height: 2.58in
-.. |image029| image:: media/image029.png
-   :width: 4.5in
-   :height: 2.56in
-.. |image030| image:: media/image030.png
-   :width: 4.5in
-   :height: 0.80in
-.. |image031| image:: media/image031.png
-   :width: 4.5in
-   :height: 1.66in
-.. |image032| image:: media/image032.png
-   :width: 4.5in
-   :height: 1.64in
-.. |image033| image:: media/image033.png
-   :width: 4.5in
-   :height: 2.64in
-.. |image034| image:: media/image034.png
-   :width: 4.5in
-   :height: 2.71in
-.. |image035| image:: media/image035.png
-   :width: 4.0in
-   :height: 3.75in
-.. |image036| image:: media/image036.png
-   :width: 4.5in
-   :height: 2.56in
-.. |image037| image:: media/image037.png
-   :width: 4.5in
-   :height: 3.40in
-.. |image038| image:: media/image038.png
-   :width: 4.5in
-   :height: 1.89in
-.. |image039| image:: media/image039.png
-   :width: 4.5in
-   :height: 1.72in
-.. |image040| image:: media/image040.png
-   :width: 4.5in
-   :height: 1.69in
-.. |image041| image:: media/image041.png
-   :width: 4.5in
-   :height: 1.73in
-.. |image042| image:: media/image042.png
-   :width: 4.5in
-   :height: 1.22in
-.. |image043| image:: media/image043.png
-   :width: 4.5in
-   :height: 1.68in
-.. |image044| image:: media/image044.png
-   :width: 2.5in
-   :height: 3.25in
-.. |image045| image:: media/image045.png
-   :width: 4.5in
-   :height: 2.30in
-.. |image046| image:: media/image046.png
-   :width: 4.5in
-   :height: 0.77in
-.. |image047| image:: media/image047.png
-   :width: 4.5in
-   :height: 3.38in
-.. |image048| image:: media/image048.png
-   :width: 4.5in
-   :height: 1.15in
-.. |image049| image:: media/image049.png
-   :width: 4.5in
-   :height: 2.04in
-.. |image050| image:: media/image050.png
-   :width: 4.5in
-   :height: 2.33in
-.. |image051| image:: media/image051.png
-   :width: 4.5in
-   :height: 1.10in
-.. |image052| image:: media/image052.png
-   :width: 4.5in
-   :height: 1.66in
-.. |image053| image:: media/image053.png
-   :width: 4.5in
-   :height: 1.03in
-.. |image054| image:: media/image054.png
-   :width: 2.0in
-   :height: 1.75in
-.. |image055| image:: media/image055.png
-   :width: 2.0in
-   :height: 1.75in
-.. |image056| image:: media/image056.png
-   :width: 2.0in
-   :height: 1.75in
-.. |image057| image:: media/image057.png
-   :width: 4.5in
-   :height: 3.03in
-.. |image058| image:: media/image058.png
-   :width: 2.5in
-   :height: 2.5in
-.. |image059| image:: media/image059.png
-   :width: 4.5in
-   :height: 1.08in
+TASK 11: End of Lab2
+~~~~~~~~~~~~~~~~~~~~
+
++----------------------------------------------------------------------------------------------+
+| 1. This concludes Lab2, feel free to review and test the configuration.                      |
++----------------------------------------------------------------------------------------------+
+| |image000|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
+.. |image000| image:: media/image001.png
+   :width: 800px
+.. |image001| image:: media/lab2-001.png
+   :width: 800px
+.. |image002| image:: media/lab2-002.png
+   :width: 800px
+.. |image003| image:: media/lab2-003.png
+   :width: 800px
+.. |image004| image:: media/lab2-004.png
+   :width: 800px
+.. |image005| image:: media/lab2-005.png
+   :width: 800px
+.. |image006| image:: media/lab2-006.png
+   :width: 800px
+.. |image007| image:: media/lab2-007.png
+   :width: 800px
+.. |image008| image:: media/lab2-008.png
+   :width: 800px
+.. |image009| image:: media/lab2-009.png
+   :width: 800px
+.. |image010| image:: media/lab2-010.png
+   :width: 800px
+.. |image011| image:: media/lab2-011.png
+   :width: 800px
+.. |image012| image:: media/lab2-012.png
+   :width: 800px
+.. |image013| image:: media/lab2-013.png
+   :width: 800px
+.. |image014| image:: media/lab2-014.png
+   :width: 800px
+.. |image015| image:: media/lab2-015.png
+   :width: 800px
+.. |image016| image:: media/lab2-016.png
+   :width: 800px
+.. |image017| image:: media/lab2-017.png
+   :width: 800px
+.. |image018| image:: media/lab2-018.png
+   :width: 800px
+.. |image019| image:: media/lab2-019.png
+   :width: 800px
+.. |image020| image:: media/lab2-020.png
+   :width: 800px
+.. |image021| image:: media/lab2-021.png
+   :width: 800px
+.. |image022| image:: media/lab2-022.png
+   :width: 800px
+.. |image023| image:: media/lab2-023.png
+   :width: 800px
+.. |image024| image:: media/lab2-024.png
+   :width: 800px
+.. |image025| image:: media/lab2-025.png
+   :width: 800px
+.. |image026| image:: media/lab2-026.png
+   :width: 800px
+.. |image027| image:: media/lab2-027.png
+   :width: 800px
+.. |image028| image:: media/lab2-028.png
+   :width: 800px
+.. |image029| image:: media/lab2-029.png
+   :width: 800px
+.. |image030| image:: media/lab2-030.png
+   :width: 800px
+.. |image031| image:: media/lab2-031.png
+   :width: 800px
+.. |image032| image:: media/lab2-032.png
+   :width: 800px
+.. |image033| image:: media/lab2-033.png
+   :width: 800px
+.. |image034| image:: media/lab2-034.png
+   :width: 800px
+.. |image035| image:: media/lab2-035.png
+   :width: 800px
+.. |image036| image:: media/lab2-036.png
+   :width: 800px
+.. |image037| image:: media/lab2-037.png
+   :width: 800px
+.. |image038| image:: media/lab2-038.png
+   :width: 800px
+.. |image039| image:: media/lab2-039.png
+   :width: 800px
+.. |image040| image:: media/lab2-040.png
+   :width: 800px
+.. |image041| image:: media/lab2-041.png
+   :width: 800px
+.. |image042| image:: media/lab2-042.png
+   :width: 800px
+.. |image043| image:: media/lab2-043.png
+   :width: 800px
+.. |image044| image:: media/lab2-044.png
+   :width: 800px
+.. |image045| image:: media/lab2-045.png
+   :width: 800px
+.. |image046| image:: media/lab2-046.png
+   :width: 800px
+.. |image047| image:: media/lab2-047.png
+   :width: 800px
+.. |image048| image:: media/lab2-048.png
+   :width: 800px
+.. |image049| image:: media/lab2-049.png
+   :width: 800px
+.. |image050| image:: media/lab2-050.png
+   :width: 800px
+.. |image051| image:: media/lab2-051.png
+   :width: 800px
+.. |image052| image:: media/lab2-052.png
+   :width: 800px
+.. |image053| image:: media/lab2-053.png
+   :width: 800px
+.. |image054| image:: media/lab2-054.png
+   :width: 800px
+.. |image055| image:: media/lab2-055.png
+   :width: 800px
+.. |image056| image:: media/lab2-056.png
+   :width: 800px
+.. |image057| image:: media/lab2-057.png
+   :width: 800px
+.. |image058| image:: media/lab2-058.png
+   :width: 800px
+.. |image059| image:: media/lab2-059.png
+   :width: 800px
+.. |image060| image:: media/lab2-060.png
+   :width: 800px
+.. |image061| image:: media/lab2-061.png
+   :width: 800px
+.. |image062| image:: media/lab2-062.png
+   :width: 800px
+.. |image063| image:: media/lab2-063.png
+   :width: 800px
+.. |image064| image:: media/lab2-064.png
+   :width: 800px
+.. |image065| image:: media/lab2-065.png
+   :width: 800px
+

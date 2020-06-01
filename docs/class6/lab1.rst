@@ -1,389 +1,671 @@
-Lab 1: SAML Service Provider (SP) Lab
-======================================
+Lab 1: Access Guided Configuration - PerRequest Policy
+======================================================
 
-The purpose of this lab is to configure and test a SAML Service
-Provider (SP). Students will configure the various aspects of a SAML Service
-Provider, import and bind to a SAML Identity Provider (IdP) and test
-SP-Initiated SAML Federation.
+The purpose of this lab is to leverage Access Guided Configuration (AGC) to 
+deploy an Identity Aware Proxy extended by Per Request Policies (PRP) access 
+controls. The Per Request Policies will restict access based on AD Group 
+Membership and the URI accessed. Students will configure the various aspects 
+of the application using strictly AGC, review the configuration and perform 
+tests of the deployment.
 
 Objective:
 ----------
 
--  Gain an understanding of SAML Service Provider(SP) configurations and
-   its component parts
+-  Gain an understanding of Access Guided Configruration configurations and
+   its various configurations and deployment models
 
--  Gain an understanding of the access flow for SP-Initiated SAML
+-  Gain an initial understanding of Per Request Policies and their applicability
+   in various delivery and control scenarios
 
 Lab Requirements:
 -----------------
 
 -  All Lab requirements will be noted in the tasks that follow
 
--  Estimated completion time: 25 minutes
+-  Estimated completion time: 30 minutes
 
 Lab 1 Tasks:
 -----------------
 
-TASK 1: Configure the SAML Service Provider (SP) 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Refer to the instructions and screen shots below:
+TASK 1: Intialize Access Guided Configuration (AGC)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 +----------------------------------------------------------------------------------------------+
-| 1. Login to your lab provided **Virtual Edition BIG-IP**                                     |
+| 1. Login to your provided lab Virtual Edition: **bigp1.f5lab.local**                         |
 |                                                                                              |
-| 2. Begin by selecting: **Access -> Federation -> SAML Service Provider** ->                  |
+| 2. Navigate to:  **Access -> Guided Configuration**                                          |
 |                                                                                              |
-|    **Local SP Services**                                                                     |
-|                                                                                              |
-| 3. Click the **Create** button (far right)                                                   |
+| 3. Click the **Zero Trust** graphic as shown.                                                |
 +----------------------------------------------------------------------------------------------+
 | |image001|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
-| 4. In the **Create New SAML SP Service**  dialogue box click **General Settings** in         |
+| 4. Click on the **Identity Aware Proxy**  dialogue box click under **Zero Trust**            |
 |                                                                                              |
-|    the left navigation pane and key in the following as shown:                               | 
-|                                                                                              |
-|    -  **Name**: **app.f5demo.com**                                                           | 
-|                                                                                              |
-|    -  **Entity ID**: **https://app.f5demo.com**                                              |
-|                                                                                              |
-|    *Note: The yellow box on Host will disappear when the Entity ID is entered.*              |
+|    in the navigation as shown.                                                               |
 +----------------------------------------------------------------------------------------------+
 | |image002|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
-| 5. Click on the **Security Settings** in the left navigation menu.                           |
+| 5. Review the **Identity Aware Proxy Application** configuration example presented.          |
 |                                                                                              |
-| 6. Check the **Sign Authentication Request** checkbox                                        |
+| 6. Scroll through and review the remaining element of the dialogue box to the bottom of the  |
 |                                                                                              |
-| 7. Select **/Common/SAML.key** from drop down menu for the                                   |
-|    **Message Signing Private Key**                                                           |
-|                                                                                              |
-| 8. Select **/Common/SAML.crt** from drop down menu for the                                   |
-|    **Message Signing Certificate**                                                           |
-|                                                                                              |
-| 9. Click **OK** on the dialogue box                                                          |
+|    screen and click "Next"                                                                   |
 +----------------------------------------------------------------------------------------------+
 | |image003|                                                                                   |
-+----------------------------------------------------------------------------------------------+
-
-TASK 2: Configure the External SAML IdP Connector 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Refer to the instructions and screen shots below:
-
-+----------------------------------------------------------------------------------------------+
-| 1. Click on the **Access** -> **Federation** -> **SAML Service Provider** ->                 |
-|                                                                                              |  
-|    **External IdP Connectors** or click on the **SAML Service Provider** tab in the          | 
 |                                                                                              |
-|    horizontal navigation menu andselect **External IdP Connectors**.                         |
-|                                                                                              |
-| 2. Click specifically on the **Down Arrow** next to the **Create** button (far right)        |
-|                                                                                              |
-| 3. Select **From Metadata** from the drop down menu                                          |
-+----------------------------------------------------------------------------------------------+
 | |image004|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
-+----------------------------------------------------------------------------------------------+   
-| 4. In the **Create New SAML IdP Connector** dialogue box, click **Browse** and select        |
+TASK 2: Name Configuration and define Device Posture  
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
++----------------------------------------------------------------------------------------------+
+| 1. In the **Configuration Name** dialogue box, enter **agc-app.acme.com**                    |
 |                                                                                              |
-|    the **idp.partner.com-app\_metadata.xml** file from the Desktop of your jump host.        |
-|                                                                                              |
-| 5. In the **Identity Provider Name** field enter the following: **idp.partner.com**          | 
-|                                                                                              |
-| 6. Click **OK** on the dialogue box.                                                         |
-|                                                                                              |
-| *Note: The idp.partner.com-app\_metadata.xml was created previously. Oftentimes, iDP*        |
-|                                                                                              |
-| *providers will have a metadata file representing their IdP service. This can be*            | 
-|                                                                                              |
-| *imported to save object creation time as it has been done in this lab*                      |
+| 2. Click **Save & Next** at the bottom of the dialogue window.                               |
 +----------------------------------------------------------------------------------------------+
 | |image005|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
-TASK: 3: Bind the External SAML IdP Connector to the SAML SP 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Refer to the instructions and screen shots below:
+TASK: 3: Configure Virtual Server Properties 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 +----------------------------------------------------------------------------------------------+
-| 1. Click on the **Local SP Services** from the **SAML Service Provider** tab in the          |
+| 1. Select the **Create New** radio button under **Virtual Server**                           |
 |                                                                                              |
-|    horizontal navigation menu.                                                               |
+| 2. Select the **Host** radio button under **Destination Address**                            |
 |                                                                                              |
-| 2. Click the **Checkbox** next to the previously created **app.f5demo.com** and select       |
+| 3. Enter the IP Address **10.1.10.100** in the dialogue box for **Destination Address**.     |
 |                                                                                              |
-|    **Bind/Unbind IdP Connectors** button at the bottom of the GUI.                           | 
+| 4. Confirm the **Rediect Port** is **80** and **HTTP**.                                      |
+|                                                                                              |
+| 5. Select the **Use Existing** radio button under **Client SSL Profile**                     |
+|                                                                                              |
+| 6. Move the **f5demo** Client SSL Profile to the right, **Selected**                         |
+|                                                                                              |
+| 7. Click **Save & Next** at the bottom of the dialogue window.                               |
 +----------------------------------------------------------------------------------------------+
 | |image006|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
+TASK: 4: Configure User Identity  
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 +----------------------------------------------------------------------------------------------+
-| 3. In the **Edit SAML IdP’s that use this SP** dialogue box click the **Add New Row** button |
+| 1. Enter **agc-f5lab-AD** in the **Name** field                                              |
 |                                                                                              |
-| 4. In the added row click the **Down Arrow** under **SAML IdP Connectors** and select the    |
+| 2. Confirm **Authentication Type** is **AAA**                                                |
 |                                                                                              |
-|    **/Common/idp.partner.com** SAML IdP Connector previously created.                        |
+| 3. Confirm **Choose Authentication Server Type** is **Active Directory**                     |
 |                                                                                              |
-| 5. Click the **Update** button and the **OK** button at the bottom of the dialogue box.      |
+| 4. Select **f5lab.local** from the **Choose Authentication Server** drop down.               |
+|                                                                                              |
+| 5. Check the **Active Directory Query Properties** checkbox.                                 |
+|                                                                                              |
+| 6. Check the **Fetch Nested Group** checkbox.                                                |
+|                                                                                              |
+| 7. Move the **memberOf** to the right under **Required Attributes**                          |
+|                                                                                              |
+| 8. Click **Save** at the bottom of the dialogue window.                                      |
 +----------------------------------------------------------------------------------------------+
 | |image007|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
-| 6. Under the **Access** -> **Federation** -> **SAML Service Provider** ->                    |
+| 9. In the dialogue window that follows for **User Identity**, confirm **agc-f5lab-AD** is    |
 |                                                                                              |
-|    **Local SP Services** menu you should now see the following (as shown):                   |
-|                                                                                              |
-|    -  **Name**: **app.f5demo.com**                                                           |
-|                                                                                              |
-|    -  **SAML IdP Connectors**: **idp.partner.com**                                           |
+|    listed, then click **Save & Next** at the bottom if the dialogue window.                  |
 +----------------------------------------------------------------------------------------------+
 | |image008|                                                                                   |
 +----------------------------------------------------------------------------------------------+
- 
-TASK 4: Configure the SAML SP Access Policy
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Refer to the instructions and screen shots below:
+TASK 5: Multi Factor Authentication
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 +----------------------------------------------------------------------------------------------+
-| 1. Begin by selecting: **Access** -> **Profiles/Policies** -> **Access Profiles**            |
-|    **(Per-Session Policies)**                                                                |
+| 1. In the **Multi Factor Authentication** dialogue box, click **Save & Next** at the bottom  |
 |                                                                                              |
-| 2. Click the **Create** button (far right)                                                   |
+|    of the dialogue window.                                                                   |
 +----------------------------------------------------------------------------------------------+
 | |image009|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
+TASK 6: Single Sign-on & HTTP Header
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 +----------------------------------------------------------------------------------------------+
-| 3. In the **New Profile** window, key in the following as shown:                             |
+| 1. Check **Enable Single Sign-on (Optional)** checkbox in the                                |
 |                                                                                              |
-|    -  **Name**: **app.f5demo.com-policy**                                                    |
-|                                                                                              |
-|    -  **Profile Type**: **All** (from drop down)                                             |
-|                                                                                              |
-|    -  **Profile Scope**: **Profile** (default)                                               |
-|                                                                                              |
-| 4. Scroll to the bottom of the **New Profile** window to the **Language Settings**           |
-|                                                                                              |
-| 5. Select **English** from the **Factory Built-in Languages** menu on the right and click    |
-|                                                                                              |
-|    the **Double Arrow (<<)**, then click the **Finished** button.                            |
+|    **Single Sign-on & HTTP Header** dialogue window.                                         |
 +----------------------------------------------------------------------------------------------+
 | |image010|                                                                                   |
 +----------------------------------------------------------------------------------------------+
  
 +----------------------------------------------------------------------------------------------+
-| 6. From the **Access** -> **Profiles/Policies** -> **Access Profiles**                       |
-|    **(Per-Session Policies)**,                                                               |
+| 2. Enter **agc-app-header** in the **Name** field in the **Single Sign-on & HTTP Header**    |
 |                                                                                              |
-|    click the **Edit** link on the previously created **app.f5demo.com-policy** line.         |
+|    **Properties** dialogue window.                                                           |
+|                                                                                              |
+| 3. Select the **HTTP Headers** radio button under **Type**                                   |
+|                                                                                              |
+| 4. Click the **+ (Plus Symbol)** in the **Action** column of the **SSO Headers** section.    |
+|                                                                                              |
+| 5. In the new **SSO Headers** row, enter the following values:                               |
+|                                                                                              |
+|    - **Header Operation**: **replace**                                                       |
+|                                                                                              |
+|    - **Header Name**: **agc-app-uid**                                                        |
+|                                                                                              |
+|    - **Header Value**: **%{subsession.logon.last.username}**                                 |
+|                                                                                              |
+| 6. Repeat steps 4 & 5 with the following values:                                             |
+|                                                                                              |
+|    - **Header Operation**: **replace**                                                       |
+|                                                                                              |
+|    - **Header Name**: **agc-memberOf**                                                       |
+|                                                                                              |
+|    - **Header Value**: **%{subsession.ad.last.attr.memberOf}**                               |
+|                                                                                              |
+| 7. At the bottom of the screen, click **Save**                                               |
 +----------------------------------------------------------------------------------------------+
 | |image011|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
-| 7. In the **Visual Policy Editor** window for the **/Common/app.f5demo.com-policy**, click   |
+| 8. In the dialogue window that follows for **Single Sign-on & HTTP Header**, confirm         |
 |                                                                                              |
-|    the **Plus (+) Sign** between **Start** and **Deny**.                                     |
+|    **agc-app-header** is listed, then click **Save & Next** at the bottom if the             |
 |                                                                                              |
-| 8. In the pop-up dialogue box select the **Authentication** tab and then click the **Radio** |
-|                                                                                              | 
-|    **Button** next to **SAML Auth**. Once selected click the **Add Item** button.            |
+|    dialogue window.                                                                          |
 +----------------------------------------------------------------------------------------------+
 | |image012|                                                                                   |
-|                                                                                              |
-| |image013|                                                                                   |
 +----------------------------------------------------------------------------------------------+
+
+TASK 7: Applications
+~~~~~~~~~~~~~~~~~~~~
   
 +----------------------------------------------------------------------------------------------+
-| 9. In the **SAML Auth** configuration window, select **/Common/app.f5demo.com** from the     |
+| 1. In the **Application Properties** dialogue window, click **Show Advanced Setting** in the |
 |                                                                                              |
-|    **SAML Authentication**, **AAA Server** drop down menu.                                   |
-|                                                                                              | 
-| 10. Click the **Save** button at the bottom of the configuration window.                     |  
+|    upper right hand corner of the dialogue window.                                           |
+|                                                                                              |
+| 2. In the **Name** field enter **agc-app.acme.com**.                                         |
+|                                                                                              |
+| 3. In the **FQDN** field enter **agc-app.acme.com**.                                         |
+|                                                                                              |
+| 4. In the **Subpath Pattern** field enter **/apps/app1\***.                                  |
+|                                                                                              |
+| 5. On the **Subpath Pattern** row entered in Step 5, click the **+ (Plus Symbol)** twice     |
+|                                                                                              |
+|    to add to more rows.                                                                      |
+|                                                                                              |
+| 6. In the two new rows add **/apps/app2\*** and **/apps/app3\*** respectively.               |
+|                                                                                              |
+| 7. In the **Pool Configuration** section, under **Health Monitors** area move                |
+|                                                                                              |
+|    **/Common/http** to the right **Selected** side.                                          |
+|                                                                                              |
+| 8. In the **Pool Configuration** section, under **Load Balancing Method** area select        |
+|                                                                                              |
+|    **/Common/10.1.20.6** from the **IP Address/Node name**                                   |
+|                                                                                              |
+| 9. Click the **Save** button at the bottom of the dialogue window.                           |
 +----------------------------------------------------------------------------------------------+
 | |image014|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
-| 11. In the **Visual Policy Editor** select the **Deny** along the **Successful** branch      |
+| 10. In the **Applications** dialogue window that follows, expand the **Subpaths** and ensure |
 |                                                                                              |
-|    following the **SAML Auth**                                                               |
+|    /apps/app1*, /apps/app2*, /apps/app3* are present for the **agc-app.acme.com** row.       |
 |                                                                                              |
-| 12. From the **Select Ending** dialogue box select the **Allow Radio Button** and then       |
-|                                                                                              |
-|    click **Save**.                                                                           |
+| 11. Click the **Save & Next** button at the bottom of the dialogue window.                   |
 +----------------------------------------------------------------------------------------------+
 | |image015|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
+TASK 8: Application Groups
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 +----------------------------------------------------------------------------------------------+
-| 13. In the **Visual Policy Editor** click the **Apply Access Policy** (top left) and close   |
+| 1. Check the **Enable Application Groups** checkbox in the **Application Groups**            |
 |                                                                                              |
-|    the **Visual Policy Editor**.                                                             |
-|                                                                                              |
-| *Note: Additional actions can be taken in the Per Session policy (Access Policy). The lab*   |
-|                                                                                              |
-| *is simply completing authentication. Other access controls can be implemented based on the* |
-|                                                                                              |
-| *use case*                                                                                   |
+|    dialogue window.                                                                          |
 +----------------------------------------------------------------------------------------------+
 | |image016|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
-TASK 5: Create the SP Virtual Server & Apply the SP Access Policy
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Refer to the instructions and screen shots below:
-
 +----------------------------------------------------------------------------------------------+
-| 1. Begin by selecting: **Local Traffic** -> **Virtual Servers**                              |
+| 2. **Application Group Properties** dialogue window, enter **app1** in the **Field**.        |
 |                                                                                              |
-| 2. Click the **Create** button (far right)                                                   |   
+| 3. Move **/apps/app1\*** from the **Available** side to the **Selected** side under          |
+|                                                                                              |
+|    **Application List**.                                                                     |
+|                                                                                              |
+| 4. Click the **Save** button at the bottom of the dialogue window.                           |
 +----------------------------------------------------------------------------------------------+
 | |image017|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
-| 3. In the **New Virtual Server** window, key in the following as shown:                      |
+| 5. Click the **Add* button in the *Application Groups** dialogue window that follows and     |
 |                                                                                              |
-|    -  **Name**: **app.f5demo.com**                                                           |
+|    repeat steps 2 through 4 using the following values:                                      |
 |                                                                                              |
-|    -  **Destination Address/Mask**: **10.1.10.100**                                          |
+|    - **Name**: app2, **Selected**: **/apps/app2\***                                          |
 |                                                                                              |
-|    -  **Service Port**: **443**                                                              |
+|    - **Name**: app3, **Selected**: **/apps/app3\***                                          |
 |                                                                                              |
-|    -  **HTTP Profile:** **http** (drop down)                                                 |
-|                                                                                              |
-|    -  **SSL Profile (client):** **app.f5demo.com-clientssl**                                 |
-|                                                                                              |
-|    -  **Source Address Translation:**  **Auto Map**                                          |
-|                                                                                              |
-| 4. Scroll to the **Access Policy** section                                                   |
-|                                                                                              |
-|    -  **Access Profile**: **app.f5demo.com-policy**                                          |
-|                                                                                              |
-|    -  **Per-Request Policy:** **saml\_policy**                                               |
-|                                                                                              |
-| 5. Scroll to the Resource section                                                            |
-|                                                                                              |
-|    -  **Default Pool**: **app.f5demo.com\_pool**                                             |
-|                                                                                              |
-| 6. Scroll to the bottom of the configuration window and click **Finished**                   |
-|                                                                                              |
-| *Note: The use of the Per-Request Policy is to provide header injection and other controls.* |
-|                                                                                              |
-| *These will be more utilized later in the lab.*                                              |
+|    - **Name**: base, **Selected**: **/**                                                     |
 +----------------------------------------------------------------------------------------------+
 | |image018|                                                                                   |
-|                                                                                              |
-| |image019|                                                                                   | 
 +----------------------------------------------------------------------------------------------+
 
-TASK 6: Test the SAML SP
-~~~~~~~~~~~~~~~~~~~~~~~~
++----------------------------------------------------------------------------------------------+
+| 6. Review the **Applications Groups** dialogue window following completion of step 5 and     |
+|                                                                                              |
+| 7. Click the **Save & Next** button at the bottom of the dialogue window.                    |
++----------------------------------------------------------------------------------------------+
+| |image019|                                                                                   |
++----------------------------------------------------------------------------------------------+
 
-Refer to the instructions and screen shots below:
+TASK 9: Contextual Access
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 +----------------------------------------------------------------------------------------------+
-| 1. Using your browser from the Jump Host click on the provided bookmark or navigate to       |
+| 1. In the **Contextual Access Properties** dialigue window, enter **app1-access** in the     |
 |                                                                                              |
-|    https://app.f5demo.com . The SAML SP that you have just configured.                       |
+|    **Name** field.                                                                           |
+|                                                                                              |
+| 2. Select **Application Group** from the **Resource Type** drop down.                        |
+|                                                                                              |
+| 3. Select **app1** from the **Resource** drop down.                                          |
+|                                                                                              |
+| 4. Select **agc-f5lab-AD** from the **Primary Authentication** drop down.                    |
+|                                                                                              |
+| 5. Select **agc-app-header** from the **HTTP Header** drop down.                             |
+|                                                                                              |
+| 6. Check the **Enable Addtional Checks** checkbox.                                           |
+|                                                                                              |
+| 7. In the **Trigger Rules** section that appears, click the **Add** button                   |
 +----------------------------------------------------------------------------------------------+
 | |image020|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
-| 2. Did you successfully redirect to the IdP?                                                 |
+| 8. In the **Contextual Access Properties > Trigger > New** dialogue window, change the       |
 |                                                                                              |
-| 3. Login to the iDP, were you successfully authenticated? (use credentials provided in the   |
+|    **Name** field to **app1-rule**.                                                          |
 |                                                                                              |
-|    Authentication Information section at the beginning of this guide)                        |
-|                                                                                              |
-|    -  **Username**: **user**                                                                 |
-|                                                                                              |
-|    -  **Password**: **Agility1**                                                             |
-|                                                                                              |
-| 4. After successful authentication, were you returned to the SAML SP?                        |
-|                                                                                              |
-| 5. Were you successfully authenticated (SAML)?                                               |
-|                                                                                              |
-| 6. Review your **Active Sessions** (**Access Overview** -> **Active Sessions**)              |
-|                                                                                              |
-| 7. Review your Access Report Logs (**Access** -> **Overview Access Reports**)                |
+| 9. Check the **User Group Check** checkbox.                                                  |
 +----------------------------------------------------------------------------------------------+
 | |image021|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
-.. |image001| image:: media/image001.png
-   :width: 4.5in
-   :height: 0.74in
-.. |image002| image:: media/image002.png
-   :width: 4.5in
-   :height: 3.37in
-.. |image003| image:: media/image003.png
-   :width: 4.5in
-   :height: 3.38in
-.. |image004| image:: media/image004.png
-   :width: 4.5in
-   :height: 0.73in
-.. |image005| image:: media/image005.png
-   :width: 4.5in
-   :height: 3.37in
-.. |image006| image:: media/image006.png
-   :width: 4.5in
-   :height: 1.15in
-.. |image007| image:: media/image007.png
-   :width: 4.5in
-   :height: 2.28in
-.. |image008| image:: media/image008.png
-   :width: 4.5in
-   :height: 0.96in
-.. |image009| image:: media/image009.png
-   :width: 4.5in
-   :height: 1.69in
-.. |image010| image:: media/image010.png
-   :width: 4.5in
-   :height: 2.94in
-.. |image011| image:: media/image011.png
-   :width: 4.5in
-   :height: 0.80in
-.. |image012| image:: media/image012.png
-   :width: 4.5in
-   :height: 1.12in
-.. |image013| image:: media/image013.png
-   :width: 4.5in
-   :height: 4.00in
-.. |image014| image:: media/image014.png
-   :width: 4.5in
-   :height: 1.48in
-.. |image015| image:: media/image015.png
-   :width: 4.5in
-   :height: 1.12in
-.. |image016| image:: media/image016.png
-   :width: 4.5in
-   :height: 1.54in
-.. |image017| image:: media/image017.png
-   :width: 4.5in
-   :height: 1.29in
-.. |image018| image:: media/image018.png
-   :width: 4.5in
-   :height: 5.46in
-.. |image019| image:: media/image019.png
-   :width: 4.5in
-   :height: 2.13in
-.. |image020| image:: media/image020.png
-   :width: 4.5in
-   :height: 1.01in
-.. |image021| image:: media/image021.png
-   :width: 4.5in
-   :height: 1.93in
++----------------------------------------------------------------------------------------------+
+| 8. In the resulting **User Group Check** dialogue window, enter **app** in the filter box on |
+|                                                                                              |
+|    the left to filter the available AD Groups in the **Primary Authentication** section.     |
+|                                                                                              |
+| 9. Click the **Add** button in the row, where **app1** appears in the **Group Name** column. |
+|                                                                                              |
+| 10. Click the **Save** button at the bottom of the dialogue window.                          |
++----------------------------------------------------------------------------------------------+
+| |image022|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 11. Review the resulting **Contextual Access Properties** for **app1-access** and click the  |
+|                                                                                              |
+|     **Save** button at the bottom of the dialogue window.                                    |
++----------------------------------------------------------------------------------------------+
+| |image023|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 12. Click the **Add** button in the **Contextual Access** dialogue window.                   |
+|                                                                                              |
+| 13. Repeat steps 1 through 10 for **app2** and **app3** using the following values           |
+|                                                                                              |
+|     **App2**                                                                                 |
+|                                                                                              |
+|     Contextual Access Properties                                                             |
+|                                                                                              |
+|     - **Name**: **app2-access**                                                              |
+|                                                                                              |
+|     - **Resource Type**: **Application Group**                                               |
+|                                                                                              |
+|     - **Resource**: **app2**                                                                 |
+|                                                                                              |
+|     - **Primary Authentication**: **agc-f5lab-AD**                                           |
+|                                                                                              |
+|     - **HTTP Header**: **agc-app-header**                                                    |
+|                                                                                              |
+|     Contextual Access Trigger Rules                                                          |
+|                                                                                              |
+|     - **Name**: **app2-rule**                                                                |
+|                                                                                              |
+|     User Group Check                                                                         |
+|                                                                                              |
+|     - Add AD group **app2**                                                                  |
+|                                                                                              |
+|     **App3**                                                                                 |
+|                                                                                              |
+|     Contextual Access Properties                                                             |
+|                                                                                              |
+|     - **Name**: **app3-access**                                                              |
+|                                                                                              |
+|     - **Resource Type**: **Application Group**                                               |
+|                                                                                              |
+|     - **Resource**: **app3**                                                                 |
+|                                                                                              |
+|     - **Primary Authentication**: **agc-f5lab-AD**                                           |
+|                                                                                              |
+|     - **HTTP Header**: **agc-app-header**                                                    |
+|                                                                                              |
+|     Contextual Access Trigger Rules                                                          |
+|                                                                                              |
+|     - **Name**: **app3-rule**                                                                |
+|                                                                                              |
+|     User Group Check                                                                         |
+|                                                                                              |
+|     - Add AD group **app3**                                                                  |
++----------------------------------------------------------------------------------------------+
+| |image024|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 14. In the **Contextual Access Properties** dialigue window, enter **base-access** in the    |
+|                                                                                              |
+|     **Name** field.                                                                          |
+|                                                                                              |
+| 15. Select **Application Group** from the **Resource Type** drop down.                       |
+|                                                                                              |
+| 16. Select **base** from the **Resource** drop down.                                         |
+|                                                                                              |
+| 17. Select **agc-f5lab-AD** from the **Primary Authentication** drop down.                   |
+|                                                                                              |
+| 18. Select **agc-app-header** from the **HTTP Header** drop down.                            |
+|                                                                                              |
+| 19. Check the **Enable Addtional Checks** checkbox.                                          |
+|                                                                                              |
+| 20. In the **Trigger Rules** section that appears, change the **Match Action** for the       |
+|                                                                                              |
+|     **Default Fallback** from **Reject** to **Allow**.                                       |
+|                                                                                              |
+| 21. Click the **Save** button at the bottom of the dialogue window.                          |
++----------------------------------------------------------------------------------------------+
+| |image025|                                                                                   |
+|                                                                                              |
+| |image026|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 22. Review the resulting **Contextual Access** dialogue window for completion of all         |
+|                                                                                              |
+|     created access rules.                                                                    |
+|                                                                                              |
+| 23. Click the **Save & Next** button at the bottom of the dialogue window.                   |
++----------------------------------------------------------------------------------------------+
+| |image027|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
+TASK 10: Customization
+~~~~~~~~~~~~~~~~~~~~~~
+
++----------------------------------------------------------------------------------------------+
+| 1. Scroll the bottom of the **Customization Properties** dialogue window, leaving all        |
+|                                                                                              |
+|    defaults and then click **Save & Next**.                                                  |
++----------------------------------------------------------------------------------------------+
+| |image028|                                                                                   |
+|                                                                                              |
+| |image029|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
+TASK 11: Logon Protection
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
++----------------------------------------------------------------------------------------------+
+| 1. Click the **Save & Next** button at the bottom of the **Logon Protection Properties**     |
+|                                                                                              |
+|    dialogue window.                                                                          |
++----------------------------------------------------------------------------------------------+
+| |image030|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
+TASK 12: Summary
+~~~~~~~~~~~~~~~~
+
++----------------------------------------------------------------------------------------------+
+| 1. In the resulting **Summary** dialogue window, review the configured elements and then     |
+|                                                                                              |
+|    click the **Deploy** button.                                                              |
++----------------------------------------------------------------------------------------------+
+| |image031|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 2. Click the **Finish** button in the final dialogue window. Access Guided Configuration     |
+|                                                                                              |
+|    will return to the start screen and **agc-app.acme.com** will be "DEPLOYED"               |
++----------------------------------------------------------------------------------------------+
+| |image032|                                                                                   |
+|                                                                                              |
+| |image033|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
+TASK 13: Testing
+~~~~~~~~~~~~~~~~
+
++----------------------------------------------------------------------------------------------+
+| 1. Begin a RDP session with the **Jumphost (10.1.10.10)** through the Student Portal.        |
+|                                                                                              |
+| 2. Open Firefox from the desktop and navigate to **https://agc-app.acme.com**.  A bookmark   |
+|                                                                                              |
+|    link has been provided in the toolbar.                                                    |
+|                                                                                              |
+| 3. Logon to the resulting logon page with **UserID: user1** and **Password: user1**          |
++----------------------------------------------------------------------------------------------+
+| |image034|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 4. Click on the **Application 1** button in the **ACME Application/Service Portal**.         |
+|                                                                                              |
+| 5. A new tab will open displaying received headers demonstrating the user has accces to the  |
+|                                                                                              |
+|    application.                                                                              |
++----------------------------------------------------------------------------------------------+
+| |image035|                                                                                   |
+|                                                                                              |
+| |image036|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 6. Return to the **ACME Application/Service Portal** and click **Application 2**.            |
+|                                                                                              |
+| 7. A new tab will open displaying a **Block Page** (customizable), restricting access to the |
+|                                                                                              |
+|    application based on AD group membership.                                                 |
++----------------------------------------------------------------------------------------------+
+| |image037|                                                                                   |
+|                                                                                              |
+| |image038|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 8. Return to the **ACME Application/Service Portal** and click the **Logout** button and     |
+|                                                                                              |
+|    and close the browser.                                                                    |
+|                                                                                              |
+| 9. Run the **Add-User1-to-Group2** Powesrshell script link provided on the **Jumphost**      |
+|                                                                                              |
+|    desktop. The script will run and automatically close.                                     |
++----------------------------------------------------------------------------------------------+
+| |image039|                                                                                   |
+|                                                                                              |
+| |image040|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 10. Reopen Firefox using the desktop link on the **Jumphost** and launch the                 |
+|                                                                                              |
+|     **agc-app.acme.com** application from the link provided in the broswer.                  |
+|                                                                                              |
+| 11. Click on the **Application 2** button in the **ACME Application/Service Portal**.        |
+|                                                                                              |
+| 12. A new tab will open displaying received headers demonstrating the user has accces to the |
+|                                                                                              |
+|     application becasue of the change in the user's Group Membership.                        |
++----------------------------------------------------------------------------------------------+
+| |image041|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
+TASK 14: Review
+~~~~~~~~~~~~~~~
+
++----------------------------------------------------------------------------------------------+
+| 1. Login to your provided lab Virtual Edition: **bigp1.f5lab.local**                         |
+|                                                                                              |
+| 2. Navigate to:  **Access -> Overview -> Active Sessions**                                   |
+|                                                                                              |
+| 3. Here you can see the active session and any subsessions created by virtue of the Per      |
+|                                                                                              |
+|    Request Policies and view their associated varibles.                                      |
+|                                                                                              |
+| 4. Click on the **View** asscoiated with the active session's subsession.                    |
++----------------------------------------------------------------------------------------------+
+| |image042|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 5. In the resulting variable view, review the subsession variables created as a result of    |
+|                                                                                              |
+|    access requests performed in testing.                                                     |
++----------------------------------------------------------------------------------------------+
+| |image043|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 6. Navigate to: **Access -> Profiles/Policies -> Per-Request Policies** in the left-hand     |
+|                                                                                              |
+|    navigation menu.                                                                          |
+|                                                                                              |
+| 7. In the resulting dialogue window, click on the **Edit** link in the                       |
+|                                                                                              |
+|    **agc-app.acme.com_perRequestPolicy** row.                                                |
+|                                                                                              |
+| 8. Review the created Per Request Policy                                                     |
++----------------------------------------------------------------------------------------------+
+| |image044|                                                                                   |
+|                                                                                              |
+| |image045|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
+TASK 15: End of Lab1
+~~~~~~~~~~~~~~~~~~~~
+
++----------------------------------------------------------------------------------------------+
+| 1. This concludes Lab1, feel free to review and test the configuration.                      |
++----------------------------------------------------------------------------------------------+
+| |image000|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
+.. |image000| image:: media/image001.png
+   :width: 800px
+.. |image001| image:: media/lab1-001.png
+   :width: 800px
+.. |image002| image:: media/lab1-002.png
+   :width: 800px
+.. |image003| image:: media/lab1-003.png
+   :width: 800px
+.. |image004| image:: media/lab1-004.png
+   :width: 800px
+.. |image005| image:: media/lab1-005.png
+   :width: 800px
+.. |image006| image:: media/lab1-006.png
+   :width: 800px
+.. |image007| image:: media/lab1-007.png
+   :width: 800px
+.. |image008| image:: media/lab1-008.png
+   :width: 800px
+.. |image009| image:: media/lab1-009.png
+   :width: 800px
+.. |image010| image:: media/lab1-010.png
+   :width: 800px
+.. |image011| image:: media/lab1-011.png
+   :width: 800px
+.. |image012| image:: media/lab1-012.png
+   :width: 800px
+.. |image013| image:: media/lab1-013.png
+   :width: 800px
+.. |image014| image:: media/lab1-014.png
+   :width: 800px
+.. |image015| image:: media/lab1-015.png
+   :width: 800px
+.. |image016| image:: media/lab1-016.png
+   :width: 800px
+.. |image017| image:: media/lab1-017.png
+   :width: 800px
+.. |image018| image:: media/lab1-018.png
+   :width: 800px
+.. |image019| image:: media/lab1-019.png
+   :width: 800px
+.. |image020| image:: media/lab1-020.png
+   :width: 800px
+.. |image021| image:: media/lab1-021.png
+   :width: 800px
+.. |image022| image:: media/lab1-022.png
+   :width: 800px
+.. |image023| image:: media/lab1-023.png
+   :width: 800px
+.. |image024| image:: media/lab1-024.png
+   :width: 800px
+.. |image025| image:: media/lab1-025.png
+   :width: 800px
+.. |image026| image:: media/lab1-026.png
+   :width: 800px
+.. |image027| image:: media/lab1-027.png
+   :width: 800px
+.. |image028| image:: media/lab1-028.png
+   :width: 800px
+.. |image029| image:: media/lab1-029.png
+   :width: 800px
+.. |image030| image:: media/lab1-030.png
+   :width: 800px
+.. |image031| image:: media/lab1-031.png
+   :width: 800px
+.. |image032| image:: media/lab1-032.png
+   :width: 800px
+.. |image033| image:: media/lab1-033.png
+   :width: 800px
+.. |image034| image:: media/lab1-034.png
+   :width: 800px
+.. |image035| image:: media/lab1-035.png
+   :width: 800px
+.. |image036| image:: media/lab1-036.png
+   :width: 800px
+.. |image037| image:: media/lab1-037.png
+   :width: 800px
+.. |image038| image:: media/lab1-038.png
+   :width: 800px
+.. |image039| image:: media/lab1-039.png
+   :width: 800px
+.. |image040| image:: media/lab1-040.png
+   :width: 800px
+.. |image041| image:: media/lab1-041.png
+   :width: 800px
+.. |image042| image:: media/lab1-042.png
+   :width: 800px
+.. |image043| image:: media/lab1-043.png
+   :width: 800px
+.. |image044| image:: media/lab1-044.png
+   :width: 800px
+.. |image045| image:: media/lab1-045.png
+   :width: 800px
+      

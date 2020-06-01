@@ -1,11 +1,22 @@
-Class 1: SAML Federation with F5
-================================
+F5 Agility Labs - Index
+=======================
+
+Welcome
+-------
+
+Welcome to the |Access 101| lab at F5 Agility |2020|
+
+|repoinfo|
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
+   :numbered:
+   :caption: Contents:
    :glob:
+   
+   intro*
+   lab1*
+   lab2*
+   close*
+   
 
-
-   labinfo
-   module*/module*
-   conclusion
