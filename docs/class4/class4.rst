@@ -1,5 +1,5 @@
-Acces 301: Identity and Access Federation
-=======================
+Access 301: Identity and Access Federation
+==========================================
 
 Welcome
 -------
