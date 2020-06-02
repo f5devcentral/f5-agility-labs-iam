@@ -225,7 +225,7 @@ TASK 9: Configure Logon Protection
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 +----------------------------------------------------------------------------------------------+
-| 1. In the **Logon Protection Properties** window, click **Save & Next**.                                                                    |
+| 1. In the **Logon Protection Properties** window, click **Save & Next**.                     |
 |                                                                                              |
 | **Note:** *Logon Page Protection enables Datasafe to further protect logon pages and*        |
 |                                                                                              |
