@@ -13,5 +13,5 @@ Welcome
 
    labinfo*
    intro*
-   module*
+   module*/module*
  
