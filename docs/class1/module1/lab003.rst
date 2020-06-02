@@ -28,6 +28,7 @@ Task 1 - Create a virtual server
 4. Click **Finished**
 
 |image20|
+
 |image22|
 
 

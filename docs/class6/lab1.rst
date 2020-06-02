@@ -48,6 +48,7 @@ Task 2: Create a Simple Access Profile
 
 1. Navigate to **Access > Profiles / Policies > Access Profiles
    (Per-Session Policies)**
+   
    |image10|
 
 2. From the Access Profiles screen, click **Create...** in the upper
@@ -55,10 +56,12 @@ Task 2: Create a Simple Access Profile
 
 3. In the Name field, enter “\ **MyAccessPolicy**\ ”, and for “Profile
      Type”, select the dropdown and choose **All**
+	 
    |image11|
 
 4. Under “Language Settings”, choose **English** and click the
    “\ **<<**\ “ button to slide over to the “Accepted Languages” column.
+   
    |image12|
 
 5. Click **Finished**, which will bring you back to the Access Profiles
@@ -66,16 +69,21 @@ Task 2: Create a Simple Access Profile
 
 6. On the Access Profiles screen, click the **Edit** link under the
    Per-Session Policy column. 
+   
    |image13|
+   
    The Visual Policy Editor (VPE) will open in a new tab.
 
 7. On the VPE page, click the ‘\ **+**\ ’ icon on the “fallback” path,
    to the right of the **Start** object.
+   
    |image14|
 
 8. On the popup menu, choose the **Logon Page** radio button under the
    Logon tab and click **Add Item**
+   
    |image15|
+   
    |image16|
 
 9. Accept the defaults and click **Save**
@@ -86,27 +94,35 @@ via the “Logon Page” object.
 1. Between the “Logon Page” and “Deny” objects, click the ‘\ **+**\ ’
    icon, select **AD Auth** found under the **Authentication** tab,
    and click the **Add Item** button
+   
    |image17|
+   
    |image18|
 
 2. Accept the default for the **Name** and in the **Server** drop-down
    menu select the AD server created above:
    **/Common/LAB\_SSO\_AD\_Server**, then click **Save**
+   
    |image19|
 
 3. On the “Successful” branch between the **AD Auth** and **Deny**
    objects, click on the word **Deny** to change the ending
-   | |image20|
+   
+   |image20|
 
 4. Change the “Successful” branch ending to **Allow**, then click **Save**
+
    |image21|
+   
    |image22|
 
 5. In the upper left-hand corner of the screen, click on the **Apply
    Access Policy** link, then close the window using the **Close**
    button in the upper right-hand. Click **Yes** when asked “Do you
    want to close this tab?”
+   
    |image23|
+   
    |image24|
 
 Task 3: Associate Access Policy to Virtual Servers
@@ -121,6 +137,7 @@ appropriate virtual server to be able to use it.
 
 2. Scroll down to the “Access Policy” section, then for the “Access
    Profile” dropdown, select **MyAccessPolicy**
+   
    |image25|
 
 3. Click **Update** at the bottom of the screen
@@ -134,6 +151,7 @@ Now you are ready to test.
    that has the access policy applied:
    `**https://server1.acme.com** <https://server1.acme.com>`__\ **
    You will be presented with a login window
+   
    |image26|
 
 2. Enter the following credentials and click **Logon**:
@@ -141,6 +159,7 @@ Now you are ready to test.
    Password: **user1**
 
    You will see a screen similar to the following:
+   
    |image27|
 
 
