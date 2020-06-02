@@ -61,11 +61,11 @@ TASK 1: Create/Review New Application Registration
 +----------------------------------------------------------------------------------------------+
 | **[REVIEW ONLY]**                                                                            |
 |                                                                                              |
-| 3. In the pop-up window for **Register an application**, enter the following values          | 
+| 3. In the pop-up window for **Register an application**, enter the following values          |
 |                                                                                              |
 |    * **Name:** **app.acme.com**                                                              |
 |                                                                                              |
-|    * **Supported account types:** **Accounts in this organizational directory only** (radio) | 
+|    * **Supported account types:** **Accounts in this organizational directory only** (radio) |
 |                                                                                              |
 |    * **Redirect URI:** **https://app.acme.com/oauth/client/redirect**                        |
 |                                                                                              |

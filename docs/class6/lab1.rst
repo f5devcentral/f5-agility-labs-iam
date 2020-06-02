@@ -4,8 +4,8 @@ Lab 1: Building a Basic Access Policy
 Objectives
 ----------
 
-The lab has a pre configured test VIP, we will use the VIP that has been pre configured in to configure a simple Access Profile using the Visual Policy Editor
-(VPE) to perform user authentication.
+The lab has a pre-configured test Virtual Server which will be used throughout the lab.  You will the Visual Policy Editor (VPE)
+to create and attach a simple Access Profile which performs user authentication.
 
 Lab Requirements
 ----------------
@@ -41,7 +41,7 @@ server profile for our Active Directory.
 
 4. Click **Finished**
 
-N.B. If you wish you can simply use the **pre-built-ad-servers**.
+Note: If you wish you can simply use the **pre-built-ad-servers**.
 
 Task 2: Create a Simple Access Profile
 --------------------------------------
@@ -54,8 +54,8 @@ Task 2: Create a Simple Access Profile
 2. From the Access Profiles screen, click **Create...** in the upper
    right-hand corner
 
-3. In the Name field, enter “\ **MyAccessPolicy**\ ”, and for “Profile
-     Type”, select the dropdown and choose **All**
+3. In the Name field, enter **MyAccessPolicy** and for the **Profile Type**, 
+   select the dropdown and choose **All**
 	 
    |image11|
 
@@ -149,13 +149,13 @@ Now you are ready to test.
 
 1. Open a new browser window and open the URL for the virtual server
    that has the access policy applied:
-   `**https://server1.acme.com** <https://server1.acme.com>`__\ **
+   `**https://server1.acme.com** <https://server1.acme.com>`
    You will be presented with a login window
    
    |image26|
 
 2. Enter the following credentials and click **Logon**:
-   Username: **user**
+   Username: **user1**
    Password: **user1**
 
    You will see a screen similar to the following:
@@ -171,12 +171,14 @@ You can view active sessions by navigating Access/Overview/Active Sessions
 You will see a screen similar to the following:
 
 Click on the session id for the active session. If the session is active it will show up as a green in the status.
+
 |image30|
 
 Click on the "session ID" next to the active session. Note every session has a unique session id. Associated with it.
 This can be used for troubleshooting specific authentication problem.
 
 Once you click on the session id you wll be presented with a screen that is similar to the following.
+
 |image31|
 
 Note that the screen will show all of the log messages associated with the session. This becomes useful if there is a problem authenticating users.

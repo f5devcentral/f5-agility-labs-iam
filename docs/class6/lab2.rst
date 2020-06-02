@@ -4,9 +4,8 @@ Lab 2: Webtop Access Policy Build
 In this lab, we will add a Webtop resource to the Access Policy
 created in the previous lab.
 
-
-.. NOTE::
-  Lab Requirements:
+Lab Requirements
+----------------
 
   - Working HTTPS Virtual Server with Access Policy Created in Lab 1 (Lab 1 successfully completed).
 
@@ -27,14 +26,14 @@ Task – Create a Webtop resource
 
 Task – Create Webtop Item
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#. Browse to **Access** > **Webtops >** **Webtop Link ** and click create.
+#. Browse to **Access** > **Webtops >** **Webtop Link** and click create.
 
 
 #. Complete the following entries.
 
       - Name: F5Rocks
       - Link Type Dropdown: Application URI
-      - pplicatoin URI : https://www.f5.com
+      - Applicatoin URI : https://www.f5.com
       - Application Caption : F5 Rocks.
 
    |image39|
@@ -57,7 +56,7 @@ Task – Add Webtop resource to existing Access Policy
    |image46|
 
 #. Select the **Advanced Resource Assign** object. Click on the "Assignment Tab" and select the "Advanced Resource Assign"
-   radio button. Click **Add Item*.
+   radio button. Click **Add Item**.
 
    |image47|
 
@@ -69,7 +68,7 @@ Task – Add Webtop resource to existing Access Policy
 #. Then under the "Expression Section" click the "Add/Delete" button
 
 #. | Click on the **Webtop** tab, select the radio button for
-     **MyFullWebtop**. Click on the **Webop Links* tab, and select the radio button for **F5Rocks**
+     **MyFullWebtop**. Click on the **Webop Links** tab, and select the radio button for **F5Rocks**
      then click the **Update** button at the bottom of
      the screen.
 
@@ -79,7 +78,6 @@ Task – Add Webtop resource to existing Access Policy
 
 #. | At the top left of the browser window, click on “\ **Apply Access
      Policy**\ ”, then close the tab.
-   |
 
    |image42|
 
@@ -95,9 +93,9 @@ Task – Testing
 
 #. Enter the following credentials:
 
-   Username: **user**
+   Username: **user1**
 
-   Password: **Agility1**
+   Password: **user1**
 
 #. Click **Logon**.
 

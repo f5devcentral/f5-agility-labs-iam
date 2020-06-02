@@ -300,7 +300,7 @@ TASK: 12: Testing the SAML Identity Provider (IdP)
 +----------------------------------------------------------------------------------------------+
 | 4. The **Partner Application** will now open if successfully configured.  Close the Partner  |
 |                                                                                              |
-|    Application window, navigate to the **F5 Dynamic Webtop** tab/window and click **Logout**.|                                               |
+|    Application window, navigate to the **F5 Dynamic Webtop** tab/window and click **Logout**.|
 +----------------------------------------------------------------------------------------------+
 | |image024|                                                                                   |
 +----------------------------------------------------------------------------------------------+
