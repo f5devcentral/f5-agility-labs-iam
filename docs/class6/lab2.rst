@@ -173,7 +173,7 @@ Refer to the instructions and screen shots below:
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
-| 7. In the **Create SAML Integration** screen, enter the following values                       |
+| 7. In the **Create SAML Integration** screen, enter the following values                     |
 |                                                                                              |
 | 8. In the **SAML Setting** section                                                           |
 |                                                                                              |
@@ -373,7 +373,7 @@ Refer to the instructions and screen shots below:
 | |image052|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
-TASK 10 – Test Access to the app.f5demo.com application
+TASK 10 - Test Access to the app.f5demo.com application
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Refer to the instructions and screen shots below:
@@ -391,7 +391,7 @@ Refer to the instructions and screen shots below:
 |                                                                                              |
 |    *Note: Those who enabled MFA access will be required to activate their second factor for* |
 |                                                                                              |
-|    *application access. Requires Task 3 & Task be completed.*                                                                     |
+|    *application access. Requires Task 3 & Task be completed.*                                |
 +----------------------------------------------------------------------------------------------+
 | |image054|                                                                                   |
 | |image055|                                                                                   |
