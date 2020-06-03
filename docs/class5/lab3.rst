@@ -486,7 +486,7 @@ TASK 6: Testing Gating Criteria
 |                                                                                              |
 | *subsession. What happens in new subsessions, the number of subsessions and how they are*    |
 |                                                                                              |
-| *controlled is based on the individual customer/application need.                            |
+| *controlled is based on the individual customer/application need.*                           |
 +----------------------------------------------------------------------------------------------+
 
 TASK 7: End of Lab3

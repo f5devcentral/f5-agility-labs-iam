@@ -483,7 +483,7 @@ TASK 7: Testing the OAuth Configuration
 +----------------------------------------------------------------------------------------------+
 | 2. Once redeirected to **https://login.microsoftonline.com** sign in with                    |
 |                                                                                              |
-|    **demouser@f5agilitydemogmail.onmicrosoft.com**, and then click **Next                    |
+|    **demouser@f5agilitydemogmail.onmicrosoft.com**, and then click **Next**                  |
 +----------------------------------------------------------------------------------------------+
 | |image027|                                                                                   |
 +----------------------------------------------------------------------------------------------+

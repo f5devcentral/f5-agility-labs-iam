@@ -52,38 +52,38 @@ The following table lists VLANS, IP Addresses and Credentials for all
 components:
 
 +------------------------+-------------------------+--------------------------+
-| Component              | VLAN/IP Address(es)     | Credentials              | 
+| Component              | VLAN/IP Address(es)     | Credentials              |
 +========================+=========================+==========================+
-| jumpbox.f5lab.local    | - Management 10.1.1.10  | - user1/user1            | 
-|                        | - External   10.1.10.10 | - user2/user2            | 
+| jumpbox.f5lab.local    | - Management 10.1.1.10  | - user1/user1            |
+|                        | - External   10.1.10.10 | - user2/user2            |
 |                        | - Internal   10.1.20.10 |                          |
 +------------------------+-------------------------+--------------------------+
-| BIG-IP1.f5lab.local    | - Management 10.1.1.4   | - admin/admin            | 
-|                        | - External   10.1.10.4  |                          | 
+| BIG-IP1.f5lab.local    | - Management 10.1.1.4   | - admin/admin            |
+|                        | - External   10.1.10.4  |                          |
 |                        | - Internal   10.1.20.4  |                          |
 +------------------------+-------------------------+--------------------------+
-| BIG-IP2.f5lab.local    | - Management 10.1.1.5   | - admin/admin            | 
-|                        | - External   10.1.10.5  |                          | 
+| BIG-IP2.f5lab.local    | - Management 10.1.1.5   | - admin/admin            |
+|                        | - External   10.1.10.5  |                          |
 |                        | - Internal   10.1.20.5  |                          |
 +------------------------+-------------------------+--------------------------+
-| dc.f5lab.local         | - Management 10.1.1.7   | - admin/admin            | 
-|                        | - Internal   10.1.20.7  |                          | 
+| dc.f5lab.local         | - Management 10.1.1.7   | - admin/admin            |
+|                        | - Internal   10.1.20.7  |                          |
 +------------------------+-------------------------+--------------------------+
-| iis.f5lab.local        | - Management 10.1.1.6   | - admin/admin            | 
-|                        | - Internal              |			              |
-|			             |      - 10.1.20.6        |                          | 
-|			             |      - 10.1.20.16       |                          |
+| iis.f5lab.local        | - Management 10.1.1.6   | - admin/admin            |
+|                        | - Internal              |                          |
+|                        |    - 10.1.20.6          |                          |
+|                        |    - 10.1.20.16         |                          |
 +------------------------+-------------------------+--------------------------+
 | web.f5lab.local        | - Management 10.1.1.9   |                          |
 |                        | - Internal              |                          |
-|                        |    	      - 10.1.20.9  |                          |
-|			             |            - 10.1.20.19 |                          |
+|                        |    - 10.1.20.9          |                          |
+|                        |    - 10.1.20.19         |                          |
 +------------------------+-------------------------+--------------------------+
-| radius.f5lab.local     | - Management 10.1.1.8   |                          | 
-|                        | - Internal              |			              |
-|			             | 	      - 10.1.20.8      |                          |
-|                        |	      - 10.1.20.18     |                          |
-+------------------------+-------------------------+--------------------------+      
+| radius.f5lab.local     | - Management 10.1.1.8   |                          |
+|                        | - Internal              |                          |
+|                        |    - 10.1.20.8          |                          |
+|                        |    - 10.1.20.18         |                          |
++------------------------+-------------------------+--------------------------+
 
 .. |image0| image:: media/image000.png
 .. |image1| image:: media/image001a.png

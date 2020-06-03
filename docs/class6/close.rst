@@ -9,7 +9,7 @@ student to further explore the BIG-IP platform and Access Policy Manager
 (APM), its functions & features.
 
 Appendix
-=======
+========
 
 
 Links & Guides
@@ -21,9 +21,9 @@ this lab guide and many other APM tasks.
 -  **Access Policy Manager (APM) Operations Guide:**
    https://support.f5.com/content/kb/en-us/products/big-ip_apm/manuals/product/f5-apm-operations-guide/_jcr_content/pdfAttach/download/file.res/f5-apm-operations-guide.pdf
 
--  **Access Policy Manager (APM) Authentication & Single Sign on Concepts:**
+-  **Access Policy Manager (APM) Authentication and Single Sign on Concepts:**
    https://support.f5.com/kb/en-us/products/big-ip_apm/manuals/product/apm-authentication-sso-13-0-0.html
-
+   
 -  **SAML:**
 
    -  **Introduction:**
@@ -75,7 +75,7 @@ this lab guide and many other APM tasks.
    -  **RSA Integration:**
       https://support.f5.com/kb/en-us/products/big-ip_apm/manuals/product/apm-authentication-single-sign-on-12-1-0/6.html#conceptid
 
-   -  **DUO Security: **
+   -  **DUO Security:**
 
       -  https://duo.com/docs/f5bigip
 

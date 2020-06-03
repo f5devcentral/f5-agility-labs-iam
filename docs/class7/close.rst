@@ -11,57 +11,6 @@ student to further explore the BIG-IP platform and Access Policy Manager
 Appendix
 ========
 
-Setting up an AzureAD Developer Account
----------------------------------------
-
-The following steps are for informational purposes only and maybe subject to change based on Microsoft.  
-
-+----------------------------------------------------------------------------------------------+
-| 1. Navigate to the following URL to begin the process then follow the prompts as shown       |
-|                                                                                              |
-|    https://azure.microsoft.com/en-us/free/                                                   |
-|                                                                                              |
-| 2. The following images show the general flow to setup a free developer account              |
-|                                                                                              |
-| *Note: This process may change as dictated by Microsoft*                                     |
-+----------------------------------------------------------------------------------------------+
-| |image143|                                                                                   |
-+----------------------------------------------------------------------------------------------+
-
-+----------------------------------------------------------------------------------------------+
-| 3. Initial Setup                                                                             |
-+----------------------------------------------------------------------------------------------+
-| |image144|                                                                                   |
-| |image145|                                                                                   |
-|                                                                                              |
-| |image146|                                                                                   | 
-| |image147|                                                                                   | 
-+----------------------------------------------------------------------------------------------+
-
-+----------------------------------------------------------------------------------------------+
-| 4. About You                                                                                 |
-+----------------------------------------------------------------------------------------------+
-| |image148|                                                                                   |
-+----------------------------------------------------------------------------------------------+
-
-+----------------------------------------------------------------------------------------------+
-| 5. Identity Verification by Phone                                                            |
-+----------------------------------------------------------------------------------------------+
-| |image149|                                                                                   |
-+----------------------------------------------------------------------------------------------+
-
-+----------------------------------------------------------------------------------------------+
-| 6. Identity Verification by Card                                                             |
-+----------------------------------------------------------------------------------------------+
-| |image150|                                                                                   |
-+----------------------------------------------------------------------------------------------+
-
-+----------------------------------------------------------------------------------------------+
-| 7. Agreement                                                                                 |
-+----------------------------------------------------------------------------------------------+
-| |image151|                                                                                   |
-+----------------------------------------------------------------------------------------------+
-
 Links & Guides
 --------------
 
@@ -125,7 +74,7 @@ this lab guide and other APM tasks.
    -  **RSA Integration:**
       https://support.f5.com/kb/en-us/products/big-ip_apm/manuals/product/apm-authentication-single-sign-on-12-1-0/6.html#conceptid
 
-   -  **DUO Security: **
+   -  **DUO Security:**
 
       -  https://duo.com/docs/f5bigip
 
@@ -194,31 +143,3 @@ this lab guide and other APM tasks.
 |                                                                                              |
 | permission of F5.                                                                            |
 +----------------------------------------------------------------------------------------------+
-
-.. |image143| image:: media/image139.png
-   :width: 2.84352in
-   :height: 1.33129in
-.. |image144| image:: media/image140.png
-   :width: 1.65644in
-   :height: 1.35621in
-.. |image145| image:: media/image141.png
-   :width: 1.53374in
-   :height: 1.34629in
-.. |image146| image:: media/image142.png
-   :width: 1.55828in
-   :height: 1.56560in
-.. |image147| image:: media/image143.png
-   :width: 1.38650in
-   :height: 1.55496in
-.. |image148| image:: media/image144.png
-   :width: 2.00614in
-   :height: 2.21876in
-.. |image149| image:: media/image145.png
-   :width: 2.79693in
-   :height: 1.78723in
-.. |image150| image:: media/image146.png
-   :width: 2.42294in
-   :height: 2.73846in
-.. |image151| image:: media/image147.png
-   :width: 3.32514in
-   :height: 1.16922in
