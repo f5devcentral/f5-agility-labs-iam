@@ -4,7 +4,7 @@ Access 101: Intro to Access Foundational Concepts
 Welcome
 -------
 
-Welcome to the |Access 101| lab at F5 Agility |2020|
+Welcome to the |classbold| lab at F5 Agility |year|
 
 |repoinfo|
 

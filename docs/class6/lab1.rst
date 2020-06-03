@@ -1,5 +1,5 @@
 Lab 1: Building a Basic Access Policy
-====================================================
+=====================================
 
 Objectives
 ----------
@@ -164,7 +164,7 @@ Now you are ready to test.
 
 
 Task 5: Troubleshooting tips
----------------
+----------------------------
 
 You can view active sessions by navigating Access/Overview/Active Sessions
 

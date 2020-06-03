@@ -35,8 +35,6 @@ Estimated completion time: 15 minutes
 TASK 1: Create an SSO object and Webtop Resource
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-______________________________________________________________
-
 SAML Resource
 
 #.  Begin by selecting Access > Federation > SAML Resources
@@ -71,8 +69,8 @@ Click finished at the bottom of the GUI
 
 
 TASK 2 – Configure an Active Directory account, Kerberos AAA Object, and keytab file
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-______________________________________________________________
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 
 During this exercise we will make a copy of the idp.acme.com-policy and modify
 it to demonstrate Kerberos to SAML functionality.  Navigate to Access, Profiles, Access Profiles
@@ -97,7 +95,7 @@ console.   Click on Active Directory Users and Computers.
 #. Configure a Kerberos AAA Object
 
 
-#. Create the AAA object by navigating to **Access, Authentication, Kerberos
+#. Create the AAA object by navigating to **Access > Authentication > Kerberos**
 
 
 #. Specify a **Name** (AD Domain)
@@ -116,8 +114,7 @@ console.   Click on Active Directory Users and Computers.
 
 
 TASK 3: Copy and Modify the idp.acme.com-policy Access Profile
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-______________________________________________________________
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #. We will now make a copy of an existing Access Policy and modify the new policy
 
@@ -149,7 +146,7 @@ ______________________________________________________________
 #. In the **HTTP 401 Response** dialog box, enter the following information:
 
    +-------------------+---------------------------------+
-   | Basic Auth Realm: | ``f5lab.local``                  |
+   | Basic Auth Realm: | ``f5lab.local``                 |
    +-------------------+---------------------------------+
    | HTTP Auth Level:  | ``basic+negotiate`` (drop down) |
    +-------------------+---------------------------------+
@@ -170,7 +167,7 @@ ______________________________________________________________
 #. In the **Kerberos Auth** dialog box, enter the following information:
 
    +----------------------+-------------------------------------+
-   | AAA Server:          | ``/Common/Kerberos_SSL`` (drop down) |
+   | AAA Server:          | ``/Common/Kerberos_SSL`` (drop down)|
    +----------------------+-------------------------------------+
    | Request Based Auth:  | ``Disabled`` (drop down)            |
    +----------------------+-------------------------------------+
@@ -259,7 +256,6 @@ ______________________________________________________________
 
 TASK 4 - Test the Kerberos to SAML Configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-______________________________________________________________
 
 .. NOTE:: In the following Lab Task it is recommended that you use Microsoft
    Internet Explorer.  While other browsers also support Kerberos

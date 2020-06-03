@@ -23,9 +23,9 @@ this lab guide and other APM tasks.
 
 **SAML Federation:**
   * **Concepts & Configuration**: https://techdocs.f5.com/en-us/bigip-15-1-0/big-ip-access-policy-manager-saml-configuration.html
-  * **APM as SAML Identity Provider (IdP): https://techdocs.f5.com/en-us/bigip-15-1-0/big-ip-access-policy-manager-saml-configuration/using-apm-as-a-saml-idp-no-sso-portal.html#concept-9265 
-  * **APM as SAML Service Provider (SP): https://techdocs.f5.com/en-us/bigip-15-1-0/big-ip-access-policy-manager-saml-configuration/using-apm-as-a-saml-service-provider.html#GUID-E4CEA553-B0AB-487C-9F37-DF3864F3B462
-  * **Inline SAML Single Sign-On: https://techdocs.f5.com/en-us/bigip-15-1-0/big-ip-access-policy-manager-saml-configuration/config-apm-as-saml-idp-inline-sso.html#overview-apm-saml-idp-inline-sso
+  * **APM as SAML Identity Provider (IdP)**: https://techdocs.f5.com/en-us/bigip-15-1-0/big-ip-access-policy-manager-saml-configuration/using-apm-as-a-saml-idp-no-sso-portal.html#concept-9265 
+  * **APM as SAML Service Provider (SP)**: https://techdocs.f5.com/en-us/bigip-15-1-0/big-ip-access-policy-manager-saml-configuration/using-apm-as-a-saml-service-provider.html#GUID-E4CEA553-B0AB-487C-9F37-DF3864F3B462
+  * **Inline SAML Single Sign-On**: https://techdocs.f5.com/en-us/bigip-15-1-0/big-ip-access-policy-manager-saml-configuration/config-apm-as-saml-idp-inline-sso.html#overview-apm-saml-idp-inline-sso
 
 **OAuth:**
   * **Concepts & Configuration**: https://techdocs.f5.com/en-us/bigip-15-1-0/big-ip-access-policy-manager-oauth-configuration.html

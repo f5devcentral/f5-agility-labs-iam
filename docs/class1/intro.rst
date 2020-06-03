@@ -1,5 +1,5 @@
 Class - API Protection
-===================
+======================
 
 As the dependency of API usage increases across organizations so do the tools used to protect them. APIs historically were protected through dedicated API gateways performing complex tasks such as transformations between API types such as REST to XML but still required a Web Application Firewall to perform content validation against various attack types beyond schema validation. The complex requirements for API gateways have decreased as the adoption of REST has increased in organizations. API gateways have been narrowed to three specific requirements: authentication, authorization, and content validation.
 
