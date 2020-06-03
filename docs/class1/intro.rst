@@ -27,7 +27,7 @@ Setup Lab Environment
 
 #. Type the command **cd c:\\labs\\class1\\postman** to navigate the Postman collection folder.
 
-#. Type the command **newman run "API Protection Labs-setup.postman_collection.json" -e master-single-dc.postman_environment.json -k**
+#. Type the command **setup.bat**
 
 #. All Steps in the collection should succeed before moving on to the lab.  If an API call fails run the collection again by repeating the previous step.  
 
