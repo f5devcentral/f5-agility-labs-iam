@@ -56,8 +56,8 @@ is not successfully allowing access or not performing as intended.
 |                                                                                              |
 | 1. Go to **Access -> Overview -> Active Sessions**                                           |
 |                                                                                              |
-|   *Note:  There may not be active sessions within lab proceed to step 2 to generate a        |
-|           session and examine the properties*                                                |
+|   *Note:  There may not be active sessions within lab proceed to step 2 to generate a*       |
+|           *session and examine the properties*                                               |
 +----------------------------------------------------------------------------------------------+
 | |image001|                                                                                   |
 +----------------------------------------------------------------------------------------------+
@@ -135,7 +135,7 @@ Task 3: Troubleshooting in the CLI
 | 3. run the command **netstat -rn**                                                           |
 |     - What routes do we have?                                                                |
 |     - How would the BIG-IP reach 10.1.20.6?                                                  |
-|     = run **ip route get 10.1.20.6** to see if you were right                                |
+|     - run **ip route get 10.1.20.6** to see if you were right                                |
 +----------------------------------------------------------------------------------------------+
 | |image008|                                                                                   |
 |                                                                                              |
@@ -146,7 +146,7 @@ Task 3: Troubleshooting in the CLI
 | 4. run command **dig app.acme.com**                                                          |
 |     - What IP is returned?                                                                   |
 |     - Why that IP?                                                                           |
-|     = try **dig app.acme.com**                                                               |
+|     - try **dig app.acme.com**                                                               |
 |     - **dig server1.acme.com**                                                               |
 +----------------------------------------------------------------------------------------------+
 | |image010|                                                                                   |
@@ -157,7 +157,7 @@ Task 3: Troubleshooting in the CLI
 |     - ensure NTP is properly configured                                                      |
 |                                                                                              |
 | 5. run command **date**                                                                      |
-|     = If time is out of sync by too much of an offset this can cause issues with sync in an  |
+|     - If time is out of sync by too much of an offset this can cause issues with sync in an  |
 |       HA pair of devices                                                                     |
 +----------------------------------------------------------------------------------------------+
 | |image011|                                                                                   |
@@ -171,10 +171,10 @@ Task 4: Managing Active Sessions
 |     - Login  user1/user1                                                                     |
 |                                                                                              |
 | 2. Return to your BIG-IP GUI by clicking the app shortcut BIG-IP1 from Chrome                |
-|     = Login admin\admin                                                                      |
+|     - Login admin\admin                                                                      |
 |     - Go to **Access -> Overview -> Active Sessions**                                        |
-|         - Do you see active sessions?  Are there in active sessions?                         |
-|         - Check the box next to your all the sessions and **Kill Selected Session**          |
+|     - Do you see active sessions?  Are there in active sessions?                             |
+|     - Check the box next to your all the sessions and **Kill Selected Session**              |
 +----------------------------------------------------------------------------------------------+
 | |image012|                                                                                   |
 +----------------------------------------------------------------------------------------------+
@@ -225,22 +225,22 @@ the server3.acme.com SAML enabled application.
 #.  Within Chrome type in https://app.acme.com
 
 #.  It may help to minimize Chrome and move the SAML Tracer utility to the right side of Chrome
-	  in order to view the SAML request/response actions
+	in order to view the SAML request/response actions
 
 #.  Log in to https://app.acme.com as user1/user1
 
 #.  Within the SAML Tracer utility you should see a number of GET and POST responses
 
 #.  Click on one of the GET requests within SAML Tracer and displayed below will be the
-	  details of the request. In general GET calls will display the request an application
-	  is sending to the IdP.   A POST call is often useful to display details such as whether
+	details of the request. In general GET calls will display the request an application
+	is sending to the IdP.   A POST call is often useful to display details such as whether
   	or not an X509 certificate is correct, but can be useful to display any number of variables
-	  depending on whether the call is SP-Initiated or IdP-Initiated.
+	depending on whether the call is SP-Initiated or IdP-Initiated.
 
  |image014|
 
 Task 4 - F5 tcpdump and Wireshark
-----------------------
+---------------------------------
 
 #.  This lab will cover the following topics:
 

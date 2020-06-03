@@ -89,8 +89,8 @@ Refer to the instructions and screen shots below:
 |                                                                                              |
 | 8. Click Apply policy                                                                        |
 |                                                                                              |
-|   *Note:  Nothing will be set in this policy we will simply establish a session and manage   |
-|           all the authentication in the Per-Request Policy*                                  |
+|   *Note:  Nothing will be set in this policy we will simply establish a session and manage*  |
+|           *all the authentication in the Per-Request Policy*                                 |
 +----------------------------------------------------------------------------------------------+
 | |image003|                                                                                   |
 |                                                                                              |

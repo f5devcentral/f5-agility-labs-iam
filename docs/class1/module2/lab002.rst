@@ -67,7 +67,7 @@ block bot traffic. What do you expect? Keep in mind that the bot profile allows 
    |module2Lab2Task2-image4|
 
 
-#. Go back to **Postman** once again and click on the **Arrow** next to the API Protection Labs collection to open **Runner**at the top. 
+#. Go back to **Postman** once again and click on the **Arrow** next to the API Protection Labs collection to open **Runner** at the top. 
 
 #. Click Run
 
