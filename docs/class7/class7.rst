@@ -1,22 +1,22 @@
-Class 7: Introduction to Universal Access
-=========================================
+Access 102: Access Building Blocks 
+==================================
+
+Welcome
+-------
 
 Welcome to the |classbold| lab at F5 Agility |year|
 
 |repoinfo|
 
-This class will cover APM concepts and will guide students
-through configuration steps for the following common use cases:
-
-- Remote access VPN services
-- Web portals (Webtops) for publishing internal applications
-- Using different authentication protocols
-- Single-Sign-On (SSO) functionality
-
 .. toctree::
    :maxdepth: 2
+   :numbered:
    :caption: Contents:
    :glob:
 
-   intro
-   module*/lab*
+   intro*
+   lab1*
+   lab2*
+   lab3*
+   lab4*
+   close*

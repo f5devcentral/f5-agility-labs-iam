@@ -1,0 +1,14 @@
+Lab 1.8 - Application Groups
+------------------------------------------------
+
+Application Groups will be covered in a later section of the lab.
+
+Task - Skip Application Group Section
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#. Click **Save & Next**
+
+|image28|
+
+.. |image28| image:: media/image028.png
+

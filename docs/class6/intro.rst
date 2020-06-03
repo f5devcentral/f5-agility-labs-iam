@@ -1,107 +1,76 @@
-Welcome
-=======
-
-Welcome to the 330 Access Policy Manager (APM) Federation Hands-on Lab Guide. The
-following labs and exercises will instruct you on how to configure and
-troubleshoot federation use cases based on the experience of field
-engineers, support engineers and clients. This guide is intended to
-complement lecture material provided during the 330 course as well as a
-reference guide that can be referred to after the class as a basis for
-configuring federation relationships in your own environment.
-
-Lab Network Setup
------------------
-
-In the interest of focusing as much time as possible configuring and
-performing lab tasks, we have provided some resources and basic setup
-ahead of time. These are:
-
--  Cloud-based lab environment complete with Jump Host, Virtual BIG-IP
-   and Lab Server
-
--  Duplicate Lab environments for each student for improved
-   collaboration
-
--  The Virtual BIG-IP has been pre-licensed and provisioned with Access
-   Policy Manager (APM)
-
--  Pre-staged configurations to speed up lab time, reducing repetitive
-   tasks to focus on key learning elements.
-
-If you wish to replicate these labs in your environment you will need to
-perform these steps accordingly. Additional lab resources are provided
-as illustrated in the diagram below:
-
-|image000|
-
-Timing for labs
+Getting Started
 ---------------
 
-The time it takes to perform each lab varies and is mostly dependent on
-accurately completing steps. This can never be accurately predicted but
-we strived to provide an estimate based on several people, each having a
-different level of experience. Below is an estimate of how long it will
-take for each lab:
+Please follow the instructions provided by the instructor to start your
+lab and access your jump host.
 
-+-----------------------------------------------------+----------------------+
-| **Lab Description**                                 | **Time Allocated**   |
-+=====================================================+======================+
-| LAB 1 - SAML Service Provider (SP)                  | 25 minutes           |
-+-----------------------------------------------------+----------------------+
-| LAB 2 - SaaS SAML Identity Provider (IDP) (OKTA)    | 25 minutes           |
-+-----------------------------------------------------+----------------------+
-| LAB 3 - oAuth & OpenID Connect (Google)             | 25 minutes           |
-+-----------------------------------------------------+----------------------+
-| LAB 4 - oAuth and Azure AD Lab                      | 25 minutes           |
-+-----------------------------------------------------+----------------------+
+To access your dedicated student lab environment, you will require a web browser and Remote Desktop Protocol (RDP) client software. The web browser will be used to access the Lab Training Portal. The RDP client will be used to connect to the Jump Host, where you will be able to access the BIG-IP management interfaces (HTTPS, SSH).
 
-Authentication – Credentials
-----------------------------
+1. Establish an RDP connection to your Jump Host and login with the following credentials:
+User: **user1**
+Password: **user1**
 
-The following credentials will be utilized throughout this Lab guide.
-All other credentials will be indicated at the time of use.
+2. Access the BIG-IP GUI https://10.1.1.4 (you can double-click on the BIG-IP1 bookmark from Chrome).
 
-+--------------------------------------+---------------+----------------+
-| **Credential Use**                   | **User ID**   | **Password**   |
-+======================================+===============+================+
-| BIG-IP Configuration Utility (GUI)   | admin         | admin          |
-+--------------------------------------+---------------+----------------+
-| BIG-IP CLI Access (SSH)              | root          | default        |
-+--------------------------------------+---------------+----------------+
-| Jump Host Access                     | f5student     | f5DEMOs4u      |
-+--------------------------------------+---------------+----------------+
+3. Login into the BIG-IP Configuration Utility with the following credentials:
+User: **admin**
+Password: **admin**
 
-Utilized Browsers
------------------
+.. NOTE::
+	 All work for this lab will be performed exclusively from the Windows
+	 jumphost. No installation or interaction with your local system is
+	 required.
 
-The preferred browser for this lab is Firefox. Shortcut links have been
-provided to speed access to targeted resources and assist you in your
-tasks. Except where noted, either browser can be used for all lab tasks.
+Lab Topology
+~~~~~~~~~~~~
 
-General Notes
--------------
+|image000|  
 
-As noted previously, environment staging has been done to speed up lab
-time, reducing repetitive tasks to focus on key learning elements. Where
-possible steps that have been optimized have been called out with links
-and references provided in the *Additional Information* section for
-additional clarification. The intention being that the lab guide truly
-serves as a resource guide for all your future federation deployments.
+The following components have been included in your lab environment:
 
-Acknowledgements 
-----------------
+- 2 x F5 BIG-IP VE (v15.1)
+- 1 x Windows Jumphost- Server 2016
+- 1 x Windows 2016 Server hosting AD, CA, OCSP & DNS
+- 1 x Windows 2016 Server hosting IIS
+- 1 x Ubuntu 16.04 LTS 
+- 1 x Centos 7
 
-This lab is built upon the work of prior F5 Agility’s and the work of
-many individuals behind the scenes in addition the 2018 Agility Lab
-Team. Many thanks to the 2017 Agility Lab Team for the SAML & OAuth
-Federation Labs, Lucas Thompson for his OAuth/OIDC Lab and our lab
-testers Matt Harmon, Dave Lipowsky & Stu McMath.
+Lab Components
+^^^^^^^^^^^^^^
 
-Presented by
-------------
+The following table lists VLANS, IP Addresses and Credentials for all
+components:
 
-APM 330 Presented by: Steve Lyons, Chris Miller & Chas Lesley
++------------------------+-------------------------+--------------------------+
+| Component              | VLAN/IP Address(es)     | Credentials              | 
++========================+=========================+==========================+
+| jumpbox.f5lab.local    | - Management 10.1.1.10  | - user1/user1            | 
+|                        | - External   10.1.10.10 | - user2/user2            | 
+|                        | - Internal   10.1.20.10 |                          |
++------------------------+-------------------------+--------------------------+
+| BIG-IP1.f5lab.local    | - Management 10.1.1.4   | - admin/admin            | 
+|                        | - External   10.1.10.4  |                          | 
+|                        | - Internal   10.1.20.4  |                          |
++------------------------+-------------------------+--------------------------+
+| BIG-IP3.f5lab.local    | - Management 10.1.1.5   | - admin/admin            | 
+|                        | - External   10.1.10.5  |                          | 
+|                        | - Internal   10.1.20.5  |                          |
++------------------------+-------------------------+--------------------------+
+| dc.f5lab.local         | - Management 10.1.1.7   | - administator/i3NqCqRQ  | 
+|                        | - Internal   10.1.20.7  |                          | 
++------------------------+-------------------------+--------------------------+
+| iis.f5lab.local        | - Management 10.1.1.6   | - administator/i3NqCqRQ  | 
+|                        | - Internal   10.1.20.6  |                          | 
++------------------------+-------------------------+--------------------------+
+| web.f5lab.local        | - Management 10.1.1.9   |                          | 
+|                        | - Internal   10.1.20.9  |                          |
+|                        | - Internal   10.1.20.19 |                          |
++------------------------+-------------------------+--------------------------+
+| radius.f5lab.local     | - Management 10.1.1.8   |                          | 
+|                        | - Internal   10.1.20.8  |                          | 
++------------------------+-------------------------+--------------------------+      
 
 .. |image000| image:: media/image000.png
    :width: 6.96097in
    :height: 4.46512in
+
