@@ -13,7 +13,7 @@ configuring federation relationships in your own environment.
 |repoinfo|
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: Contents:
    :glob:
 
@@ -24,4 +24,4 @@ configuring federation relationships in your own environment.
    class2/class*
    class5/class*
    class1/class*
-   archived/archive*
+   archived/class*
