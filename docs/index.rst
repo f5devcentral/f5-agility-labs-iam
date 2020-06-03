@@ -24,4 +24,4 @@ configuring federation relationships in your own environment.
    class2/class*
    class5/class*
    class1/class*
-   archived/archive*
+   archived/archived*
