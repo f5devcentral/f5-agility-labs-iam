@@ -1,83 +1,90 @@
 Getting Started
-===============
+---------------
 
-Lab Network Setup
-~~~~~~~~~~~~~~~~~
 
-In the interest of focusing as much time as possible configuring and
-performing lab tasks, we have provided some resources and basic setup
-ahead of time. These are:
+To access your dedicated student lab environment, you will require a web browser and Remote Desktop Protocol (RDP) client software. The web browser will be used to access the Lab Training Portal. The RDP client will be used to connect to the Jump Host, where you will be able to access the BIG-IP management interfaces (HTTPS, SSH).
 
--  Cloud-based lab environment complete with Jump Host, Virtual BIG-IP
-   and Lab Server
+#. Click **DEPLOYMENT** located on the top left corner to display the environment
 
--  Duplicate Lab environments for each student for improved
-   collaboration
+#. Click **ACCESS** next to jumpbox.f5lab.local
 
--  The Virtual BIG-IP has been pre-licensed and provisioned with Access
-   Policy Manager (APM)
+|image1|
 
--  Pre-staged configurations to speed up lab time, reducing repetitive
-   tasks to focus on key learning elements.
 
-If you wish to replicate these labs in your environment you will need to
-perform these steps accordingly. Additional lab resources are provided
-as illustrated in the diagram below:
+#. Select your RDP solution.  
 
-.. image:: /_static/class1/image2.png
+#. The RDP client on your local host establishes a RDP connection to the Jump Host.
 
-Timing for labs
-~~~~~~~~~~~~~~~
+#.  login with the following credentials:
+         - User: **f5lab\\user1**
+         - Password: **user1**
 
-The time it takes to perform each lab varies and is mostly dependent on
-accurately completing steps. This can never be accurately predicted but
-we strived to provide an estimate based on several people, each having a
-different level of experience. Below is an estimate of how long it will
-take for each lab:
+#. Once logged on to the jumphost, you can access BIG-IP1's GUI via Chrome using bookmarks or by typing https://10.1.1.4 
 
-+-----------------------------------------+----------------------+
-| **Lab Description**                     | **Time Allocated**   |
-+=========================================+======================+
-| LAB I (SAML Service Provider (SP))      | 25 minutes           |
-+-----------------------------------------+----------------------+
-| LAB II (SAML Identity Provider (IDP))   | 25 minutes           |
-+-----------------------------------------+----------------------+
-| LAB III (Kerberos to SAML)              | 25 minutes           |
-+-----------------------------------------+----------------------+
-| LAB IV (SAAS Federation IAPP)           | 25 minutes           |
-+-----------------------------------------+----------------------+
+#. Login into the BIG-IP Configuration Utility with the following credentials:
+         - User: **admin**
+         - Password: **admin**
 
-Authentication – Credentials
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. NOTE::
+	 All work for this lab will be performed exclusively from the Windows
+	 jumphost. No installation or interaction with your local system is
+	 required.
 
-The following credentials will be utilized throughout this Lab guide.
+Lab Topology
+~~~~~~~~~~~~
 
-+------------------------------------------+----------------+----------------+
-| **Credential Use**                       | **User ID**    | **Password**   |
-+==========================================+================+================+
-| BIG-IP Configuration Utility (GUI)       | admin          | admin          |
-+------------------------------------------+----------------+----------------+
-| BIG-IP CLI Access (SSH)                  | root           | default        |
-+------------------------------------------+----------------+----------------+
-| Jump Host Access                         | f5demo\\user   | Agility1       |
-+------------------------------------------+----------------+----------------+
-| All User authentication for Labs/Tasks   | user           | Agility1       |
-+------------------------------------------+----------------+----------------+
+|image0|
 
-Utilized Browsers
-~~~~~~~~~~~~~~~~~
 
-The preferred browsers for this lab are Firefox and Internet Explorer.
-Shortcut links have been provided to speed access to targeted resources
-and assist you in your tasks. Except where noted, either browser can be
-used for all lab tasks.
+The following components have been included in your lab environment:
 
-General Notes
-~~~~~~~~~~~~~
+- 2 x F5 BIG-IP VE (v15.1)
+- 1 x Windows Jumphost- Server 2016
+- 1 x Windows 2016 Server hosting AD, CA, OCSP & DNS
+- 1 x Windows 2016 Server hosting IIS
+- 1 x Ubuntu 16.04 LTS 
+- 1 x Centos 7
 
-As noted previously, environment staging has been done to speed up lab
-time, reducing repetitive tasks to focus on key learning elements. Where
-possible steps that have been optimized have been called out with links
-and references provided in the *Additional Information* section for
-additional clarification. The intention being that the lab guide truly
-serves as a resource guide for all your future federation deployments.
+Lab Components
+^^^^^^^^^^^^^^
+
+The following table lists VLANS, IP Addresses and Credentials for all
+components:
+
++------------------------+-------------------------+--------------------------+
+| Component              | VLAN/IP Address(es)     | Credentials              | 
++========================+=========================+==========================+
+| jumpbox.f5lab.local    | - Management 10.1.1.10  | - user1/user1            | 
+|                        | - External   10.1.10.10 | - user2/user2            | 
+|                        | - Internal   10.1.20.10 |                          |
++------------------------+-------------------------+--------------------------+
+| BIG-IP1.f5lab.local    | - Management 10.1.1.4   | - admin/admin            | 
+|                        | - External   10.1.10.4  |                          | 
+|                        | - Internal   10.1.20.4  |                          |
++------------------------+-------------------------+--------------------------+
+| BIG-IP2.f5lab.local    | - Management 10.1.1.5   | - admin/admin            | 
+|                        | - External   10.1.10.5  |                          | 
+|                        | - Internal   10.1.20.5  |                          |
++------------------------+-------------------------+--------------------------+
+| dc.f5lab.local         | - Management 10.1.1.7   | - admin/admin            | 
+|                        | - Internal   10.1.20.7  |                          | 
++------------------------+-------------------------+--------------------------+
+| iis.f5lab.local        | - Management 10.1.1.6   | - admin/admin            | 
+|                        | - Internal              |			              |
+|			             |      - 10.1.20.6        |                          | 
+|			             |      - 10.1.20.16       |                          |
++------------------------+-------------------------+--------------------------+
+| web.f5lab.local        | - Management 10.1.1.9   |                          |
+|                        | - Internal              |                          |
+|                        |    	      - 10.1.20.9  |                          |
+|			             |            - 10.1.20.19 |                          |
++------------------------+-------------------------+--------------------------+
+| radius.f5lab.local     | - Management 10.1.1.8   |                          | 
+|                        | - Internal              |			              |
+|			             | 	      - 10.1.20.8      |                          |
+|                        |	      - 10.1.20.18     |                          |
++------------------------+-------------------------+--------------------------+      
+
+.. |image0| image:: media/image000.png
+.. |image1| image:: media/image001a.png
+

@@ -1,11 +1,14 @@
-Class 1: SAML Federation with F5
-================================
+WAF/APM API Security and Management
+===================================
+
+Welcome
+-------
 
 .. toctree::
    :maxdepth: 1
+   :caption: Contents:
    :glob:
 
-
-   labinfo
+   labinfo*
+   intro*
    module*/module*
-   conclusion

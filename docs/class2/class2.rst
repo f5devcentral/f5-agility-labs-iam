@@ -1,11 +1,17 @@
-Class 2: OAuth Federation with F5
-=================================
+Access 302: Ephemeral Authentication
+====================================
+
+Welcome
+-------
+
+
 
 .. toctree::
    :maxdepth: 1
+   :caption: Contents:
    :glob:
 
-
-   labinfo
+   labinfo*
+   intro*
    module*/module*
-   conclusion
+ 
