@@ -3,7 +3,7 @@ Lab 2.4 - Applications
 
 In this section you will define a second application with subpaths.  
 
-Task - Configure Application header-iap.acme.com
+Task - Configure Application header.acme.com
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #. Click the **Applications** icon from the ribbon.
