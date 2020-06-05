@@ -6,6 +6,8 @@ The HTTP Connector is made up of two parts.  The first part is called the HTTP C
 Task - Create a DNS Resolver
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+#. Return to the BIG-IP GUI
+
 #. Navigate to Network >> DNS Resolvers >> DNS Resolver List. Click the  **+ (Plus symbol)** Symbol
 
    |image0|
