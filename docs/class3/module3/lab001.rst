@@ -6,7 +6,9 @@ The HTTP Connector is made up of two parts.  The first part is called the HTTP C
 Task - Create a DNS Resolver
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Navigate to Network >> DNS Resolvers >> DNS Resolver List. Click the  **+** Symbol
+#. Return to the BIG-IP GUI
+
+#. Navigate to Network >> DNS Resolvers >> DNS Resolver List. Click the  **+ (Plus symbol)** Symbol
 
    |image0|
 
@@ -36,7 +38,7 @@ Task - Create a DNS Resolver
 Task - Create a ServerSide SSL Profile
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Navigate to Local Traffic >> Profiles >> SSL >> Server. Click the  **+** Symbol
+#. Navigate to Local Traffic >> Profiles >> SSL >> Server. Click the  **+ (Plus Symbol)** Symbol
 
    |image6|
 

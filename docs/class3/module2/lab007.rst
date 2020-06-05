@@ -1,10 +1,10 @@
 Lab 2.7 - Testing
-------------------------------------------------
+------------------
 
 In this section you will use user1's credentials to default website header.acme.com.  However, when you attempt to access the admin page you will be prompted for certificate based authentication.  After a successful login you will close your browser and login to default website using user2's credentials.  User2 will be denied due to not having the correct AD groups.
 
 Task - Login to header.acme.com using user1
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #. Open a new browser tab
 #. Access the site https://header.acme.com
@@ -30,7 +30,7 @@ Task - Login to header.acme.com using user1
 #. Close the browser completely.
 
 Task - Login to header.acme.com using user2
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #. Open a new browser window.
 #. Access the site https://header.acme.com
