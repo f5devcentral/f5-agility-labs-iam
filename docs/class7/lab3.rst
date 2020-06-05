@@ -7,13 +7,13 @@ stored user names and passwords to applications and servers automatically,
 without having to input credentials repeatedly.   This allows single
 sign-on (SSO) functionality for secure user access.  As different applications
 and resources support different authentication mechanisms, the SSO system
-may be required to store and translate credentials that differ from the
-user name and password a user inputs on the logon page.  The SSO credential
-mapping action allows for credentials to be retrieved from the logon
-page, or in another way for both the user name and the password.
+may be required to store and transform credentials to meet these requirements.
+For example, username and password may be transformed into forms-based 
+authentication, a SAML assertion into Kerberos or Kerberos authentication into
+SAML. 
 
-This lab will demonstrate one SSO method, although a number of different SSO
-methods exist.  This lab will demonstrate the Kerberos to SAML method.
+Although a number of different SSO methods exist, this lab will demonstrate access
+single SSO method, the Kerberos to SAML method.
 
 Objective:
 
