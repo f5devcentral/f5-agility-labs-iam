@@ -316,7 +316,6 @@ TASK 2 - Test the Kerberos to SAML Configuration
 .. |image077| image:: media/Lab3/image077.png
 .. |image078| image:: media/Lab3/image078.png
 .. |image079| image:: media/Lab3/image079.png
-.. |image080| image:: media/Lab3/image080.png
 .. |image082| image:: media/Lab3/image082.png
 .. |image080| image:: media/Lab3/image080.png
 .. |image084| image:: media/Lab3/image084.png
@@ -327,7 +326,6 @@ TASK 2 - Test the Kerberos to SAML Configuration
 .. |image090| image:: media/Lab3/image090.png
 .. |image091| image:: media/Lab3/image091.png
 .. |image092| image:: media/Lab3/image092.png
-.. |image093| image:: media/Lab3/image093.png
 .. |image093| image:: media/Lab3/image093.png
 .. |image094| image:: media/Lab3/image094.png
 .. |image095| image:: media/Lab3/image095.png
