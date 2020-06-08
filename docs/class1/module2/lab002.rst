@@ -56,11 +56,7 @@ block bot traffic. Keep in mind that the bot profile allows for fine-grained con
 
    |module2Lab2Task2-image3| 
 
-   Why was this request not blocked?
-
-   To understand this, we must take a closer look at the Mitigation Settings.
-   
-   
+   Why was this request not blocked?  To understand this, we must take a closer look at the Mitigation Settings.
    
 
 #. Navigate to **Security -> Bot Defense -> Bot Defense Profiles -> api.acme.com_botprofile -> Bot Mitigation Settings** and examine the **Unknown** categorization, note that bots that are of category Unknown are simply rate limited.
