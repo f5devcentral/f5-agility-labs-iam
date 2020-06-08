@@ -33,7 +33,7 @@ Lab Requirements:
 Estimated completion time: 15 minutes
 
 Task 1: Kerberos AAA Object
-==============================
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 AD User and Keytab
 ~~~~~~~~~~~~~~~~~~
@@ -108,10 +108,7 @@ Kerberos AAA Object
 
 #. Review the AAA server configuration at **Access ‑> Authentication**
 
-
-
-
-TASK 1 – Modify the SAML Identity Provider (IdP) Access Policy
+Task 2 – Modify the SAML Identity Provider (IdP) Access Policy
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #. Navigate to **Access ‑> Profiles/Policies ‑> Access Profiles (Per-Session Policies)**, and click
@@ -277,7 +274,7 @@ TASK 1 – Modify the SAML Identity Provider (IdP) Access Policy
 
    |image094|
 
-TASK 2 - Test the Kerberos to SAML Configuration
+Task 3 - Test the Kerberos to SAML Configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. NOTE:: In the following Lab Task it is recommended that you use Microsoft
