@@ -24,7 +24,7 @@ Task 1 - Create and assign a Bot Defense Profile
 
 #. Apply the bot profile to the api.acme.com virtual by navigating to **Local Traffic -> Virtual Servers -> api.acme.com -> Security -> Policies**.
 
-For **Bot Defense Profile** select **Enabled** and select **api.acme.com_botprofile** as the Profile. Click **Update**.
+   For **Bot Defense Profile** select **Enabled** and select **api.acme.com_botprofile** as the Profile. Click **Update**.
 
    |module2Lab2Task1-image2|
 
