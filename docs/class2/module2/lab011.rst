@@ -4,7 +4,7 @@ Lab 2.11 - Verification Testing
 Task - Test the updated Webtop
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Access the webtop via http://pua.acme.com
+#. Access the webtop via https://pua.acme.com
 
 #. A Warning Banner page (customizable) should appear, click the **Click here to continue** link.
 
