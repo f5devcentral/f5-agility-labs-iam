@@ -1,5 +1,5 @@
 Lab 4: Troubleshooting
-==========================================
+======================
 
 .. toctree::
    :maxdepth: 1
@@ -20,7 +20,7 @@ covered in this lab:
 
 
 Task 1 - Jump Host
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~
 
 Refer to the instructions and screen shots below:
 
@@ -32,7 +32,7 @@ Refer to the instructions and screen shots below:
 
 
 Task 2: General Troubleshooting
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 In this lab exercise, you will learn where to look and what to look at when an Access Policy
 is not successfully allowing access or not performing as intended.
@@ -119,7 +119,7 @@ is not successfully allowing access or not performing as intended.
 +----------------------------------------------------------------------------------------------+
 
 Task 3: Troubleshooting in the CLI
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 +----------------------------------------------------------------------------------------------+
 |*Let's verify our routing on BIG-IP*                                                          |
@@ -164,7 +164,7 @@ Task 3: Troubleshooting in the CLI
 +----------------------------------------------------------------------------------------------+
 
 Task 4: Managing Active Sessions
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 +----------------------------------------------------------------------------------------------+
 | 1. In Chrome go to https://app.acme.com                                                      |
@@ -180,7 +180,7 @@ Task 4: Managing Active Sessions
 +----------------------------------------------------------------------------------------------+
 
 Task 5: APM Logging
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~
 
 **Checking APM Logs**
 
@@ -202,8 +202,8 @@ Variables, but it will also add additional system overhead.
 If you need to log Session Variables on a production system, F5 recommends setting the access policy log
 level to Debug temporarily while performing troubleshooting or debugging access related issues.
 
-Task 5: SAML Tracer
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Task 6: SAML Tracer
+~~~~~~~~~~~~~~~~~~~
 
 Overview
 
@@ -239,8 +239,8 @@ the server3.acme.com SAML enabled application.
 
  |image014|
 
-Task 4 - F5 tcpdump and Wireshark
----------------------------------
+Task 7: F5 TCPdump and Wireshark
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #.  This lab will cover the following topics:
 
