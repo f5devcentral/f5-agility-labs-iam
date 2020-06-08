@@ -1,5 +1,5 @@
 Lab 1: Access Guided Configuration - Per Request Policy
-================================================+======
+=======================================================
 
 The purpose of this lab is to leverage Access Guided Configuration (AGC) to 
 deploy an Identity Aware Proxy extended by Per Request Policies (PRP) access 
