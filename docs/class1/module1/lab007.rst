@@ -21,7 +21,7 @@ Task 1 - Verify no access to API
 5. Click **Send**
 
 
-6. You receive a **403 Forbidden** response status code because the the new API has not been published at the Gateway
+6. You receive a **403 Forbidden** response status code because the the new API has not been published at the Gateway. WARNING: If you executed this step too quickly after the prior 1.6 lab, you may still be rate limited and need to wait a minute.
 
 |image39|
 

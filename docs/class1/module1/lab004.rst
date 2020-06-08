@@ -11,9 +11,7 @@ Task 1 - Send a valid GET without a JWT to retrieve user1's attributes
 
 |image23|
 
-2. Expand the **API Protection** Collection
-
-3. the **Lab API Requests subfolder**
+2. Expand the **API Protection** Collection, the **Agility 2020** Folder, and finally the **Lab API Requests subfolder**
 
 3. Select the request **No JWT-Retrieve User Attributes**
 
@@ -50,7 +48,7 @@ Task 2 - Send a valid GET with JWT to retrieve user1\'s attributes
 
 |image28|
 
-7. Scroll down to the token and click **Use Token**
+7. Click **Use Token** at the top.
 
 |image29|
 
@@ -94,7 +92,7 @@ Task 3 - Send a valid GET with JWT to set user1's employeeNumber
 Task 4 - Send a valid GET with JWT to create a user
 -----------------------------------------------------
 
-1. Select the request **JWT-Create User-JWT**
+1. Select the request **JWT-Create User**
 
 2. Select the **Authorization** tab
 
@@ -113,7 +111,7 @@ Task 4 - Send a valid GET with JWT to create a user
 |image46|
 
 
-Task 4 - Send invalid GET request with JWT to set a nonexistent user's attributes
+Task 5 - Send invalid GET request with JWT to set a nonexistent user's attributes
 ------------------------------------------------------------------------------------
 
 1. Select the request **JWT-Set Invalid Attributes**
@@ -148,7 +146,7 @@ Task 6 - Send a POST request to a valid URI to set User1's attributes
 
 5. Click **Send**
 
-6. You receive a **403 Forbidden** response status code. This is expected because the POST Method was not specified in the API Protection Profile for the path /aduser/get
+6. You receive a **403 Forbidden** response status code. This is expected because the POST Method was not specified in the API Protection Profile for the path /aduser/Set
 
 |image39|
 

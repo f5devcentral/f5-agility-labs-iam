@@ -122,7 +122,7 @@ Task 2 - Create and assign a Security Logging Profile to the virtual
 
 6. Click **Create**
 
-7. Apply the bot profile to the api.acme.com virtual by navigating to **Local Traffic -> Virtual Servers -> api.acme.com -> Security -> Policies** and set the Selected Log Profile to **api.acme.com_logprofile**.
+7. Apply the bot profile to the api.acme.com virtual by navigating to **Local Traffic -> Virtual Servers -> api.acme.com -> Security -> Policies** and after choosing "Enabled" from the dropdown, set the Selected Log Profile to **api.acme.com_logprofile**.
 
 |module2Lab1Task2-image5|
 
@@ -132,7 +132,7 @@ Task 2 - Create and assign a Security Logging Profile to the virtual
 Task 3 - Set the WAF policy to Transparent and assign it to the virtual
 ----------------------------------------------------------------------------
 
-1. From the web browser, click on the Security -> Application Security -> Security Policies -> Policies List. Click  **api-protection**. Notice the Enforcement Mode is set to **Blocking**. Set the Enforcement Mode to **Transparent**. Be sure to click **Save**, then **Apply Policy**.
+1. From the web browser, click on the Security -> Application Security -> Security Policies -> Policies List. Click  **api-protection**. Scroll down and you'll notice the Enforcement Mode is set to **Blocking**. Set the Enforcement Mode to **Transparent**. Be sure to click **Save**, then **Apply Policy**.
 
 |module2Lab1Task3-image1|
 
