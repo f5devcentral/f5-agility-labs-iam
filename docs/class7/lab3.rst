@@ -36,7 +36,7 @@ Task 1: Kerberos AAA Object
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 AD User and Keytab
-~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^
 
 #. Create a new user in Active Directory
 
@@ -78,7 +78,7 @@ AD User and Keytab
    |image112|
 
 Kerberos AAA Object
-~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^
 
 #. Return to your BIG-IP1
 
