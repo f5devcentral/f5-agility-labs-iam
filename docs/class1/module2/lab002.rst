@@ -33,9 +33,8 @@ Task 1 - Create and assign a Bot Defense Profile
 #. Return to the bigip01 gui and navigate to **Security -> Event Logs -> Bot Defense -> Bot Requests** and find the request to the /vulnerable uri as shown below
 
    |module2Lab2Task1-image4|
-
-
-   .. note:: The student should pay special attention to the Request Status, Mitigation Action and Bot Class. Bot Class will be one of the categories found in **Security -> Bot Defense -> Bot Defense Profiles -> api.acme.com_botprofile -> Bot Mitigation Settings** under **Mitigation Settings**.
+   
+   ..note:: The student should pay special attention to the Request Status, Mitigation Action and Bot Class. Bot Class will be one of the categories found in **Security -> Bot Defense -> Bot Defense Profiles -> api.acme.com_botprofile -> Bot Mitigation Settings** under **Mitigation Settings**.
 
 
 Task 2 - Place Bot Profile in blocking and allow appropriate clients
@@ -54,9 +53,8 @@ block bot traffic. Keep in mind that the bot profile allows for fine-grained con
 
 #.  Return to the bigip01 gui and navigate to **Security -> Event Logs -> Bot Defense -> Bot Requests** and find the 2nd request to the /vulnerable uri as shown below
 
-   |module2Lab2Task2-image3| 
-
-   .. note:: Why was this request not blocked?  To understand this, we must take a closer look at the Mitigation Settings.
+   |module2Lab2Task2-image3|
+   ..note:: Why was this request not blocked?  To understand this, we must take a closer look at the Mitigation Settings.
    
 
 #. Navigate to **Security -> Bot Defense -> Bot Defense Profiles -> api.acme.com_botprofile -> Bot Mitigation Settings** and examine the **Unknown** categorization, note that bots that are of category Unknown are simply rate limited.
