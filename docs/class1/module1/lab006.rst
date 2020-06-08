@@ -124,7 +124,7 @@ Task 3 - Create a Rate Limiting Policy
 Task 4 - Apply the Rate Limiting Policy
 -------------------------------------------
 
-#. Click **Rate Limiting** from the ribbon
+#. Click **Access Control** from the ribbon
 
    |image93|
 

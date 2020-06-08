@@ -8,7 +8,7 @@ Task 1 - Implement Static Parameter values
 
 
 
-1. From Postman, run **SSRF Attack-Dummy**.  Notice you get content from Google via api.acme.com/vulnerable.  This endpoint is vulnerable to Server Side Request Forgery attacks
+1. From Postman, click "Send" on the **SSRF Attack-Dummy** request.  Notice you get content from Google via api.acme.com/vulnerable.  This endpoint is vulnerable to Server Side Request Forgery attacks
 
 
 |image118|

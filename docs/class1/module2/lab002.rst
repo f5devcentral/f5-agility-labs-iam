@@ -20,7 +20,7 @@ Task 1 - Create and assign a Bot Defense Profile
 
 #. Click **Save**
 
-The bot profile is left in transparent mode to demonstrate the logging behavior and behavior differences to the client.
+   The bot profile is left in transparent mode to demonstrate the logging behavior and behavior differences to the client.
 
 #. Apply the bot profile to the api.acme.com virtual by navigating to **Local Traffic -> Virtual Servers -> api.acme.com -> Security -> Policies**.
 
@@ -59,8 +59,9 @@ block bot traffic. What do you expect? Keep in mind that the bot profile allows 
    Why was this request not blocked?
 
    To understand this, we must take a closer look at the Mitigation Settings.
-
-
+   
+   
+   
 
 #. Navigate to **Security -> Bot Defense -> Bot Defense Profiles -> api.acme.com_botprofile -> Bot Mitigation Settings** and examine the **Unknown** categorization, note that bots that are of category Unknown are simply rate limited.
 
