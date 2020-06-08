@@ -109,7 +109,7 @@ Task 1 - Configure Attack Signatures and Change WAF Policy to Blocking
 
 #. Navigate to **Security -> Event Logs -> Application -> Requests** and find this latest request. Notice the **|** is considered illegal. However its not blocked, the Enforcement Action is None
 
-  |module2Lab3Task1-image16|
+   |module2Lab3Task1-image16|
 
 #. To see why this parameter character violation is not being blocked, but is being logged (alarmed). Navaigate to **Security -> Application Security -> Policy Building -> Learning and Blocking Settings -> Parameters** and enable the **Block** column for the **Illegal meta character in value** under the Parameters Section
 
