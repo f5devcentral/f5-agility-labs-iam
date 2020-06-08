@@ -12,7 +12,7 @@ Task 1 - Test pre-rate limiting Access
 
    |image88|
 
-#. Click the **arrow** located to the right of the API Portection labs Collection.
+#. Click the **arrow** located to the right of the API Protection labs collection.
 
    |image89|
 

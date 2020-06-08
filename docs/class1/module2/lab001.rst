@@ -31,7 +31,7 @@ Task 1 - Add Vulnerable API
 
 8. Select **Branch Rules**
 9. Click **Add Branch Rule**
-10. Enter name ** GET /vulnerable**
+10. Enter name **GET /vulnerable**
 11. Click **Change**
 
 |image103|

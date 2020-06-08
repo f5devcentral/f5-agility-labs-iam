@@ -42,7 +42,7 @@ Task 2 - Place Bot Profile in blocking and allow appropriate clients
 ----------------------------------------------------------------------
 
 The bot profile was left in transparent to demonstrate the behavior, now we will configure the bot profile to 
-block bot traffic. What do you expect? Keep in mind that the bot profile allows for fine-grained control of categories of bots, which bot fits in those categories. We will explore this later.
+block bot traffic. Keep in mind that the bot profile allows for fine-grained control of categories of bots, which bot fits in those categories. We will explore this later.
 
 #. Navigate back to **Security -> Bot Defense -> Bot Defense Profiles -> api.acme.com_botprofile**, change the **Enforcement Mode** to  **Blocking** and click **Save**.
 
@@ -52,7 +52,7 @@ block bot traffic. What do you expect? Keep in mind that the bot profile allows 
 
    |module2Lab2Task2-image2|
 
-3.  Return to the bigip01 gui and navigate to **Security -> Event Logs -> Bot Defense -> Bot Requests** and find the 2nd request to the /vulnerable uri as shown below
+#.  Return to the bigip01 gui and navigate to **Security -> Event Logs -> Bot Defense -> Bot Requests** and find the 2nd request to the /vulnerable uri as shown below
 
    |module2Lab2Task2-image3| 
 
