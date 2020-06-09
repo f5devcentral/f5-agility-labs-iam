@@ -3,7 +3,7 @@ Lab 1: Access Guided Configuration - Per Request Policy
 
 The purpose of this lab is to leverage Access Guided Configuration (AGC) to 
 deploy an Identity Aware Proxy extended by Per Request Policies (PRP) access 
-controls. The Per Request Policies will restict access based on AD Group 
+controls. The Per Request Policies will restrict access based on AD Group 
 Membership and the URI accessed. Students will configure the various aspects 
 of the application using strictly AGC, review the configuration and perform 
 tests of the deployment.
@@ -11,7 +11,7 @@ tests of the deployment.
 Objective:
 ----------
 
--  Gain an understanding of Access Guided Configruration configurations and
+-  Gain an understanding of Access Guided Configurations and
    its various configurations and deployment models
 
 -  Gain an initial understanding of Per Request Policies and their applicability
@@ -503,7 +503,7 @@ TASK 13: Testing
 |                                                                                              |
 |    and close the browser.                                                                    |
 |                                                                                              |
-| 9. Run the **Add-User1-to-Group2** Powesrshell script link provided on the **Jumphost**      |
+| 9. Run the **Add-User1-to-App2** Powesrshell script link provided on the **Jumphost**        |
 |                                                                                              |
 |    desktop. The script will run and automatically close.                                     |
 +----------------------------------------------------------------------------------------------+
@@ -668,4 +668,3 @@ TASK 15: End of Lab1
    :width: 800px
 .. |image045| image:: media/lab1-045.png
    :width: 800px
-      
