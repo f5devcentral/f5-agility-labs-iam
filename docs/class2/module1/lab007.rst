@@ -4,8 +4,8 @@ Lab 1.7 - Test CertSSO
 In this section, you will test access to an NGINX website requiring mTLS.
 
 
-Task - Access mtls.acme.com with static certificate
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Task 1 - Access mtls.acme.com with static certificate
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #. From the jumpbox's web browser, access https://mtls.acme.com
 

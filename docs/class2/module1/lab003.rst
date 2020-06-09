@@ -3,8 +3,8 @@ Lab 1.3 - Create the Access Policy
 
 In this section, edit the policy using the Visual Policy Editor to enable users to login via AD+MFA, then transition to CertSSO.
 
-Task - Open Visual Policy Editor
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Task 1 - Open Visual Policy Editor
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #. On the cert_sso profile line click **edit** under Per-Session Policy
 
