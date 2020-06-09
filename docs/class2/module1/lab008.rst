@@ -4,8 +4,8 @@ Lab 1.8 - Implement Dynamic Certificate Injection
 In this section, we will use the HTTP Connector to retrieve a user's certificate from Active Directory and use it in the BIG-IP Certificate minting process.
 
 
-Task - Create an HTTP Connector Transport
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Task 1 - Create an HTTP Connector Transport
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #. Navigate to **Access >> Authentication >> HTTP Connector >> HTTP Connector Transport** and click the  **+** (plus symbol)
 
@@ -21,8 +21,8 @@ Task - Create an HTTP Connector Transport
 
    |image55|
 
-Task - Create a HTTP Connector Request
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Task 2 - Create a HTTP Connector Request
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #. Navigate to **Access >> Authentication >> HTTP Connector >> HTTP Connector Request** and click the  **+** (plus symbol)
 
@@ -38,8 +38,8 @@ Task - Create a HTTP Connector Request
    |image57|
 
 
-Task - Create a Per-Request Policy
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Task 3 - Create a Per-Request Policy
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #. Navigate to **Access >> Profiles/Policies >> Per-Request Policies** and click the  **+** (plus symbol)
 
@@ -172,8 +172,8 @@ Task - Create a Per-Request Policy
 
 |image81|
 
-Task - Attach the PRP to the mTLS Virtual Server
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Task 4 - Attach the PRP to the mTLS Virtual Server
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 1. Navigate to **Local Traffic >> Virtual Servers**.  Click **Virtual Server List**
 

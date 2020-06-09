@@ -165,7 +165,7 @@ TASK 3: URI Dynamic Filtering (via AD Group Membership)
 
 **Expression is shown below for copy and paste convenience**
 
-*expr {[mcget {subsession.ad.last.attr.memberOf}] contains "CN=[findstr [mcget {perflow.category_lookup.result.url}] "http" 26 "/"],OU=Groups,DC=f5lab,DC=local"}*
+expr {[mcget {subsession.ad.last.attr.memberOf}] contains "CN=[findstr [mcget {perflow.category_lookup.result.url}] "http" 26 "/"],OU=Groups,DC=f5lab,DC=local"}
 
 +----------------------------------------------------------------------------------------------+
 | 10. Click **Save** in the resulting window.                                                  |
@@ -228,7 +228,7 @@ TASK 4: URI DataGroup Filtering (via AD Group Membership)
 
 **Expression is shown below for copy and paste convenience**
 
-*expr {[mcget {subsession.ad.last.attr.memberOf}] contains "[class match -value [findstr [mcget {perflow.category_lookup.result.url}] "http" 28 "/"] eq acme_app.acme.com_dg]"}*
+expr {[mcget {subsession.ad.last.attr.memberOf}] contains "[class match -value [findstr [mcget {perflow.category_lookup.result.url}] "http" 28 "/"] eq acme_app.acme.com_dg]"}
 
 +----------------------------------------------------------------------------------------------+
 | 9. Click **Save** in the resulting window.                                                   |
