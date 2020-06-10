@@ -7,89 +7,85 @@ The student will also place the waf policy in trasnparent to show the difference
 Task 1 - Add Vulnerable API 
 ------------------------------
 
-1. From the web browser, navigate to API Protection >> Profile.  Click **Profile** to modify the previously created API protection Profile (not the + Plus symbol)
+#. From the web browser, navigate to API Protection >> Profile.  Click **Profile** to modify the previously created API protection Profile (not the + Plus symbol)
 
-|image48|
+   |image48|
 
-2. Click **API-Protection**
+#. Click **Edit** Under Per-Request Policy
 
-|image64|
+   |image49|
 
-3. Click **Edit** Under Per-Request Policy
+#. Click the **+ (Plus Symbol)** located between Start and OAuth Scope Check AuthZ
 
-|image49|
+   |image101|
 
-4. Click the **+ (Plus Symbol)** located between Start and OAuth Scope Check AuthZ
+#. Select the **Classification** tab
+#. Select **Request Classification**
+#. Click **Add Item**
 
-|image101|
+   |image102|
 
-5. Select the **Classification** tab
-6. Select **Request Classification**
-7. Click **Add Item**
+#. Select **Branch Rules**
+#. Click **Add Branch Rule**
+#. Enter name **GET /vulnerable**
+#. Click **Change**
 
-|image102|
+   |image103|
 
-8. Select **Branch Rules**
-9. Click **Add Branch Rule**
-10. Enter name **GET /vulnerable**
-11. Click **Change**
+#. Click **Add Expression**
 
-|image103|
+   |image104|
 
-12. Click **Add Expression**
+#. Select **Request** from the Context dropdown
 
-|image104|
+#. Click **Add Expression**
 
-13. Select **Request** from the Context dropdown
+   |image105|
 
-14. Click **Add Expression**
+#. Click **Add Expression** on the AND line
 
-|image105|
+   |image106|
 
-15. Click **Add Expression** on the AND line
+#. Select **Path (value)** from the Request dropdown
+#. Enter **/vulnerable** in the empty text box
+#. Click **Add Expression**
 
-|image106|
+   |image107|
 
-16. Select **Path (value)** from the Request dropdown
-17. Enter **/vulnerable** in the empty text box
-18. Click **Add Expression**
+#. Click **Finished**
 
-|image107|
+   |image108|
 
-19. Click **Finished**
+#. Click **Save**
 
-|image108|
+   |image109|
 
-20. Click **Save**
+#. Click the **+ Plus Symbol** on the GET /vulnerable branch
 
-|image109|
+   |image110|
 
-21. Click the **+ Plus Symbol** on the GET /vulnerable branch
+#. Click **API Server Selection**
+#. Click **Add Item**
 
-|image110|
+   |image111|
 
-22. Click **API Server Selection**
-23. Click **Add Item**
+#. Select **api-protection_server1** from the dropdown
+#. Click **Save**
 
-|image111|
+   |image112|
 
-24. Select **api-protection_server1** from the dropdown
-25. Click **Save**
+#. Click the **Reject** terminal at the end of API Server Selection
 
-|image112|
+   |image113|
 
-26. Click the **Reject** terminal at the end of API Server Selection
+#. Select **Allow**
+#. Click **Save**
 
-|image113|
+   |image114|
 
-27. Select **Allow**
-28. Click **Save**
+#. The completed policy should look like the below.
 
-|image114|
-
-29. The completed policy should look like the below.
-
-|image115|
+   |image115|
 
 
 
@@ -97,50 +93,50 @@ Task 1 - Add Vulnerable API
 Task 2 - Create and assign a Security Logging Profile to the virtual
 -------------------------------------------------------------------------
 
-.. note :: Ensure you are logged into BIGIP1
+..note :: Ensure you are logged into BIGIP1
 
-1. From the web browser, click on the **Security -> Event Logs -> Logging Profile** and click **Create**.
-
-
-2. For the Profile Name enter **api.acme.com_logprofile**.
-
-|module2Lab1Task2-image1|
+#. From the web browser, click on the **Security -> Event Logs -> Logging Profile** and click **Create**.
 
 
-3. Enable **Application Security** a Application Security configuration menu will open up at the bottom. Change the Request Type from Illegal requests only to **All requests**.
+#. For the Profile Name enter **api.acme.com_logprofile**.
 
-|module2Lab1Task2-image2|
-
-4. Enable **DoS Protection**, a DoS Protection configuration menu will open up at the bottom. Enable **Local Publisher**
-
-|module2Lab1Task2-image3|
+   |module2Lab1Task2-image1|
 
 
-5. Enable **Bot Defense**, a Bot Defense configuration menu will open up at the bottom. Enable **Local Publisher** and all other checkboxes, leave Remote Publisher set to none.
+#. Enable **Application Security**, an Application Security configuration menu will open up at the bottom. Change the Request Type from Illegal requests only to **All requests**.
 
-|module2Lab1Task2-image4|
+   |module2Lab1Task2-image2|
 
-6. Click **Create**
+#. Enable **DoS Protection**, a DoS Protection configuration menu will open up at the bottom. Enable **Local Publisher**
 
-7. Apply the bot profile to the api.acme.com virtual by navigating to **Local Traffic -> Virtual Servers -> api.acme.com -> Security -> Policies** and after choosing "Enabled" from the dropdown, set the Selected Log Profile to **api.acme.com_logprofile**.
+   |module2Lab1Task2-image3|
 
-|module2Lab1Task2-image5|
 
-8. Click **Update**. The virtual will now log Application Security, DoS and Bot related events under **Security -> Event Logs** when an appropriate security profiles have been applied to the virtual.
+#. Enable **Bot Defense**, a Bot Defense configuration menu will open up at the bottom. Enable **Local Publisher** and all other checkboxes, leave Remote Publisher set to none.
+
+   |module2Lab1Task2-image4|
+
+#. Click **Create**
+
+#. Apply the log profile to the api.acme.com virtual by navigating to **Local Traffic -> Virtual Servers -> api.acme.com -> Security -> Policies** and after choosing "Enabled" from the dropdown, set the Selected Log Profile to **api.acme.com_logprofile**.
+
+   |module2Lab1Task2-image5|
+
+#. Click **Update**. The virtual will now log Application Security, DoS and Bot related events under **Security -> Event Logs** when an appropriate security profiles have been applied to the virtual.
 
 
 Task 3 - Set the WAF policy to Transparent and assign it to the virtual
 ----------------------------------------------------------------------------
 
-1. From the web browser, click on the Security -> Application Security -> Security Policies -> Policies List. Click  **api-protection**. Scroll down and you'll notice the Enforcement Mode is set to **Blocking**. Set the Enforcement Mode to **Transparent**. Be sure to click **Save**, then **Apply Policy**.
+#. From the web browser, click on the Security -> Application Security -> Security Policies -> Policies List. Click  **api-protection**. Scroll down and you'll notice the Enforcement Mode is set to **Blocking**. Set the Enforcement Mode to **Transparent**. Be sure to click **Save**, then **Apply Policy**.
 
-|module2Lab1Task3-image1|
+   |module2Lab1Task3-image1|
 
-2. Apply the waf policy to the api.acme.com virtual by navigating to **Local Traffic -> Virtual Servers -> api.acme.com -> Security -> Policies** and set the Application Security Policy to enabled and the Policy to  **api-protection**.
+#. Apply the waf policy to the api.acme.com virtual by navigating to **Local Traffic -> Virtual Servers -> api.acme.com -> Security -> Policies** and set the Application Security Policy to enabled and the Policy to  **api-protection**.
 
-|module2Lab1Task3-image2|
+   |module2Lab1Task3-image2|
 
-3. Click **Update**.
+#. Click **Update**.
 
 
 ..  |module2Lab1Task3-image2| image:: media/module2Lab1Task3-image2.png

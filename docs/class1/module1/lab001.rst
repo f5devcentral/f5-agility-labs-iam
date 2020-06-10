@@ -6,7 +6,7 @@ The cornerstone of the API protection profile is the ability to authorize users 
 Task 1 - Create a key configuration
 --------------------------------------
 
-.. note :: Ensure you are logged into BIGIP1
+..note :: Ensure you are logged into BIGIP1
 
 1. From the web browser, click on the **Access** tab located on the left side.
 
