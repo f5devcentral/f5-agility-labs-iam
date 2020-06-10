@@ -228,7 +228,7 @@ TASK 3: Testing Partner Access to SAML SP (ACME)
 |                                                                                              |
 |    **user1** for password  in the logon form and click the **Logon** button.                 |
 |                                                                                              |
-| **Note:** *If you have issues, open Firefox in a Provate Window (Incognito/Safe Mode)*       |
+| **Note:** *If you have issues, open Firefox in a Private Window (Incognito/Safe Mode)*       |
 +----------------------------------------------------------------------------------------------+
 | |image020|                                                                                   |
 +----------------------------------------------------------------------------------------------+
