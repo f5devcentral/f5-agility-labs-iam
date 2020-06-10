@@ -524,7 +524,7 @@ TASK 8: Review OAuth Session
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
-| 3. In the resulting **Session Variable** window, review all the vailable **oauth.client**    |
+| 3. In the resulting **Session Variable** window, review all the available **oauth.client**   |
 |                                                                                              |
 |    variables resulting from the access just performed.                                       |
 +----------------------------------------------------------------------------------------------+
