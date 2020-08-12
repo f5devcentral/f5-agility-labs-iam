@@ -149,7 +149,7 @@ Now you are ready to test.
 
 1. Open a new browser window and open the URL for the virtual server
    that has the access policy applied:
-   `**https://server1.acme.com** <https://server1.acme.com>`
+   **https://server1.acme.com**
    You will be presented with a login window
    
    |image26|
