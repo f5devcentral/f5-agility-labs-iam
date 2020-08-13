@@ -17,7 +17,7 @@ Task – Create a Webtop resource
    to **Webtops** > **Webtop Lists**.
 
 #. Click **Create** to create a new Webtop called **MyFullWebtop**,
-   select Type “\ **Full**\ ”, uncheck “\ **Minmize To Tray**\ ” and
+   select Type “\ **Full**\ ”, uncheck “\ **Minimize To Tray**\ ” and
    click **Finished**.
 
    |image38|
@@ -87,7 +87,7 @@ Task – Add Webtop resource to existing Access Policy
 Task – Testing
 ~~~~~~~~~~~~~~
 
-#. Open a web browser to the virtual server created in the previous lab
+#. Open a **New Incognito** web browser to the virtual server created in the previous lab
    by navigating to **https://server1.acme.com**. You will be presented
    with a Logon page similar to the one from the last lab.
 
