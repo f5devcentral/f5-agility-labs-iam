@@ -6,7 +6,7 @@ The Customization section allows an administrator to define the images, colors, 
 Task - Customize the Remediation Page URL
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The default **remediation Page** URL uses the hostname site **request.com**.  This should be changed to reference a real host where users can download and install the EPI updates.
+The default **remediation Page** URL uses the hostname **siterequest.com**.  This should be changed to reference a real host where users can download and install the EPI updates.
 
 #. Scroll down to the Remediation Page Section
 
