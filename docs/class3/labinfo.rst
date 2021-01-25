@@ -6,7 +6,7 @@ To access your dedicated student lab environment, you will require a web browser
 
 #. Click **DEPLOYMENT** located on the top left corner to display the environment
 
-#. Click **ACCESS** next to jumpbox.f5lab.local
+#. Click **ACCESS** next to jumphost.f5lab.local
 
 |image1|
 
