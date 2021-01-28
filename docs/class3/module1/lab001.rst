@@ -5,6 +5,7 @@ The first step in deploying the IAP is accessing Guided Configuration
 
 Task - Access the Zero Trust IAP guided configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#. Open Google Chrome, click the bookmark for "bigip1", and login using **admin/admin**
 
 #. From the webbrowser, click on the **Access** tab located on the left side.
 
