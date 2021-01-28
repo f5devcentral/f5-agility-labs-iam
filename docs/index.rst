@@ -13,8 +13,15 @@ configuring federation relationships in your own environment.
 |repoinfo|
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: Contents:
    :glob:
 
-   class*/class*
+   class6/class*
+   class7/class*
+   class3/class*
+   class4/class*
+   class2/class*
+   class5/class*
+   class1/class*
+   archived/archived*

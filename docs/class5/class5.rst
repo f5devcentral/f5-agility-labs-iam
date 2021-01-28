@@ -1,18 +1,22 @@
-Class 5: AD FS Proxy Lab
-========================
+Access 303: Per Request Application Control
+===========================================
 
-This lab covers the following topics:
+Welcome
+-------
 
-- Configuring AD FS Proxy Services on F5 BIG-IP
+Welcome to the |classbold| lab at F5 Agility |year|
 
-Expected time to complete: **2 hours**
-
-To continue please review the information about the Lab Environment.
+|repoinfo|
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
+   :numbered:
+   :caption: Contents:
    :glob:
-
-   labinfo/labinfo
-   module*/module*
-   conclusion
+   
+   intro*
+   lab1*
+   lab2*
+   lab3*
+   close*
+   
