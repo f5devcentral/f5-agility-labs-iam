@@ -1,0 +1,605 @@
+{
+	"info": {
+		"_postman_id": "652db190-0228-45ea-89ca-a03f474bc752",
+		"name": "student-class4-module1-lab1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Objects",
+			"item": [
+				{
+					"name": "bigip-import-cert-idp",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Azure IDP Certificate imported\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/octet-stream"
+							},
+							{
+								"key": "Content-Range",
+								"type": "text",
+								"value": "0-1089/1090"
+							},
+							{
+								"key": "Content-Length",
+								"type": "text",
+								"value": "1090"
+							},
+							{
+								"key": "Connection",
+								"type": "text",
+								"value": "Keep-alive"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "-----BEGIN CERTIFICATE-----\r\nMIIC8DCCAdigAwIBAgIQf1zLbk4QSa1LIse63tCYJjANBgkqhkiG9w0BAQsFADA0MTIwMAYDVQQD\r\nEylNaWNyb3NvZnQgQXp1cmUgRmVkZXJhdGVkIFNTTyBDZXJ0aWZpY2F0ZTAeFw0yMDEwMjEyMjI5\r\nMTFaFw0yMzEwMjEyMjI5MTFaMDQxMjAwBgNVBAMTKU1pY3Jvc29mdCBBenVyZSBGZWRlcmF0ZWQg\r\nU1NPIENlcnRpZmljYXRlMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyyEXDII5ZX+g\r\ngqwA/dzW3QvxGk2dfvO+XIf19JjvQszjssDQUZNeekp6I+Vds6DdzLf2cEH7Ri1XhCTlz4J06yaP\r\nsUY3ZcXHCRfg6O1ZU4CYvZJ99mRrT9DnscCPhhHB0Hp+lS9SLpyulxBnMRi7PEJI0NM8J3ONEctJ\r\nqLnBrP0jo0scswL/RALe/xgkcJyCjU/b7hrDdy3bKL0cxjG3uZkd+hz21SQyakkNKhWga+ogk8l+\r\nW17z6pm9fA8q7uNXbU7Af8Cdct4DsbrFSMaPimJ7Nwoy9jlB2XQAc9sRIgEWz7c29PGd9zprrUUE\r\nT5eRXq1QXoKPpMcnvFhrw4beqQIDAQABMA0GCSqGSIb3DQEBCwUAA4IBAQCwQfp2IxOONCRmB/li\r\nPPax50wl9m8S61De1KFLfNHaMkjkJBop/C4/235/Y5XY5yTslhkVoaB6/jSa482KE5iTYdKFKcrT\r\niZIl5lqeG20SMvCm7weyU8Y6VPmTWKaVKPdPwg3u8fGujLT7JlwFphUHHnl3zidBwYfWY3nXqjPh\r\nsoqSGOrUWrwwl66Y80t7FR2ru/iNtynfRwspfpVAGD0wJFPs5UFEJwDoV/qKFIxsNKAiqAPkwTcz\r\n6L6sxciSxagrQCebvzumm9jl3U+uI+31vl4IFQC5DiYnUM6ytST04JpsrYfmYtLzNKl52v9y/U2L\r\nj30f8f4levAd8tAmfSyj\r\n-----END CERTIFICATE-----\r\n"
+						},
+						"url": {
+							"raw": "https://{{BIGIP_MGMT}}/mgmt/shared/file-transfer/uploads/{{VS_NAME}}.crt",
+							"protocol": "https",
+							"host": [
+								"{{BIGIP_MGMT}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"file-transfer",
+								"uploads",
+								"{{VS_NAME}}.crt"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "bigip-install-cert-idp",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Azure IDP Certificate installed\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "X-F5-REST-Coordination-Id",
+								"type": "text",
+								"value": "",
+								"disabled": true
+							},
+							{
+								"key": "Content-Range",
+								"value": "0-1321/1322",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"command\":\"install\",\n\t\"name\":\"{{VS_NAME}}-idp\",\n\t\"from-local-file\":\"/var/config/rest/downloads/{{VS_NAME}}.crt\"\n\t\n}"
+						},
+						"url": {
+							"raw": "https://{{BIGIP_MGMT}}/mgmt/tm/sys/crypto/cert",
+							"protocol": "https",
+							"host": [
+								"{{BIGIP_MGMT}}"
+							],
+							"path": [
+								"mgmt",
+								"tm",
+								"sys",
+								"crypto",
+								"cert"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "bigip-create-idp connector-azuread",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (responseCode.code === 200) {\r",
+									"pm.test(\"AzureAD SAML IDP Connector created\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"} else \r",
+									"pm.test(\"AzureAD SAML IDP Connector exists\", function () {\r",
+									"    pm.response.to.have.status(409);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "X-F5-REST-Coordination-Id",
+								"type": "text",
+								"value": "{{TRANSID}}",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"{{VS_NAME}}-idp\",\r\n    \"partition\": \"Common\",\r\n    \"artifactResolutionServiceAddr\": \"any6\",\r\n    \"artifactResolutionServicePort\": 0,\r\n    \"entityId\": \"https://sts.windows.net/8807dced-9637-4205-a520-423077750c60/\",\r\n    \"identityLocation\": \"subject\",\r\n    \"idpCertificate\": \"/Common/{{VS_NAME}}-idp\",\r\n    \"locationSpecific\": \"false\",\r\n    \"signArtifactResolutionRq\": \"false\",\r\n    \"signatureType\": \"rsa-sha256\",\r\n    \"singleLogoutBinding\": \"http-redirect\",\r\n    \"singleLogoutResponseUri\": \"https://login.microsoftonline.com/8807dced-9637-4205-a520-423077750c60/saml2\",\r\n    \"singleLogoutUri\": \"https://login.microsoftonline.com/8807dced-9637-4205-a520-423077750c60/saml2\",\r\n    \"ssoBinding\": \"http-redirect\",\r\n    \"ssoUri\": \"https://login.microsoftonline.com/8807dced-9637-4205-a520-423077750c60/saml2\",\r\n    \"wantAuthnRequestSigned\": \"false\",\r\n    \"wantDetachedSignature\": \"false\"\r\n}"
+						},
+						"url": {
+							"raw": "https://{{BIGIP_MGMT}}/mgmt/tm/apm/aaa/saml-idp-connector/",
+							"protocol": "https",
+							"host": [
+								"{{BIGIP_MGMT}}"
+							],
+							"path": [
+								"mgmt",
+								"tm",
+								"apm",
+								"aaa",
+								"saml-idp-connector",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "bigip-create-sp service-bigip",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "X-F5-REST-Coordination-Id",
+								"type": "text",
+								"value": "{{TRANSID}}",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"{{VS_NAME}}-sp\",\r\n    \"partition\": \"Common\",\r\n    \"assertionConsumerBinding\": \"http-post\",\r\n    \"authContextComparisonMethod\": \"exact\",\r\n    \"entityId\": \"https://{{DNS_NAME}}\",\r\n    \"forceAuthn\": \"false\",\r\n    \"isAuthnRequestSigned\": \"false\",\r\n    \"locationSpecific\": \"false\",\r\n    \"nameIdPolicyAllowCreate\": \"true\",\r\n    \"spHost\": \"{{DNS_NAME}}\",\r\n    \"spScheme\": \"https\",\r\n    \"wantAssertionEncrypted\": \"false\",\r\n    \"wantAssertionSigned\": \"true\",\r\n    \"idpConnectors\": [\r\n        {\r\n            \"name\": \"{{VS_NAME}}-idp\",\r\n            \"partition\": \"Common\"\r\n\r\n        }\r\n    ]\r\n}"
+						},
+						"url": {
+							"raw": "https://{{BIGIP_MGMT}}/mgmt/tm/apm/aaa/saml/",
+							"protocol": "https",
+							"host": [
+								"{{BIGIP_MGMT}}"
+							],
+							"path": [
+								"mgmt",
+								"tm",
+								"apm",
+								"aaa",
+								"saml",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Delete Objects",
+			"item": [
+				{
+					"name": "bigip-delete-sp service",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var VS_NAME = pm.collectionVariables.get(\"VS_NAME\");",
+									"",
+									"if (responseCode.code === 200) {",
+									"",
+									"    pm.test(\"SAML SP Service \"+VS_NAME+\"-sp deleted\", function () {",
+									"        pm.response.to.have.status(200);",
+									"    });",
+									"} else {",
+									"    pm.test(\"SAML SP Service \"+VS_NAME+\"-sp does not exist\", function () {",
+									"        pm.response.to.have.status(404);",
+									"    });",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "X-F5-REST-Coordination-Id",
+								"type": "text",
+								"value": "{{TRANSID}}",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{BIGIP_MGMT}}/mgmt/tm/apm/aaa/saml/~Common~{{VS_NAME}}-sp",
+							"protocol": "https",
+							"host": [
+								"{{BIGIP_MGMT}}"
+							],
+							"path": [
+								"mgmt",
+								"tm",
+								"apm",
+								"aaa",
+								"saml",
+								"~Common~{{VS_NAME}}-sp"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "bigip-delete-idp connector",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var VS_NAME = pm.collectionVariables.get(\"VS_NAME\");",
+									"",
+									"if (responseCode.code === 200) {",
+									"",
+									"    pm.test(\"SAML IDP connector \"+VS_NAME+\"-idp deleted\", function () {",
+									"        pm.response.to.have.status(200);",
+									"    });",
+									"} else ",
+									"    pm.test(\"SAML IDP connector \"+VS_NAME+\"-idp does not exist\", function () {",
+									"        pm.response.to.have.status(404);",
+									"    });",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "X-F5-REST-Coordination-Id",
+								"type": "text",
+								"value": "{{TRANSID}}",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{BIGIP_MGMT}}/mgmt/tm/apm/aaa/saml-idp-connector/~Common~{{VS_NAME}}-idp",
+							"protocol": "https",
+							"host": [
+								"{{BIGIP_MGMT}}"
+							],
+							"path": [
+								"mgmt",
+								"tm",
+								"apm",
+								"aaa",
+								"saml-idp-connector",
+								"~Common~{{VS_NAME}}-idp"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "bigip-delete-idp cert",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var VS_NAME = pm.collectionVariables.get(\"VS_NAME\");\r",
+									"\r",
+									"if (responseCode.code === 200) {\r",
+									"\r",
+									"    pm.test(\"IdP Signing Certificate \"+VS_NAME+\"-idp deleted\", function () {\r",
+									"        pm.response.to.have.status(200);\r",
+									"    });\r",
+									"} else {\r",
+									"    pm.test(\"IdP Signing Certificate \"+VS_NAME+\"-idp does not exist\", function () {\r",
+									"        pm.response.to.have.status(404);\r",
+									"    });\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "X-F5-REST-Coordination-Id",
+								"type": "text",
+								"value": "",
+								"disabled": true
+							},
+							{
+								"key": "Content-Range",
+								"type": "text",
+								"value": "0-1321/1322",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{BIGIP_MGMT}}/mgmt/tm/sys/crypto/cert/~Common~{{VS_NAME}}-idp",
+							"protocol": "https",
+							"host": [
+								"{{BIGIP_MGMT}}"
+							],
+							"path": [
+								"mgmt",
+								"tm",
+								"sys",
+								"crypto",
+								"cert",
+								"~Common~{{VS_NAME}}-idp"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BIGIP_MGMT",
+			"value": "10.1.1.4"
+		},
+		{
+			"key": "VS_NAME",
+			"value": "class4-module1-lab1"
+		},
+		{
+			"key": "CUSTOM_TYPE",
+			"value": "modern"
+		},
+		{
+			"key": "DNS_NAME",
+			"value": "sp.acme.com"
+		}
+	]
+}

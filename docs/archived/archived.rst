@@ -8,8 +8,6 @@ They were developed to provide instructions for customers to configure and
 troubleshoot varied use cases.  While some of the material may be dated, there is 
 value in each of the use cases for concepts and specific solution scenarios.
 
-|repoinfo|
-
 .. toctree::
    :maxdepth: 1
    :caption: Contents:

