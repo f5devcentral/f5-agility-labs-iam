@@ -1,22 +1,28 @@
-Access 301: Identity and Access Federation
-==========================================
+400 Series: APM Automation Labs
+======================================================
 
-Welcome
--------
+This lab documents provides foundational concepts for understanding Access Policy Manager's (APM) common features.
 
-Welcome to the |classbold| lab at F5 Agility |year|
-
-|repoinfo|
-
+401 - Access Object Labs
+---------------------------
 .. toctree::
-   :maxdepth: 2
-   :numbered:
-   :caption: Contents:
+   :maxdepth: 1
    :glob:
    
-   intro*
-   lab1*
-   lab2*
-   lab3*
-   close*
+   module1/intro.rst
+   module1/lab*
+
+
+402 - Per-Session Policy Labs
+--------------------------------
+.. toctree::
+   :maxdepth: 1
+   :glob:
    
+   module2/intro.rst
+   module2/lab*
+     
+   
+
+  
+ 

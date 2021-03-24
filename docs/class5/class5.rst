@@ -1,22 +1,17 @@
-Access 303: Per Request Application Control
-===========================================
+500 Series: Troubleshooting
+======================================================
 
-Welcome
--------
+Welcome to the Troubleshooting Universal Access Lab Series. These lab exercises will instruct you on how to configure and troubleshoot common Access Policy Manager (APM) issues as experienced by field engineers, support engineers and customers. 
 
-Welcome to the |classbold| lab at F5 Agility |year|
 
-|repoinfo|
+
+501 - GUI Tools
+---------------------------
 
 .. toctree::
-   :maxdepth: 2
-   :numbered:
-   :caption: Contents:
+   :maxdepth: 1
    :glob:
    
-   intro*
-   lab1*
-   lab2*
-   lab3*
-   close*
-   
+   module1/intro.rst
+   module1/lab*  
+ 

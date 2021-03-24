@@ -1,17 +1,44 @@
-Access 302: Ephemeral Authentication
-====================================
+200 Series: Assisted Deployment Use Cases
+======================================================
 
-Welcome
--------
+This lab documents provides foundational concepts for understanding Access Policy Manager's (APM) common features.
 
+
+201 - Zero Trust - Identity Aware Proxy
+--------------------------------------------------------  
 
 
 .. toctree::
    :maxdepth: 1
-   :caption: Contents:
+   :caption: Version 15.1 Labs:
    :glob:
 
-   labinfo*
-   intro*
-   module*/module*
- 
+   module1/intro.rst
+   module1/lab*
+
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Version 16.0 Labs:
+   :glob:
+
+   module2/intro.rst
+   module2/lab*
+
+
+202 - Federation
+-----------------------
+.. toctree::
+   :maxdepth: 1
+   :glob:
+
+   module3/intro.rst
+   module3/lab*
+
+    
+
+
+
+
+   
+  
