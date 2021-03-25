@@ -65,7 +65,9 @@ Task 1 - Import Postman Collections
 
 Task 2 - Explore the icontrolRest Endpoints
 -----------------------------------------------------------------------
+
 .. _class4-module2-lab1-endpoints:
+
 #. Expand the **student-class4-module2-lab1** collection and the **Create Policy** folder to see its subfolders.
 
     |image007|

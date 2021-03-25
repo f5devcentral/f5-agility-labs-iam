@@ -313,3 +313,4 @@ Lab 1 is now complete.
 .. |accessjh| image:: /class1/module2/media/accessjh.png
 .. |accessportal| image:: /class1/module2/media/accessportal.png
 .. |102intro| image:: /class1/module2/media/102intro.png
+.. |guioverview| image:: /class1/module1/media/lab01/setup/guioverview.png

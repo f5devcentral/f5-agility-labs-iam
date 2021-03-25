@@ -88,12 +88,15 @@ Advertised Certificate Authorities has ben set to ca.f5lab.local
   |Lab3-Image8|
 
   Customized APM Profile Settings
-The SSO/Auth Domains of the APM profile is configured with the Kerberos SSO Profile needed to authenticate to the server.
+
+  The SSO/Auth Domains of the APM profile is configured with the Kerberos SSO Profile needed to authenticate to the server.
 
   |Lab3-Image9|
 
-  Supporting APM Objects
+Supporting APM Objects
+
 AAA OCSP Responder
+
 The OCSP Responder has been configured with the following settings
 
 - URL: this field is only used if you check the Ignore AIA field

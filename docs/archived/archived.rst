@@ -13,13 +13,4 @@ value in each of the use cases for concepts and specific solution scenarios.
    :caption: Contents:
    :glob:
 
-   class*/class1
-   class*/class2
-   class*/class3
-   class*/class4
-   class*/class5
-   class*/class6
-   class*/class7
-   class*/class8
-   class*/class9
-   class*/class10
+   class*/class*

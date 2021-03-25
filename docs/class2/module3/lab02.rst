@@ -267,13 +267,13 @@ TASK 9: Review the Summary and Deploy
 +----------------------------------------------------------------------------------------------+
 
 TASK: 10: Testing the SAML Service Provider (SP)
--------------------------------------------------------------
+------------------------------------------------
 
 +----------------------------------------------------------------------------------------------+
 |1. Open Firefox from the Jumphost desktop and navigate to https://sp.acme.com                 |
 |                                                                                              |
 |                                                                                              |
-| **Note:** *If you have issues, open Firefox in a New Private Window (Incognito/Safe Mode)    | 
+| **Note:** If you have issues, open Firefox in a New Private Window (Incognito/Safe Mode)     |
 |                                                                                              |
 | 2. Once the page loads, enter **user1** for username and **user1** for password  in the      |
 |                                                                                              |

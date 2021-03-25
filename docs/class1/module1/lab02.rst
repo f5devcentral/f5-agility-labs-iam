@@ -13,7 +13,7 @@ To access your dedicated student lab environment, you will require a web browser
 
    |image001|
 
-#. Select your RDP solution.  
+#. Select your RDP solution.
 
 #. The RDP client on your local host establishes a RDP connection to the Jump Host.
 
@@ -340,7 +340,7 @@ In this task we are going to create a Macro that detects the client operating sy
 
     |image044|
 
-#. Click the **+(Plus Symbol) inside of the Windows branch.
+#. Click the **+(Plus Symbol)** inside of the Windows branch.
 
     |image045|
 

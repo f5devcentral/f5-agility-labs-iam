@@ -102,7 +102,7 @@ Task 1 - Configure Application header.acme.com
 
    |image12|
 
-#. Toggle **Advanced Setting** to **ON**in the top left corner to see additional properties
+#. Toggle **Advanced Setting** to **ON** in the top left corner to see additional properties
 #. Enter Name **header.acme.com**
 #. Enter FQDN **header.acme.com**
 #. Enter Subpath Pattern **/admin.php**

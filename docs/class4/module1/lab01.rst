@@ -1,10 +1,12 @@
 Lab 1: Creating a SAML Service Provider(SP)
 ============================================
+
 .. _class4-module1-lab1:
+
 In this lab you will learn how to create and delete Access related objects.
 
 Access Lab Environment
--------------------------
+----------------------
 
 To access your dedicated student lab environment, you will require a web browser and Remote Desktop Protocol (RDP) client software. The web browser will be used to access the Lab Training Portal. The RDP client will be used to connect to the Jump Host, where you will be able to access the BIG-IP management interfaces (HTTPS, SSH).
 
@@ -179,7 +181,7 @@ With imperative call objects must be deleted in the reverse order they are typic
 
     |image021|
 
-#. If you click *Send a second time you will you get a message back stating the object is not found and a Status Code of 404.
+#. If you click **Send** a second time you will you get a message back stating the object is not found and a Status Code of 404.
 
     |image022|
 
