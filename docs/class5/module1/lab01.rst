@@ -140,7 +140,7 @@ In this task you will create two Message Box Macros.  One for the success branch
    |image21|
 
 #. Expand the Macro
-#. Click the **+ (Plus Symbol) on the fallback branch.
+#. Click the **+ (Plus Symbol)** on the fallback branch.
 
    |image022|
 
@@ -153,11 +153,11 @@ In this task you will create two Message Box Macros.  One for the success branch
 #. Enter the Title **Success**
 #. Enter the Description below
 
-   .. code-block:: irule
+.. code-block:: bash
 
-      <br>Firewall Vendor: %{session.check_software.last.fw.item_1.vendor_name}
-      <br>Firewall Name: %{session.check_software.last.fw.item_1.name}
-      <br>Firewall Version: %{session.check_software.last.fw.item_1.version}
+   <br>Firewall Vendor: %{session.check_software.last.fw.item_1.vendor_name}
+   <br>Firewall Name: %{session.check_software.last.fw.item_1.name}
+   <br>Firewall Version: %{session.check_software.last.fw.item_1.version}
 
 # Click **Save**
 
@@ -173,7 +173,7 @@ In this task you will create two Message Box Macros.  One for the success branch
    |image25|
 
 #. Expand the Macro
-#. Click the **+ (Plus Symbol) on the fallback branch.
+#. Click the **+ (Plus Symbol)** on the fallback branch.
 
    |image026|
 
@@ -186,11 +186,11 @@ In this task you will create two Message Box Macros.  One for the success branch
 #. Enter the Title **Failure**
 #. Enter the Description below
 
-   .. code-block:: irule
+.. code-block:: bash
 
-      <br>Firewall Vendor: %{session.check_software.last.fw.item_1.vendor_name}
-      <br>Firewall Name: %{session.check_software.last.fw.item_1.name}
-      <br>Firewall Version: %{session.check_software.last.fw.item_1.version}
+   <br>Firewall Vendor: %{session.check_software.last.fw.item_1.vendor_name}
+   <br>Firewall Name: %{session.check_software.last.fw.item_1.name}
+   <br>Firewall Version: %{session.check_software.last.fw.item_1.version}
 
 #. Click **Save**
 

@@ -3,12 +3,10 @@ Lab 2: Onboard a Second Application(15.1)
 
 Guided Configuration supports more than a single application per Identity Aware Proxy Deployment.  In this module you will learn how to modify an existing IAP deployment  to onboard new authentication methods, SSO methods, and applications. 
 
-This Module also introduces the **Application Group** (skipped in the previous module) to provide different contextual access controls on parts of a website. 
-
-
+This Module also introduces the **Application Group** (skipped in the previous module) to provide different contextual access controls on parts of a website.
 
 Section 2.1 - Access Guided Configuration
-----------------------------------------
+-----------------------------------------
 
 To onboard a new application to the IAP, you will first access the Guided Configuration menu.
 

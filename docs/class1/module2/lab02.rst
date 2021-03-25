@@ -1,5 +1,5 @@
 Lab 2: Step up Authentication with Per-Request Policies
-=====================================
+=======================================================
 
 Objectives
 ----------
@@ -41,10 +41,10 @@ Lab Requirements:
 Estimated completion time: 15 minutes
 
 Lab 2 Tasks:
------------------
+------------
 
 TASK 1: Create Per Session Policy
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Refer to the instructions and screen shots below:
 
@@ -95,7 +95,7 @@ Refer to the instructions and screen shots below:
 +----------------------------------------------------------------------------------------------+
 
 Task 2: Step Up Authentication with Per Request Policies
---------------------------------------
+--------------------------------------------------------
 Step-up authentication can be used to protect layers or parts of a web application that manage more sensitive data. It can be used to increase protection by requiring stronger authentication within an already authenticated access to the web application.
 Step-up authentication can be a part of using the portal access or web application management (reverse proxy) features of Access Policy Manager.
 
@@ -186,7 +186,7 @@ In this example we're going to use a Per-Request Policy with a subroutine to aut
 |                                                                                              |
 | 24. Change the drop down on the right hand side to **Session Varaible** and imput the        |
 | following value                                                                              |
-|    - **subsession.ad.last.attr.memberOf**                                                    |
+|   - **subsession.ad.last.attr.memberOf**                                                     |
 |                                                                                              |
 | 25. In the left hand box type the following then click finished and Save                     |
 |   - **session.adgroups.custom**                                                              |

@@ -205,7 +205,7 @@ Task 1 - Access basic.acme.com
 
    |image30|
 
-#. Locate the **DisableUser2.ps1 Powershell script located on the desktop.  
+#. Locate the **DisableUser2.ps1** Powershell script located on the desktop.
 
    |image31|
 

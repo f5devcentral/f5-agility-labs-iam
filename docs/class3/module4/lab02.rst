@@ -415,7 +415,7 @@ Task 1 - Configure Attack Signatures and Change WAF Policy to Blocking
 Task 2 - Implement Static Parameter values
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. From Postman, click "Send" on the **Request 2: SSRF Attack-Google* request.  Notice you get content from restapiexammple.com via api.acme.com/vulnerable.  This endpoint is vulnerable to Server Side Request Forgery attacks
+#. From Postman, click "Send" on the **Request 2: SSRF Attack-Google** request.  Notice you get content from restapiexammple.com via api.acme.com/vulnerable.  This endpoint is vulnerable to Server Side Request Forgery attacks
 
    |image118|
 

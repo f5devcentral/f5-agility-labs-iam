@@ -137,13 +137,14 @@ Task 4 - Create a SAML SP policy
 
 #. Every Policy-item must be defined inside of the items list of the policy.  Expand the **Create Policy** subfolder located inside the **Baseline Policy** folder, click on **bigip-create-policy** and then **Body**.
 
-#. Copy the below JSON inside the items array in front of the allow Terminal.  The placement of policy items inside of the items array is not important to the order they used within branch rules or Visual Policy Editors. 
-        
-        
-        {
-            "name": "{{VS_NAME}}-psp_act_saml_auth",
-            "partition": "Common"
-        },
+#. Copy the below JSON inside the items array in front of the allow Terminal.  The placement of policy items inside of the items array is not important to the order they used within branch rules or Visual Policy Editors.
+
+.. code-block:: json
+
+{
+    "name": "{{VS_NAME}}-psp_act_saml_auth",
+    "partition": "Common"
+}
 
 
     |image020|

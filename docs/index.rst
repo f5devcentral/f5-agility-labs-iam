@@ -17,11 +17,5 @@ configuring federation relationships in your own environment.
    :caption: Contents:
    :glob:
 
-   class6/class*
-   class7/class*
-   class3/class*
-   class4/class*
-   class2/class*
-   class5/class*
-   class1/class*
+   class*/class*
    archived/archived*
