@@ -68,9 +68,9 @@ Section 1 - The Access Profile
     |image010|
 
     +-------------------------+-------------------------+--------------------------------------------------------------------------------------------------------------------+
-    | Setting                 | Value                   | Description and defaults                                                                                           | 
+    | Setting                 | Value                   | Description and defaults                                                                                           |
     +=========================+=========================+====================================================================================================================+
-    | Name                    | text                    | Specifies the name of the access profile.                                                                          | 
+    | Name                    | text                    | Specifies the name of the access profile.                                                                          |
     +-------------------------+-------------------------+--------------------------------------------------------------------------------------------------------------------+
     | Inactivity Timeout      | Number of seconds, or 0 | Specifies the inactivity timeout for the connection. If there is no activity between the client and server within  |
     |                         |                         | the specified threshold time, the system closes the current session. By default, the threshold is 0, which         |
@@ -95,15 +95,15 @@ Section 1 - The Access Profile
     +-------------------------+-------------------------+--------------------------------------------------------------------------------------------------------------------+
     | Max In Progress Sessions| Number 0 or greater     | Specifies the maximum number of sessions that can be in progress for a client IP address. When setting this value, |
     | Per Client IP           |                         | take into account whether users will come from a NAT-ed or proxied client address and, if so, consider increasing  |
-    |                         |                         | the value accordingly. The default value is 0 which represents unlimited sessions.                                 |                                                                                                          |
+    |                         |                         | the value accordingly. The default value is 0 which represents unlimited sessions.                                 |
     +-------------------------+-------------------------+--------------------------------------------------------------------------------------------------------------------+
-    | Restrict to Single      | Selected or cleared     | When selected, limits a session to a single IP address.                                                            |                                                            
+    | Restrict to Single      | Selected or cleared     | When selected, limits a session to a single IP address.                                                            |
     | Client IP               |                         |                                                                                                                    |
     +-------------------------+-------------------------+--------------------------------------------------------------------------------------------------------------------+
-    | Logout URI Include      | One or more URIs        | Specifies a list of URIs to include in the access profile to initiate session logout.                              |                                                            
+    | Logout URI Include      | One or more URIs        | Specifies a list of URIs to include in the access profile to initiate session logout.                              |
     |                         |                         |                                                                                                                    |
     +-------------------------+-------------------------+--------------------------------------------------------------------------------------------------------------------+
-    | Logout URI Timeout      | Logout delay URI in     | Specifies the time delay before the logout occurs, using the logout URIs defined in the logout URI include list.   |                                                            
+    | Logout URI Timeout      | Logout delay URI in     | Specifies the time delay before the logout occurs, using the logout URIs defined in the logout URI include list.   |
     |                         | seconds                 |                                                                                                                    |
     +-------------------------+-------------------------+--------------------------------------------------------------------------------------------------------------------+
 
@@ -112,11 +112,11 @@ Section 1 - The Access Profile
     |image011|
 
     +-------------------------+-------------------------+--------------------------------------------------------------------------------------------------------------------+
-    | Setting                 | Value                   | Description and defaults                                                                                           | 
+    | Setting                 | Value                   | Description and defaults                                                                                           |
     +=========================+=========================+====================================================================================================================+
     | Domain Mode             | Single Domain or        | Select Single Domain to apply your SSO configuration to a single domain. Select Multiple Domain to apply your SSO  |
     |                         | Multiple Domains        | configuration across multiple domains. This is useful in cases where you want to allow your users a single Access  |
-    |                         |                         | Policy Manager® (APM®) login session and apply it across multiple Local Traffic Manager™ or APM virtual servers,   |                                                   
+    |                         |                         | Policy Manager® (APM®) login session and apply it across multiple Local Traffic Manager™ or APM virtual servers,   |
     |                         |                         | front-ending different domains.                                                                                    |
     +-------------------------+-------------------------+--------------------------------------------------------------------------------------------------------------------+
     | Domain Cookie           | A Domain Cookie         | If you specify a domain cookie, then the line domain=specified_domain is added to the MRHsession                   |
@@ -124,19 +124,19 @@ Section 1 - The Access Profile
     +-------------------------+-------------------------+--------------------------------------------------------------------------------------------------------------------+
     | Cookie Options:         | Enable or disable check | Enabled, this setting specifies to add the secure keyword to the session cookie. If you are configuring an         |
     | Secure                  | box                     | application access control scenario where you are using an HTTPS virtual server to authenticate the user, and then |
-    |                         |                         | sending the user to an existing HTTP virtual server to use applications, clear this check box.                     |                                                                                         
+    |                         |                         | sending the user to an existing HTTP virtual server to use applications, clear this check box.                     |
     +-------------------------+-------------------------+--------------------------------------------------------------------------------------------------------------------+
     | Cookie Options:         | Enable or disable check | Enabled, this setting specifies to set cookies if the session does not have a webtop. When the session is first    |
     | Persistent              | box                     | established, session cookies are not marked as persistent, but when the first response is sent to the client after |
-    |                         |                         | the access policy completes successfully, the cookies are marked persistent.                                       |                                                                                       
+    |                         |                         | the access policy completes successfully, the cookies are marked persistent.                                       |
     +-------------------------+-------------------------+--------------------------------------------------------------------------------------------------------------------+
-    | Cookie Options:         | Enable or disable check | HttpOnly is an additional flag included in a Set-Cookie HTTP response header. Use the HttpOnly flag when generating| 
+    | Cookie Options:         | Enable or disable check | HttpOnly is an additional flag included in a Set-Cookie HTTP response header. Use the HttpOnly flag when generating|
     | HTTP only               | box                     | a cookie to help mitigate the risk of a client-side script accessing the protected cookie, if the browser supports |
-    |                         |                         | HttpOnly.                                                                                                          |                                                                                      
+    |                         |                         | HttpOnly.                                                                                                          |
     +-------------------------+-------------------------+--------------------------------------------------------------------------------------------------------------------+
     | SSO Configuration       | Predefined SSO          | SSO configurations contain settings to configure single sign-on with an access profile. Select the SSO             |
     |                         | Configuration           | configuration from the list that you want applied to your domain.                                                  |
-    |                         |                         |                                                                                                                    |                                                                                      
+    |                         |                         |                                                                                                                    |
     +-------------------------+-------------------------+--------------------------------------------------------------------------------------------------------------------+
 
 
@@ -145,11 +145,11 @@ Section 1 - The Access Profile
     |image012|
 
     +-------------------------+-------------------------+--------------------------------------------------------------------------------------------------------------------+
-    | Setting                 | Value                   | Description and defaults                                                                                           | 
+    | Setting                 | Value                   | Description and defaults                                                                                           |
     +=========================+=========================+====================================================================================================================+
     | Primary Authentication  | URI                     | The URI of your primary authentication server, for example https://logon.siterequest.com. This is required if you  |
     | URI                     |                         | use SSO across multiple domains. You provide this URI so your users can access multiple back-end applications from |
-    |                         |                         | multiple domains and hosts without requiring them to re-enter their credentials, because the user session is stored| 
+    |                         |                         | multiple domains and hosts without requiring them to re-enter their credentials, because the user session is stored|
     |                         |                         | on the primary domain.                                                                                             |
     +-------------------------+-------------------------+--------------------------------------------------------------------------------------------------------------------+
     | Cookie                  | Domain or Host          | If you specify multiple domains, populate this area with hosts or domains. Each host or domain can have a separate |
