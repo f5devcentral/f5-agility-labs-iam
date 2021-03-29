@@ -15,7 +15,7 @@ Expected time to complete: **1 hour**
 Setup Lab Environment
 ----------------------------------------
 
-To access your dedicated student lab environment, you will require a web browser and Remote Desktop Protocol (RDP) client software. The web browser will be used to access the Lab Training Portal. The RDP client will be used to connect to the Jump Host, where you will be able to access the BIG-IP management interfaces (HTTPS, SSH).
+To access your dedicated student lab environment, you will need a web browser and Remote Desktop Protocol (RDP) client software. The web browser will be used to access the Unified Demo Framework (UDF) Training Portal. The RDP client will be used to connect to the jumphost, where you will be able to access the BIG-IP management interfaces (HTTPS, SSH).
 
 #. Click **DEPLOYMENT** located on the top left corner to display the environment
 
@@ -23,7 +23,7 @@ To access your dedicated student lab environment, you will require a web browser
 
    |image090|
 
-#. Select your RDP solution.  
+#. Select your RDP resolution.  
 
 #. The RDP client on your local host establishes a RDP connection to the Jump Host.
 
@@ -54,7 +54,7 @@ To access your dedicated student lab environment, you will require a web browser
 
 
 Section 1.1 - Access Guided Configuration
------------------------------------------
+-----------------------------------------------
 
 The first step in deploying the IAP is accessing Guided Configuration
 
@@ -298,13 +298,15 @@ Task 1 - Create Contextual Access for basic.acme.com
 
    |image025|
 
+
+
 Section 1.10 - Customization
-----------------------------
+-----------------------------
 
 The Customization section allows an administrator to define the images, colors, and messages that are presented to a user.
 
 Task 1 - Customize the Remediation Page URL
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The default **remediation Page** URL uses the hostname site **request.com**.  This should be changed to reference a real host where users can download and install the EPI updates.
 
@@ -473,7 +475,6 @@ Task 4 - Enable Windows Firewall
 .. |image040| image:: media/lab01/image040.png
 .. |image041| image:: media/lab01/image041.png
 .. |image042| image:: media/lab01/image042.png
-.. |image043| image:: media/lab01/image043.png
 .. |image087| image:: media/lab01/087.png
 .. |image088| image:: media/lab01/088.png
 .. |image089| image:: media/lab01/089.png

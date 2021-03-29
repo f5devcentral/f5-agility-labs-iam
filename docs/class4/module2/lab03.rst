@@ -9,20 +9,19 @@ In this lab your will learn about the API calls necessary to modify an existing 
 Access Lab Environment
 -------------------------
 
-To access your dedicated student lab environment, you will require a web browser and Remote Desktop Protocol (RDP) client software. The web browser will be used to access the Lab Training Portal. The RDP client will be used to connect to the Jump Host, where you will be able to access the BIG-IP management interfaces (HTTPS, SSH).
+To access your dedicated student lab environment, you will need a web browser and Remote Desktop Protocol (RDP) client software. The web browser will be used to access the Unified Demo Framework (UDF) Training Portal. The RDP client will be used to connect to the jumphost, where you will be able to access the BIG-IP management interfaces (HTTPS, SSH).
 
 #. Click **DEPLOYMENT** located on the top left corner to display the environment
 
-#. Click **ACCESS** next to jumphostf5lab.local
+#. Click **ACCESS** next to jumphost.f5lab.local
 
     |image101|
 
+#. Select your RDP resolution.
 
-#. Select your RDP resolution.  
+#. The RDP client on your local host establishes a RDP connection to the Jumphost.
 
-#. The RDP client on your local host establishes a RDP connection to the Jump Host.
-
-#.  login with the following credentials:
+#. Login with the following credentials:
 
          - User: **f5lab\\user1**
          - Password: **user1**
@@ -33,7 +32,7 @@ Task 1 - Import Postman Collections
 
 #. From the Jumpbox, open **Postman** via the desktop shortcut or toolbar at the bottom
 
-    .. note::  Dismiss any prompts to update Postman.  
+    .. note::  Dismiss any prompts to update Postman.
 
     |image001|
 
@@ -45,7 +44,7 @@ Task 1 - Import Postman Collections
 
     |image003|
 
-#.  Click **Upload Files** 
+#.  Click **Upload Files**
 
     |image004|
 
@@ -67,11 +66,11 @@ Task 2 - Create A Webtop Policy
 
     |image007|
 
-#. Click the **Create Policy** folder. You will see two subfolders in the folder.
+#. Click the **Create Policy** folder.
 
     |image008|
 
-#.  Click the blue **Run**  button and Postman Runner will open.
+#.  Click the blue **Run** button and Postman Runner will open.
 
     |image009|
 
@@ -79,17 +78,19 @@ Task 2 - Create A Webtop Policy
 
     |image010|
 
-#. The **Pass** circle will display a value 10.   
-    
+#. The **Pass** circle will display a value 10.
+#. Close Runner by clicking the **X** in the top right corner.
+
     |image011|
 
-#. Open a browser and navigate to https://bigip1.f5lab.local
+#. From the jumphost, ppen a browser and navigate to https://bigip1.f5lab.local
 
 #. Login to the BIG-IP GUI with the following credentials:
+
         - Username: **admin**
         - Password: **admin**
 
-#. Navigate to Access>>Profiles/Policies>>Access Profiles (Per-Session Policies).  Do not click the plus symbol.
+#. Navigate to Access>>Profiles/Policies>>Access Profiles (Per-Session Policies).  Do not click the **+** (plus symbol).
 
     |image012|
 
@@ -97,23 +98,25 @@ Task 2 - Create A Webtop Policy
 
     |image013|
 
-#. The policy was successfully deployed using SAML Authenticaiton and an Advanced Resource Assign. Click on the **Advanced Resource Assign** Policy Item.
+#. The policy was successfully deployed using SAML Authenticaiton and an Advanced Resource Assign. Click on the **Advanced Resource Assign** action.
 
     |image014|
 
-#. The Advanced Resource Assign contains a webtop and a single webtop link.  
+#. The Advanced Resource Assign contains a webtop and a single webtop link.
 
     |image015|
 
 
-Task 3 - Create a Webtop Link 
+Task 3 - Create a Webtop Link
 -----------------------------------------------------------------------
 
-#. Expand the **student-class4-module2-lab3** collection and then the Webtop Link subfolder. 
+#. From Postman, expand the **student-class4-module2-lab3** collection and then the **Create Webtop Link** subfolder.
 
     |image016|
 
-#. Click the request **bigip-create-customization group-resource** and then **Body**.  The body of this request specifies that we will be creating a webtop link resource.  One thing to note, all webtop link resources use "/Common/standard" as the source type even if the policy is using "/Common/Modern".
+#. Click the request **bigip-create-customization group-resource** and then **Body**.  The body of this request specifies that we will be creating a webtop link resource.
+
+    .. note:: One thing to note, all webtop link resources use "/Common/standard" as the source type even if the policy is using "/Common/Modern".
 
     |image017|
 
@@ -121,7 +124,7 @@ Task 3 - Create a Webtop Link
 
     |image018|
 
-#. Click the request **bigip-create-webtop-link** and then **Body**.  The body of this request creates the webtop link Resource.  The applicationUri JSON key contains the resource destination.  The Postman Variable ((DNS3_NAME)) is set to server2.acme.com   
+#. Click the request **bigip-create-webtop-link** and then **Body**.  The body of this request creates the webtop link Resource.  The applicationUri JSON key contains the resource destination.  The Postman Variable ((DNS3_NAME)) is set to server2.acme.com
 
     |image019|
 
@@ -132,11 +135,11 @@ Task 3 - Create a Webtop Link
 Task 4 - Add a webtop to an Advanced Resource Assign
 -----------------------------------------------------------------------
 
-    .. note::  When creating or modifying a policy it must be performed within a transaction.  A transaction occurs in multiple steps.  First, you create the transation by receiving a transaction ID from the BIG-IP.  Next, you pass subsequent configuration requests that contain the transaction ID header to the BIG-IP.  The BIG-IP does not process these requests.  Instead it holds those requests until the transaction is commited in the final step.  It's important to understand that transactions have an all or nothing approach.  Either every request in the transaction is process sucessfully or none of the configuration changes are made.  This is extremely important to ensure all the required information is there for building a working policy. To understand more about transactions please review :ref:`The Explore the icontrolRest Endpoints of lab 1<class4-module2-lab1-endpoints>` 
+    .. note::  When creating or modifying a policy it must be performed within a transaction.  A transaction occurs in multiple steps.  First, you create the transaction by receiving a transaction ID from the BIG-IP.  Next, you pass subsequent configuration requests that contain the transaction ID header to the BIG-IP.  The BIG-IP does not process these requests.  Instead it holds those requests until the transaction is commited in the final step.  It's important to understand that transactions have an all or nothing approach.  Either every request in the transaction is processed sucessfully or none of the configuration changes are made.  This is extremely important to ensure all the required information is there for building a working policy. To understand more about transactions please review :ref:`The Explore the icontrolRest Endpoints of lab 1<class4-module2-lab1-endpoints>`
 
- 
 
-#. Expand the **Modify Policy** folder.  Since the only change to the policy is the addition of a single webtop link will only review that single request. Expand the **Modify Advanced Resource Assign** subfolder. 
+
+#. Expand the **Modify Policy** folder.  Since the only change to the policy is the addition of a single webtop link you will only review that single request. Expand the **Modify Advanced Resource Assign** subfolder.
 
     |image021|
 
@@ -152,6 +155,10 @@ Task 4 - Add a webtop to an Advanced Resource Assign
 
     |image023|
 
+ #. Click **student-class4-module2-lab3** to return to the main folder if you are not already there.
+
+    |image033|
+
 #. Click the **Modify Policy** folder. You will see four subfolders in the folder.
 
     |image024|
@@ -164,17 +171,19 @@ Task 4 - Add a webtop to an Advanced Resource Assign
 
     |image026|
 
-#. The **Pass** circle will display a value 2.   
-    
+#. The **Pass** circle will display a value 2.
+#. Close Runner by clicking the **X** in the top right corner.
+
     |image027|
 
-#. Open a browser and navigate to https://bigip1.f5lab.local
+#. From the jumphost, open a browser and navigate to https://bigip1.f5lab.local
 
 #. Login to the BIG-IP GUI with the following credentials:
+
         - Username: **admin**
         - Password: **admin**
 
-#. Navigate to Access>>Profiles/Policies>>Access Profiles (Per-Session Policies).  Do not click the plus symbol.
+#. Navigate to Access>>Profiles/Policies>>Access Profiles (Per-Session Policies).  Do not click the **+** (plus symbol).
 
     |image012|
 
@@ -182,7 +191,7 @@ Task 4 - Add a webtop to an Advanced Resource Assign
 
     |image013|
 
-#. Click on the **Advanced Resource Assign** Policy Item to display the changes.
+#. Click on the **Advanced Resource Assign** action to display the changes.
 
     |image014|
 
@@ -198,7 +207,12 @@ Task 4 - Lab Cleanup
 
     |image023|
 
-#. Click the **Lab Cleanup** folder. You will see three subfolders in the folder.
+ #. Click **student-class4-module2-lab3** to return to the main folder if you are not already there.
+
+    |image034|
+
+
+#. Click the **Lab Cleanup** folder.
 
     |image029|
 
@@ -210,9 +224,15 @@ Task 4 - Lab Cleanup
 
     |image031|
 
-#. The **Pass** circle will display a value 7.   
-    
+#. The **Pass** circle will display a value 7.
+
     |image032|
+
+#. From Postman, Click the **3 dots** on the bottom right of the student-class4-module2-lab3 Collection.
+
+#. Click **Delete**
+
+    |image035|
 
 This concludes our lab on modifying a webtop via automation.
 
@@ -254,6 +274,8 @@ This concludes our lab on modifying a webtop via automation.
 .. |image030| image:: media/lab03/030.png
 .. |image031| image:: media/lab03/031.png
 .. |image032| image:: media/lab03/032.png
+.. |image033| image:: media/lab03/033.png
+.. |image034| image:: media/lab03/034.png
+.. |image035| image:: media/lab03/035.png
 .. |image100| image:: media/lab03/100.png
 .. |image101| image:: media/lab03/101.png
-

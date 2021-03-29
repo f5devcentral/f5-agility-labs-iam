@@ -108,13 +108,13 @@ Task Testing
    |Lab4-Image10|
 
 
-.. |Lab4-Image1| image:: /class1/module2/media/Lab4-Image1.png
-.. |Lab4-Image2| image:: /class1/module2/media/Lab4-Image2.png
-.. |Lab4-Image3| image:: /class1/module2/media/Lab4-Image3.png
-.. |Lab4-Image4| image:: /class1/module2/media/Lab4-Image4.png
-.. |Lab4-Image5| image:: /class1/module2/media/Lab4-Image5.png
-.. |Lab4-Image6| image:: /class1/module2/media/Lab4-Image6.png
-.. |Lab4-Image7| image:: /class1/module2/media/Lab4-Image7.png
-.. |Lab4-Image8| image:: /class1/module2/media/Lab4-Image8.png
-.. |Lab4-Image9| image:: /class1/module2/media/Lab4-Image9.png
-.. |Lab4-Image10| image:: /class1/module2/media/Lab4-Image10.png
+.. |Lab4-Image1| image:: ./media/Lab4-Image1.png
+.. |Lab4-Image2| image:: ./media/Lab4-Image2.png
+.. |Lab4-Image3| image:: ./media/Lab4-Image3.png
+.. |Lab4-Image4| image:: ./media/Lab4-Image4.png
+.. |Lab4-Image5| image:: ./media/Lab4-Image5.png
+.. |Lab4-Image6| image:: ./media/Lab4-Image6.png
+.. |Lab4-Image7| image:: ./media/Lab4-Image7.png
+.. |Lab4-Image8| image:: ./media/Lab4-Image8.png
+.. |Lab4-Image9| image:: ./media/Lab4-Image9.png
+.. |Lab4-Image10| image:: ./media/Lab4-Image10.png

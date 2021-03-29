@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "c57955a0-249a-411e-b339-ba55bd62a03e",
+		"_postman_id": "2bdb641e-8d2d-4eba-b66d-d3c06841ae26",
 		"name": "student-class4-module2-lab3",
 		"description": "This solution was created using template 1.10",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -2098,7 +2098,7 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"var DNS_NAME = pm.collectionVariables.get(\"DNS_NAME\");\r",
+									"var DNS_NAME = pm.collectionVariables.get(\"DNS3_NAME\");\r",
 									"\r",
 									"\r",
 									"if (responseCode.code === 200) {\r",

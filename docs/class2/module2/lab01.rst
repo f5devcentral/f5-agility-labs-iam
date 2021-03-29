@@ -16,15 +16,15 @@ Expected time to complete: **1 hour**
 Setup Lab Environment
 --------------------------
 
-To access your dedicated student lab environment, you will require a web browser and Remote Desktop Protocol (RDP) client software. The web browser will be used to access the Lab Training Portal. The RDP client will be used to connect to the Jump Host, where you will be able to access the BIG-IP management interfaces (HTTPS, SSH).
+To access your dedicated student lab environment, you will need a web browser and Remote Desktop Protocol (RDP) client software. The web browser will be used to access the Unified Demo Framework (UDF) Training Portal. The RDP client will be used to connect to the jumphost, where you will be able to access the BIG-IP management interfaces (HTTPS, SSH).
 
 #. Click **DEPLOYMENT** located on the top left corner to display the environment
 
-#. Click **ACCESS** next to jumpohost.f5lab.local
+#. Click **ACCESS** next to jumphost.f5lab.local
 
    |image90|
 
-#. Select your RDP solution.  
+#. Select your RDP resolution.  
 
 #. The RDP client on your local host establishes a RDP connection to the Jump Host.
 
@@ -429,7 +429,7 @@ Task 2 - Disable Windows Firewall
 
    |image45|
 
-#. Click the radio button **Turn off Windows Firewall** under Public Network Settings
+#. Click the radio button **Turn off Windows Firewall** 
 #. Click **Ok**
 
    |image46|
@@ -471,7 +471,7 @@ Task 4 - Enable Windows Firewall
 
    |image45|
 
-#. Click the radio button **Turn on Windows Firewall** under Public Network Settings
+#. Click the radio button **Turn on Windows Firewall** 
 #. Click **Ok**
 
    |image48|
@@ -485,7 +485,6 @@ Task 4 - Enable Windows Firewall
 
 
 
-.. |image0| image:: media/lab01/image000.png
 .. |image1| image:: media/lab01/image001.png
 .. |image2| image:: media/lab01/image002.png
 .. |image3| image:: media/lab01/image003.png

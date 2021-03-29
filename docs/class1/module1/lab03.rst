@@ -9,11 +9,11 @@ Regardless of whether it is assigned to an access profile, the default-log-setti
 Task 1 - Setup Lab Environment
 -----------------------------------
 
-To access your dedicated student lab environment, you will require a web browser and Remote Desktop Protocol (RDP) client software. The web browser will be used to access the Lab Training Portal. The RDP client will be used to connect to the Jump Host, where you will be able to access the BIG-IP management interfaces (HTTPS, SSH).
+To access your dedicated student lab environment, you will need a web browser and Remote Desktop Protocol (RDP) client software. The web browser will be used to access the Unified Demo Framework (UDF) Training Portal. The RDP client will be used to connect to the jumphost, where you will be able to access the BIG-IP management interfaces (HTTPS, SSH).
 
 #. Click **DEPLOYMENT** located on the top left corner to display the environment
 
-#. Click **ACCESS** next to jumpohost.f5lab.local
+#. Click **ACCESS** next to jumphost.f5lab.local
 
    |image001|
 
@@ -95,7 +95,7 @@ Task 2 -  Active Sessions
 
 #. Notice the Active Session Count is now **2**
 
-#. Notice the Status of the new session is a blue square rather than a green circle.  A green circle means The entire access policy has been completed from beginnning to end.  A blue circle means the session is not complete and is still in process.
+#. Notice the Status of the new session is a blue square rather than a green circle.  A green circle means the entire access policy has been completed from beginnning to end.  A blue circle means the session is not complete and is still in process.
 
     |image016|
 
@@ -221,15 +221,15 @@ In Task 2, you learned how to view access reports.  In this Task you will learn 
 
     |image040|
 
-#. Click **URL Request Logs**
+#. Click **URL Request Logs**.  This section determines what type of events you want to log in SWG deployments
 
     |image041|
 
-#. Click **Access Profiles**
+#. Click **Access Profiles**.  This section allows you to select which Access Profiles will use this logging profile.  
 
     |image042|
 
-#. Click **SSO Objects**
+#. Click **SSO Objects**.  This section allows you to select which SSLO Objects Profiles will use this logging profile.
 #. Click **OK**
 
     |image043|
@@ -242,7 +242,11 @@ In Task 2, you learned how to view access reports.  In this Task you will learn 
 
     |image006|
 
-#. At the logon page enter the Username:**user1** and Password:**user1**
+#. At the logon page enter the following credentials:
+
+    - Username:**user1** 
+    - Password:**user1**
+
 #. Click **Logon**
 
     |image007|
@@ -266,7 +270,7 @@ In Task 2, you learned how to view access reports.  In this Task you will learn 
 .. note:: to learn more about logging levels see https://support.f5.com/csp/article/K24826763
 
 
-Task 5 - Lab CleanUp
+Task 5 - Lab Cleanup
 ------------------------
 
 #. From a browser on the jumphost navigate to https://portal.f5lab.local

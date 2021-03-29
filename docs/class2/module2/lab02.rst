@@ -304,8 +304,6 @@ Task 2 - Login to header.acme.com using user2
    |image100|
 
 
-.. |image0| image:: media/lab02/image000.png
-	:width: 800px
 .. |image1| image:: media/lab02/image001.png
 .. |image2| image:: media/lab02/image002.png
 	:width: 800px

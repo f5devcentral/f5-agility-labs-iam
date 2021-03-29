@@ -14,3 +14,4 @@ value in each of the use cases for concepts and specific solution scenarios.
    :glob:
 
    class*/class*
+

@@ -120,6 +120,12 @@ TASK 3: URI Dynamic Filtering (via AD Group Membership)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 +----------------------------------------------------------------------------------------------+
+| **Note:** *This provides the ability to dynamically deploy new applications based on*        |
+|                                                                                              |
+| *standardized URI paths and control access to those applications (via group membership)*     |
+|                                                                                              |
+| *without needing to re-entrantly edit the Per Request Policy again.*                         |
+|                                                                                              |
 | 1. Navigate to **Access -> Profiles/Policies -> Per-Request Policies** and then click the    |
 |                                                                                              |
 |    **Edit** link for the **app.acme.com_prp** Per Request Policy.                            |
@@ -189,6 +195,12 @@ TASK 4: URI DataGroup Filtering (via AD Group Membership)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 +----------------------------------------------------------------------------------------------+
+| **Note:** *This provides the ability to dynamically deploy new applications based on*        |
+|                                                                                              |
+| *standardized URI paths defined in DataGroups and control access to those applications*      |
+|                                                                                              |
+| *(via group membership) without needing to re-entrantly edit the Per Request Policy again.*  |
+|                                                                                              |
 | 1. In the Visual Policy Editor window, click on the **+ (Plus Symbol)** on the **members**   |
 |                                                                                              |
 |    branch following **URL Branching**.                                                       |
@@ -322,6 +334,10 @@ TASK 7: Dynamic Group Checks
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 +----------------------------------------------------------------------------------------------+
+| **Note:** *This provides the ability to dynamically enforce controlled application access*   |
+|                                                                                              |
+| *without requiring the user to logon/logoff to acquire new permissions or restrictions.*     |
+|                                                                                              |
 | 1. Navigate to **Access -> Profiles/Policies -> Per-Request Policies** and then click the    |
 |                                                                                              |
 |    **Edit** link for the **app.acme.com_prp** Per Request Policy (or use the already open    |
@@ -501,6 +517,8 @@ TASK 8: Testing Dynamic Group Checks
 | 5. Return to **Firefox** test access to application **app2**. **Note:** *60 seconds should*  |
 |                                                                                              |
 |    *elapse (the subsession timeout) before testing to the application begins.*               |
+|                                                                                              |
+| **Note:** *No user logon/logoff event needed to occur to change application access!*         |
 +----------------------------------------------------------------------------------------------+
 | |image041|                                                                                   |
 +----------------------------------------------------------------------------------------------+
@@ -509,6 +527,10 @@ TASK 9: Step-Up Authentication (Client Cert Auth)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 +----------------------------------------------------------------------------------------------+
+| **Note:** *This provides the ability to require additional authentication/authorization*     |
+|                                                                                              |
+| *to priviledged pages or resources.*                                                         |
+|                                                                                              |
 | 1. Navigate to **Access -> Profiles/Policies -> Per-Request Policies** and then click the    |
 |                                                                                              |
 |    **Edit** link for the **app.acme.com_prp** Per Request Policy (or use the already open    |

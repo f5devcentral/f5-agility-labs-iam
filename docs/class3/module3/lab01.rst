@@ -36,16 +36,12 @@ TASK 1: Intialize Access Guided Configuration (AGC)
 | 2. Navigate to:  **Access -> Guided Configuration**                                          |
 |                                                                                              |
 | 3. Click the **Zero Trust** graphic as shown.                                                |
-+----------------------------------------------------------------------------------------------+
-| |image001|                                                                                   |
-+----------------------------------------------------------------------------------------------+
-
-+----------------------------------------------------------------------------------------------+
+|                                                                                              |
 | 4. Click on the **Identity Aware Proxy**  dialogue box click under **Zero Trust**            |
 |                                                                                              |
 |    in the navigation as shown.                                                               |
 +----------------------------------------------------------------------------------------------+
-| |image002|                                                                                   |
+| |image001|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
@@ -53,22 +49,28 @@ TASK 1: Intialize Access Guided Configuration (AGC)
 |                                                                                              |
 | 6. Scroll through and review the remaining element of the dialogue box to the bottom of the  |
 |                                                                                              |
-|    screen and click "Next"                                                                   |
+|    screen and click **Next**.                                                                |
 +----------------------------------------------------------------------------------------------+
-| |image003|                                                                                   |
+| |image002|                                                                                   |
 |                                                                                              |
-| |image004|                                                                                   |
+| |image003|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
-TASK 2: Name Configuration and define Device Posture  
+TASK 2: Config Properties  
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 +----------------------------------------------------------------------------------------------+
-| 1. In the **Configuration Name** dialogue box, enter **agc-app.acme.com**                    |
+| 1. In the **Configuration Name** dialogue box, enter **agc-app.acme.com**.                   |
 |                                                                                              |
-| 2. Click **Save & Next** at the bottom of the dialogue window.                               |
+| 2. Toggle **Single Sign-On (SSO) & HTTP Header** to the **On** position.                     |
+|                                                                                              |
+| 3. Toggle **Application Groups** to the **On** position.                                     |
+|                                                                                              |
+| 4. Toggle **Webtop** to the **Off** position.                                                |
+|                                                                                              |
+| 5. Click **Save & Next** at the bottom of the dialogue window.                               |
 +----------------------------------------------------------------------------------------------+
-| |image005|                                                                                   |
+| |image004|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 TASK: 3: Configure Virtual Server Properties 
@@ -81,14 +83,18 @@ TASK: 3: Configure Virtual Server Properties
 |                                                                                              |
 | 3. Enter the IP Address **10.1.10.100** in the dialogue box for **Destination Address**.     |
 |                                                                                              |
-| 4. Confirm the **Rediect Port** is **80** and **HTTP**.                                      |
+| 4. Confirm the **Enable Redirect Port** is checked.                                          |
 |                                                                                              |
-| 5. Select the **Use Existing** radio button under **Client SSL Profile**                     |
+| 5. Confirm the **Rediect Port** is **80** and **HTTP**.                                      |
 |                                                                                              |
-| 6. Move the **f5demo** Client SSL Profile to the right, **Selected**                         |
+| 6. Select the **Use Existing** radio button under **Client SSL Profile**                     |
 |                                                                                              |
-| 7. Click **Save & Next** at the bottom of the dialogue window.                               |
+| 7. Move the **f5demo** Client SSL Profile to the right, **Selected**                         |
+|                                                                                              |
+| 8. Scroll to the bottom of the dialogue window and Click **Save & Next**.                    |
 +----------------------------------------------------------------------------------------------+
+| |image005|                                                                                   |
+|                                                                                              |
 | |image006|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
@@ -96,59 +102,58 @@ TASK: 4: Configure User Identity
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 +----------------------------------------------------------------------------------------------+
-| 1. Enter **agc-f5lab-AD** in the **Name** field                                              |
-|                                                                                              |
-| 2. Confirm **Authentication Type** is **AAA**                                                |
-|                                                                                              |
-| 3. Confirm **Choose Authentication Server Type** is **Active Directory**                     |
-|                                                                                              |
-| 4. Select **f5lab.local** from the **Choose Authentication Server** drop down.               |
-|                                                                                              |
-| 5. Check the **Active Directory Query Properties** checkbox.                                 |
-|                                                                                              |
-| 6. Check the **Fetch Nested Group** checkbox.                                                |
-|                                                                                              |
-| 7. Move the **memberOf** to the right under **Required Attributes**                          |
-|                                                                                              |
-| 8. Click **Save** at the bottom of the dialogue window.                                      |
+| 1. Click the **Add** button on the **User Identity** dialogue window.                        |
 +----------------------------------------------------------------------------------------------+
 | |image007|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
-| 9. In the dialogue window that follows for **User Identity**, confirm **agc-f5lab-AD** is    |
+| 2. In the resulting dialogue window, enter **agc-f5lab-AD** in the **Name** field.           |
 |                                                                                              |
-|    listed, then click **Save & Next** at the bottom if the dialogue window.                  |
+| 3. Confirm **Authentication Type** is **AAA**                                                |
+|                                                                                              |
+| 4. Confirm **Choose Authentication Server Type** is **Active Directory**                     |
+|                                                                                              |
+| 5. Select **f5lab.local** from the **Choose Authentication Server** drop down.               |
 +----------------------------------------------------------------------------------------------+
 | |image008|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
-TASK 5: Multi Factor Authentication
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 +----------------------------------------------------------------------------------------------+
-| 1. In the **Multi Factor Authentication** dialogue box, click **Save & Next** at the bottom  |
+| 6. Check the **Active Directory Query Properties** checkbox.                                 |
 |                                                                                              |
-|    of the dialogue window.                                                                   |
+| 7. Confirm the **Search Filter Type** & **Search Filter** match **sAMAccountName** values.   |
+|                                                                                              |
+| 8. Check the **Fetch Nested Group** checkbox.                                                |
+|                                                                                              |
+| 9. Move the **memberOf** to the right under **Required Attributes** **Selected**.            |
+|                                                                                              |
+| 10. Click **Save** at the bottom of the dialogue window.                                     |
 +----------------------------------------------------------------------------------------------+
 | |image009|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
-TASK 6: Single Sign-on & HTTP Header
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 +----------------------------------------------------------------------------------------------+
-| 1. Check **Enable Single Sign-on (Optional)** checkbox in the                                |
+| 11. In the dialogue window that follows for **User Identity**, confirm **agc-f5lab-AD** is   |
 |                                                                                              |
-|    **Single Sign-on & HTTP Header** dialogue window.                                         |
+|     listed, then click **Save & Next** at the bottom if the dialogue window.                 |
 +----------------------------------------------------------------------------------------------+
 | |image010|                                                                                   |
 +----------------------------------------------------------------------------------------------+
- 
+
+TASK 5: Single Sign-on & HTTP Header
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 +----------------------------------------------------------------------------------------------+
-| 2. Enter **agc-app-header** in the **Name** field in the **Single Sign-on & HTTP Header**    |
+| 1. Click the **Add** button on the **Single Sign-on & HTTP Header** dialogue window.         |
++----------------------------------------------------------------------------------------------+
+| |image011|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 2. In the resulting **Single Sign-on & HTTP Header Properties** dialogue window. Enter       |
 |                                                                                              |
-|    **Properties** dialogue window.                                                           |
+|    **agc-app-header** in the **Name** field.                                                 |
 |                                                                                              |
 | 3. Select the **HTTP Headers** radio button under **Type**                                   |
 |                                                                                              |
@@ -172,7 +177,7 @@ TASK 6: Single Sign-on & HTTP Header
 |                                                                                              |
 | 7. At the bottom of the screen, click **Save**                                               |
 +----------------------------------------------------------------------------------------------+
-| |image011|                                                                                   |
+| |image012|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
@@ -182,65 +187,75 @@ TASK 6: Single Sign-on & HTTP Header
 |                                                                                              |
 |    dialogue window.                                                                          |
 +----------------------------------------------------------------------------------------------+
-| |image012|                                                                                   |
+| |image013|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
-TASK 7: Applications
+TASK 6: Applications
 ~~~~~~~~~~~~~~~~~~~~
-  
+
 +----------------------------------------------------------------------------------------------+
-| 1. In the **Application Properties** dialogue window, click **Show Advanced Setting** in the |
-|                                                                                              |
-|    upper right hand corner of the dialogue window.                                           |
-|                                                                                              |
-| 2. In the **Name** field enter **agc-app.acme.com**.                                         |
-|                                                                                              |
-| 3. In the **FQDN** field enter **agc-app.acme.com**.                                         |
-|                                                                                              |
-| 4. In the **Subpath Pattern** field enter **/apps/app1\***.                                  |
-|                                                                                              |
-| 5. On the **Subpath Pattern** row entered in Step 5, click the **+ (Plus Symbol)** twice     |
-|                                                                                              |
-|    to add to more rows.                                                                      |
-|                                                                                              |
-| 6. In the two new rows add **/apps/app2\*** and **/apps/app3\*** respectively.               |
-|                                                                                              |
-| 7. In the **Pool Configuration** section, under **Health Monitors** area move                |
-|                                                                                              |
-|    **/Common/http** to the right **Selected** side.                                          |
-|                                                                                              |
-| 8. In the **Pool Configuration** section, under **Load Balancing Method** area select        |
-|                                                                                              |
-|    **/Common/10.1.20.6** from the **IP Address/Node name**                                   |
-|                                                                                              |
-| 9. Click the **Save** button at the bottom of the dialogue window.                           |
+| 1. Click the **Add** button in the **Applications** dialogue window.                         |
 +----------------------------------------------------------------------------------------------+
 | |image014|                                                                                   |
 +----------------------------------------------------------------------------------------------+
-
+  
 +----------------------------------------------------------------------------------------------+
-| 10. In the **Applications** dialogue window that follows, expand the **Subpaths** and ensure |
+| 2. In the **Application Properties** dialogue window, toggle **Advanced Settings** to the    |
 |                                                                                              |
-|    /apps/app1*, /apps/app2*, /apps/app3* are present for the **agc-app.acme.com** row.       |
+|    **On** position.                                                                          |
 |                                                                                              |
-| 11. Click the **Save & Next** button at the bottom of the dialogue window.                   |
+| 3. In the **Name** field enter **agc-app.acme.com**.                                         |
+|                                                                                              |
+| 4. In the **FQDN** field enter **agc-app.acme.com**.                                         |
+|                                                                                              |
+| 5. In the **Subpath Pattern** field enter **/apps/app1\***.                                  |
+|                                                                                              |
+| 6. On the **Subpath Pattern** row entered in Step 5, click the **+ (Plus Symbol)** twice     |
+|                                                                                              |
+|    to add to more rows.                                                                      |
+|                                                                                              |
+| 7. In the two new rows add **/apps/app2\*** and **/apps/app3\*** respectively.               |
 +----------------------------------------------------------------------------------------------+
 | |image015|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
-TASK 8: Application Groups
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 +----------------------------------------------------------------------------------------------+
-| 1. Check the **Enable Application Groups** checkbox in the **Application Groups**            |
+| 8. In the **Pool Configuration** section, under **Health Monitors** area move                |
 |                                                                                              |
-|    dialogue window.                                                                          |
+|    **/Common/http** to the right **Selected** side.                                          |
+|                                                                                              |
+| 9. In the **Pool Configuration** section, under **Load Balancing Method** area select        |
+|                                                                                              |
+|    **/Common/10.1.20.6** from the **IP Address/Node name**                                   |
+|                                                                                              |
+| 10. Click the **Save** button at the bottom of the dialogue window.                          |
 +----------------------------------------------------------------------------------------------+
 | |image016|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
-| 2. **Application Group Properties** dialogue window, enter **app1** in the **Field**.        |
+| 11. In the **Applications** dialogue window that follows, expand the **Subpaths** and ensure |
+|                                                                                              |
+|     /apps/app1*, /apps/app2*, /apps/app3* are present for the **agc-app.acme.com** row.      |
+|                                                                                              |
+| 12. Click the **Save & Next** button at the bottom of the dialogue window.                   |
++----------------------------------------------------------------------------------------------+
+| |image017|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
+TASK 7: Application Groups
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
++----------------------------------------------------------------------------------------------+
+| 1. Click the **Add** button in the **Application Groups** dialogue window.                   |
++----------------------------------------------------------------------------------------------+
+| |image018|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 2. In the resulting **Application Group Properties** dialogue window, enter **app1** in the  |
+|                                                                                              |
+|    **Name** field.                                                                           |
 |                                                                                              |
 | 3. Move **/apps/app1\*** from the **Available** side to the **Selected** side under          |
 |                                                                                              |
@@ -248,11 +263,11 @@ TASK 8: Application Groups
 |                                                                                              |
 | 4. Click the **Save** button at the bottom of the dialogue window.                           |
 +----------------------------------------------------------------------------------------------+
-| |image017|                                                                                   |
+| |image019|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
-| 5. Click the **Add* button in the *Application Groups** dialogue window that follows and     |
+| 5. Click the **Add** button in the **Application Groups** dialogue window that follows and   |
 |                                                                                              |
 |    repeat steps 2 through 4 using the following values:                                      |
 |                                                                                              |
@@ -262,7 +277,7 @@ TASK 8: Application Groups
 |                                                                                              |
 |    - **Name**: base, **Selected**: **/**                                                     |
 +----------------------------------------------------------------------------------------------+
-| |image018|                                                                                   |
+| |image020|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
@@ -270,66 +285,50 @@ TASK 8: Application Groups
 |                                                                                              |
 | 7. Click the **Save & Next** button at the bottom of the dialogue window.                    |
 +----------------------------------------------------------------------------------------------+
-| |image019|                                                                                   |
-+----------------------------------------------------------------------------------------------+
-
-TASK 9: Contextual Access
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-+----------------------------------------------------------------------------------------------+
-| 1. In the **Contextual Access Properties** dialigue window, enter **app1-access** in the     |
-|                                                                                              |
-|    **Name** field.                                                                           |
-|                                                                                              |
-| 2. Select **Application Group** from the **Resource Type** drop down.                        |
-|                                                                                              |
-| 3. Select **app1** from the **Resource** drop down.                                          |
-|                                                                                              |
-| 4. Select **agc-f5lab-AD** from the **Primary Authentication** drop down.                    |
-|                                                                                              |
-| 5. Select **agc-app-header** from the **HTTP Header** drop down.                             |
-|                                                                                              |
-| 6. Check the **Enable Addtional Checks** checkbox.                                           |
-|                                                                                              |
-| 7. In the **Trigger Rules** section that appears, click the **Add** button                   |
-+----------------------------------------------------------------------------------------------+
-| |image020|                                                                                   |
-+----------------------------------------------------------------------------------------------+
-
-+----------------------------------------------------------------------------------------------+
-| 8. In the **Contextual Access Properties > Trigger > New** dialogue window, change the       |
-|                                                                                              |
-|    **Name** field to **app1-rule**.                                                          |
-|                                                                                              |
-| 9. Check the **User Group Check** checkbox.                                                  |
-+----------------------------------------------------------------------------------------------+
 | |image021|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
+TASK 8: Contextual Access
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
 +----------------------------------------------------------------------------------------------+
-| 8. In the resulting **User Group Check** dialogue window, enter **app** in the filter box on |
-|                                                                                              |
-|    the left to filter the available AD Groups in the **Primary Authentication** section.     |
-|                                                                                              |
-| 9. Click the **Add** button in the row, where **app1** appears in the **Group Name** column. |
-|                                                                                              |
-| 10. Click the **Save** button at the bottom of the dialogue window.                          |
+| 1. Click the **Add** button in the **Contextual Access** dialogue window.                    |
 +----------------------------------------------------------------------------------------------+
 | |image022|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
-| 11. Review the resulting **Contextual Access Properties** for **app1-access** and click the  |
+| 2. In the **Contextual Access Properties** dialigue window that follows, enter               |
 |                                                                                              |
-|     **Save** button at the bottom of the dialogue window.                                    |
+|    **app1-access** in the **Name** field.                                                    |
+|                                                                                              |
+| 3. Select **Application Group** from the **Resource Type** drop down.                        |
+|                                                                                              |
+| 4. Select **app1** from the **Resource** drop down.                                          |
+|                                                                                              |
+| 5. Select **agc-f5lab-AD** from the **Primary Authentication** drop down.                    |
+|                                                                                              |
+| 6. Select **agc-app-header** from the **HTTP Header** drop down.                             |
 +----------------------------------------------------------------------------------------------+
 | |image023|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
-| 12. Click the **Add** button in the **Contextual Access** dialogue window.                   |
+| 7. In the **Assign User Groups** section, scroll through the available groups to find the    |
 |                                                                                              |
-| 13. Repeat steps 1 through 10 for **app2** and **app3** using the following values           |
+|    **app1** **Group Name**. Click the **Add** button in the **Action** column.               |
+|                                                                                              |
+| 8. Verify the added group in the **Selected User Groups**.                                   |
+|                                                                                              |
+| 9. Click the **Save** button at the bottom of the dialogue window.                           |
++----------------------------------------------------------------------------------------------+
+| |image024|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 10. Click the **Add** button in the **Contextual Access** dialogue window.                   |
+|                                                                                              |
+| 11. Repeat steps 2 through 9 for **app2** and **app3** using the following values            |
 |                                                                                              |
 |     **App2**                                                                                 |
 |                                                                                              |
@@ -345,13 +344,9 @@ TASK 9: Contextual Access
 |                                                                                              |
 |     - **HTTP Header**: **agc-app-header**                                                    |
 |                                                                                              |
-|     Contextual Access Trigger Rules                                                          |
+|     Assign User Groups                                                                       |
 |                                                                                              |
-|     - **Name**: **app2-rule**                                                                |
-|                                                                                              |
-|     User Group Check                                                                         |
-|                                                                                              |
-|     - Add AD group **app2**                                                                  |
+|     - Add **Group Name** **app2**                                                            |
 |                                                                                              |
 |     **App3**                                                                                 |
 |                                                                                              |
@@ -367,78 +362,84 @@ TASK 9: Contextual Access
 |                                                                                              |
 |     - **HTTP Header**: **agc-app-header**                                                    |
 |                                                                                              |
-|     Contextual Access Trigger Rules                                                          |
+|     Assign User Groups                                                                       |
 |                                                                                              |
-|     - **Name**: **app3-rule**                                                                |
-|                                                                                              |
-|     User Group Check                                                                         |
-|                                                                                              |
-|     - Add AD group **app3**                                                                  |
+|     - Add **Group Name** **app3**                                                            |
 +----------------------------------------------------------------------------------------------+
-| |image024|                                                                                   |
+| |image025|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
-| 14. In the **Contextual Access Properties** dialigue window, enter **base-access** in the    |
-|                                                                                              |
-|     **Name** field.                                                                          |
-|                                                                                              |
-| 15. Select **Application Group** from the **Resource Type** drop down.                       |
-|                                                                                              |
-| 16. Select **base** from the **Resource** drop down.                                         |
-|                                                                                              |
-| 17. Select **agc-f5lab-AD** from the **Primary Authentication** drop down.                   |
-|                                                                                              |
-| 18. Select **agc-app-header** from the **HTTP Header** drop down.                            |
-|                                                                                              |
-| 19. Check the **Enable Addtional Checks** checkbox.                                          |
-|                                                                                              |
-| 20. In the **Trigger Rules** section that appears, change the **Match Action** for the       |
-|                                                                                              |
-|     **Default Fallback** from **Reject** to **Allow**.                                       |
-|                                                                                              |
-| 21. Click the **Save** button at the bottom of the dialogue window.                          |
+| 12. Click the **Add** button in the **Contextual Access** dialogue window.                   |
 +----------------------------------------------------------------------------------------------+
-| |image025|                                                                                   |
-|                                                                                              |
 | |image026|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
-| 22. Review the resulting **Contextual Access** dialogue window for completion of all         |
+| 13. In the **Contextual Access Properties** dialogue window that follows, enter              |
 |                                                                                              |
-|     created access rules.                                                                    |
+|     **base-access** in the **Name** field.                                                   |
 |                                                                                              |
-| 23. Click the **Save & Next** button at the bottom of the dialogue window.                   |
+| 14. Select **Application Group** from the **Resource Type** drop down.                       |
+|                                                                                              |
+| 15. Select **base** from the **Resource** drop down.                                         |
+|                                                                                              |
+| 16. Select **agc-f5lab-AD** from the **Primary Authentication** drop down.                   |
+|                                                                                              |
+| 17. Select **agc-app-header** from the **HTTP Header** drop down.                            |
 +----------------------------------------------------------------------------------------------+
 | |image027|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
-TASK 10: Customization
-~~~~~~~~~~~~~~~~~~~~~~
++----------------------------------------------------------------------------------------------+
+| 18. In the **Assign User Groups** section, scroll through the available groups to find the   |
+|                                                                                              |
+|     **Sales Engineering** **Group Name**. Click the **Add** button in the **Action** column. |
+|                                                                                              |
+| 19. Verify the added group in the **Selected User Groups**.                                  |
+|                                                                                              |
+| 20. Click the **Save** button at the bottom of the dialogue window.                          |
++----------------------------------------------------------------------------------------------+
+| |image028|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 21. Review the resulting **Contextual Access** dialogue window for completion of all         |
+|                                                                                              |
+|     created access rules.                                                                    |
+|                                                                                              |
+| 22. Click the **Save & Next** button at the bottom of the dialogue window.                   |
++----------------------------------------------------------------------------------------------+
+| |image029|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
+TASK 9: Customization
+~~~~~~~~~~~~~~~~~~~~~
 
 +----------------------------------------------------------------------------------------------+
 | 1. Scroll the bottom of the **Customization Properties** dialogue window, leaving all        |
 |                                                                                              |
 |    defaults and then click **Save & Next**.                                                  |
 +----------------------------------------------------------------------------------------------+
-| |image028|                                                                                   |
-|                                                                                              |
-| |image029|                                                                                   |
-+----------------------------------------------------------------------------------------------+
-
-TASK 11: Logon Protection
-~~~~~~~~~~~~~~~~~~~~~~~~~
-
-+----------------------------------------------------------------------------------------------+
-| 1. Click the **Save & Next** button at the bottom of the **Logon Protection Properties**     |
-|                                                                                              |
-|    dialogue window.                                                                          |
-+----------------------------------------------------------------------------------------------+
 | |image030|                                                                                   |
+|                                                                                              |
+| |image031|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
-TASK 12: Summary
+TASK 10: Session Management Properties
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
++----------------------------------------------------------------------------------------------+
+| 1. Scroll the bottom of the **Session Management Properties** dialogue window, leaving all   |
+|                                                                                              |
+|    defaults and then click **Save & Next**.                                                  |
++----------------------------------------------------------------------------------------------+
+| |image032|                                                                                   |
+|                                                                                              |
+| |image033|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
+TASK 11: Summary
 ~~~~~~~~~~~~~~~~
 
 +----------------------------------------------------------------------------------------------+
@@ -446,20 +447,20 @@ TASK 12: Summary
 |                                                                                              |
 |    click the **Deploy** button.                                                              |
 +----------------------------------------------------------------------------------------------+
-| |image031|                                                                                   |
+| |image034|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
 | 2. Click the **Finish** button in the final dialogue window. Access Guided Configuration     |
 |                                                                                              |
-|    will return to the start screen and **agc-app.acme.com** will be "DEPLOYED"               |
+|    will return to the start screen and **agc-app.acme.com** will be **DEPLOYED**             |
 +----------------------------------------------------------------------------------------------+
-| |image032|                                                                                   |
+| |image035|                                                                                   |
 |                                                                                              |
-| |image033|                                                                                   |
+| |image036|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
-TASK 13: Testing
+TASK 12: Testing
 ~~~~~~~~~~~~~~~~
 
 +----------------------------------------------------------------------------------------------+
@@ -471,7 +472,7 @@ TASK 13: Testing
 |                                                                                              |
 | 3. Logon to the resulting logon page with **UserID: user1** and **Password: user1**          |
 +----------------------------------------------------------------------------------------------+
-| |image034|                                                                                   |
+| |image037|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
@@ -481,9 +482,9 @@ TASK 13: Testing
 |                                                                                              |
 |    application.                                                                              |
 +----------------------------------------------------------------------------------------------+
-| |image035|                                                                                   |
+| |image038|                                                                                   |
 |                                                                                              |
-| |image036|                                                                                   |
+| |image039|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
@@ -493,9 +494,9 @@ TASK 13: Testing
 |                                                                                              |
 |    application based on AD group membership.                                                 |
 +----------------------------------------------------------------------------------------------+
-| |image037|                                                                                   |
+| |image040|                                                                                   |
 |                                                                                              |
-| |image038|                                                                                   |
+| |image041|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
@@ -507,9 +508,9 @@ TASK 13: Testing
 |                                                                                              |
 |    desktop. The script will run and automatically close.                                     |
 +----------------------------------------------------------------------------------------------+
-| |image039|                                                                                   |
+| |image042|                                                                                   |
 |                                                                                              |
-| |image040|                                                                                   |
+| |image043|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
@@ -523,7 +524,7 @@ TASK 13: Testing
 |                                                                                              |
 |     application becasue of the change in the user's Group Membership.                        |
 +----------------------------------------------------------------------------------------------+
-| |image041|                                                                                   |
+| |image044|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 TASK 14: Review
@@ -540,7 +541,7 @@ TASK 14: Review
 |                                                                                              |
 | 4. Click on the **View** asscoiated with the active session's subsession.                    |
 +----------------------------------------------------------------------------------------------+
-| |image042|                                                                                   |
+| |image045|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
@@ -548,7 +549,7 @@ TASK 14: Review
 |                                                                                              |
 |    access requests performed in testing.                                                     |
 +----------------------------------------------------------------------------------------------+
-| |image043|                                                                                   |
+| |image046|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
@@ -562,9 +563,9 @@ TASK 14: Review
 |                                                                                              |
 | 8. Review the created Per Request Policy                                                     |
 +----------------------------------------------------------------------------------------------+
-| |image044|                                                                                   |
+| |image047|                                                                                   |
 |                                                                                              |
-| |image045|                                                                                   |
+| |image048|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
 TASK 15: End of Lab1
@@ -667,4 +668,10 @@ TASK 15: End of Lab1
 .. |image044| image:: media/lab1-044.png
    :width: 800px
 .. |image045| image:: media/lab1-045.png
+   :width: 800px
+.. |image046| image:: media/lab1-046.png
+   :width: 800px
+.. |image047| image:: media/lab1-047.png
+   :width: 800px
+.. |image048| image:: media/lab1-048.png
    :width: 800px
