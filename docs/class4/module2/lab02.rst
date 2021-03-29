@@ -2,7 +2,7 @@ Lab 2: Create a SAML SP Per-Session Policy
 ==============================================
 
 
-In this lab your will learn about the API calls necessary to build a SAML SP Access Policy .  The graphic below depicts the basic flow required for creating a policy via API.
+In this lab your will learn about the API calls necessary to build a SAML SP Access Policy.  The graphic below depicts the basic flow required for creating the policy via API.
 
     |image100|
 
@@ -10,20 +10,19 @@ In this lab your will learn about the API calls necessary to build a SAML SP Acc
 Access Lab Environment
 -------------------------
 
-To access your dedicated student lab environment, you will require a web browser and Remote Desktop Protocol (RDP) client software. The web browser will be used to access the Lab Training Portal. The RDP client will be used to connect to the Jump Host, where you will be able to access the BIG-IP management interfaces (HTTPS, SSH).
+To access your dedicated student lab environment, you will need a web browser and Remote Desktop Protocol (RDP) client software. The web browser will be used to access the Unified Demo Framework (UDF) Training Portal. The RDP client will be used to connect to the jumphost, where you will be able to access the BIG-IP management interfaces (HTTPS, SSH).
 
 #. Click **DEPLOYMENT** located on the top left corner to display the environment
 
-#. Click **ACCESS** next to jumphostf5lab.local
+#. Click **ACCESS** next to jumphost.f5lab.local
 
     |image101|
 
+#. Select your RDP resolution.
 
-#. Select your RDP resolution.  
+#. The RDP client on your local host establishes a RDP connection to the Jumphost.
 
-#. The RDP client on your local host establishes a RDP connection to the Jump Host.
-
-#.  login with the following credentials:
+#. Login with the following credentials:
 
          - User: **f5lab\\user1**
          - Password: **user1**
@@ -34,7 +33,7 @@ Task 1 - Import Postman Collections
 
 #. From the Jumpbox, open **Postman** via the desktop shortcut or toolbar at the bottom
 
-    .. note::  Dismiss any prompts to update Postman.  
+    .. note::  Dismiss any prompts to update Postman.
 
     |image001|
 
@@ -46,7 +45,7 @@ Task 1 - Import Postman Collections
 
     |image003|
 
-#.  Click **Upload Files** 
+#.  Click **Upload Files**
 
     |image004|
 
@@ -64,7 +63,7 @@ Task 1 - Import Postman Collections
 Task 2 - Create Required SAML Objects
 -----------------------------------------------------------------------
 
-#. Expand the **student-class4-module2-lab2** collection and **Create Access Objects** folder.  These requests will import the IDP signing certificate, create a IdP Connector, and also the SP Service.  If you are unfamiliar with these requests please review :ref:`Creating a SAML Service Provider(SP) Service <class4-module1-lab1>` for more detail.
+#. Expand the **student-class4-module2-lab2** collection and **Create Access Objects** folder.  These requests will import the IdP signing certificate, create a IdP Connector, and also the SP Service.  If you are unfamiliar with these requests please review :ref:`Creating a SAML Service Provider(SP) Service <class4-module1-lab1>` for more detail.
 
     |image007|
 
@@ -85,8 +84,9 @@ Task 2 - Create Required SAML Objects
 
     |image011|
 
-#. The **Pass** circle will display a value 4.   
-    
+#. The **Pass** circle will display a value 4.
+#. Close Runner by clicking the **X** in the top right corner.
+
     |image012|
 
 
@@ -101,12 +101,12 @@ Task 3 - Review the SAML SP Policy-item
 
     |image014|
 
-#. Click **bigip-create-agent-saml-sp** and then **Body**.  The JSON Body specificies the SP service using the server JSON key.  
+#. Click **bigip-create-agent-saml-sp** and then **Body**.  The JSON Body specifies the SP service using the **server** JSON key.   This is the name of the service we just created using runner.
 
 
     |image015|
 
-#. Click **bigip-create-policy item-saml-sp** and then **Body**.  The JSON Body of the policy item contains a reference to the previously reviewed SAML agent along with two branch rules.  One branch rule contains an expression that if the SAML auth is 1(True) then proceed down the allow terminal.  Everything else goes down the fallback branch to the Deny Terminal.  Lastly notice the name of the Policy item.  We will be referencing it later.
+#. Click **bigip-create-policy item-saml-sp** and then **Body**.  The JSON Body of the policy-item contains a reference to the previously reviewed SAML agent along with two branch rules.  One branch rule contains an expression that if the SAML auth is 1(True) then proceed to the allow terminal.  Everything else goes down the fallback branch to the Deny Terminal.  Lastly take notice of the SAML SP policy-item name because we will be using it later in the lab.
 
 
     |image016|
@@ -119,32 +119,32 @@ Task 4 - Create a SAML SP policy
 
     |image017|
 
-#. We will now add the policy-item SAML SP folder to the baseline Policy folder in it's proper place.  Click  and drag the policy-item SAML SP folder between the Allow Ending and Start Item folders.  The exact placement of the folder 
+#. We will now add the policy-item SAML SP folder to the baseline Policy folder in its proper place.  Click and drag the **policy-item SAML SP** folder between the Allow Ending and Start Item folders.
 
     |image018|
 
-#. Now the the requests are in the folder we need to modify a couple baseline requests to ensure the policy is created.
+#. Now the the requests are in the folder we need to modify a couple baseline requests to ensure the policy is created correctly.
 
-#. First, we need to adjust the start item's rule to go to the SAML SP Policy item.   Open the **Start Item** folder, click on **bigip-create-policy item-start**, and then **Body**.
+#. First, we need to adjust the start item's rule to go to the **SAML SP Policy-item**.   Open the **Start Item** folder, click on **bigip-create-policy item-start**, and then **Body**.
 
-#. Change the NextItem key value from "/Common/{{VS_NAME}}-psp_end_deny" to "/Common/{{VS_NAME}}-psp_act_saml_auth".  
+#. Change the NextItem key value from **"/Common/{{VS_NAME}}-psp_end_deny"** to **"/Common/{{VS_NAME}}-psp_act_saml_auth"**.
 
     |image019|
 
 #. After you are done editing the request, click **Save** in the upper right corner.  Runner will not pickup any changes that are not saved causing the automation to fail.
 
-#. Now the workflow the policy is complete. We enter the start policy-item, proceed to the SAML Auth Policy-item, and then based on success or failure of SAML authentication a user will proceed down the allow or Deny Terminal.
+#. Now the workflow of the policy is complete. The flow of the policy is as follows:  A user enters the **start** policy-item, proceed to the **SAML Auth** Policy-item.Then based on success or failure of SAML authentication a user will proceed to the **Allow** or **Deny** Terminal.
 
-#. Every Policy-item must be defined inside of the items list of the policy.  Expand the **Create Policy** subfolder located inside the **Baseline Policy** folder, click on **bigip-create-policy** and then **Body**.
+#. Every Policy-item must be defined inside of the **items** list of the policy.  Expand the **Create Policy** subfolder located inside the **Baseline Policy** folder, click on **bigip-create-policy** and then **Body**.
 
-#. Copy the below JSON inside the items array in front of the allow Terminal.  The placement of policy items inside of the items array is not important to the order they used within branch rules or Visual Policy Editors.
+#. Copy and paste the below JSON inside the items array in front of the allow Terminal.  The placement of policy-items inside of the items array is not important to the order they used within branch rules or Visual Policy Editors.
 
-.. code-block:: json
+    .. code-block:: JSON
 
-{
-    "name": "{{VS_NAME}}-psp_act_saml_auth",
-    "partition": "Common"
-}
+        {
+            "name": "{{VS_NAME}}-psp_act_saml_auth",
+            "partition": "Common"
+        },
 
 
     |image020|
@@ -153,11 +153,15 @@ Task 4 - Create a SAML SP policy
 #. After you are done editing the request, click **Save** in the upper right corner.  Runner will not pickup any changes that are not saved causing the automation to fail.
 
 
-#.  Now that we have the automation updated lets deploy the policy.  Hover over the Collection name **student-class4-module2-lab2** with your mouse and click the **Arrow** icon.
+#.  Now that we have the automation updated let's deploy the policy.  Hover over the Collection name **student-class4-module2-lab2** with your mouse and click the **Arrow** icon.
 
     |image021|
 
-#. Click the **Create Policy** folder. 
+#. Click **student-class4-module...** to return to the main folder if you are not already there.
+
+    |image035|
+
+#. Click the **Create Policy** folder.
 
     |image022|
 
@@ -169,14 +173,16 @@ Task 4 - Create a SAML SP policy
 
     |image024|
 
-#. The **Pass** circle will display a value 2.   
-    
-    |image025|   
+#. The **Pass** circle will display a value 2.
+#. Close Runner by clicking the **X** in the top right corner.
+
+    |image025|
 
 
-#. Open a browser and navigate to https://bigip1.f5lab.local
+#. From the jumphost, open browser and navigate to https://bigip1.f5lab.local
 
 #. Login to the BIG-IP GUI with the following credentials:
+
         - Username: **admin**
         - Password: **admin**
 
@@ -196,15 +202,18 @@ Task 4 - Create a SAML SP policy
 Task 5 - Lab Cleanup
 -------------------------------------------
 
-#.  Expand the **Lab Cleanup** subfolder and it's subfolders. There are a total of five requests.  The first two requests delete the Policy, while the last three requests delete the SP Service, IdP Connector, and IdP signing certificate.  To understand these requests further review :ref:`Deleting an Access Profile <class4-module2-lab1-delete>` or :ref:`Deleting a SAML Service Provider(SP) Service Configuration <class4-module1-lab1-delete>` 
+#.  Expand the **Lab Cleanup** subfolder and its subfolders. There are a total of five requests.  The first two requests delete the Policy, while the last three requests delete the SP Service, IdP Connector, and IdP signing certificate.  To understand these requests further review :ref:`Deleting an Access Profile <class4-module2-lab1-delete>` or :ref:`Deleting a SAML Service Provider(SP) Service Configuration <class4-module1-lab1-delete>`
 
     |image028|
 
 
-
-#.  Now that we have the automation updated lets deploy the policy.  Hover over the Collection name **student-class4-module2-lab2** with your mouse and click the **Arrow** icon.
+#.  Hover over the Collection name **student-class4-module2-lab2** with your mouse and click the **Arrow** icon.
 
     |image029|
+
+ #. Click **student-class4-module2-lab2** to return to the main folder if you are not already there.
+
+    |image036|
 
 #. Click the **Lab Cleanup** folder.
 
@@ -218,10 +227,15 @@ Task 5 - Lab Cleanup
 
     |image032|
 
-#. The **Pass** circle will display a value of 5.   
-    
-    |image033|  
+#. The **Pass** circle will display a value of 5.
 
+    |image033|
+
+#. From Postman, Click the **3 dots** on the bottom right of the student-class4-module2-lab2 Collection.
+
+#. Click **Delete**
+
+    |image037|
 
 This concludes the lab on creating and deleting a SAML SP Access Policy.
 
@@ -264,6 +278,8 @@ This concludes the lab on creating and deleting a SAML SP Access Policy.
 .. |image032| image:: media/lab02/032.png
 .. |image033| image:: media/lab02/033.png
 .. |image034| image:: media/lab02/034.png
+.. |image035| image:: media/lab02/035.png
+.. |image036| image:: media/lab02/036.png
+.. |image037| image:: media/lab02/037.png
 .. |image100| image:: media/lab02/100.png
 .. |image101| image:: media/lab02/101.png
-

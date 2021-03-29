@@ -2,38 +2,37 @@ Lab 1: Create a baseline Per-Session Policy
 ===============================================
 .. _class4-module2-lab1:
 
-In this lab you will learn about the API calls necessary to build the baseline for an Access Policy as if you had clicked create from GUI.  The graphic below depicts the basic flow required for creating a policy via API.
+In this lab you will learn about the API calls necessary to build the basline Access Policy as if you had clicked **create** from GUI.  The graphic below depicts the basic flow required for creating a policy via API.
 
     |image100|
 
 
 
-Access Lab Environment
--------------------------
+Task 1 - Access Lab Environment
+--------------------------------
 
-To access your dedicated student lab environment, you will require a web browser and Remote Desktop Protocol (RDP) client software. The web browser will be used to access the Lab Training Portal. The RDP client will be used to connect to the Jump Host, where you will be able to access the BIG-IP management interfaces (HTTPS, SSH).
+To access your dedicated student lab environment, you will need a web browser and Remote Desktop Protocol (RDP) client software. The web browser will be used to access the Unified Demo Framework (UDF) Training Portal. The RDP client will be used to connect to the jumphost, where you will be able to access the BIG-IP management interfaces (HTTPS, SSH).
 
 #. Click **DEPLOYMENT** located on the top left corner to display the environment
 
-#. Click **ACCESS** next to jumphostf5lab.local
+#. Click **ACCESS** next to jumphost.f5lab.local
 
     |image101|
-
 
 #. Select your RDP resolution.  
 
 #. The RDP client on your local host establishes a RDP connection to the Jump Host.
 
-#.  login with the following credentials:
+#. Login with the following credentials:
 
          - User: **f5lab\\user1**
          - Password: **user1**
 
 
-Task 1 - Import Postman Collections
+Task 2 - Import Postman Collections
 -----------------------------------------------------------------------
 
-#. From the Jumpbox, open **Postman** via the desktop shortcut or toolbar at the bottom
+#. From the Jumphost, open **Postman** via the desktop shortcut or toolbar at the bottom
 
     .. note::  Dismiss any prompts to update Postman.  
 
@@ -63,7 +62,7 @@ Task 1 - Import Postman Collections
 #. A collection called **student-class4-module2-lab1** will appear on the left side in Postman
 
 
-Task 2 - Explore the icontrolRest Endpoints
+Task 3 - Explore the icontrolRest Endpoints
 -----------------------------------------------------------------------
 
 .. _class4-module2-lab1-endpoints:
@@ -74,7 +73,7 @@ Task 2 - Explore the icontrolRest Endpoints
 
 #.  Expand the **Create Transaction** subfolder and click on the request **bigip-create-transaction**
 
-    .. note::  When creating or modifying a policy it must be performed within a transaction.  A transaction occurs in multiple steps.  First, you create the transation by receiving a transaction ID from the BIG-IP.  Next, you pass subsequent configuration requests that contain the transaction ID header to the BIG-IP.  The BIG-IP does not process these requests.  Instead it holds those requests until the transaction is commited in the final step.  It's important to understand that transactions have an all or nothing approach.  Either every request in the transaction is process sucessfully or none of the configuration changes are made.  This is extremely important to ensure all the required information is there for building a working policy.
+    .. note::  When creating or modifying a policy it must be performed within a transaction.  A transaction occurs in multiple steps.  First, you create the transaction by receiving a transaction ID from the BIG-IP.  Next, you pass subsequent configuration requests that contain the transaction ID header to the BIG-IP.  The BIG-IP does not process these requests.  Instead it holds those requests until the transaction is commited in the final step.  It's important to understand that transactions have an all or nothing approach.  Either every request in the transaction is processed sucessfully or none of the configuration changes are made.  This is extremely important to ensure all the required information is correct for building a working policy.
 
 #. Click on Body. The only thing in the Body are open and close curly braces.
 
@@ -90,7 +89,7 @@ Task 2 - Explore the icontrolRest Endpoints
 
     |image010|
 
-#. Expand the **Baseline Customization Groups** subfolder.  There are five mandatory customization groups created anytime an APM Per-Session Policy is created. A Customization Group defines the look of a particualar object such as the difference between the logout page on 13.1 and 15.1. Not all policy-items have a customization group.  Any Agent that is enduser facing will have a customization group associated with it. That includes items such as logon pages, webtops, logout pages.  Whereas something such as an Active Directory Authentication will not have a customziation group.
+#. Expand the **Baseline Customization Groups** subfolder.  There are five mandatory customization groups created anytime an APM Per-Session Policy is created. A Customization Group defines the look of a particualar object such as the difference between the logout page on 13.1 and 15.1. Not all policy-items have a customization group.  Any Agent that is enduser facing will have a customization group associated with it. That includes items such as logon pages, webtops, logout pages.  Whereas something such as an Active Directory Authentication will not have a customization group.
 
 #. Click **bigip-create-customization group-logout**
 
@@ -98,7 +97,7 @@ Task 2 - Explore the icontrolRest Endpoints
 
     |image011|
 
-#. Cick on **Body**.  Customziation is done by setting the **source** JSON key to either **/Common/modern** or **/Common/standard**. This lab uses a Postman variable that references **/Common/modern**.
+#. Cick on **Body**.  Customization is done by setting the **source** JSON key to either **/Common/modern** or **/Common/standard**. This lab uses a Postman variable that references **/Common/modern**.
 
     |image012|
 
@@ -108,17 +107,17 @@ Task 2 - Explore the icontrolRest Endpoints
 
     |image013|
 
-#.  To create a Terminal in a policy it takes three requests. A good rule of thumb is every object you manually build in Visual Policy Editor will take three Requests  The first defines a **customiztion group**, the second defines an **agent** and the third defines a **policy-item**.  
+#.  To create a Deny Terminal in a policy it takes three requests. A good rule of thumb is every object you manually build in Visual Policy Editor will take three Requests  The first defines a **customization group**, the second defines an **agent**, and the third defines a **policy-item**.  
 
-#. Click **bigip-create-customization group-end Deny**.  This customization group request is same as all previous requests except for the name and the value of the **type** JSON key is **logout**
+#. Click **bigip-create-customization group-deny emding**.  This customization group request is same as all previous customization group requests except for the name and the value of the **type** JSON key is **logout**
 
-#. Click **bigip-create-agent-deny ending**.  The easiest way to descibe an agent is it contains the operatinal settings for that object. For example an AD authentication agent would contain the list of AD servers to be used or a SAMl Agent it would contain the SAML Service Provider to be used.  In the case of a ending it will only contain the previously defined customization group.
+#. Click **bigip-create-agent-deny ending**.  An agent contains the operational settings for that object. For example, an AD authentication agent would contain the list of AD servers to be used or a SAMl Agent would contain the SAML Service Provider to be used.  In the case of an ending it will only contain the previously defined customization group.
 
-#. The endpoint is **/mgmt/tm/apm/policy/agent/ending-deny**. Each agent type has it's own endpoint unlike customiztion groups.  
+#. The endpoint is **/mgmt/tm/apm/policy/agent/ending-deny**. Each agent type has its own endpoint unlike customization groups.  
 
     |image014|
 
-#. Click **bigip-create-policy item-Deny ending**.  A Policy-Item typically contains all the settings related to its placement in the flow such as branch rules. Since this is an ending we will not see any branch rules but will see references to this policy-item after a few more steps. Additional settings of how the ending is displayed in Visual Policy Editor are also specified here such as caption and color. Lastly there will always be a reference to an Agent via it's name.  You can see the name of the agent specificed is the agent we created in the previous request.
+#. Click **bigip-create-policy item-deny ending**.  A Policy-Item contains all the settings related to its placement in the flow such as branch rules. Since this is an ending we will not see any branch rules but will see references to this policy-item after a few more steps. Additional settings of how the ending is displayed in Visual Policy Editor are also specified here such as caption and color. Lastly there will always be a reference to an Agent via its name.  The agent specified is the agent in the previous request.
 
     |image015|
 
@@ -126,7 +125,7 @@ Task 2 - Explore the icontrolRest Endpoints
 
     |image016|
 
-#. There is only an agent and policy-item.  There is no customization group, because if the connection is allowed the user will not be see anything displayed from APM.  This example of a policy-item that is not end user facing.
+#. There is only an agent and policy-item.  If the connection is allowed the user will not be see anything displayed from APM so no need for a customization group.  This is an example of a policy-item that is not enduser facing.
 
 #. Click **Body**.  The allow agent only contains a name and partition.
 
@@ -134,7 +133,7 @@ Task 2 - Explore the icontrolRest Endpoints
 
 #. Click **bigip-create-policy item-allow ending**.  Then, click **Body**.
     
-#. The stucture of an allow ending is similiar to the previous deny ending.  Since this is an ending it doesn't contain any branch rules.  
+#. The structure of an allow ending is similiar to the previous deny ending.  Since this is an ending it doesn't contain any branch rules.  
 
     |image018|
 
@@ -144,7 +143,7 @@ Task 2 - Explore the icontrolRest Endpoints
 
 #. Click **bigip-create-policy item-start** and then **Body**
 
-#. The **Rules** JSON key defines the branch rules for a policy-item.  All Policy-items except for terminal endpoints contain a rule condition.  In this case, the Start policy item connects to the Deny Terminal.    Secondly, the **Rules** JSON key is defined as an array because of the brackets.  This will allow definition of multiple branch rules using expressions, such as with an authenticaiton having a success and failure branch.  This will be covered in future labs.
+#. The **Rules** JSON key defines the branch rules for a policy-item.  All Policy-items except for terminal endpoints contain a **rules** condition.  In this case, the Start policy-item connects to the Deny Terminal.    Secondly, the **Rules** JSON key is defined as an array because of the brackets.  This will allow the definition of multiple branch rules using expressions. An example of this is an authentication Policy-item having a success and failure branch.  This will be covered in future labs.
 
     |image020|
 
@@ -154,7 +153,7 @@ Task 2 - Explore the icontrolRest Endpoints
 
 #. Click **bigip-create-policy** and then **Body**
 
-#. In order to create a policy all of the policy-items  MUST be defined inside the **items** JSON key array.  In this case we are only building a empty policy so only three items are defined.  The Start Item, Deny Terminal, and Allow Terminal.  
+#. In order to create a policy all of the policy-items  MUST be defined inside the **items** JSON key array.  In this case we are only building a empty policy so only three items Start Item, Deny Terminal, and Allow Terminal are defined.  
 
     |image022|
 
@@ -172,7 +171,7 @@ Task 2 - Explore the icontrolRest Endpoints
 
 #. Click **bigip-commit-transaction** and then **Body**.
 
-#. Notice the request is sent to the endpoint **/mgmt/tm/transaction/** along with the transactionID using the PUT Method.  The body contains the **state** JSON Key with the value **VALIDATING**.  This request triggers the BIG-IP to process all the requests that contain the transationID header.  After the transaction is completed you will recieve a 200 OK.  If you receive any status code but 200 OK, one or more of the requests in the transaction could not be completed.
+#. Notice the request is sent to the endpoint **/mgmt/tm/transaction/** along with the transactionID using the PUT Method.  The body contains the **state** JSON Key with the value **VALIDATING**.  This request triggers the BIG-IP to process all the requests that contain the transactionID header.  After the transaction is completed you will recieve a 200 OK.  If you receive any status code but 200 OK, one or more of the requests in the transaction could not be completed.
 
     |image026|
 
@@ -182,13 +181,13 @@ Task 2 - Explore the icontrolRest Endpoints
 
 #. Click **bigip-apply Policy** and then **Body**
 
-#. The Request is sent to the endpoint **/mgmt/tm/apm/profile/access/** using the PATCH Method.  When a patch is sent to the endpoint of a profile with the JSON body **"generationAction": "incremenet"** is instructs the BIG-IP that you want to Apply Policy.  Think commit changes.
+#. The Request is sent to the endpoint **/mgmt/tm/apm/profile/access/** using the PATCH Method.  When a patch is sent to the endpoint of a profile with the JSON body **"generationAction": "increment"** it instructs the BIG-IP that you want to Apply Policy.  Think commit changes.
 
     |image028|
 
 
 
-Task 3 - Create your first policy using automation
+Task 4 - Create your first policy using automation
 -----------------------------------------------------------------------  
 
 #.  Now that we have walked through all the API calls required to create a policy through automation, we will use Postman Runner to create it.
@@ -209,14 +208,21 @@ Task 3 - Create your first policy using automation
 
     |image032|
 
-#. The **Pass** circle will display only a value of two even through there were more requests than two.   Postman will display either passed or failed for  only the requests that contain **Test** conditions.   In this example, only the Commit Transaction request and the Apply Policy request contain Tests.  Another thing to note,  The requests that contained the transaction ID will always receive a 200 OK unless sent to an invalid endpoint or the JSON is improperly formatted.  Remember with a transaction, a request is not actually processed until the transaction is commited.
-    
+#. The **Pass** circle will display a value of two even through there were more requests than two.   Postman will display either passed or failed for only the requests that contain **Test** conditions.   In this example, only the Commit Transaction request and the Apply Policy request contain **Tests**.  Another thing to note,  The requests that contained the transaction ID will always receive a 200 OK unless sent to an invalid endpoint or the JSON is improperly formatted.  Remember with a transaction, a request is not actually processed until the transaction is commited.
+#. Close Runner by clicking the **X** in the top right corner.
+
+
     |image033|
+
+#. Collapse the main **Create Policy** folder so only two folders are displayed in the collection
+
+    |image041|
 
 
 #. Open a browser and navigate to https://bigip1.f5lab.local
 
 #. Login to the BIG-IP GUI with the following credentials:
+       
         - Username: **admin**
         - Password: **admin**
 
@@ -228,16 +234,16 @@ Task 3 - Create your first policy using automation
 
     |image035|
 
-#.  The policy is empty as planned.  This collection of requests is a baseline for creating anything in APM regarless of how basic or complex the Access Policy.
+#.  The policy is empty as planned.  This collection of requests is a baseline for creating anything in APM regarfless of how basic or complex the Access Policy.
 
     |image036|
 
 
-Task 4 - Deleting an Access Profile 
+Task 5 - Deleting an Access Profile 
 ----------------------------------------------------------------------- 
 .. _class4-module2-lab1-delete:
 
-#. From Postman, Expand the **student-class4-module2-lab1 subfolder**.
+#. From Postman, Expand the **Delete Policy** subfolder.
 
     |image037|
 
@@ -256,10 +262,11 @@ Task 4 - Deleting an Access Profile
 #. Open a browser and navigate to https://bigip1.f5lab.local
 
 #. Login to the BIG-IP GUI with the following credentials:
+
         - Username: **admin**
         - Password: **admin**
 
-#. Navigate to Access>>Profiles/Policies>>Access Profiles (Per-Session Policies).  Do not click the plus symbol.
+#. Navigate to Access>>Profiles/Policies>>Access Profiles (Per-Session Policies).  Do not click the **+** (plus symbol).
 
     |image034|
 
@@ -267,7 +274,17 @@ Task 4 - Deleting an Access Profile
 
     |image040|
 
-This concludes the lab on building an empty Access Policy
+
+Task 6 - Lab Cleanup
+---------------------------------
+
+#. From Postman, Click the **3 dots** on the bottom right of the student-class4-module2-lab1 Collection.
+
+#. Click **Delete**
+
+    |image042|
+
+This concludes the lab on building a baseline Access Policy
 
 
    |image000|
@@ -315,6 +332,8 @@ This concludes the lab on building an empty Access Policy
 .. |image038| image:: media/lab01/038.png
 .. |image039| image:: media/lab01/039.png
 .. |image040| image:: media/lab01/040.png
+.. |image041| image:: media/lab01/041.png
+.. |image042| image:: media/lab01/042.png
 .. |image100| image:: media/lab01/100.png
 .. |image101| image:: media/lab01/101.png
 

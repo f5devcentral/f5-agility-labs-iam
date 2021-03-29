@@ -88,15 +88,12 @@ Advertised Certificate Authorities has ben set to ca.f5lab.local
   |Lab3-Image8|
 
   Customized APM Profile Settings
-
   The SSO/Auth Domains of the APM profile is configured with the Kerberos SSO Profile needed to authenticate to the server.
 
   |Lab3-Image9|
 
 Supporting APM Objects
-
 AAA OCSP Responder
-
 The OCSP Responder has been configured with the following settings
 
 - URL: this field is only used if you check the Ignore AIA field
@@ -131,17 +128,17 @@ If successful the user is granted access to the application
 
 Lab 3 is now complete.
 
-.. |Lab3-Image1| image:: /class1/module2/media/Lab3-Image1.png
-.. |Lab3-Image2| image:: /class1/module2/media/Lab3-Image2.png
-.. |Lab3-Image3| image:: /class1/module2/media/Lab3-Image3.png
-.. |Lab3-Image4| image:: /class1/module2/media/Lab3-Image4.png
-.. |Lab3-Image5| image:: /class1/module2/media/Lab3-Image5.png
-.. |Lab3-Image6| image:: /class1/module2/media/Lab3-Image6.png
-.. |Lab3-Image7| image:: /class1/module2/media/Lab3-Image7.png
-.. |Lab3-Image8| image:: /class1/module2/media/Lab3-Image8.png
-.. |Lab3-Image9| image:: /class1/module2/media/Lab3-Image9.png
-.. |Lab3-Image10| image:: /class1/module2/media/Lab3-Image10.png
-.. |Lab3-Image11| image:: /class1/module2/media/Lab3-Image11.png
-.. |Lab3-Image12| image:: /class1/module2/media/Lab3-Image12.png
-.. |Lab3-Image13| image:: /class1/module2/media/Lab3-Image13.png
-.. |Lab3-Image14| image:: /class1/module2/media/Lab3-Image14.png
+.. |Lab3-Image1| image:: ./media/Lab3-Image1.png
+.. |Lab3-Image2| image:: ./media/Lab3-Image2.png
+.. |Lab3-Image3| image:: ./media/Lab3-Image3.png
+.. |Lab3-Image4| image:: ./media/Lab3-Image4.png
+.. |Lab3-Image5| image:: ./media/Lab3-Image5.png
+.. |Lab3-Image6| image:: ./media/Lab3-Image6.png
+.. |Lab3-Image7| image:: ./media/Lab3-Image7.png
+.. |Lab3-Image8| image:: ./media/Lab3-Image8.png
+.. |Lab3-Image9| image:: ./media/Lab3-Image9.png
+.. |Lab3-Image10| image:: ./media/Lab3-Image10.png
+.. |Lab3-Image11| image:: ./media/Lab3-Image11.png
+.. |Lab3-Image12| image:: ./media/Lab3-Image12.png
+.. |Lab3-Image13| image:: ./media/Lab3-Image13.png
+.. |Lab3-Image14| image:: ./media/Lab3-Image14.png

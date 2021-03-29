@@ -1,9 +1,9 @@
 Lab 3: Utilize HTTP Connector(15.1)
 ======================================================
 
-HTTP Connector is a new feature released in BIG-IP APM 15.1 that allows HTTP requests to be initiated from a Per-Request Policy.  This could be used to send a request to an API to retrieve additional information to make an access control decision, or send information to update an external resource.  
+HTTP Connector is a new feature released in BIG-IP APM 15.1 that allows HTTP requests to be initiated from a Per-Request Policy.  This could be used to send a request to an API to retrieve additional information to make an access control decision, or send information to update an external resource.
 
-  
+
 Section 3.1 - Create the HTTP Connector Request
 --------------------------------------------------
 
@@ -22,7 +22,7 @@ Task 1 - Create a DNS Resolver
 
    |image1|
 
-#. Click **internal_resolver** 
+#. Click **internal_resolver**
 
    |image2|
 
@@ -80,11 +80,11 @@ Task 4 - Create a HTTP Connector Request
    |image10|
 
 #. Enter name **get-aduser-attributes**
-#. Select **demo-http-connector** from the dropdown 
+#. Select **demo-http-connector** from the dropdown
 #. Enter URL **https://adapi.f5lab.local:8443/user?username=%{perflow.username}**
 #. Enter **GET** for the Method
 #. Select **Parse** for the Response Action
-#. Click **Save** 
+#. Click **Save**
 
    |image11|
 
@@ -103,12 +103,12 @@ Task 1 - Add the HTTP Connector Request
    |image12|
 
 #. Click **Guided Configuration**
-#. Click **IAP_DEMO** 
+#. Click **IAP_DEMO**
 
    |image14|
 
 #. Click on **Contextual Access**
-   
+
    |image15|
 
 #. Click on **basic.acme.com**
@@ -147,7 +147,7 @@ In this section you will test how HTTP connector can influence policy changes dy
 Task 1 - Access basic.acme.com
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. From the jump box open Chrome and open Developer Tools 
+#. From the jump box open Chrome and open Developer Tools
 
    |image21|
 
@@ -175,7 +175,7 @@ Task 1 - Access basic.acme.com
    |image26|
 
 #. You will see an active session for **user2**.
-#. Expand the session to see all the sub-sessions by clicking the **+ (Plus symbol)** to the left of the session ID.  
+#. Expand the session to see all the sub-sessions by clicking the **+ (Plus symbol)** to the left of the session ID.
 
    .. note :: Your session ID will not match the one displayed in the screenshot below.
 
@@ -185,7 +185,7 @@ Task 1 - Access basic.acme.com
 
    |image28|
 
-#. You will notice that HTTP Connector received multiple values back in the response and each JSON key was parsed to individual subsession variables. 
+#. You will notice that HTTP Connector received multiple values back in the response and each JSON key was parsed to individual subsession variables.
 #. userAccountControl is currently set to **66048**.  Which mean the account is enabled and the password never expires.
 
 
@@ -193,7 +193,7 @@ Task 1 - Access basic.acme.com
 
 #. Click **Cancel**
 
-#. Expand the session to see all the sub-sessions by clicking the **+ (Plus Symbol)** to the left of the session ID.  
+#. Expand the session to see all the sub-sessions by clicking the **+ (Plus Symbol)** to the left of the session ID.
 
    .. note:: You session ID will not match the one displayed in the screenshot below.
 
@@ -206,9 +206,6 @@ Task 1 - Access basic.acme.com
    |image30|
 
 #. Locate the **DisableUser2.ps1** Powershell script located on the desktop.
-
-   |image31|
-
 #. Right click the script and select **Run with PowerShell**.  A Powershell window will appear displaying User2 account is Disabled.
 
    |image32|
@@ -225,56 +222,45 @@ Task 1 - Access basic.acme.com
 
 
 #. This concludes lab 3.
- 
+
    |image100|
 
 
 
-.. |image100| image:: media/lab01/100.png
-
-.. |image0| image:: media/lab03/image000.png
-.. |image1| image:: media/lab03/image001.png
-.. |image2| image:: media/lab03/image002.png
-.. |image3| image:: media/lab03/image003.png
-.. |image4| image:: media/lab03/image004.png
-.. |image5| image:: media/lab03/image005.png
-.. |image6| image:: media/lab03/image006.png
-.. |image7| image:: media/lab03/image007.png
-.. |image8| image:: media/lab03/image008.png
-.. |image9| image:: media/lab03/image009.png
-.. |image10| image:: media/lab03/image010.png
-.. |image11| image:: media/lab03/011.png
-
-
-
-
-.. |image12| image:: media/lab03/image012.png
-	:width: 800px
-.. |image14| image:: media/lab03/image014.png
-.. |image15| image:: media/lab03/image015.png
-	:width: 1200px
-.. |image16| image:: media/lab03/image016.png
-.. |image17| image:: media/lab03/image017.png
-.. |image18| image:: media/lab03/image018.png
-.. |image19| image:: media/lab03/image019.png
-.. |image20| image:: media/lab03/image020.png
-
-
-
-.. |image21| image:: media/lab03/image021.png
-.. |image22| image:: media/lab03/image022.png
-.. |image23| image:: media/lab03/image023.png
-.. |image24| image:: media/lab03/image024.png
-.. |image25| image:: media/lab03/image025.png
-.. |image26| image:: media/lab03/image026.png
-.. |image27| image:: media/lab03/image027.png
-.. |image28| image:: media/lab03/image028.png
-.. |image29| image:: media/lab03/image029.png
-	:width: 1000px
-.. |image30| image:: media/lab03/image030.png
-.. |image31| image:: media/lab03/image031.png
-.. |image32| image:: media/lab03/032.png
-.. |image33| image:: media/lab03/image033.png
-.. |image34| image:: media/lab03/image034.png
-
-
+.. |image100| image:: ./media/lab01/100.png
+.. |image0| image:: ./media/lab03/image000.png
+.. |image1| image:: ./media/lab03/image001.png
+.. |image2| image:: ./media/lab03/image002.png
+.. |image3| image:: ./media/lab03/image003.png
+.. |image4| image:: ./media/lab03/image004.png
+.. |image5| image:: ./media/lab03/image005.png
+.. |image6| image:: ./media/lab03/image006.png
+.. |image7| image:: ./media/lab03/image007.png
+.. |image8| image:: ./media/lab03/image008.png
+.. |image9| image:: ./media/lab03/image009.png
+.. |image10| image:: ./media/lab03/image010.png
+.. |image11| image:: ./media/lab03/011.png
+.. |image12| image:: ./media/lab03/image012.png
+	 :width: 800px
+.. |image14| image:: ./media/lab03/image014.png
+.. |image15| image:: ./media/lab03/image015.png
+	 :width: 1200px
+.. |image16| image:: ./media/lab03/image016.png
+.. |image17| image:: ./media/lab03/image017.png
+.. |image18| image:: ./media/lab03/image018.png
+.. |image19| image:: ./media/lab03/image019.png
+.. |image20| image:: ./media/lab03/image020.png
+.. |image21| image:: ./media/lab03/image021.png
+.. |image22| image:: ./media/lab03/image022.png
+.. |image23| image:: ./media/lab03/image023.png
+.. |image24| image:: ./media/lab03/image024.png
+.. |image25| image:: ./media/lab03/image025.png
+.. |image26| image:: ./media/lab03/image026.png
+.. |image27| image:: ./media/lab03/image027.png
+.. |image28| image:: ./media/lab03/image028.png
+.. |image29| image:: ./media/lab03/image029.png
+	 :width: 1000px
+.. |image30| image:: ./media/lab03/image030.png
+.. |image32| image:: ./media/lab03/032.png
+.. |image33| image:: ./media/lab03/image033.png
+.. |image34| image:: ./media/lab03/image034.png

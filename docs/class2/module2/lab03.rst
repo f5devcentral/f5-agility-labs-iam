@@ -233,7 +233,6 @@ Task 1 - Access basic.acme.com
 
    |image100|
 
-.. |image0| image:: media/lab03/image000.png
 .. |image1| image:: media/lab03/image001.png
 .. |image2| image:: media/lab03/image002.png
 .. |image3| image:: media/lab03/image003.png
@@ -245,10 +244,6 @@ Task 1 - Access basic.acme.com
 .. |image9| image:: media/lab03/image009.png
 .. |image10| image:: media/lab03/image010.png
 .. |image11| image:: media/lab03/image011.png
-
-
-
-
 .. |image12| image:: media/lab03/image012.png
 	:width: 800px
 .. |image13| image:: media/lab03/image013.png
@@ -260,9 +255,6 @@ Task 1 - Access basic.acme.com
 .. |image18| image:: media/lab03/image018.png
 .. |image19| image:: media/lab03/image019.png
 .. |image20| image:: media/lab03/image020.png
-
-
-
 .. |image21| image:: media/lab03/image021.png
 .. |image22| image:: media/lab03/image022.png
 .. |image23| image:: media/lab03/image023.png

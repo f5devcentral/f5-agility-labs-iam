@@ -1,12 +1,14 @@
 Lab 2: Onboard a Second Application(15.1)
 ======================================================
 
-Guided Configuration supports more than a single application per Identity Aware Proxy Deployment.  In this module you will learn how to modify an existing IAP deployment  to onboard new authentication methods, SSO methods, and applications. 
+Guided Configuration supports more than a single application per Identity Aware Proxy Deployment.  In this module you will learn how to modify an existing IAP deployment  to onboard new authentication methods, SSO methods, and applications.
 
 This Module also introduces the **Application Group** (skipped in the previous module) to provide different contextual access controls on parts of a website.
 
+
+
 Section 2.1 - Access Guided Configuration
------------------------------------------
+--------------------------------------------
 
 To onboard a new application to the IAP, you will first access the Guided Configuration menu.
 
@@ -21,7 +23,7 @@ Task 1 - Access the Zero Trust IAP guided configuration
 
    |image1|
 
-#. Click **IAP_DEMO** 
+#. Click **IAP_DEMO**
 
    |image2|
 
@@ -29,7 +31,7 @@ Task 1 - Access the Zero Trust IAP guided configuration
 Section 2.2 - User Identity
 ------------------------------------------------
 
-Adding an additional User Identity to IAP is just a few simple steps. 
+Adding an additional User Identity to IAP is just a few simple steps.
 
 Task 1 - Configure Certificate Authentication with OCSP
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -42,7 +44,7 @@ Task 1 - Configure Certificate Authentication with OCSP
 
     |image4|
 
-#. Enter Name **ocsp** 
+#. Enter Name **ocsp**
 #. Select **On-Demand Certificate Authentication** from the Authentication Type dropdown
 #. Select **OCSP Responder** from the Authentication Server Type dropdown
 #. Select **ocsp-servers** from the Authentication Server dropdown
@@ -54,12 +56,12 @@ Task 1 - Configure Certificate Authentication with OCSP
 #. Verify the **ocsp** object was created
 
     |image6|
-	
-	
+
+
 Section 2.3 - SSO & HTTP Header
 ------------------------------------------------
 
-In this section, you will create a custom header value to pass to the web server. 
+In this section, you will create a custom header value to pass to the web server.
 
 Task 1 - Create Custom Header
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -82,12 +84,12 @@ Task 1 - Create Custom Header
 #. Verify the **header_sso** object was created
 
    |image10|
-   
-   
+
+
 Section 2.4 - Applications
 ------------------------------------------------
 
-In this section you will define a second application with subpaths.  
+In this section you will define a second application with subpaths.
 
 Task 1 - Configure Application header.acme.com
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -116,12 +118,12 @@ Task 1 - Configure Application header.acme.com
 #. Verify **header.acme.com** was created.
 
    |image14|
-   
-   
+
+
 Section 2.5 - Application Groups
 ------------------------------------------------
 
-In this section you will configure two Application groups to enforce different policies on parts of the header.acme.com website.  
+In this section you will configure two Application groups to enforce different policies on parts of the header.acme.com website.
 
 Task 1 - Create header-ad Group
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -131,13 +133,13 @@ Task 1 - Create header-ad Group
    |image15|
 
 #. Check **Enable Application Groups**
- 
+
   |image16|
 
 #. Enter Name **header-ad**
 #. Under Applications List, select **/** and click the arrow to move it into the Selected box
-#. Click **Save** 
- 
+#. Click **Save**
+
    |image17|
 
 Task 2 - Create header-ocsp Group
@@ -149,15 +151,15 @@ Task 2 - Create header-ocsp Group
 
 #. Enter Name **header-ocsp**
 #. Under Applications List, select **/admin.php** and click the arrow to move it into the Selected box
-#. Click **Save** 
+#. Click **Save**
 
    |image19|
- 
+
 #. Verify both applications groups have been created.
 #. Click **Save & Next**
 
    |image20|
-   
+
 Section 2.6 - Contextual Access
 ------------------------------------------------
 
@@ -206,7 +208,7 @@ Task 2 - Configure Contextual Access for header-ocsp Group
 
 #. Enter Name **webadmin-group**
 #. Check **User Group Check**
-#. Locate the **Website Admin** group 
+#. Locate the **Website Admin** group
 
    .. tip:: Try using the filter field to search
 
@@ -224,8 +226,8 @@ Task 2 - Configure Contextual Access for header-ocsp Group
 #. Click **Deploy** located under the ribbon. Deployment will take a few moments.
 
    |image27|
-   
-   
+
+
 Section 2.7 - Testing
 -----------------------
 
@@ -276,81 +278,52 @@ Task 2 - Login to header.acme.com using user2
 
    |image36|
 
-#. This concludes lab 2. 
- 
+#. This concludes lab 2.
+
    |image100|
 
 
 
-.. |image100| image:: media/lab01/100.png
+.. |image100| image:: ./media/lab01/100.png
 
-.. |image0| image:: media/lab02/image000.png
+.. |image0| image:: ./media/lab02/image000.png
 	:width: 800px
-.. |image1| image:: media/lab02/image001.png
-.. |image2| image:: media/lab02/image002.png
+.. |image1| image:: ./media/lab02/image001.png
+.. |image2| image:: ./media/lab02/image002.png
 	:width: 800px
-.. |image3| image:: media/lab02/image003.png
+.. |image3| image:: ./media/lab02/image003.png
 	:width: 1000px
-.. |image4| image:: media/lab02/image004.png
-.. |image5| image:: media/lab02/image005.png
-.. |image6| image:: media/lab02/image006.png
-.. |image7| image:: media/lab02/image007.png
-.. |image8| image:: media/lab02/image008.png
-.. |image9| image:: media/lab02/image009.png
-.. |image10| image:: media/lab02/image010.png
-.. |image11| image:: media/lab02/image011.png
-.. |image12| image:: media/lab02/image012.png
-.. |image13| image:: media/lab02/image013.png
-.. |image14| image:: media/lab02/image014.png
-.. |image15| image:: media/lab02/image015.png
-.. |image16| image:: media/lab02/image016.png
-.. |image17| image:: media/lab02/image017.png
-.. |image18| image:: media/lab02/image018.png
-.. |image19| image:: media/lab02/image019.png
-.. |image20| image:: media/lab02/image020.png
-.. |image21| image:: media/lab02/image021.png
-.. |image22| image:: media/lab02/image022.png
-.. |image23| image:: media/lab02/image023.png
-.. |image24| image:: media/lab02/image024.png
-.. |image25| image:: media/lab02/image025.png
-.. |image26| image:: media/lab02/image026.png
-.. |image27| image:: media/lab02/image027.png
-.. |image28| image:: media/lab02/image028.png
-.. |image29| image:: media/lab02/image029.png
-.. |image30| image:: media/lab02/image030.png
-.. |image31| image:: media/lab02/image031.png
-.. |image32| image:: media/lab02/image032.png
-.. |image33| image:: media/lab02/image033.png
-.. |image34| image:: media/lab02/image034.png
-.. |image35| image:: media/lab02/image035.png
-.. |image36| image:: media/lab02/image036.png
-.. |image37| image:: media/lab02/image037.png
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	
-	
-
-
-
-
-
-
+.. |image4| image:: ./media/lab02/image004.png
+.. |image5| image:: ./media/lab02/image005.png
+.. |image6| image:: ./media/lab02/image006.png
+.. |image7| image:: ./media/lab02/image007.png
+.. |image8| image:: ./media/lab02/image008.png
+.. |image9| image:: ./media/lab02/image009.png
+.. |image10| image:: ./media/lab02/image010.png
+.. |image11| image:: ./media/lab02/image011.png
+.. |image12| image:: ./media/lab02/image012.png
+.. |image13| image:: ./media/lab02/image013.png
+.. |image14| image:: ./media/lab02/image014.png
+.. |image15| image:: ./media/lab02/image015.png
+.. |image16| image:: ./media/lab02/image016.png
+.. |image17| image:: ./media/lab02/image017.png
+.. |image18| image:: ./media/lab02/image018.png
+.. |image19| image:: ./media/lab02/image019.png
+.. |image20| image:: ./media/lab02/image020.png
+.. |image21| image:: ./media/lab02/image021.png
+.. |image22| image:: ./media/lab02/image022.png
+.. |image23| image:: ./media/lab02/image023.png
+.. |image24| image:: ./media/lab02/image024.png
+.. |image25| image:: ./media/lab02/image025.png
+.. |image26| image:: ./media/lab02/image026.png
+.. |image27| image:: ./media/lab02/image027.png
+.. |image28| image:: ./media/lab02/image028.png
+.. |image29| image:: ./media/lab02/image029.png
+.. |image30| image:: ./media/lab02/image030.png
+.. |image31| image:: ./media/lab02/image031.png
+.. |image32| image:: ./media/lab02/image032.png
+.. |image33| image:: ./media/lab02/image033.png
+.. |image34| image:: ./media/lab02/image034.png
+.. |image35| image:: ./media/lab02/image035.png
+.. |image36| image:: ./media/lab02/image036.png
+.. |image37| image:: ./media/lab02/image037.png

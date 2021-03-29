@@ -26,7 +26,7 @@ Lab Requirements:
 Task 1 - Setup Lab environment
 ---------------------------------
 
-To access your dedicated student lab environment, you will require a web browser and Remote Desktop Protocol (RDP) client software. The web browser will be used to access the Lab Training Portal. The RDP client will be used to connect to the Jump Host, where you will be able to access the BIG-IP management interfaces (HTTPS, SSH).
+To access your dedicated student lab environment, you will need a web browser and Remote Desktop Protocol (RDP) client software. The web browser will be used to access the Unified Demo Framework (UDF) Training Portal. The RDP client will be used to connect to the jumphost, where you will be able to access the BIG-IP management interfaces (HTTPS, SSH).
 
 #. Click **DEPLOYMENT** located on the top left corner to display the environment
 
@@ -34,7 +34,7 @@ To access your dedicated student lab environment, you will require a web browser
 
    |image999|
 
-#. Select your RDP solution.  
+#. Select your RDP resolution.  
 
 #. The RDP client on your local host establishes a RDP connection to the Jumphost.
 
@@ -267,13 +267,13 @@ TASK 9: Review the Summary and Deploy
 +----------------------------------------------------------------------------------------------+
 
 TASK: 10: Testing the SAML Service Provider (SP)
-------------------------------------------------
+-------------------------------------------------------------
 
 +----------------------------------------------------------------------------------------------+
 |1. Open Firefox from the Jumphost desktop and navigate to https://sp.acme.com                 |
 |                                                                                              |
 |                                                                                              |
-| **Note:** If you have issues, open Firefox in a New Private Window (Incognito/Safe Mode)     |
+| **Note:** If you have issues, open Firefox in a New Private Window (Incognito/Safe Mode)     | 
 |                                                                                              |
 | 2. Once the page loads, enter **user1** for username and **user1** for password  in the      |
 |                                                                                              |

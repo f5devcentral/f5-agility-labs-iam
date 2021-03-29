@@ -11,6 +11,8 @@ Welcome to the Troubleshooting Universal Access Lab Series. These lab exercises 
 .. toctree::
    :maxdepth: 1
    :glob:
-
+   
    module1/intro.rst
    module1/lab*
+   
+ 

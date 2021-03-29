@@ -5,14 +5,15 @@ F5 Access Guard is a new set of client software tools designed to help administr
 
 APM has included posture checking capability since its inception, and this new service improves upon this capability by allowing for instantaneous and continuous checks. Deployment of F5 Access Guard is significantly different than previous posture check implementations.
 
+   
 Section 4.1 - XML Configuration File
-------------------------------------
+---------------------------------------
 
 The F5 AccessGuardServiceConfig.xml file defines the settings used by the AccessGuard Service.  This file contains settings for the signing certificate, timers, checks performed and websites posture data can be sent to.
 
 
 Task 1 - Explore the configuration file setting
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 	.. note:: Additional settings can be configured in the XML file beyond this 		example.  For further information see the article **Configuring F5 AccessGuard** 	on askf5.com - https://techdocs.f5.com/en-us/bigip-15-0-0/big-ip-access-policy-manager-access-guard-config/configuring-f5-access-guard.html
 
