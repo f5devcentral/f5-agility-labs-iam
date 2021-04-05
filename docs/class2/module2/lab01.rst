@@ -386,6 +386,9 @@ Section 1.13 - Testing
 
 In this section you will access the application basic.acme.com and watch how the BIG-IP restricts access when a device fails it's posture assessment.
 
+.. warning::
+   You must use **Firefox** for testing!
+
 Task 1 - Access basic.acme.com
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

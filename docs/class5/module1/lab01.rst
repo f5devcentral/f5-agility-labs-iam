@@ -1,4 +1,4 @@
-Lab1: The Message Box
+Lab 1: The Message Box
 =======================
 
 Task 1 - Setup Lab Environment
