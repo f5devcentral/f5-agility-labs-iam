@@ -244,6 +244,9 @@ Section 2.8 - Testing
 
 In this section you will use user1's credentials to default website header.acme.com.  However, when you attempt to access the admin page you will be prompted for certificate based authentication.  After a successful login you will close your browser and login to default website using user2's credentials.  User2 will be denied due to not having the correct AD groups.
 
+.. warning::
+   You must use **Firefox** for testing!
+
 Task 1 - Login to header.acme.com using user1
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

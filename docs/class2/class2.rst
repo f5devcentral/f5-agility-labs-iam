@@ -36,7 +36,13 @@ This lab documents provides foundational concepts for understanding Access Polic
    module3/lab*
 
     
+203 - Microsoft Integration
+-----------------------------
+.. toctree::
+   :maxdepth: 1
+   :glob:
 
+   module4/lab*
 
 
 

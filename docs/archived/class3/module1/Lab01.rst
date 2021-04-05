@@ -57,7 +57,7 @@ Create an AD AAA Server
 
 -  Click **Finished**
 
-   |image1|
+   |image001|
 
 Create a Per-Session Access Policy
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -75,28 +75,28 @@ Create a Per-Session Access Policy
 
 -  Click on the **Edit…** link for the appropriate Access Policy created above
 
-   |image2|
+   |image002|
 
 -  Select the **+** between Start and Deny and **Add**
    an **HTTP 407 Response** object
 
-   |image3|
+   |image003|
 
 -  Change the **HTTP Auth Level** to **basic**
 
-   |image4|
+   |image004|
 
 -  Click **Save**
 
 -  On the **Basic** branch of the **HTTP 407** Object, **Add**
    an **AD Auth** Object
 
-   |image5|
+   |image005|
 
 -  Change the **Server** to **/Common/AD_F5DEMO** and change
    **Show Extended Error** to **Enabled**
 
-   |image6|
+   |image006|
 
 -  Click **Save**
 
@@ -107,7 +107,7 @@ Create a Per-Session Access Policy
 
 -  Click on the **Apply Access Policy** link
 
-   |image7|
+   |image007|
 
 Task 2 – Create a custom URL Filter
 -----------------------------------
@@ -119,16 +119,16 @@ Task 2 – Create a custom URL Filter
 
 -  Click on the first check box to select all categories
 
-   |image8|
+   |image008|
 
 -  Click **Allow** at the bottom of the page
 
-   |image9|
+   |image009|
 
 -  Click the check box to select **Social Web – Facebook** and then click
    **Block** (for this lab, our URL filter will only block Facebook)
 
-   |image10|
+   |image010|
 
 Task 3 – Create a "Per-Request" Access Policy
 ---------------------------------------------
@@ -143,14 +143,14 @@ Task 3 – Create a "Per-Request" Access Policy
 -  Click on the **Edit…** link for the appropriate Per-Request Policy created
    above, then go back to the VPE tab in your browser
 
-   |image11|
+   |image011|
 
 -  Click on the **+** symbol between **Start** and **Allow**
 
 -  Go to the **General Purpose** tab and add a **Protocol
    Lookup** object
 
-   |image12|
+   |image012|
 
 -  Click **Add Item**
 
@@ -159,7 +159,7 @@ Task 3 – Create a "Per-Request" Access Policy
 -  On the HTTPS branch, click the **+** and **Add** a
    **Category Lookup** object (**General Purpose** tab)
 
-   |image13|
+   |image013|
 
 -  Select **Use SNI in Client Hello** for **Categorization Input**
 
@@ -169,12 +169,12 @@ Task 3 – Create a "Per-Request" Access Policy
    (from the **General Purpose** tab) and choose URL Filter
    **/Common/LAB_URL_FILTER**
 
-   |image14|
+   |image014|
 
    .. IMPORTANT:: Change the Ending of the **Allow**
       outcome on the "fallback" branch from “Reject” to **Allow**
 
-   |image15|
+   |image015|
 
 Task 4 – Create Explicit Proxy Configuration using the SWG iApp
 ----------------------------------------------------------------
@@ -277,7 +277,7 @@ origin server) to domain-joined machines.
 -  Click the gear icon or hit ``Alt-X`` and select
    **Internet options**
 
-   |image16|
+   |image016|
 
 -  Go to the **Content** tab and click **Certificates**
 
@@ -285,7 +285,7 @@ origin server) to domain-joined machines.
    scroll down. You should see the **F5 Agility CA** certificate in the
    list.
 
-   |image17|
+   |image017|
 
 -  Double-click on the certificate to view its properties, then close
    this window and the Certificates window.
@@ -306,7 +306,7 @@ Configure your browser with a “Proxy Server”
 
 -  Click **OK** twice.
 
-   |image18|
+   |image018|
 
 Test 1:
 ~~~~~~~
@@ -316,7 +316,7 @@ Test 1:
 
 -  Browse to **https://www.google.com**
 
-   |image19|
+   |image019|
 
 -  The browser should prompt you for authentication. Submit your
    credentials:
@@ -329,7 +329,7 @@ Test 1:
 
 -  Browse to **Access > Overview > Active Sessions**
 
-   |image20|
+   |image020|
 
 Test 2:
 ~~~~~~~
@@ -338,14 +338,14 @@ Test 2:
    machine, go to https://www.google.com and verify the SSL certificate
    is signed by the **F5 Agility CA** you configured in Lab 1
 
-   |image21|
+   |image021|
 
 -  Using an InPrivate browser window from the client test
    machine, go to https://www.wellsfargo.com and examine the certificate
    to verify that it is signed by the same **F5 Agility CA** you
    configured in Lab 1
 
-   |image22|
+   |image022|
 
 Test 3:
 ~~~~~~~
@@ -355,74 +355,31 @@ Test 3:
    instead delivered a SWG Block Page, in accordance to the URL Filter
    you configured above.
 
-   |image23|
+   |image023|
 
-.. |image1| image:: /_static/class3/image3.png
-   :width: 3.69928in
-   :height: 4.01600in
-.. |image2| image:: /_static/class3/image4.png
-   :width: 5.30417in
-   :height: 1.38264in
-.. |image3| image:: /_static/class3/image5.png
-   :width: 5.30417in
-   :height: 1.69583in
-.. |image4| image:: /_static/class3/image6.png
-   :width: 3.31806in
-   :height: 3.78403in
-.. |image5| image:: /_static/class3/image7.png
-   :width: 2.99375in
-   :height: 2.42569in
-.. |image6| image:: /_static/class3/image8.png
-   :width: 2.97778in
-   :height: 2.66458in
-.. |image7| image:: /_static/class3/image9.png
-   :width: 5.30694in
-   :height: 3.12847in
-.. |image8| image:: /_static/class3/image10.png
-   :width: 5.35833in
-   :height: 4.54097in
-.. |image9| image:: /_static/class3/image11.png
-   :width: 3.50000in
-   :height: 1.58889in
-.. |image10| image:: /_static/class3/image12.png
-   :width: 5.22083in
-   :height: 4.91736in
-.. |image11| image:: /_static/class3/image13.png
-   :width: 5.40278in
-   :height: 1.57222in
-.. |image12| image:: /_static/class3/image14.png
-   :width: 4.91458in
-   :height: 3.24722in
-.. |image13| image:: /_static/class3/image15.png
-   :width: 5.19653in
-   :height: 3.96181in
-.. |image14| image:: /_static/class3/image16.png
-   :width: 5.58958in
-   :height: 2.93333in
-.. |image15| image:: /_static/class3/image17.png
-   :width: 4.96736in
-   :height: 1.67153in
-.. |image16| image:: /_static/class3/image18.png
-   :width: 1.90556in
-   :height: 2.55139in
-.. |image17| image:: /_static/class3/image19.png
-   :width: 4.91459in
-   :height: 5.05600in
-.. |image18| image:: /_static/class3/image20.png
-   :width: 3.93600in
-   :height: 3.97152in
-.. |image19| image:: /_static/class3/image21.png
-   :width: 2.44262in
-   :height: 2.39685in
-.. |image20| image:: /_static/class3/image22.png
-   :width: 4.83200in
-   :height: 2.86912in
-.. |image21| image:: /_static/class3/image23.png
-   :width: 5.31000in
-   :height: 2.48000in
-.. |image22| image:: /_static/class3/image24.png
-   :width: 4.17000in
-   :height: 2.10168in
-.. |image23| image:: /_static/class3/image25.png
-   :width: 5.33000in
-   :height: 2.17000in
+
+
+
+.. |image001| image:: ./media/lab01/001.png
+.. |image002| image:: ./media/lab01/002.png
+.. |image003| image:: ./media/lab01/003.png
+.. |image004| image:: ./media/lab01/004.png
+.. |image005| image:: ./media/lab01/005.png
+.. |image006| image:: ./media/lab01/006.png
+.. |image007| image:: ./media/lab01/007.png
+.. |image008| image:: ./media/lab01/008.png
+.. |image009| image:: ./media/lab01/009.png
+.. |image010| image:: ./media/lab01/010.png
+.. |image011| image:: ./media/lab01/011.png
+.. |image012| image:: ./media/lab01/012.png
+.. |image013| image:: ./media/lab01/013.png
+.. |image014| image:: ./media/lab01/014.png
+.. |image015| image:: ./media/lab01/015.png
+.. |image016| image:: ./media/lab01/016.png
+.. |image017| image:: ./media/lab01/017.png
+.. |image018| image:: ./media/lab01/018.png
+.. |image019| image:: ./media/lab01/019.png
+.. |image020| image:: ./media/lab01/020.png
+.. |image021| image:: ./media/lab01/021.png
+.. |image022| image:: ./media/lab01/022.png
+.. |image023| image:: ./media/lab01/023.png

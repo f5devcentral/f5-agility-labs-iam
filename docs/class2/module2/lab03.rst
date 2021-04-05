@@ -154,6 +154,9 @@ Section 3.3 - Testing
 
 In this section you will test how HTTP connector can influence policy changes dynamically as conditions change in the network 
 
+.. warning::
+   You must use **Firefox** for testing!
+
 Task 1 - Access basic.acme.com
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

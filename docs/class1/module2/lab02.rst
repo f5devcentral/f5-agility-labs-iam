@@ -44,7 +44,7 @@ Lab 2 Tasks:
 -----------------
 
 TASK 1: Create Per Session Policy
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+----------------------------------
 
 Refer to the instructions and screen shots below:
 

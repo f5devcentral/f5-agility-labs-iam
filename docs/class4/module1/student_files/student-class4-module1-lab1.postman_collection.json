@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "c6937034-d199-4ff0-9a22-610cf4003daf",
+		"_postman_id": "d8aa0737-686e-4be8-8447-3fed520a9d96",
 		"name": "student-class4-module1-lab1",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -589,6 +589,16 @@
 					""
 				]
 			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BIGIP_MGMT",
+			"value": "10.1.1.4"
+		},
+		{
+			"key": "VS_NAME",
+			"value": "class4-module1-lab1"
 		}
 	]
 }

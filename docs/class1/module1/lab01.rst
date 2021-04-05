@@ -335,7 +335,7 @@ Profiles and Policies are where we begin to learn about what makes APM function.
       A per request policy creation will work the same way as a per session policy allowing you to add various items to the main policy and create macros. In addition a per request policy can also contain subroutines.
 
       .. Note:: A per-request policy subroutine is a collection of actions. What distinguishes a subroutine from other collections of actions (such as macros), is that a subroutine starts a subsession that, for its duration, controls user access to specified resources. If a subroutine has an established subsession, subroutine execution is skipped. A subroutine is therefore useful for cases that require user interaction (such as a confirmation dialog or a step-up authentication), since it allows skipping that interaction in a subsequent access.
-      
+
       You cannot use subroutines in macros within per-request policies.
       Subroutine properties specify subsession timeout values, maximum macro loop count, and gating criteria. You can reauthenticate, check for changes on the client, or take other actions based on timeouts or gating criteria.
 
@@ -353,17 +353,17 @@ Profiles and Policies are where we begin to learn about what makes APM function.
 
       .. Important:: USE WITH CAUTION.  This is an advanced feature and you should consult with your F5 Account team or Professional Services before implementing this configuration.
 
-      .. Note:: In BIG-IP 13.1.0, a maximum of either BIG-IP APM systems are supported in a sync-only group type.
+      .. Note:: In BIG-IP 13.1.0, a maximum of eight BIG-IP APM systems are supported in a sync-only group type.
 
 **Customization**
 
 #. Click on **Access** --> **Profiles/Policies** --> **Customization**
 
-      What are customization and localization?
+      **What are customization and localization?**
 
       Customization and localization are ways to change the text and the language that users see, and to change the appearance of the user interface that Access Policy Manager presents to client users. Customization provides numerous settings that let you adapt the interface to your particular operation. Localization allows you to use different languages in different countries.
 
-      About the Customization tool
+      **About the Customization tool**
 
       The Customization tool is part of Access Policy Manager (APM). With the Customization tool, you can personalize screen messages and prompts, change screen layouts, colors, and images, and customize error messages and other messages using specific languages and text for policies and profiles developed in APM. You can customize settings in the Basic Customization view (fewer settings) or change the view to General Customization (many settings). In the General Customization view, you can use the Customization tool in the BIG-IP admin console, or click Popout to open it in a separate browser window. In either view, you can click Preview to see what an object (such as Logon page or Deny Ending Page) will look like.
 
@@ -482,10 +482,10 @@ The following figure shows BIG-IP APM acting as an authentication gateway. Infor
 
       |adpool|
 
-      You have now created an object that can be used to facilitate Active Directory authentication in front of any application.  The application itself does not need to require authentication. If you were to deploy a policy with AD Auth on a Virtual Server for a web application the policy would preset a login page, prompt for credentials, verify the credentials against this AD object before allowing a user to access the web application.
+      You now have an object that can be used to facilitate Active Directory authentication in front of any application.  The application itself does not need to require authentication. If you were to deploy a policy with AD Auth on a Virtual Server for a web application the policy would preset a login page, prompt for credentials, verify the credentials against this AD object before allowing a user to access the web application.
 
 #. Go to **Access** --> **Profiles/Policies** --> **Access Profiles (Per-Session Policies)**
-#. Locate the server1-psp and click **Edit**
+#. Locate the **server1-psp** and click **Edit**
 #. Click the **+** symbol between Start and Deny.
 #. From the **Logon** tab select the **Logon Page** radio button
 #. Click **Add Item**
@@ -503,8 +503,8 @@ The following figure shows BIG-IP APM acting as an authentication gateway. Infor
       Now you have a basic policy with AD Authentication that you can leverage for Web Pre-Authorization in front of any application.
 
 #. Go to **Local Traffic** --> **Virtual Servers**
-#. Locate server1-https and click on it
-#. Scroll down to the Access Policy section.  Next to **Access Profile** click the drop and replace server1-psp with your server1-psp
+#. Locate **server1-https** and click on it
+#. Scroll down to the **Access Policy** section.  Next to **Access Profile** click the drop and replace server1-psp with your server1-psp
 #. Scroll down to the bottom and click **Update**
 #. In a new browser tab go to http://server1.acme.com and Login
 
@@ -535,10 +535,10 @@ BIG-IP APM supports industry standard authentication methods, including:
         |SSO Method Conversion | Username Conversion         |  unchecked                       |
         +----------------------+-----------------------------+----------------------------------+
 
-        .. Note::  Username conversion can be enabled if you want domain\username or username@domain to convert to just username.
+        .. Note::  Username conversion can be enabled if you want domain\\username or username@domain to convert to just username.
 
 #. Click on **Access** --> *Profiles/Policies** --> **Access Profiles (Per-Session Policies)**
-#. Locate the basic-psp profile and click on the name
+#. Locate the **basic-psp** profile and click on the name
 #. Click on **SSO/Auth Domains**
 #. Under SSO Configuration notice **basic_sso** is selected
 #. From the top menu bar click **Access Policy** and click **Edit Access Policy for Profile "basic-psp"** link
@@ -554,7 +554,7 @@ BIG-IP APM supports industry standard authentication methods, including:
 #. Open an incognito window and try go to https://basic.acme.com
 #. You should have been prompted with a windows login.  Close the Window
 #. Go to **Local Traffic** --> **Virtual Servers** and open basic-https
-#. Scroll to *Access Policy** and click the drop down next to **Access Profile**.  Choose basic-psp
+#. Scroll to **Access Policy** and click the drop down next to **Access Profile**.  Choose **basic-psp**
 
       |policyattach|
 

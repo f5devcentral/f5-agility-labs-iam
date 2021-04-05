@@ -1,4 +1,4 @@
-400 Series: APM Automation Labs
+400 Series: Access Automation
 ======================================================
 
 This Series provides an understanding of how to perform create, read, update, and delete(CRUD) operations on the BIG-IP Access Policy Manager(APM) Module.  
