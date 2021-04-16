@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "abcaf531-8231-40e9-8ff1-28dcde787c2c",
+		"_postman_id": "b9282e88-057b-493b-aa62-563420b18203",
 		"name": "class1-module1-lab01-create",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -15064,6 +15064,37 @@
 							}
 						}
 					]
+				}
+			]
+		},
+		{
+			"name": "Add Images",
+			"item": [
+				{
+					"name": "Push Images",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"repo\":\"access-labs\",\r\n\"class_number\":\"1\",\r\n\"module_number\":\"1\",\r\n\"user\": \"user1\"\r\n}"
+						},
+						"url": {
+							"raw": "http://10.1.20.6:81/desktop",
+							"protocol": "http",
+							"host": [
+								"10",
+								"1",
+								"20",
+								"6"
+							],
+							"port": "81",
+							"path": [
+								"desktop"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
