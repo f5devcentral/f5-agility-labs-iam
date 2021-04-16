@@ -79,7 +79,7 @@ Task 2 -  Active Sessions
 
     |image012|
 
-#.  The Auto Refresh timer is disabled by default.  Various timers settings can be applied to auto update the Active session page.  Select 10 seconds is selected it will immediately begin counting down.  Alternativily the Refresh button and be clicked to immediatily update the table.
+#.  The Auto Refresh timer is disabled by default.  Various timers settings can be applied to auto update the Active session page.  Select 10 seconds is selected it will immediately begin counting down.  Alternatively, the Refresh button and be clicked to immediately update the table.
 
     |image013|
 
@@ -87,15 +87,15 @@ Task 2 -  Active Sessions
 
     |image014|
 
-#. Open a new **ingognito** browser tab and navigate to https://server1.acme.com.  Do this will create a new session. Once presented a logon page, **DO NOT** logon and simply close the ingognito browser window.
+#. Open a new **incognito** browser tab and navigate to https://server1.acme.com.  Do this will create a new session. Once presented a logon page, **DO NOT** logon and simply close the incognito browser window.
 
     |image015|
 
-#. Return to the BIG-IP active session screen. If autorefresh is still enabled the next time it refreshes a new session will appear.  **Stop** the autorefresh.
+#. Return to the BIG-IP active session screen. If auto refresh is still enabled the next time it refreshes a new session will appear.  **Stop** the auto refresh.
 
 #. Notice the Active Session Count is now **2**
 
-#. Notice the Status of the new session is a blue square rather than a green circle.  A green circle means the entire access policy has been completed from beginnning to end.  A blue circle means the session is not complete and is still in process.
+#. Notice the Status of the new session is a blue square rather than a green circle.  A green circle means the entire access policy has been completed from beginning to end.  A blue circle means the session is not complete and is still in process.
 
     |image016|
 
@@ -113,7 +113,7 @@ Task 2 -  Active Sessions
 
     |image019|
 
-#.  Clicking the **+ (plus symbol)** next to the session ID expands the session to display an subsessions associated with the primary session.  Subsessions are created when using a Per-Request Policy that contains a subroutine.  Subesssions have their own variables, settings, and timers seperate from the primary session.
+#.  Clicking the **+ (plus symbol)** next to the session ID expands the session to display an subsessions associated with the primary session.  Subsessions are created when using a Per-Request Policy that contains a subroutine.  Subesssions have their own variables, settings, and timers separate from the primary session.
 
     |image020|
 
@@ -125,7 +125,7 @@ Task 2 -  Active Sessions
 
     |image022|
 
-#. Each variable contains a piece of information that APM gathered during the life of the sesson.  This information can come from various sources such as traffic flow, device Information or sser Information.  Variables can be created, modified, or deleted throughout the life of a session.  Once a variable is defined it can used as condition for access control decisions. Click **Cancel** to return to the Active Session Screen.
+#. Each variable contains a piece of information that APM gathered during the life of the session.  This information can come from various sources such as traffic flow, device Information or user Information.  Variables can be created, modified, or deleted throughout the life of a session.  Once a variable is defined it can used as condition for access control decisions. Click **Cancel** to return to the Active Session Screen.
 
     |image023|
 
@@ -143,11 +143,11 @@ Task 2 -  Active Sessions
 
     |image027|
 
-#. The Start Time for a session is when the intial request was made and the session ID assigned.
+#. The Start Time for a session is when the initial request was made and the session ID assigned.
 
     |image028|
 
-#. The experition time's initial value is be based on the **Inactivity Timeout** defined on the Access Profile.  The default is 15 minutes and can be modified.  The Inactivity Timeout setting controls how long (in seconds) a client can keep a live session without sending traffic.
+#. The expiration time's initial value is be based on the **Inactivity Timeout** defined on the Access Profile.  The default is 15 minutes and can be modified.  The Inactivity Timeout setting controls how long (in seconds) a client can keep a live session without sending traffic.
 
     |image029|
 
@@ -156,7 +156,7 @@ Task 2 -  Active Sessions
     - n/a: Session completion still pending
     - network_access: A webtop with a network access resource (VPN)
     - web_application: A virtual server with APM profile and a rewrite profile (APM doing L7 reverse proxy)
-    - full: A webtop, that can have multiple type of resources: Web Resources,Reverse Proxy, VDI Resources, SSH Resources, and  network access resource (VPN)
+    - full: A webtop, that can have multiple type of resources: Web Resources, Reverse Proxy, VDI Resources, SSH Resources, and  network access resource (VPN)
     - ltm_apm: A virtual server with an APM profile.  No rewrite profile or webtop attached.
 
     |image030|
@@ -189,7 +189,7 @@ Access Reports allow an administrator to quickly locate current and historical s
 
     |image035|
 
-#.  A session details report displays every every step of policy evaluation from the start item to the End Termanial. You can see in line 3 that username **user1** was collected. Then in line 4 the username and password were authenticated against Active Directory and down the **Allow** End branch.  This makes troubleshooting access control descisions easy beccause every step is logged and it can be easily seen where the failure is and potential reasons why it happened.
+#.  A session details report displays every step of policy evaluation from the start item to the End Terminal. You can see in line 3 that username **user1** was collected. Then in line 4 the username and password were authenticated against Active Directory and down the **Allow** End branch.  This makes troubleshooting access control decisions easy because every step is logged and it can be easily seen where the failure is and potential reasons why it happened.
 
     |image036|
 
@@ -197,7 +197,7 @@ Access Reports allow an administrator to quickly locate current and historical s
 Task 4 - Log Settings
 --------------------------------------------------
 
-In Task 2, you learned how to view access reports.  In this Task you will learn how to modify the existing logging profile.  This is sometimes necessary when more detailed logging informaiton is needed due to Organizational requirements or when troubleshooting an issue.
+In Task 2, you learned how to view access reports.  In this Task you will learn how to modify the existing logging profile.  This is sometimes necessary when more detailed logging information is needed due to Organizational requirements or when troubleshooting an issue.
 
 
 #. Navigate to Access >> Overview >> Event Logs >> Settings.
@@ -225,7 +225,7 @@ In Task 2, you learned how to view access reports.  In this Task you will learn 
 
     |image041|
 
-#. Click **Access Profiles**.  This section allows you to select which Access Profiles will use this logging profile.  
+#. Click **Access Profiles**.  This section allows you to select which Access Profiles will use this logging profile.
 
     |image042|
 
@@ -244,14 +244,14 @@ In Task 2, you learned how to view access reports.  In this Task you will learn 
 
 #. At the logon page enter the following credentials:
 
-    - Username:**user1** 
+    - Username:**user1**
     - Password:**user1**
 
 #. Click **Logon**
 
     |image007|
 
-#.  You will be be presented the following website if the logon was successful.
+#.  You will be presented the following website if the logon was successful.
 
     |image008|
 
@@ -287,7 +287,7 @@ Task 5 - Lab Cleanup
 
    |image998|
 
-#. The screen should refresh displaying the progress of the automation within 30 seconds.  Scroll to the bottom of the automation workflow to ensure all requests succeeded.  If you you experience errors try running the automation a second time or open an issue on the `Access Labs Repo <https://github.com/f5devcentral/access-labs>`__.
+#. The screen should refresh displaying the progress of the automation within 30 seconds.  Scroll to the bottom of the automation workflow to ensure all requests succeeded.  If you experience errors try running the automation a second time or open an issue on the `Access Labs Repo <https://github.com/f5devcentral/access-labs>`__.
 
    |image999|
 

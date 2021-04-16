@@ -71,7 +71,7 @@ Task 3: Add Webtop resource to existing Access Policy
 
 #. Click **Save**.
 
-#. At the top left of the browser window, click on **Apply Access Policy** , then close the tab.
+#. At the top left of the browser window, click on **Apply Access Policy** , then close the tab. Replace the Access Profile on your app-https VIP with your myaccesspolicy Access profile and set the Per-Request Policy to None
 
    |Lab4-Image9|
 
@@ -81,7 +81,7 @@ Task 3: Add Webtop resource to existing Access Policy
 Task 4: Testing
 -----------------
 
-#. Open a **New Incognito** web browser to the virtual server created in the previous lab by navigating to **https://server1.acme.com**. You will be presented with a Logon page similar to the one from the last lab.
+#. Open a **New Incognito** web browser to the virtual server created in the previous lab by navigating to **https://app.acme.com**. You will be presented with a Logon page similar to the one from the last lab.
 
 #. Enter the following credentials:
 

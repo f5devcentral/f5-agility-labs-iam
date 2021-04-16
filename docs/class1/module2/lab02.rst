@@ -231,7 +231,7 @@ In this example we're going to use a Per-Request Policy with a subroutine to aut
 
     |Lab2-Image34|
 
-#. Click the + sign after the URL Branching Box you just added and select the **General Purpose** tab and click the **HTTP Headers** radio Button
+#. Click the + sign after the AD_Subroutine Box you just added and select the **General Purpose** tab and click the **HTTP Headers** radio Button
 
     |Lab2-Image29|
 

@@ -33,11 +33,11 @@ To access your dedicated student lab environment, you will require a web browser
 
    |image003|
 
-#. Hover over tile **Intro to Per-Session Policies**. A start and stop icon should appear within the tile.  Click the **Play** Button to start the automation to build the environment
+#. Hover over tile **Visual Policy Editor (VPE) Overview**. A start and stop icon should appear within the tile.  Click the **Play** Button to start the automation to build the environment
 
    |image004|
 
-#. The screen should refresh displaying the progress of the automation within 30 seconds.  Scroll to the bottom of the automation workflow to ensure all requests succeeded.  If you you experience errors try running the automation a second time or open an issue on the `Access Labs Repo <https://github.com/f5devcentral/access-labs>`__.
+#. The screen should refresh displaying the progress of the automation within 30 seconds.  Scroll to the bottom of the automation workflow to ensure all requests succeeded.  If you experience errors try running the automation a second time or open an issue on the `Access Labs Repo <https://github.com/f5devcentral/access-labs>`__.
 
    |image005|
 
@@ -63,7 +63,7 @@ Section 1 - The Access Profile
 
     |image009|
 
-#. The **Properties** section provides baseline settings related to Scope, timers, and languages accross the all sessions that will use the policy regardless of how Visual Policy Editor is configured.
+#. The **Properties** section provides baseline settings related to Scope, timers, and languages across the all sessions that will use the policy regardless of how Visual Policy Editor is configured.
 
     |image010|
 
@@ -95,7 +95,7 @@ Section 1 - The Access Profile
     +-------------------------+-------------------------+--------------------------------------------------------------------------------------------------------------------+
     | Max In Progress Sessions| Number 0 or greater     | Specifies the maximum number of sessions that can be in progress for a client IP address. When setting this value, |
     | Per Client IP           |                         | take into account whether users will come from a NAT-ed or proxied client address and, if so, consider increasing  |
-    |                         |                         | the value accordingly. The default value is 0 which represents unlimited sessions.                                 |                                                                                                          
+    |                         |                         | the value accordingly. The default value is 0 which represents unlimited sessions.                                 |
     +-------------------------+-------------------------+--------------------------------------------------------------------------------------------------------------------+
     | Restrict to Single      | Selected or cleared     | When selected, limits a session to a single IP address.                                                            |
     | Client IP               |                         |                                                                                                                    |
@@ -159,7 +159,7 @@ Section 1 - The Access Profile
 
 #. Click **Access Policy**
 
-    .. note::  Object builts outside visual policy editor, but used within the policy are displayed here.
+    .. note::  Object builds outside visual policy editor, but used within the policy are displayed here.
 
 #. Click **Edit Access Policy for Profile "server1-psp"** to open Visual Policy Editor(VPE) in a new tab.
 
@@ -193,19 +193,19 @@ When a creating a policy from scratch there will only be a single branch connect
 
     |image015|
 
-#.  Actions will have atleast two tabs.  One contains the settings for that action, while the second one contains the Branch Rules. Click **Branch Rules**.
+#.  Actions will have at least two tabs.  One contains the settings for that action, while the second one contains the Branch Rules. Click **Branch Rules**.
 
     |image016|
 
-#.  The AD Auth action has two branch rules. In order to proceed down the Succesful branch **Active Directory Auth has Passed** must be true.  If not the user will proceed down the fallback branch. Click **change** to take a deeper look at the Expression.
+#.  The AD Auth action has two branch rules. In order to proceed down the Successful branch **Active Directory Auth has Passed** must be true.  If not the user will proceed down the fallback branch. Click **change** to take a deeper look at the Expression.
 
     |image017|
 
-#. Expressions can be modified under the **Simple** or **Advanced** Tabs.  The Simple tab allows you create expression using boolean logic.  If something is added to the AND experssion both conditions must be true.  While if something is add the OR condition either condition must be true.  Click **Advanced**.
+#. Expressions can be modified under the **Simple** or **Advanced** Tabs.  The Simple tab allows you create expression using boolean logic.  If something is added to the AND expression both conditions must be true.  While if something is add the OR condition either condition must be true.  Click **Advanced**.
 
     |image018|
 
-#.  The **Advanced** tab allows direct modifation of the expression using TCL.  You can now see that AD Auth action evaluates the session variable session.ad.last.authresult to determine if the value is a 1(true).
+#.  The **Advanced** tab allows direct modification of the expression using TCL.  You can now see that AD Auth action evaluates the session variable session.ad.last.authresult to determine if the value is a 1(true).
 #.  Click **Cancel** because we do not want to modify anything in the AD Auth action.
 
     |image019|
@@ -219,13 +219,13 @@ APM includes a number of pre-defined actions. You can see the available actions 
 
 #. Click the **+ (Plus Symbol)** on the Successful of the AD Auth Action.
 
-    |image020|
+    |image064|
 
-    The Actions selection screen has a default set of six tabs.  Each tab contains a collection of prefined actions related to that tab.
+    The Actions selection screen has a default set of six tabs.  Each tab contains a collection of predefined actions related to that tab.
 
 #. The **Logon** tab contains various ways of collections user credentials.
 
-    |image021|
+    |image020|
 
 #. Click the Authentication Tab.  It contains actions that either validate credentials or interact with directory servers in some way.
 
@@ -233,7 +233,7 @@ APM includes a number of pre-defined actions. You can see the available actions 
 
     |image023|
 
-#.  Click the **Assigment** tab.  It determines the associatation between resources and users.  Secoondly this is where mechanisms such as ACLs orbandwidth controls are chosen.
+#.  Click the **Assignment** tab.  It determines the association between resources and users.  Secondly this is where mechanisms such as ACLs or bandwidth controls are chosen.
 
     |image024|
 
@@ -242,7 +242,7 @@ APM includes a number of pre-defined actions. You can see the available actions 
 
     |image025|
 
-#. Click the Endpoint Security (Client-side) tab.  These endpoints checks require software to be installed on the client.  Either the Edge Client is using VPN or F5 Helper Agent if performing posture via a webbrowser.  It's important to know the initial installation requires administrative privildges on th client machine.  In this enviorment the software is already installed on the jumphost.
+#. Click the Endpoint Security (Client-side) tab.  These endpoints checks require software to be installed on the client.  Either the Edge Client is using VPN or F5 Helper Agent if performing posture via a web browser.  It's important to know the initial installation requires administrative privileges on the client machine.  In this environment the software is already installed on the jumphost.
 
     |image026|
 
@@ -259,7 +259,7 @@ APM includes a number of pre-defined actions. You can see the available actions 
     |image028|
 
 #.  We have successfully added our first new action to this policy.  Now After the user credentials are successfully validated against Active Directory the user will see a message box with the text "Learning APM".
-#.  Also notice a new set of text has appeared in the top left corner of the policy.  When you see **Apply Access Policy** in the left corner it means a policy has changes that have been saved but yet to be commited.  It is important to understand that changes made to a per-session policy do not impact existing sessions. we will leave it that way for now as we have more changes to make.
+#.  Also notice a new set of text has appeared in the top left corner of the policy.  When you see **Apply Access Policy** in the left corner it means a policy has changes that have been saved but yet to be committed.  It is important to understand that changes made to a per-session policy do not impact existing sessions. we will leave it that way for now as we have more changes to make.
 
     |image029|
 
@@ -354,7 +354,7 @@ In this task we are going to create a Macro that detects the client operating sy
 
     |image047|
 
-#. Now add your completed Macro to the Policy by clicking the **+(Plus Symbol)** between the the Start Item and Logon Page action.
+#. Now add your completed Macro to the Policy by clicking the **+(Plus Symbol)** between the Start Item and Logon Page action.
 
     |image048|
 
@@ -368,7 +368,7 @@ In this task we are going to create a Macro that detects the client operating sy
 Task 2.5: Endings
 ~~~~~~~~~~~~~~~~~~~
 
-Endings allow an administrtor to customize APM's reponsse by introducing redirects rather than generic Allow or Deny action.   We will explore added a redirect to our policy to see it's behavior during testing.
+Endings allow an administrator to customize APM's response by introducing redirects rather than generic Allow or Deny action.   We will explore added a redirect to our policy to see it's behavior during testing.
 
 #. Click **Edit Endings**
 
@@ -409,7 +409,7 @@ Task 2.6 Testing
 
     |image057|
 
-#. After posture assement has been successful performed the logon screen will appear.
+#. After posture assessment has been successful performed the logon screen will appear.
 
     |image058|
 
@@ -427,7 +427,7 @@ Task 2.6 Testing
 
     |image061|
 
-#.  After successfull authentication you are presented the Message box with the text **learning APM**.  Click **Continue**.
+#.  After successful authentication you are presented the Message box with the text **learning APM**.  Click **Continue**.
 
     |image062|
 
@@ -449,11 +449,11 @@ Lab Cleanup
 
    |image003|
 
-#. Hover over tile **Into to Per-Session Policies**. A start and stop icon should appear within the tile.  Click the **Stop** Button to trigger the automation to remove any prebuilt objects from the environment
+#. Hover over tile **Visual Policy Editor (VPE) Overview**. A start and stop icon should appear within the tile.  Click the **Stop** Button to trigger the automation to remove any prebuilt objects from the environment
 
    |image998|
 
-#. The screen should refresh displaying the progress of the automation within 30 seconds.  Scroll to the bottom of the automation workflow to ensure all requests succeeded.  If you you experience errors try running the automation a second time or open an issue on the `Access Labs Repo <https://github.com/f5devcentral/access-labs>`__.
+#. The screen should refresh displaying the progress of the automation within 30 seconds.  Scroll to the bottom of the automation workflow to ensure all requests succeeded.  If you experience errors try running the automation a second time or open an issue on the `Access Labs Repo <https://github.com/f5devcentral/access-labs>`__.
 
    |image999|
 
@@ -482,7 +482,6 @@ Lab Cleanup
 .. |image018| image:: ./media/lab02/018.png
 .. |image019| image:: ./media/lab02/019.png
 .. |image020| image:: ./media/lab02/020.png
-.. |image021| image:: ./media/lab02/021.png
 .. |image022| image:: ./media/lab02/022.png
 .. |image023| image:: ./media/lab02/023.png
 .. |image024| image:: ./media/lab02/024.png
@@ -525,5 +524,6 @@ Lab Cleanup
 .. |image061| image:: ./media/lab02/061.png
 .. |image062| image:: ./media/lab02/062.png
 .. |image063| image:: ./media/lab02/063.png
+.. |image064| image:: ./media/lab02/064.png
 .. |image998| image:: ./media/lab02/998.png
 .. |image999| image:: ./media/lab02/999.png
