@@ -187,7 +187,7 @@ Test your deployment
 #. RDP to Win10 machine as ``user`` and password ``user``
 #. Open ``Microsoft Edge`` browser - icon is on the Desktop
 #. Click on the ``bookmark`` ``Vanilla``
-#. You will be redirected to Azure AD login page - only if your previous session with ``Bluesky`` expired in APM. Login as ``user1@f5access.onmicrosoft.com``, and password ``F5twister$`` if you are prompted. But as you already authenticated against Azure AD, you still have a session in Azure AD.
+#. You will be redirected to Azure AD login page - only if your previous session with ``Bluesky`` expired in APM. Login as ``user1@f5access.onmicrosoft.com``, and for the password please ask to your instructor (if you are prompted). But as you already authenticated against Azure AD, you still have a session in Azure AD.
 
    .. image:: ../pictures/module1/login.png
       :align: center

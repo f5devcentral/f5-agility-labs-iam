@@ -212,7 +212,7 @@ TASK 6: Applications
 |                                                                                              |
 | 6. On the **Subpath Pattern** row entered in Step 5, click the **+ (Plus Symbol)** twice     |
 |                                                                                              |
-|    to add to more rows.                                                                      |
+|    to add two more rows.                                                                     |
 |                                                                                              |
 | 7. In the two new rows add **/apps/app2\*** and **/apps/app3\*** respectively.               |
 +----------------------------------------------------------------------------------------------+
@@ -317,6 +317,8 @@ TASK 8: Contextual Access
 | 7. In the **Assign User Groups** section, scroll through the available groups to find the    |
 |                                                                                              |
 |    **app1** **Group Name**. Click the **Add** button in the **Action** column.               |
+|                                                                                              |
+|    (The filter can be used to find the appropriate group faster.)                            |
 |                                                                                              |
 | 8. Verify the added group in the **Selected User Groups**.                                   |
 |                                                                                              |
@@ -500,9 +502,9 @@ TASK 12: Testing
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
-| 8. Return to the **ACME Application/Service Portal** and click the **Logout** button and     |
+| 8. Close the open application tabs and return to the **ACME Application/Service Portal**     |
 |                                                                                              |
-|    and close the browser.                                                                    |
+|    and click the **Logout** button, then close the browser.                                  |
 |                                                                                              |
 | 9. Run the **Add-User1-to-App2** Powesrshell script link provided on the **Jumphost**        |
 |                                                                                              |
@@ -527,7 +529,7 @@ TASK 12: Testing
 | |image044|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
-TASK 14: Review
+TASK 13: Review
 ~~~~~~~~~~~~~~~
 
 +----------------------------------------------------------------------------------------------+
@@ -568,7 +570,7 @@ TASK 14: Review
 | |image048|                                                                                   |
 +----------------------------------------------------------------------------------------------+
 
-TASK 15: End of Lab1
+TASK 14: End of Lab1
 ~~~~~~~~~~~~~~~~~~~~
 
 +----------------------------------------------------------------------------------------------+

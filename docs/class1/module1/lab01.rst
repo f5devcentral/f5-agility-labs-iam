@@ -142,7 +142,7 @@ Access Guided Configuration (AGC) provides an easy way to create BIG-IP configur
       +---------------+-------------+-------------+
       |Single Proxy   | |image13|   |  |image17|  |
       +---------------+-------------+-------------+
-      |Multi-Proxy    | |image14|   |  |image16|  |
+      |Multi-Proxy    | |image019|  |  |image16|  |
       +---------------+-------------+-------------+
 
 #.  Proceeding with this configuration will create a number of object as seen here.
@@ -410,7 +410,7 @@ Profiles and Policies are where we begin to learn about what makes APM function.
 
       .. Note:: See the `APM Customization guide <https://techdocs.f5.com/en-us/bigip-16-0-0/big-ip-access-policy-manager-customization.html>`__ for further details on customization
 
-#. Under **Available Profiles** choose the /Common/server1-psp
+#. Under **Available Profiles** choose the **/Common/server1-psp**
 #. Select Language:  **English**
 #. Let's upload a new image.  Click **Upload New Image**
 #. Browse to **Desktop** and locate the **Lab01_images** folder
@@ -418,7 +418,16 @@ Profiles and Policies are where we begin to learn about what makes APM function.
 #. Pick a Background color
 #. Pick a Header Background color
 #. Change the footer Text
-#. Click on the **Preview** button
+#. Remember to click **Save** icon at the bottom
+
+    |image014|
+
+    ..Note:: If you click the Preview button at the bottom of this screen you will get to preview the page you are editing.  However, we are going to use the Preview button located at the top right of this GUI.
+
+#. Click on the **Preview** button (At the top right)
+
+    |image015|
+
 #. Choose **Access Profiles** --> **/Common/server1-psp** --> **Access Policy** --> **Ending pages** -- **Deny**
 
       Bonus Answer:  Why don't we see logon pages?
@@ -444,7 +453,7 @@ The following figure shows BIG-IP APM acting as an authentication gateway. Infor
 
 #. Client-side authentication
 
-      Client-side authentication involves the client (typically a user employing a browser) accessing a BIG-APM virtual server and presenting identity. This is called authentication, authorization, and accounting (AAA).
+      Client-side authentication involves the client (typically a user employing a browser) accessing a BIG-IP APM virtual server and presenting identity. This is called authentication, authorization, and accounting (AAA).
 
       BIG-IP APM supports industry standard authentication methods, including:
 
@@ -504,7 +513,7 @@ The following figure shows BIG-IP APM acting as an authentication gateway. Infor
 #. Click the **+** between **Logon Page** and Deny
 #. Click the **Authentication** tab
 #. Choose the **AD Auth** radio button and click **Add Item**
-#. Under the **Type** field click on the drop down menu and choose the AAA server **basic-ad-servers**
+#. Under the **Server** field click on the drop down menu and choose the AAA server **basic-ad-servers**
 #. Click **Save**
 #. On the Success branch click on the **Deny** end point and choose **Allow** then click **Save**
 #. Click **Apply Access Policy**
@@ -527,6 +536,9 @@ The following figure shows BIG-IP APM acting as an authentication gateway. Infor
 
 Task 6: Single Sign-On
 ----------------------------
+
+..Note:: All the objects used to demonstrate Server-side Single Sign-On have already been created.  The next steps will walk you through what the configuration looks like.
+
 Client side and server side are loosely coupled in the authentication proxy. Because of this, BIG-IP APM can transform client-side identity values of one type into server-side identity values of another type. You configure SSO within an SSO profile, which is applied to an access profile. The system triggers SSO at the end of successful access policy evaluation and on subsequent client-side requests.
 
 BIG-IP APM supports industry standard authentication methods, including:
@@ -582,6 +594,8 @@ BIG-IP APM supports industry standard authentication methods, including:
 
 Task 7: Federation
 ----------------------------
+
+..Note:: In this task we will examine SAML IDP and SP configuration.  All the configuration has been completed the next several steps you will just be examining the objects and testing the configuraiton.  For more in depth instruction on Federatoion consider taking a 300 series course.
 
 **BIG-IP APM federation with SAML**
 
@@ -689,6 +703,8 @@ Task 7: Federation
 Task 8: Connectivity/VPN
 ----------------------------
 
+..Note:: In interest of time the VPN configuration has already been completed.  The next several steps will be observing what the configuration looks like and testing out the connectivity.
+
 **Policy Walk-Through**
 
 #.  Navigate to **Access** --> **Profiles/Policies** --> **Access Profiles (Per-Session Policies)**
@@ -724,7 +740,7 @@ The Advanced Resource Assign agent grants a user access to the assigned resource
 
 **Network Access Resource**
 
-#. Navigate to **Access** --> **Connectivity/VPN** --> **Network Access Lists**
+#. Navigate to **Access** --> **Connectivity/VPN** --> **Network Access (VPN)** --> **Network Access Lists**
 #. Click the **vpn** Network Access Profile
 
       The Properties page contains the Caption name **VPN**.  This is the name displayed to a user.
@@ -740,7 +756,7 @@ The Advanced Resource Assign agent grants a user access to the assigned resource
 
 **Lease Pool**
 
-#. Navigate to **Access** --> **Connectivity/VPN** --> **Network Access Lists** --> **IPV4 Lease Pools**
+#. Navigate to **Access** --> **Connectivity/VPN** --> **Network Access (VPN)** --> **IPV4 Lease Pools**
 #. Click **vpn-vpn_pool** lease pool object
 
       A single address of **10.1.20.254** is assigned inside the lease pool.
@@ -842,7 +858,6 @@ Lab 1 is now complete.
 .. |image09| image:: ./media/lab01/image9.png
 .. |image10| image:: ./media/lab01/image10.png
 .. |image13| image:: ./media/lab01/image13.png
-.. |image14| image:: ./media/lab01/image14.png
 .. |image16| image:: ./media/lab01/image16.png
 .. |image17| image:: ./media/lab01/image17.png
 .. |image18| image:: ./media/lab01/image18.png
@@ -885,3 +900,6 @@ Lab 1 is now complete.
 .. |image011| image:: ./media/lab01/011.png
 .. |image012| image:: ./media/lab01/012.png
 .. |image013| image:: ./media/lab01/013.png
+.. |image014| image:: ./media/lab01/014.png
+.. |image015| image:: ./media/lab01/015.png
+.. |image019| image:: ./media/lab01/019.png

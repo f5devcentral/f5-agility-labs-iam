@@ -89,6 +89,10 @@ Refer to the instructions and screen shots below:
 
     |Lab2-Image4|
 
+#. Close Visual Policy Editor
+
+    |Lab2-Image40|
+
 
 Task 2: Step Up Authentication with Per Request Policies
 ---------------------------------------------------------------
@@ -115,8 +119,11 @@ In this example we're going to use a Per-Request Policy with a subroutine to aut
 
     |Lab2-Image8|
 
+#. Click **Finished**
 
-#. On the app.acme.com-PRP policy click **Edit**
+#. Back in the **Access** --> **Profiles/Policies** --> **Per-Request Policies** screen locate **app.acme.com-PRP** policy you just created.
+
+#. Click **Edit** to the right of the name
 
 #. Click on **Add New Subroutine**
 
@@ -187,7 +194,7 @@ In this example we're going to use a Per-Request Policy with a subroutine to aut
 
     |Lab2-Image20|
 
-#. Next to "Empty" click the **change** links
+#. Next to "Empty" click the **Change** link
 
 #. Change the drop down on the right hand side to **Session Varaible** and input the following value
 
@@ -195,7 +202,7 @@ In this example we're going to use a Per-Request Policy with a subroutine to aut
     | **subsession.ad.last.attr.memberOf**   |
     +----------------------------------------+
 
-#. In the left hand box type the following then click finished and Save
+#. In the left hand box type the following then click **Finished** and **Save**
 
     +----------------------------------+
     | **session.adgroups.custom**      |
@@ -209,11 +216,11 @@ In this example we're going to use a Per-Request Policy with a subroutine to aut
 
     |Lab2-Image23|
 
-#. Select the **Classification** tab and click the **URL Branching Radio Button**
+#. Select the **Classification** tab, click the **URL Branching Radio Button** and click **Add Item**
 
     |Lab2-Image24|
 
-#. Click the **change** hyperlink
+#. Click the **Branch Rules** tab and then click the **change** hyperlink
 
     |Lab2-Image25|
 
@@ -223,7 +230,7 @@ In this example we're going to use a Per-Request Policy with a subroutine to aut
 
     |Lab2-Image27|
 
-#. Change the name from **Allow** to **/apps/app1/**
+#. Change the name from **Allow** to **/apps/app1/** and then click **Save**
 
     |Lab2-Image28|
 
@@ -235,13 +242,15 @@ In this example we're going to use a Per-Request Policy with a subroutine to aut
 
     |Lab2-Image29|
 
-#. Click **Add new entry**
+#. Under **HTTP Header Modify**, click **Add new entry**
 
     |Lab2-Image30|
 
 #. Type **AD_Groups** for header name and **%{session.adgroups.custom}** for **Header Value** and click Save
 
     |Lab2-Image31|
+
+#. In the Per-Request Policy follow the **fallback** branch for the URL Branching.  Click on the **Reject** terminal and change to **Allow**
 
 #. Your Per-Request Policy should now look like this
 
@@ -251,7 +260,7 @@ In this example we're going to use a Per-Request Policy with a subroutine to aut
 
     |Lab2-Image33|
 
-#. In a browser on your jumphost access https://apps.acme.com you should see the webpage listed below, click the Application1 link
+#. In a browser on your jumphost access https://app.acme.com you should see the webpage listed below, click the Application1 link
 
     |Lab2-Image35|
 
@@ -307,3 +316,4 @@ Lab 2 is now complete.
 .. |Lab2-Image37| image:: ./media/Lab2-Image37.png
 .. |Lab2-Image38| image:: ./media/Lab2-Image38.png
 .. |Lab2-Image39| image:: ./media/Lab2-Image39.png
+.. |Lab2-Image40| image:: ./media/Lab2-Image40.png

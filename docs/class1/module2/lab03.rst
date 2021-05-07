@@ -26,6 +26,8 @@ Estimated completion time: 15 minutes
 Task 1: Policy review
 -----------------------
 
+..Note::  All the objects and configuration have been completed for you.  In this lab we will explore the configuration and test.
+
 #. From the jumphost launch Chrome and login to bigip1.f5lab.local.  admin/admin
 
 #. Navigate to **Access** -> **Profiles/Policies** -> **Access Profiles (Per-Session Policies)**
