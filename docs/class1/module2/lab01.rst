@@ -52,7 +52,7 @@ To access your dedicated student lab environment, you will need a web browser an
    |issues|
 
 
-Task 1: Intro to Access Profiles and Policies
+Intro to Access Profiles and Policies
 -----------------------------------------------
 Access Policy Manager (APM) provides two types of policies.
 
@@ -210,11 +210,9 @@ Task 3: Associate Access Policy to Virtual Servers
 Now that we have created an access policy, we must apply it to the
 appropriate virtual server to be able to use it.
 
-#. From the **Local Traffic** menu, navigate to the **Virtual Servers
-   List** and click the name of the virtual server created previously:
-   **app-https**.
+#. Navigate to **Local Traffic** --> **Virtual Servers** --> **Virtual Server List** and click the name of the virtual server created previously:  **app-https**
 
-#. Scroll down to the **Access Policy** section, then for the **Access
+#. Scroll down to the **Access Policy** section, for the **Access
    Profile** dropdown, select **myaccesspolicy**
 
    |Lab1-Image16|
@@ -247,7 +245,7 @@ You will see a screen similar to the following:
    |Lab1-Image18|
 
 
-Task 7: Troubleshooting tips
+Task 5: Troubleshooting tips
 ----------------------------
 
 You can view active sessions by navigating Access/Overview/Active Sessions
@@ -303,7 +301,6 @@ Lab 1 is now complete.
 .. |accessjh| image:: ./media/accessjh.png
 .. |accessportal| image:: ./media/accessportal.png
 .. |102intro| image:: ./media/102intro.png
-.. |guioverview| image:: /class1/module1/media/lab01/setup/guioverview.png
 .. |lab01| image:: ./media/lab01.png
 .. |lab01fly| image:: ./media/lab01fly.png
 .. |process| image:: ./media/process.png

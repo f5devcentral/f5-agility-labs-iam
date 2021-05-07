@@ -87,9 +87,9 @@ TASK 2: Review Existing Configuration
 +----------------------------------------------------------------------------------------------+
 | 7. Review the **app.acme.com_prp** Per Request Policy and the subroutine.                    |
 |                                                                                              |
-| 8. Click on the **+ (Plus Symbol)** to expand the **Logon** Subroutine.  Then click on the   |
+| 8. Click on the **+ (Plus Symbol)** to expand the **Logon** Subroutine at the bottom of the  |
 |                                                                                              |
-|    **Subroutine Settings / Rename** link.                                                    |
+|    policy window.  Then click on the  **Subroutine Settings / Rename** link.                 |
 +----------------------------------------------------------------------------------------------+
 | |image007|                                                                                   |
 +----------------------------------------------------------------------------------------------+
@@ -107,7 +107,7 @@ TASK 2: Review Existing Configuration
 |                                                                                              |
 | 11. Logon to the resulting logon page with **UserID: user1** and **Password: user1**         |
 |                                                                                              |
-| **Note:** *User1 has access to all applications even though user1 does not currently have*   |
+| **Note:** *User1 has buttons to all applications even though user1 does not currently have*  |
 |                                                                                              |
 | *the necessary group access for all applications.*                                           |
 +----------------------------------------------------------------------------------------------+
@@ -286,7 +286,7 @@ TASK 5: Testing URI Dynamic & DataGroup Filtering
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 +----------------------------------------------------------------------------------------------+
-| 1. Return to **Firefox** test access to all the applications again.                          |
+| 1. Return to **Firefox** test access to all the applications again for **app.acme.com**.     |
 |                                                                                              |
 | 2. Access to **App1**, **Member Services A** and the **Admin** application is still granted  |
 |                                                                                              |
@@ -317,7 +317,9 @@ TASK 6: Adding a new Application (App3)
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
-| 2. Return to **Firefox** to see the newly deployed **App3** and test access to it.           |
+| 2. Return to **Firefox** to see the newly deployed **App3** and test access to it.  You      |
+|                                                                                              |
+|    may need to refresh your browser to see the new **App3** applicationn button.             |
 |                                                                                              |
 | 3. Even though **App3** is newly deployed, user1 access is still blocked based on AD Group   |
 |                                                                                              |
@@ -372,7 +374,9 @@ TASK 7: Dynamic Group Checks
 +----------------------------------------------------------------------------------------------+
 
 +----------------------------------------------------------------------------------------------+
-| 6. In the **Variable Assign** window, click the **Add new entry** button.                    |
+| 6. In the **Variable Assign** window, click the **Add new entry** button.  In the new        |
+|                                                                                              |
+|    added row, click the **Change** link.                                                     |
 +----------------------------------------------------------------------------------------------+
 | |image062|                                                                                   |
 +----------------------------------------------------------------------------------------------+
@@ -583,7 +587,7 @@ TASK 9: Step-Up Authentication (Client Cert Auth)
 |                                                                                              |
 | 9. In the resulting section, change the **Name** to **Fail**, select the red color (#2) from |
 |                                                                                              |
-|    the dropdown and then click **Save**.                                                     |
+|    the dropdown and then click **Save**.  The arrows can be used to change positions.        |
 +----------------------------------------------------------------------------------------------+
 | |image053|                                                                                   |
 +----------------------------------------------------------------------------------------------+

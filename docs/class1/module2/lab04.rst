@@ -75,8 +75,15 @@ Task 3: Add Webtop resource to existing Access Policy
 
    |Lab4-Image9|
 
+#. Navigate to **Local Traffic** --> **Virtual Servers** --> **Virtual Server List**
 
+    .. Note:: Make sure you are in the **Common Partition**
 
+        |Lab4-Image17|
+
+#. Open the **app-https** Virtual server, scroll down to the **Access Policy** section and ensure that **myaccesspolicy** has been assigned to this virtual server.
+
+    |Lab4-Image18|
 
 Task 4: Testing
 -----------------
@@ -110,3 +117,5 @@ Task 4: Testing
 .. |Lab4-Image8| image:: ./media/Lab4-Image8.png
 .. |Lab4-Image9| image:: ./media/Lab4-Image9.png
 .. |Lab4-Image10| image:: ./media/Lab4-Image10.png
+.. |Lab4-Image17| image:: ./media/Lab4-Image17.png
+.. |Lab4-Image18| image:: ./media/Lab4-Image18.png 

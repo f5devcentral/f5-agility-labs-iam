@@ -82,7 +82,7 @@ TASK 2: Review HTTP Connector Configuration
 |                                                                                              |
 | *entered for the purposes of this lab, these could have been referenced variables set*       |
 |                                                                                              |
-| *in the Per Request Policy flow.*                                                            |
+| *in the Per Request Policy flow. Screenshot may show different values then your lab.*        |
 +----------------------------------------------------------------------------------------------+
 | |image005|                                                                                   |
 |                                                                                              |

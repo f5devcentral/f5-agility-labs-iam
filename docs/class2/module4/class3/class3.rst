@@ -22,7 +22,7 @@ Test your deployment
 #. RDP to Win10 machine as ``user`` and password ``user``
 #. Open ``Microsoft Edge`` browser - icon is on the Desktop
 #. Click on the ``bookmark`` ``Wordpress Cloud App``
-#. You will be redirected to Azure AD login page (it can take a while - look at the address bar). Login as ``user1@f5access.onmicrosoft.com``, and password ``F5twister$``, if prompted. You already have a session up and running in Azure AD, from previous class.
+#. You will be redirected to Azure AD login page (it can take a while - look at the address bar). Login as ``user1@f5access.onmicrosoft.com``, and for the password please ask to the instructor (if prompted). You already have a session up and running in Azure AD, from previous class.
 #. You are redirected to the ``cloud app`` in Azure cloud, and can access to Wordpress-UDF application.
 
    .. image:: ./pictures/WP.png
