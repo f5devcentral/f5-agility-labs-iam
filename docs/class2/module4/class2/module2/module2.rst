@@ -95,7 +95,7 @@ Azure Active Directory
 
       #. In the list, click ``Add`` for the user ``user1``. If you can't find it, search for it in the ``search`` field.
          
-         .. image:: ../pictures/module2/user.png
+         .. image:: ../pictures/module2/User.png
             :align: center
          
 
