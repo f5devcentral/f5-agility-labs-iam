@@ -1,4 +1,4 @@
-Lab 4: ADFS Proxy using ADFS Authentication
+Lab 2: ADFS Proxy using ADFS Authentication
 =============================================
 
 

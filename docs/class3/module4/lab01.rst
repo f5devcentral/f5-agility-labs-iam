@@ -8,7 +8,7 @@ To access your dedicated student lab environment, you will need a web browser an
 
 #. Click **DEPLOYMENT** located on the top left corner to display the environment
 
-#. Click **ACCESS** next to jumpbox.f5lab.local
+#. Click **ACCESS** next to jumphost.f5lab.local
 
    |image200|
 
@@ -155,11 +155,7 @@ Task 5 - Associate a JWT Provider
 Task 6 - Create a virtual server
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. From the web browser, click on the **Local Traffic** tab located on the left side
-
-   |image18|
-
-#. Navigate to Virtual Servers >> Virtual Server List.  Click the **+ (plus symbol)**
+#. Navigate to Local Traffic >> Virtual Servers >> Virtual Server List.  Click the **+ (plus symbol)**
 
    |image19|
 
@@ -222,14 +218,14 @@ Task 8 - Retreive your OAuth clientID
 
    |image25|
 
-#. You receive a *200 OK** with a response body.  The clientID is now stored as a Postman Variable to be used in future requests.
+#. You receive a **200 OK** with a response body.  The clientID is now stored as a Postman Variable to be used in future requests.  Your ClientID will not be the same as displayed in the screenshot below.
 
    |image113|
 
 Task 9 - Attempt to Retrieve User1\'s Attributes without JWT
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Select the request **Request2: Retrieve User Attributes without JWT**
+#. Select the request **Request 2: Retrieve User Attributes without JWT**
 
 #. Click **Send**
 
@@ -240,17 +236,11 @@ Task 9 - Attempt to Retrieve User1\'s Attributes without JWT
 Task 10 -  Retrieve User1\'s Attributes with a JWT
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Select the request **Request3: Retrieve User Attributes with JWT**
+#. Select the request **Request 3: Retrieve User Attributes with JWT**
 
 #. Select the **Authorization** tab
 
 #. Click **Get New Access Token**
-
-   |image44|
-
-#. Enter **User1** for the Token Name and review the Postman Configuration. Nothing else should need to be modified.
-
-#. Click **Request Token**
 
    |image27|
 
@@ -300,7 +290,7 @@ Task 11 - Set a Valid User Attribute
 Task 12 - Set an Nonexistent User's Attribute
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Select the request **Request 5: Update a Nonexistent User Attribute**
+#. Select the request **Request 5: Update a Nonexistent User\'s Attribute**
 
 #. Select the **Authorization** tab
 
@@ -501,48 +491,55 @@ Task 3 - Test the Fine-Grained Access Control with user1
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-1. From Postman select the request **Request 7: Create User**
+#. From Postman select the request **Request 7: Create User**
 
-2. Select the **Authorization** Tab
+#. Select the **Authorization** Tab
 
-3. Select the previously created **User1** token from the **Available Tokens** dropdown
+#. Select the previously created **User1** token from the **Available Tokens** dropdown
 
-4. The **Token** field is now populated
+#. The **Token** field is now populated
 
-5. Click **Send**
+#. Click **Send**
 
-6. You receive a **403 Forbidden** response status code when using user1. User1 does not contain the proper claim data.
+#. You receive a **403 Forbidden** response status code when using user1. User1 does not contain the proper claim data.
 
-|image26|
+   |image26|
 
 
 Task 4 - Test the Fine-Grained Access Control with user2
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1. Select the request **Request 7: Create User**
+#. Select the request **Request 7: Create User**
 
-2. Select the **Authorization** tab
+#. Select the **Authorization** tab
 
-3. Click **Get New Access Token**
 
-|image44|
+#. Click **Edit token configuration**
 
-4. Enter **User2** for the Token Name and review the Postman Configuration. Nothing else should need to be modified
-5. Click **Request Token**
+   |image205|
 
-|image101|
 
-6. Login using Username: **user2**, Password: **user2**
+#. Enter **User2** for the Token Name and review the Postman Configuration. Nothing else should need to be modified
+#. Click **Get New Access Token**
 
-|image62|
+   |image044|
 
-7. Scroll down to the token and click **Use Token**
-8. The **Token** field is now populated
-9. Click **Send**
+#. Login using Username: **user2**, Password: **user2**
 
-10. You receive a **200 OK** response status code when using user2. User2 does contain the proper claim data
+   |image62|
 
-|image46|
+#. Ensure the **User2** Token is selected
+#. Click **Use Token** at the top right.
+
+   |image206|
+
+
+#. The **Token** field is now populated
+#. Click **Send**
+
+#. You receive a **200 OK** response status code when using user2. User2 does contain the proper claim data
+
+   |image46|
 
 
 Section 1.4 - Implement Rate Limiting
@@ -559,7 +556,7 @@ Task 1 - Test pre-rate limiting Access
 
    |image88|
 
-#. Click the **arrow** located to the right of the student-class3-module-lab01 collection.
+#. Click the **arrow** located to the right of the student-class3-module4-lab01 collection.
 
    |image89|
 
@@ -806,7 +803,7 @@ Task 3 - Test Access to the new path
 	:width: 800px
 .. |image14| image:: media/lab01/image014.png
 	:width: 800px
-.. |image15| image:: media/lab01/image015.png
+.. |image15| image:: media/lab01/015.png
 	:width: 800px
 .. |image16| image:: media/lab01/image016.png
 	:width: 800px
@@ -827,9 +824,9 @@ Task 3 - Test Access to the new path
 .. |image29| image:: media/lab01/029.png
 .. |image31| image:: media/lab01/031.png
 .. |image32| image:: media/lab01/image032.png
-.. |image33| image:: media/lab01/image033.png
+.. |image33| image:: media/lab01/033.png
 	:width: 800px
-.. |image34| image:: media/lab01/image034.png
+.. |image34| image:: media/lab01/034.png
 .. |image35| image:: media/lab01/image035.png
 .. |image36| image:: media/lab01/image036.png
 .. |image37| image:: media/lab01/037.png
@@ -839,13 +836,12 @@ Task 3 - Test Access to the new path
 .. |image41| image:: media/lab01/image041.png
 .. |image42| image:: media/lab01/image042.png
 .. |image43| image:: media/lab01/image043.png
-.. |image44| image:: media/lab01/image044.png
+.. |image044| image:: media/lab01/044.png
 .. |image45| image:: media/lab01/image045.png
 .. |image46| image:: media/lab01/046.png
 .. |image47| image:: media/lab01/image047.png
 .. |image48| image:: media/lab01/image048.png
-.. |image49| image:: media/lab01/image049.png
-	:width: 800px
+.. |image49| image:: media/lab01/049.png
 .. |image50| image:: media/lab01/050.png
 .. |image51| image:: media/lab01/image051.png
 .. |image52| image:: media/lab01/image052.png
@@ -935,4 +931,7 @@ Task 3 - Test Access to the new path
 .. |image202| image:: media/lab01/202.png
 .. |image203| image:: media/lab01/203.png
 .. |image204| image:: media/lab01/204.png
+.. |image205| image:: media/lab01/205.png
+.. |image206| image:: media/lab01/206.png
+
 

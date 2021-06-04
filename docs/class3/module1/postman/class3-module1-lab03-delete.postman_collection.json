@@ -1,11 +1,103 @@
 {
 	"info": {
-		"_postman_id": "3448c54d-2f9b-4af6-b3d1-ddbfcb4b9599",
+		"_postman_id": "5dc852d8-d323-480b-aa13-991ef9aac8bf",
 		"name": "class3-module1-lab03-delete",
 		"description": "This solution was created using template 1.8",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
+		{
+			"name": "Desktop Files",
+			"item": [
+				{
+					"name": "Delete Desktop files",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.test(\"Files Deleted\", function () {",
+									"",
+									"    pm.expect(jsonData.status).to.eql(\"Success\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"repo\":\"access-labs\",\n\"class_number\":\"2\",\n\"module_number\":\"3\",\n\"user\": \"user1\"\n}"
+						},
+						"url": {
+							"raw": "http://10.1.20.6:81/desktop",
+							"protocol": "http",
+							"host": [
+								"10",
+								"1",
+								"20",
+								"6"
+							],
+							"port": "81",
+							"path": [
+								"desktop"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User Account",
+			"item": [
+				{
+					"name": "Delete User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"pm.test(\"User Account Deleted\", function () {\r",
+									"\r",
+									"    pm.expect(jsonData.status).to.eql(\"Success\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"Username\":\"krbtsrv\"\n}\n"
+						},
+						"url": {
+							"raw": "http://10.1.20.6:81/user",
+							"protocol": "http",
+							"host": [
+								"10",
+								"1",
+								"20",
+								"6"
+							],
+							"port": "81",
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
 		{
 			"name": "Set Collection Parameters",
 			"item": [

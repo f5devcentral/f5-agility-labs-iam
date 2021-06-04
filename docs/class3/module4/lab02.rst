@@ -390,7 +390,7 @@ Task 1 - Configure Attack Signatures and Change WAF Policy to Blocking
 #. Go back to the command prompt on the jumphost and run
 
    **curl -k "https://api.acme.com/vulnerable?param1=|legitimate%20value" -v**
-   |
+   
 
 #. Navigate to **Security -> Event Logs -> Application -> Requests** and find this latest request. Notice the **|** is considered illegal. However its not blocked, the Enforcement Action is None
 
@@ -405,7 +405,7 @@ Task 1 - Configure Attack Signatures and Change WAF Policy to Blocking
 #. Go back to the command prompt on the jumphost and run 
 
    **curl -k "https://api.acme.com/vulnerable?param1=|legitimate%20value" -v**
-   |
+   
 
 #. Navigate to **Security -> Event Logs -> Application -> Requests** and find this latest request. Notice the **|** is considered illegal and is now blocked.
 
@@ -415,11 +415,11 @@ Task 1 - Configure Attack Signatures and Change WAF Policy to Blocking
 Task 2 - Implement Static Parameter values
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. From Postman, click "Send" on the **Request 2: SSRF Attack-Google** request.  Notice you get content from restapiexammple.com via api.acme.com/vulnerable.  This endpoint is vulnerable to Server Side Request Forgery attacks
+#. From Postman, click "Send" on the **Request 2: SSRF Attack-Google** request.  
 
    |image118|
 
-#. From Postman, run **Request 3: SSRF Attack-unprotected-json**. This site contains example ID and keys in JSON format.  Hackers will uses your servers as a jump off point to gain access to internal resources 
+#. From Postman, run **Request 3: SSRF Attack-unprotected-json**. This site contains an example ID and Secret key in JSON format. You can now see the endpoint is vulnerable to Server Side Request Forgery attacks because the endpoint can be directed to locations other than Google.  Hackers will uses your servers as a jump off point to gain access to internal resources. 
 
    |image119|
 
@@ -427,7 +427,7 @@ Task 2 - Implement Static Parameter values
 
    |image120|
 
-#.  We are going to secure the the uri parameter, so it only allows access to restapiexample, but not access to the internal private data.
+#.  We are going to secure the the uri parameter, so it only allows access to Google, but not access to the internal private data.
 
 #. Navigate to **Security -> Application Security -> Parameters -> Parameters List**.  Click the **+ Plus Symbol**
 
@@ -501,7 +501,7 @@ Task 2 - Implement Static Parameter values
 	:width: 800px
 .. |image121| image:: media/lab02/image121.png
 	:width: 800px
-.. |image122| image:: media/lab02/image122.png
+.. |image122| image:: media/lab02/122.png
 	:width: 800px
 .. |image123| image:: media/lab02/image123.png
 	:width: 800px

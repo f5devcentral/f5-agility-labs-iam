@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "6cc46732-2080-4088-938f-c8283f8bfc2f",
+		"_postman_id": "845f8385-22df-42fa-8daf-a57fecdefbb4",
 		"name": "class3-module1-lab03-create",
 		"description": "This solution was created using template 1.8",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -47,6 +47,52 @@
 							"port": "81",
 							"path": [
 								"desktop"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User Account",
+			"item": [
+				{
+					"name": "Create User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.test(\"User Account Created\", function () {",
+									"",
+									"    pm.expect(jsonData.status).to.eql(\"Success\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"Username\":\"krbtsrv\",\n  \"employeeNumber\":\"100\",\n  \"GivenName\":\"Kerberos\",\n  \"Surname\": \"Server\",\n  \"UserPrincipalName\":\"krbtsrv@f5lab.local\",\n  \"OU\":\"IT\",\n  \"Password\":\"P@$$w0rd\",\n  \"email\":\"krbtsrv@acme.com\"\n}"
+						},
+						"url": {
+							"raw": "http://10.1.20.6:81/user",
+							"protocol": "http",
+							"host": [
+								"10",
+								"1",
+								"20",
+								"6"
+							],
+							"port": "81",
+							"path": [
+								"user"
 							]
 						}
 					},
