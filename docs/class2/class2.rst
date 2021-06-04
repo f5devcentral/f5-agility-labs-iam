@@ -42,6 +42,7 @@ This lab documents provides foundational concepts for understanding Access Polic
    :maxdepth: 1
    :glob:
 
+   module4/intro.rst
    module4/lab*
 
 
