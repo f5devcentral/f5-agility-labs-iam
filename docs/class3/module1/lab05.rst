@@ -261,7 +261,7 @@ Task 6 - Create an AAA LDAP Server
     |image026|
 
 
-Task 6 - Create a SAML IdP Access Policy
+Task 7 - Create a SAML IdP Access Policy
 ---------------------------------------------
 
 #. Select **Access ‑> Profiles/Policies ‑> Access Profiles
@@ -508,7 +508,7 @@ Task 6 - Create a SAML IdP Access Policy
    |image065|
 
 
-Task 7 - Create a Client-side SSL Profile
+Task 8 - Create a Client-side SSL Profile
 ---------------------------------------------
 
 #. Navigate to Local Traffic ‑> Profile -> SSL -> Client. Click the **Plus (+) Sign**
@@ -538,7 +538,7 @@ Task 7 - Create a Client-side SSL Profile
 
 
 
-Task 8 - Create an IdP Virtual Server
+Task 9 - Create an IdP Virtual Server
 ----------------------------------------
 
 #. Begin by selecting Local Traffic ‑> Virtual Servers -> Virtual Server List. Click the **Plus (+) Sign** 
@@ -582,7 +582,7 @@ Task 8 - Create an IdP Virtual Server
 #. Scroll to the bottom of the configuration window and click **Finished**
 
 
-Task 9 - Test the Configuration
+Task 10 - Test the Configuration
 ------------------------------------------
 
 #. From the jumphost, navigate to the SAML IdP you previously configured at **https://idp.acme.com**. 
@@ -605,7 +605,7 @@ Task 9 - Test the Configuration
 #. Review your Access Report Logs **(Access ‑> Overview ‑> Access Reports)**
 
 
-Task 10 - Lab Cleanup
+Task 11 - Lab Cleanup
 ------------------------
 
 #. From a browser on the jumphost navigate to https://portal.f5lab.local
