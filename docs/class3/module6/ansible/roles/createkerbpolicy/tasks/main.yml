@@ -1,0 +1,402 @@
+---
+# tasks file for roles/kerbpolicy
+
+- name: Import CERT
+  bigip_ssl_certificate:
+    name: "ca.f5lab.local"
+    state: present
+    content: "{{ lookup('file','files/ca.crt', split_lines=False ) }}"
+    provider: "{{ provider }}"
+  delegate_to: localhost 
+
+- name: Create SSO
+  uri:
+    url: https://{{bigip}}/mgmt/tm/apm/sso/kerberos/
+    method: POST
+    headers:
+      X-F5-Auth-Token: "{{ f5_auth_token }}"
+    body_format: json
+    body: "{{ lookup('template','templates/kerb.j2', split_lines=False )}}"
+    validate_certs: false
+  delegate_to: localhost
+  ignore_errors: true  
+
+- name: Create a OCSP Server
+  uri:
+    url: https://{{bigip}}/mgmt/tm/apm/aaa/ocsp
+    method: POST
+    headers:
+      X-F5-Auth-Token: "{{ f5_auth_token }}"
+    body_format: json
+    body: "{{ lookup('template','templates/ocsp.j2', split_lines=False )}}"
+    validate_certs: false
+  delegate_to: localhost
+  ignore_errors: true  
+
+
+- name: Create LDAP Pool
+  bigip_pool:
+    state: present
+    name: "{{vs_name}}-ldap-pool"
+    partition: {{partition_name}}
+    monitor_type: single
+    monitors:
+      - tcp
+    provider: "{{provider}}"
+  delegate_to: localhost
+
+- name: ADD POOL MEMBERS
+  bigip_pool_member:
+    provider: "{{provider}}"
+    state: "present"
+    name: "10.1.20.7"
+    host: "10.1.20.7"
+    port: "389"
+    pool: "{{vs_name}}-ldap-pool"
+
+- name: Create LDAP AAA
+  uri:
+    url: https://{{bigip}}/mgmt/tm/apm/aaa/ldap
+    method: POST
+    headers:
+      X-F5-Auth-Token: "{{ f5_auth_token }}"
+    body_format: json
+    body: "{{ lookup('template','templates/ldap.j2', split_lines=False )}}"
+    validate_certs: false
+  delegate_to: localhost
+  ignore_errors: true  
+
+- name: Create a Transaction
+  uri:
+    url: https://{{bigip}}/mgmt/tm/transaction
+    method: POST
+    headers:
+      X-F5-Auth-Token: "{{ f5_auth_token }}"
+    body_format: json
+    body: {}
+    validate_certs: false
+  register: transaction
+  delegate_to: localhost    
+
+- name: Set Transaction ID
+  set_fact: 
+    transid: '{{transaction.json.transId}}'
+
+- name: Create a Custom group-end Deny
+  uri:
+    url: https://{{bigip}}/mgmt/tm/apm/policy/customization-group
+    method: POST
+    headers:
+      X-F5-Auth-Token: "{{ f5_auth_token }}"
+      X-F5-REST-Coordination-Id: "{{transid}}"
+    body_format: json
+    body: "{{ lookup('template','templates/customgroup.j2', split_lines=False )}}"
+    validate_certs: false
+  delegate_to: localhost
+  ignore_errors: true   
+
+- name: Create a Custom group-logout
+  uri:
+    url: https://{{bigip}}/mgmt/tm/apm/policy/customization-group
+    method: POST
+    headers:
+      X-F5-Auth-Token: "{{ f5_auth_token }}"
+      X-F5-REST-Coordination-Id: "{{transid}}"
+    body_format: json
+    body: "{{ lookup('template','templates/logout.j2', split_lines=False )}}"
+    validate_certs: false
+  delegate_to: localhost
+  ignore_errors: true     
+
+- name: Create a Custom group-eps
+  uri:
+    url: https://{{bigip}}/mgmt/tm/apm/policy/customization-group
+    method: POST
+    headers:
+      X-F5-Auth-Token: "{{ f5_auth_token }}"
+      X-F5-REST-Coordination-Id: "{{transid}}"
+    body_format: json
+    body: "{{ lookup('template','templates/groupeps.j2', split_lines=False )}}"
+    validate_certs: false
+  delegate_to: localhost  
+  ignore_errors: true 
+
+- name: Create a Custom group-error map
+  uri:
+    url: https://{{bigip}}/mgmt/tm/apm/policy/customization-group
+    method: POST
+    headers:
+      X-F5-Auth-Token: "{{ f5_auth_token }}"
+      X-F5-REST-Coordination-Id: "{{transid}}"
+    body_format: json
+    body: "{{ lookup('template','templates/errormap.j2', split_lines=False )}}"
+    validate_certs: false
+  delegate_to: localhost
+  ignore_errors: true     
+
+- name: Create a Custom group-framework
+  uri:
+    url: https://{{bigip}}/mgmt/tm/apm/policy/customization-group
+    method: POST
+    headers:
+      X-F5-Auth-Token: "{{ f5_auth_token }}"
+      X-F5-REST-Coordination-Id: "{{transid}}"
+    body_format: json
+    body: "{{ lookup('template','templates/framework.j2', split_lines=False )}}"
+    validate_certs: false
+  delegate_to: localhost  
+  ignore_errors: true 
+
+- name: Create a Custom group-general ui
+  uri:
+    url: https://{{bigip}}/mgmt/tm/apm/policy/customization-group
+    method: POST
+    headers:
+      X-F5-Auth-Token: "{{ f5_auth_token }}"
+      X-F5-REST-Coordination-Id: "{{transid}}"
+    body_format: json
+    body: "{{ lookup('template','templates/generalui.j2', split_lines=False )}}"
+    validate_certs: false
+  delegate_to: localhost  
+  ignore_errors: true 
+
+- name: Create a agent-allow ending
+  uri:
+    url: https://{{bigip}}/mgmt/tm/apm/policy/agent/ending-allow/
+    method: POST
+    headers:
+      X-F5-Auth-Token: "{{ f5_auth_token }}"
+      X-F5-REST-Coordination-Id: "{{transid}}"
+    body_format: json
+    body: "{{ lookup('template','templates/allowending.j2', split_lines=False )}}"
+    validate_certs: false
+  delegate_to: localhost 
+  ignore_errors: true
+  
+
+- name: Create a agent-deny ending
+  uri:
+    url: https://{{bigip}}/mgmt/tm/apm/policy/agent/ending-deny/
+    method: POST
+    headers:
+      X-F5-Auth-Token: "{{ f5_auth_token }}"
+      X-F5-REST-Coordination-Id: "{{transid}}"
+    body_format: json
+    body: "{{ lookup('template','templates/denyending.j2', split_lines=False )}}"
+    validate_certs: false
+  delegate_to: localhost
+  ignore_errors: true 
+
+- name: Create a agent-OCSP
+  uri:
+    url: https://{{bigip}}/mgmt/tm/apm/policy/agent/aaa-ocsp/
+    method: POST
+    headers:
+      X-F5-Auth-Token: "{{ f5_auth_token }}"
+      X-F5-REST-Coordination-Id: "{{transid}}"
+    body_format: json
+    body: "{{ lookup('template','templates/aaaocsp.j2', split_lines=False )}}"
+    validate_certs: false
+  delegate_to: localhost\
+  ignore_errors: true 
+  
+
+- name: Create a agent-ODCA
+  uri:
+    url: https://{{bigip}}/mgmt/tm/apm/policy/agent/aaa-client-cert/
+    method: POST
+    headers:
+      X-F5-Auth-Token: "{{ f5_auth_token }}"
+      X-F5-REST-Coordination-Id: "{{transid}}"
+    body_format: json
+    body: "{{ lookup('template','templates/aaaodca.j2', split_lines=False )}}"
+    validate_certs: false
+  delegate_to: localhost
+  ignore_errors: true   
+
+
+- name: Create a agent-LDAP Query
+  uri:
+    url: https://{{bigip}}/mgmt/tm/apm/policy/agent/aaa-ldap/
+    method: POST
+    headers:
+      X-F5-Auth-Token: "{{ f5_auth_token }}"
+      X-F5-REST-Coordination-Id: "{{transid}}"
+    body_format: json
+    body: "{{ lookup('template','templates/aaaldap.j2', split_lines=False )}}"
+    validate_certs: false
+  delegate_to: localhost 
+  ignore_errors: true
+
+- name: Create a agent-UPN Extract
+  uri:
+    url: https://{{bigip}}/mgmt/tm/apm/policy/agent/variable-assign/
+    method: POST
+    headers:
+      X-F5-Auth-Token: "{{ f5_auth_token }}"
+      X-F5-REST-Coordination-Id: "{{transid}}"
+    body_format: json
+    body: "{{ lookup('template','templates/upn.j2', split_lines=False )}}"
+    validate_certs: false
+  delegate_to: localhost 
+  ignore_errors: true
+
+
+- name: Create a agent-set variables
+  uri:
+    url: https://{{bigip}}/mgmt/tm/apm/policy/agent/variable-assign/
+    method: POST
+    headers:
+      X-F5-Auth-Token: "{{ f5_auth_token }}"
+      X-F5-REST-Coordination-Id: "{{transid}}"
+    body_format: json
+    body: "{{ lookup('template','templates/variables.j2', split_lines=False )}}"
+    validate_certs: false
+  delegate_to: localhost 
+  ignore_errors: true
+
+- name: Create a policy-item-Allow ending
+  uri:
+    url: https://{{bigip}}/mgmt/tm/apm/policy/policy-item/
+    method: POST
+    headers:
+      X-F5-Auth-Token: "{{ f5_auth_token }}"
+      X-F5-REST-Coordination-Id: "{{transid}}"
+    body_format: json
+    body: "{{ lookup('template','templates/policyallowending.j2', split_lines=False )}}"
+    validate_certs: false
+  delegate_to: localhost 
+
+- name: Create a policy-item-Deny ending
+  uri:
+    url: https://{{bigip}}/mgmt/tm/apm/policy/policy-item/
+    method: POST
+    headers:
+      X-F5-Auth-Token: "{{ f5_auth_token }}"
+      X-F5-REST-Coordination-Id: "{{transid}}"
+    body_format: json
+    body: "{{ lookup('template','templates/policydenyending.j2', split_lines=False )}}"
+    validate_certs: false
+  delegate_to: localhost 
+
+- name: Create a policy-item-set Variables 
+  uri:
+    url: https://{{bigip}}/mgmt/tm/apm/policy/policy-item/
+    method: POST
+    headers:
+      X-F5-Auth-Token: "{{ f5_auth_token }}"
+      X-F5-REST-Coordination-Id: "{{transid}}"
+    body_format: json
+    body: "{{ lookup('template','templates/policyvariables.j2', split_lines=False )}}"
+    validate_certs: false
+  delegate_to: localhost   
+
+
+- name: Create a policy-item-LDAP Query
+  uri:
+    url: https://{{bigip}}/mgmt/tm/apm/policy/policy-item/
+    method: POST
+    headers:
+      X-F5-Auth-Token: "{{ f5_auth_token }}"
+      X-F5-REST-Coordination-Id: "{{transid}}"
+    body_format: json
+    body: "{{ lookup('template','templates/ldapquery.j2', split_lines=False )}}"
+    validate_certs: false
+  delegate_to: localhost 
+
+- name: Create a policy-item-UPN Extract
+  uri:
+    url: https://{{bigip}}/mgmt/tm/apm/policy/policy-item/
+    method: POST
+    headers:
+      X-F5-Auth-Token: "{{ f5_auth_token }}"
+      X-F5-REST-Coordination-Id: "{{transid}}"
+    body_format: json
+    body: "{{ lookup('template','templates/upnpolicy.j2', split_lines=False )}}"
+    validate_certs: false
+  delegate_to: localhost 
+  
+
+- name: Create a policy-item-OCSP
+  uri:
+    url: https://{{bigip}}/mgmt/tm/apm/policy/policy-item/
+    method: POST
+    headers:
+      X-F5-Auth-Token: "{{ f5_auth_token }}"
+      X-F5-REST-Coordination-Id: "{{transid}}"
+    body_format: json
+    body: "{{ lookup('template','templates/ocsppolicy.j2', split_lines=False )}}"
+    validate_certs: false
+  delegate_to: localhost 
+
+- name: Create a policy-item-ODCA
+  uri:
+    url: https://{{bigip}}/mgmt/tm/apm/policy/policy-item/
+    method: POST
+    headers:
+      X-F5-Auth-Token: "{{ f5_auth_token }}"
+      X-F5-REST-Coordination-Id: "{{transid}}"
+    body_format: json
+    body: "{{ lookup('template','templates/odcapolicy.j2', split_lines=False )}}"
+    validate_certs: false
+  delegate_to: localhost 
+  ignore_errors: true
+
+- name: Create a policy-item-start
+  uri:
+    url: https://{{bigip}}/mgmt/tm/apm/policy/policy-item/
+    method: POST
+    headers:
+      X-F5-Auth-Token: "{{ f5_auth_token }}"
+      X-F5-REST-Coordination-Id: "{{transid}}"
+    body_format: json
+    body: "{{ lookup('template','templates/startpolicy.j2', split_lines=False )}}"
+    validate_certs: false
+  delegate_to: localhost 
+
+- name: Create a policy
+  uri:
+    url: https://{{bigip}}/mgmt/tm/apm/policy/access-policy/
+    method: POST
+    headers:
+      X-F5-Auth-Token: "{{ f5_auth_token }}"
+      X-F5-REST-Coordination-Id: "{{transid}}"
+    body_format: json
+    body: "{{ lookup('template','templates/accesspolicy.j2', split_lines=False )}}"
+    validate_certs: false
+  delegate_to: localhost 
+
+- name: Create a profile
+  uri:
+    url: https://{{bigip}}/mgmt/tm/apm/profile/access/
+    method: POST
+    headers:
+      X-F5-Auth-Token: "{{ f5_auth_token }}"
+      X-F5-REST-Coordination-Id: "{{transid}}"
+    body_format: json
+    body: "{{ lookup('template','templates/accessprofile.j2', split_lines=False )}}"
+    validate_certs: false
+  delegate_to: localhost  
+
+- name: BIGIP Commit Transaction
+  uri:
+    url: https://{{bigip}}/mgmt/tm/transaction/{{transid}}/
+    method: PUT
+    headers:
+      X-F5-Auth-Token: "{{ f5_auth_token }}"
+    body_format: json
+    body: "{{ lookup('file','files/transaction', split_lines=False )}}"
+    validate_certs: false
+    status_code: 200, 409
+  delegate_to: localhost 
+
+- name: BIGIP Apply policy
+  uri:
+    url: https://{{bigip}}/mgmt/tm/apm/profile/access/~{{partition_name}}~{{vs_name}}-psp
+    method: PATCH
+    headers:
+      X-F5-Auth-Token: "{{ f5_auth_token }}"
+    body_format: json
+    body: "{{ lookup('file','files/applypolicy', split_lines=False )}}"
+    validate_certs: false
+  delegate_to: localhost 

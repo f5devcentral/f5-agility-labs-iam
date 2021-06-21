@@ -1,0 +1,30 @@
+{
+    
+    "name": "{{vs_name}}-psp_act_ldap_query",
+    "partition": "{{partition_name}}",
+    "caption": "LDAP Query",
+    "color": 1,
+    "itemType": "action",
+    "loop": "false",
+    "agents": [
+        {
+            "name": "{{vs_name}}-psp_act_ldap_query_ag",
+            "partition": "{{partition_name}}",
+            "type": "aaa-ldap"
+         
+        }
+    ],
+    "rules": [
+        {
+            "caption": "Query Passed",
+            "expression": "expr {[mcget {session.ldap.last.queryresult}] == 1}",
+            "nextItem": "/{{partition_name}}/{{vs_name}}-psp_act_variable_assign_1"
+            
+        },
+        {
+            "caption": "fallback",
+            "nextItem": "/{{partition_name}}/{{vs_name}}-psp_end_deny"
+            
+        }
+    ]
+}

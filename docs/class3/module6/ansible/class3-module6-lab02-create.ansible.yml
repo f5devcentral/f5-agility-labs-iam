@@ -1,0 +1,93 @@
+- name: Create PUA Radius Virtual Server and DNS
+  hosts: bigips
+  connection: local
+  gather_facts: no
+
+  vars:
+    vs_name: pua
+    dns_name: pua.acme.com
+    path_name: apm
+    partition_name: demo
+    files_base: http://files-master.f5lab.local/solutions    
+
+  tasks:
+    - name: Request IP address of Webtop VS
+      include_role:
+        name: nextdhcpaddr
+      vars:
+        vs_name: webtop_address
+        dhcp_scope: 10.1.10.96
+    
+    - name: Set variable Webtop IP 
+      set_fact:
+        webtop_address: "{{ scope_result }}"
+
+    - name: GET BIGIP-1 AUTH Token
+      include_role:
+        name: bigipauth
+      vars:
+        bigip: 10.1.1.4
+
+    - name: Create LDAP AAA Pool
+      include_role:
+        name: createapp
+      vars:
+        service_port: 389
+        service_monitor: tcp
+        app_service: ldap
+        pool_member: 10.1.20.7
+        body_template: as3_pool_nomon
+        partition_name: Common
+        path_name: Shared
+        as3_template: shared
+        bigip: 10.1.1.4
+
+    - name: Create LDAP AAA    
+      include_role:
+        name: createldap_aaa
+      vars:        
+        partition_name: Common
+        path_name: Shared
+        bigip: 10.1.1.4
+
+    - name: Create PUA Webtop
+      include_role:
+        name: createapp
+      vars:
+        partition_name: webtop
+        as3_template: shared
+        app_service: webtop
+        bigip_address: "{{webtop_address}}"
+        body_template: as3_app_nopool
+        bigip: 10.1.1.4
+
+    - name: Create Radius Virtual Server
+      include_role:
+        name: createapp
+      vars:
+        partition_name: radius
+        app_service: radius
+        bigip_address: 10.1.20.104
+        body_template: as3_udp_nomon_vs
+        vs_port: 1812
+        bigip: 10.1.1.4
+
+    - name: GET BIGIP-5 AUTH Token
+      include_role:
+        name: bigipauth
+      vars:
+        bigip: 10.1.1.11        
+
+    - name: Create DNS Wide IPs
+      include_role:
+        name: creategslb
+      vars:
+        bigip: 10.1.1.11
+        gslb:
+          - name: webtop.acme.com
+            port: 443
+            ipaddress: "{{webtop_address}}"
+          - name: radius.f5lab.local
+            port: 1812
+            ipaddress: 10.1.20.104
+      

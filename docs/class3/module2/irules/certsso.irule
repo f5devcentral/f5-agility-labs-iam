@@ -1,0 +1,12 @@
+when SERVERSSL_CLIENTHELLO_SEND {
+
+set username [ACCESS::session data get "session.logon.last.username"]
+set domain [ACCESS::session data get "session.ad.last.actualdomain"]
+  SSL::c3d extension 1.1.1.1 "Minted Extension=$username@$domain"
+}
+
+when ACCESS_PER_REQUEST_AGENT_EVENT {
+ set cert [ACCESS::session data get {session.ssl.cert.whole}]
+ log local0. "My cert: $cert"
+ SSL::c3d cert [X509::pem2der $cert]
+}

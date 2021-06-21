@@ -1,0 +1,19 @@
+{
+    "name": "{{vs_name}}-psp_act_variable_assign_1_ag",
+    "partition": "{{partition_name}}",
+    "type": "general",
+    "variables": [
+        {
+            "append": "false",
+            "expression": "mcget {session.ldap.last.attr.sAMAccountName}",
+            "secure": "false",
+            "varname": "session.logon.last.username"
+        },
+        {
+            "append": "false",
+            "expression": "return {F5LAB.LOCAL}",
+            "secure": "false",
+            "varname": "session.logon.last.domain"
+        }
+    ]
+}

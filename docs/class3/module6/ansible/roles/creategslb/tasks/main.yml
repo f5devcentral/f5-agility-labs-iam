@@ -1,0 +1,20 @@
+---
+# tasks file for roles/creategslb
+
+
+- name: Build BIG-IP DNS Configurations from Jinja2
+  template:
+    src: "templates/gslb_build.j2"
+    dest: "{{ role_path }}/templates/gslb.j2"
+
+- name: Create GSLB 
+  uri:
+    url: "https://{{ bigip }}/mgmt/shared/appsvcs/declare"
+    method: POST
+    body: "{{ lookup('template','templates/gslb.j2', split_lines=False) }}"
+    timeout: 300
+    body_format: json
+    headers:
+      X-F5-Auth-Token: "{{ f5_auth_token }}"
+    validate_certs: false
+  delegate_to: localhost

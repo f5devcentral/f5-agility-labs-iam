@@ -1,0 +1,11 @@
+"{{path_name}}": {
+    "class": "Application",
+    "{{vs_name}}-{{app_service}}": {
+        "class": "Service_UDP",
+        "virtualAddresses": [
+            "{{ bigip_address }}"
+        ],
+        "virtualPort": {{vs_port}},
+        "snat": "auto"
+    }
+}

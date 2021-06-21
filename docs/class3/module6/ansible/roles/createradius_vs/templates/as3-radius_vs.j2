@@ -1,0 +1,12 @@
+"{{path_name}}": {
+    "class": "Application",
+    "template": "generic",
+    "{{vs_name}}": {
+        "class": "Service_TCP",
+        "virtualAddresses": [
+            "{{radius_address}}"
+        ],
+        "virtualPort": 1812,
+        "snat": "auto"
+    }
+}

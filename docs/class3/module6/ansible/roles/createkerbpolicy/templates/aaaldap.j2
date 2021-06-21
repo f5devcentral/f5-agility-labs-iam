@@ -1,0 +1,18 @@
+{
+    
+    "name": "{{vs_name}}-psp_act_ldap_query_ag",
+    "partition": "{{partition_name}}",
+    "attrName": [
+        "sAMAccountName"
+    ],
+    "filter": "(userPrincipalName=%{session.custom.upn})",
+    "groupMemberScope": "none",
+    "groupMembershipScope": "none",
+    "maxLogonAttempt": 3,
+    "maxPwdResetAttempt": 3,
+    "pwdComplexityCheck": "false",
+    "searchDn": "dc=f5lab, dc=local\n",
+    "server": "/{{partition_name}}/{{vs_name}}-ldap-servers",
+    "showExtendedError": "false",
+    "type": "query"
+}

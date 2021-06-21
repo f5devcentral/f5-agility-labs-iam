@@ -1,0 +1,117 @@
+{
+    "class": "ADC",
+    "schemaVersion": "3.6.0",
+    "id": "AS3-APPS-DC",
+
+    "pua": {
+        "class": "Tenant",
+        "Application": {
+            "class": "Application",
+            "template": "shared",
+
+            "webtop.acme.com": {
+                "class": "GSLB_Domain",
+                "domainName": "webtop.acme.com",
+                "resourceRecordType": "A",
+                "lastResortPool": {
+                    "use": "webtop.acme.com.gtm.pl"
+                },
+                "lastResortPoolType": "A",
+                "pools": [
+                    {
+                        "use": "webtop.acme.com.gtm.pl"
+                    }                  
+
+                ]
+            },
+            "webtop.acme.com.gtm.pl": {
+                "class": "GSLB_Pool",
+                "resourceRecordType": "A",
+                "ttl": 0,
+                "members": [
+                    {
+                        "server": {
+                            "use": "/Common/Shared/bigip1.f5lab.local"
+                        },
+                        "virtualServer": "webtop.acme.com.vs"
+                    }         
+
+                ]
+            },
+            "radius.f5lab.local": {
+                "class": "GSLB_Domain",
+                "domainName": "radius.f5lab.local",
+                "resourceRecordType": "A",
+                "lastResortPool": {
+                    "use": "radius.f5lab.local.gtm.pl"
+                },
+                "lastResortPoolType": "A",
+                "pools": [
+                    {
+                        "use": "radius.f5lab.local.gtm.pl"
+                    }                  
+
+                ]
+            },
+            "radius.f5lab.local.gtm.pl": {
+                "class": "GSLB_Pool",
+                "resourceRecordType": "A",
+                "ttl": 0,
+                "members": [
+                    {
+                        "server": {
+                            "use": "/Common/Shared/bigip1.f5lab.local"
+                        },
+                        "virtualServer": "radius.f5lab.local.vs"
+                    }         
+
+                ]
+            }               
+        }
+    }, 
+
+    "Common": {
+        "class": "Tenant",
+        "Shared": {
+            "class": "Application",
+            "template": "shared",
+            "DC1": {
+                "class": "GSLB_Data_Center"
+            },
+            "bigip1.f5lab.local": {
+                "class": "GSLB_Server",
+                "dataCenter": {
+                    "use": "DC1"
+                },
+                "devices": [
+                    {
+                        "address": "10.1.10.4"
+                    }
+                ],
+                "virtualServers": [
+                    {
+                        "address": "10.1.10.100",
+                        "port": 443,
+                        "name": "webtop.acme.com.vs"
+                    },
+                    {
+                        "address": "10.1.20.104",
+                        "port": 1812,
+                        "name": "radius.f5lab.local.vs"
+                    }
+                ]
+            },              
+            "bigip5.f5lab.local": {
+                "class": "GSLB_Server",
+                "dataCenter": {
+                    "use": "DC1"
+                },
+                "devices": [
+                    {
+                        "address": "10.1.20.11"
+                    }
+                ]
+            }
+        }
+    }
+}  

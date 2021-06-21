@@ -1,0 +1,14 @@
+{
+    "name": "{{vs_name}}-kerbsso",
+    "partition": "{{partition_name}}",
+    "accountName": "HOST/{{vs_name}}.f5lab.local",
+    "accountPassword": "{{vs_name}}",
+    "locationSpecific": "false",
+    "realm": "F5LAB.LOCAL",
+    "sendAuthorization": "401",
+    "spnPattern": "HTTP/{{vs_name}}.acme.com",
+    "ticketLifetime": 600,
+    "upnSupport": "disabled",
+    "userRealmSource": "session.logon.last.domain",
+    "usernameSource": "session.logon.last.username"
+}

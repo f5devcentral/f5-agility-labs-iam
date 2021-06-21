@@ -1,0 +1,14 @@
+---
+# tasks file for roles/createldap_aaa
+
+- name: Create LDAP AAA
+  uri:
+    url: https://{{bigip}}/mgmt/tm/apm/aaa/ldap
+    method: POST
+    headers:
+      X-F5-Auth-Token: "{{ f5_auth_token }}"
+    body_format: json
+    body: "{{ lookup('template','templates/ldap.j2', split_lines=False )}}"
+    validate_certs: false
+  delegate_to: localhost
+  ignore_errors: true  

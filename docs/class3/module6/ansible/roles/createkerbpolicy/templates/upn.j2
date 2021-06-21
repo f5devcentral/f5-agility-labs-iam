@@ -1,0 +1,13 @@
+{
+    "name": "{{vs_name}}-psp_act_variable_assign_ag",
+    "partition": "{{partition_name}}",
+    "type": "general",
+    "variables": [
+        {
+            "append": "false",
+            "expression": "set x509e_fields [split [mcget {session.ssl.cert.x509extension}] \\\"\\\\n\\\"];\n# For each element in the list:\nforeach field $x509e_fields {\n# If the element contains UPN:\nif { $field contains \\\"othername:UPN\\\" } {\n## set start of UPN variable\nset start [expr {[string first \\\"othername:UPN<\\\" $field] +14}]\n# UPN format is <user@domain>\n# Return the UPN, by finding the index of opening and closing brackets, then use string range to get everything between.\nreturn [string range $field $start [expr { [string first \\\">\\\" $field $start] - 1 } ] ];  } }\n# Otherwise return UPN Not Found:\nreturn \\\"UPN-NOT-FOUND\\\";\n",
+            "secure": "false",
+            "varname": "session.custom.upn"
+        }
+    ]
+}

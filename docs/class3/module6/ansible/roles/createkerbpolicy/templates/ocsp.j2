@@ -1,0 +1,24 @@
+{
+    
+    "name": "{{vs_name}}-ocsp-servers",
+    "partition": "{{partition_name}}",
+    "allowCerts": "true",
+    "caFile": "/{{partition_name}}/ca.f5lab.local.crt",
+    "caPath": "/ocsp",
+    "certIdDigest": "sha1",
+    "chain": "true",
+    "checkCerts": "true",
+    "explicitOcsp": "true",
+    "ignoreAia": "false",
+    "intern": "true",
+    "locationSpecific": "true",
+    "nonce": "false",
+    "signDigest": "sha1",
+    "statusAge": 0,
+    "trustOther": "false",
+    "url": "http://dc1.f5lab.local",
+    "validityPeriod": 300,
+    "verify": "true",
+    "verifyCert": "true",
+    "verifySig": "true"
+}

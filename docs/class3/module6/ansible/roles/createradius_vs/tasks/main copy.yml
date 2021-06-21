@@ -1,0 +1,39 @@
+---
+# tasks file for ldap-vs
+
+- name: ADD POOL MEMBERS
+  bigip_pool_member:
+    provider: "{{provider}}"
+    state: "present"
+    name: "10.1.20.7"
+    host: "10.1.20.7"
+    port: "389"
+    pool: "{{vs_name}}-ldap-pool"
+
+- name: Create LDAP AAA
+  uri:
+    url: https://{{bigip}}/mgmt/tm/apm/aaa/ldap
+    method: POST
+    headers:
+      X-F5-Auth-Token: "{{ f5_auth_token }}"
+    body_format: json
+    body: "{{ lookup('template','templates/ldap.j2', split_lines=False )}}"
+    validate_certs: false
+  delegate_to: localhost
+  ignore_errors: true 
+
+- name: CREATE AS3 JSON BODY
+  set_fact:
+    as3_app_body: "{{ lookup('template', 'templates/as3_radius_app.j2', split_lines=False) }}"
+  
+- name: PUSH AS3
+  uri:
+    url: "https://{{ bigip }}/mgmt/shared/appsvcs/declare"
+    method: POST
+    body: "{{ lookup('template','templates/tenant_base.j2', split_lines=False) }}"
+    timeout: 300
+    body_format: json
+    headers:
+      X-F5-Auth-Token: "{{ f5_auth_token }}"
+    validate_certs: false
+  delegate_to: localhost

@@ -1,0 +1,28 @@
+"{{path_name}}": {
+    "class": "Application",
+    "template": "{{as3_template}}",
+    "{{vs_name}}-{{app_service}}": {
+        "class": "Service_HTTPS",
+        "virtualAddresses": [
+            "{{bigip_address}}"
+        ],
+        "virtualPort": 443,
+        "serverTLS": "{{vs_name}}-clientssl",
+        "snat": "auto"
+    },
+    "{{vs_name}}-clientssl": {
+        "class": "TLS_Server",
+        "authenticationInviteCA": {"bigip":"/Common/ca.f5lab.local.crt"},
+        "authenticationTrustCA": {"bigip":"/Common/ca.f5lab.local.crt"},
+        "certificates": [
+            {
+                "certificate": "tlsserver_local_cert"
+            }
+        ]
+    },
+    "tlsserver_local_cert": {
+        "class": "Certificate",
+        "certificate": {"bigip":"/Common/acme.com-wildcard"},
+        "privateKey": {"bigip":"/Common/acme.com-wildcard"}
+    }
+}

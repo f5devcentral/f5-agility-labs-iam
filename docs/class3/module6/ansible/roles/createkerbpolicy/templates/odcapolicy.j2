@@ -1,0 +1,30 @@
+{
+    
+    "name": "{{vs_name}}-psp_act_ondemand_cert_auth",
+    "partition": "{{partition_name}}",
+    "caption": "On-Demand Cert Auth",
+    "color": 1,
+    "itemType": "action",
+    "loop": "false",
+    "agents": [
+        {
+            "name": "{{vs_name}}-psp_act_ondemand_cert_auth_ag",
+            "partition": "{{partition_name}}",
+            "type": "aaa-client-cert"
+            
+        }
+    ],
+    "rules": [
+        {
+            "caption": "Successful",
+            "expression": "expr {[mcget {session.ssl.cert.valid}] == \\\"0\\\"}",
+            "nextItem": "/{{partition_name}}/{{vs_name}}-psp_act_ocsp_auth"
+            
+        },
+        {
+            "caption": "fallback",
+            "nextItem": "/{{partition_name}}/{{vs_name}}-psp_end_deny"
+            
+        }
+    ]
+}

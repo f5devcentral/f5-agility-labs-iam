@@ -1,0 +1,14 @@
+---
+# tasks file for roles/deleteapp
+
+- name: Delete Common Tenant
+  uri:
+    url: "https://{{ bigip }}/mgmt/shared/appsvcs/declare"
+    method: DELETE
+    status_code: 200
+    timeout: 300
+    headers:
+      X-F5-Auth-Token: "{{ f5_auth_token }}"
+    validate_certs: false
+  delegate_to: localhost
+  

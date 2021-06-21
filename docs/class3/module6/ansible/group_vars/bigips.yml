@@ -1,0 +1,7 @@
+provider:
+  server: "{{ ansible_host }}"
+  server_port: 443
+  user: "{{ansible_user}}"
+  password: "{{ansible_ssh_pass}}"
+  validate_certs: false
+  transport: rest

@@ -1,0 +1,23 @@
+{
+    "name": "{{vs_name}}-ldap-servers",
+    "partition": "{{partition_name}}",
+    "address": "any6",
+    "adminDn": "CN=Admin,CN=Users,DC=f5lab,DC=local",
+    "adminEncryptedPassword": "admin",
+    "cleanupCache": "none",
+    "groupCacheTtl": 30,
+    "isLdaps": "false",
+    "locationSpecific": "true",
+    "pool": "/{{partition_name}}/{{vs_name}}-ldap-pool",
+    "port": 389,
+    "schemaAttr": {
+        "groupMember": "member",
+        "groupMemberValue": "dn",
+        "groupMemberof": "memberOf",
+        "groupObjectClass": "group",
+        "userMemberof": "memberOf",
+        "userObjectClass": "user"
+    },
+    "timeout": 15,
+    "usePool": "enabled"
+}

@@ -1,0 +1,13 @@
+---
+# tasks file for roles/remove_apm_macros
+
+- name: --ROLE-- Remove APM Macros
+  uri:
+    url: https://{{bigip}}/mgmt/tm/apm/policy/access-policy/{{item}}
+    method: DELETE
+    headers:
+      X-F5-Auth-Token: "{{ f5_auth_token }}"
+    validate_certs: false
+  loop: "{{macro_names}}"
+  delegate_to: localhost
+  ignore_errors: true  
