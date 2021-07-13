@@ -1,0 +1,14 @@
+{
+    "class": "ADC",
+    "action": "deploy",
+    "persist": true,
+    "declaration": {
+        "class": "ADC",
+        "schemaVersion": "3.20.0",
+        "updateMode": "selective",
+        "{{partition_name}}":{
+            "class": "Tenant",
+            {{ as3_app_body }}
+        }
+    }
+}

@@ -1,0 +1,23 @@
+{
+    
+    "name": "{{vs_name}}-psp_act_variable_assign_1",
+    "partition": "{{partition_name}}",
+    "caption": "set_variables",
+    "color": 1,
+    "itemType": "action",
+    "loop": "false",
+    "agents": [
+        {
+            "name": "{{vs_name}}-psp_act_variable_assign_1_ag",
+            "partition": "{{partition_name}}",
+            "type": "variable-assign"
+        }
+    ],
+    "rules": [
+        {
+            "caption": "fallback",
+            "nextItem": "/{{partition_name}}/{{vs_name}}-psp_end_allow"
+            
+        }
+    ]
+}

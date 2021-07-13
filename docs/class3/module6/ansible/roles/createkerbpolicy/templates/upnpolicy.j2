@@ -1,0 +1,24 @@
+{
+    
+    "name": "{{vs_name}}-psp_act_variable_assign",
+    "partition": "{{partition_name}}",
+    "caption": "upn_extract",
+    "color": 1,
+    "itemType": "action",
+    "loop": "false",
+    "agents": [
+        {
+            "name": "{{vs_name}}-psp_act_variable_assign_ag",
+            "partition": "{{partition_name}}",
+            "type": "variable-assign"
+            
+        }
+    ],
+    "rules": [
+        {
+            "caption": "fallback",
+            "nextItem": "/{{partition_name}}/{{vs_name}}-psp_act_ldap_query"
+            
+        }
+    ]
+}

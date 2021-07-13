@@ -1,0 +1,30 @@
+{
+    
+    "name": "{{vs_name}}-psp_act_ocsp_auth",
+    "partition": "{{partition_name}}",
+    "caption": "OCSP Auth",
+    "color": 1,
+    "itemType": "action",
+    "loop": "false",
+    "agents": [
+        {
+            "name": "{{vs_name}}-psp_act_ocsp_auth_ag",
+            "partition": "{{partition_name}}",
+            "type": "aaa-ocsp"
+            
+        }
+    ],
+    "rules": [
+        {
+            "caption": "Successful",
+            "expression": "expr {[mcget {session.ocsp.last.result}] == 1}",
+            "nextItem": "/{{partition_name}}/{{vs_name}}-psp_act_variable_assign"
+            
+        },
+        {
+            "caption": "fallback",
+            "nextItem": "/{{partition_name}}/{{vs_name}}-psp_end_deny"
+            
+        }
+    ]
+}

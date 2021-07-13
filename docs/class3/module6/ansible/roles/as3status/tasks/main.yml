@@ -1,0 +1,13 @@
+---
+# tasks file for as3status
+
+  - name: GET AS3 status
+    uri:
+      url: "https://{{ bigip }}:443/mgmt/shared/appsvcs/info"
+      validate_certs: false
+      headers:
+        X-F5-Auth-Token: "{{ f5_auth_token }}"
+    register: data
+
+  - debug: 
+      var: data.json

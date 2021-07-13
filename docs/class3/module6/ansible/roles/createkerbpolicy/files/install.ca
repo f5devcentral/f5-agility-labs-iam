@@ -1,0 +1,6 @@
+{
+	"command":"install",
+	"name":"ca.f5lab.local",
+	"from-local-file":"/var/config/rest/downloads/ca.f5lab.local.crt"
+	
+}

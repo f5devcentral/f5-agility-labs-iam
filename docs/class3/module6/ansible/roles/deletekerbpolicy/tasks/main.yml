@@ -1,0 +1,74 @@
+---
+# tasks file for roles/deletekerbpolicy
+
+- name: Delete Profile
+  uri:
+    url: https://{{bigip}}/mgmt/tm/apm/profile/access/~{{partition_name}}~{{partition_name}}-psp
+    method: DELETE
+    headers:
+      X-F5-Auth-Token: "{{ f5_auth_token }}"
+    validate_certs: false
+  delegate_to: localhost
+  ignore_errors: true  
+
+
+- name: Delete Policy
+  uri:
+    url: https://{{bigip}}/mgmt/tm/apm/policy/access-policy/~{{partition_name}}~{{partition_name}}-psp
+    method: DELETE
+    headers:
+      X-F5-Auth-Token: "{{ f5_auth_token }}"
+    validate_certs: false
+  delegate_to: localhost
+  ignore_errors: true  
+
+- name: Delete SSO profile
+  uri:
+    url: https://{{bigip}}/mgmt/tm/apm/sso/kerberos/~{{partition_name}}~{{vs_name}}-kerbsso
+    method: DELETE
+    headers:
+      X-F5-Auth-Token: "{{ f5_auth_token }}"
+    validate_certs: false
+  delegate_to: localhost
+  ignore_errors: true    
+
+- name: Delete OCSP Servers
+  uri:
+    url: https://{{bigip}}/mgmt/tm/apm/aaa/ocsp/~{{partition_name}}~{{vs_name}}-ocsp-servers
+    method: DELETE
+    headers:
+      X-F5-Auth-Token: "{{ f5_auth_token }}"
+    validate_certs: false
+  delegate_to: localhost
+  ignore_errors: true  
+
+- name: Delete APM LDAP
+  uri:
+    url: https://{{bigip}}/mgmt/tm/apm/aaa/ldap/~{{partition_name}}~{{vs_name}}-ldap-servers
+    method: DELETE
+    headers:
+      X-F5-Auth-Token: "{{ f5_auth_token }}"
+    validate_certs: false
+  delegate_to: localhost
+  ignore_errors: true
+
+- name: Delete APM LDAP Pool
+  uri:
+    url: https://{{bigip}}/mgmt/tm/ltm/pool/~{{partition_name}}~{{vs_name}}-ldap-pool
+    method: DELETE
+    headers:
+      X-F5-Auth-Token: "{{ f5_auth_token }}"
+    validate_certs: false
+  delegate_to: localhost
+  ignore_errors: true  
+
+- name: Delete LDAP Node
+  uri:
+    url: https://{{bigip}}/mgmt/tm/ltm/node/10.1.20.7
+    method: DELETE
+    headers:
+      X-F5-Auth-Token: "{{ f5_auth_token }}"
+    validate_certs: false
+  delegate_to: localhost
+  ignore_errors: true  
+

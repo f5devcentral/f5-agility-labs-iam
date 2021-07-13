@@ -1,0 +1,12 @@
+---
+# tasks file for roles/remove_apm_psp
+
+- name: --ROLE-- Remove APM PSP Policy
+  uri:
+    url: https://{{bigip}}/mgmt/tm/apm/profile/access/{{psp_pol_name}}
+    method: DELETE
+    headers:
+      X-F5-Auth-Token: "{{ f5_auth_token }}"
+    validate_certs: false
+  delegate_to: localhost
+  ignore_errors: true  

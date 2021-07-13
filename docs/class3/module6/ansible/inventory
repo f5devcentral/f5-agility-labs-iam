@@ -1,0 +1,17 @@
+
+[bigips]
+bigip1 ansible_host=10.1.1.4
+
+[bigipdns]
+dns1 ansible_host=10.1.1.11
+
+[iis]
+iis ansible_host=10.1.20.6
+
+[single]
+bigip1
+dns1
+
+[all:vars]
+ansible_user = "admin"
+ansible_ssh_pass = "admin"

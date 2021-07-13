@@ -1,0 +1,19 @@
+"{{path_name}}-{{app_service}}": {
+    "class": "Application",
+    "template": "generic",
+
+
+    "{{vs_name}}-{{vs_serices}}-pool": {
+        "class": "Pool",
+        "monitors": [
+            "http"
+        ],
+        "members": [
+            {
+                "servicePort": {{vs_port}},
+                "serverAddresses": [
+                    "{{pool_member}}"
+                ]            
+            }         
+        ]
+    }

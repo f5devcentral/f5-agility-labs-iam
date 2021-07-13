@@ -1,0 +1,46 @@
+"{{path_name}}": {
+    "class": "Application",
+    "template": "generic",
+    "{{vs_name}}": {
+        "class": "Service_HTTPS",
+        "virtualAddresses": [
+            "{{bigip_address}}"
+        ],
+        "virtualPort": 443,
+        "serverTLS": "{{vs_name}}-clientssl",
+        "pool": "{{vs_name}}-iis-pool",
+        "snat": "auto",
+        "profileAccess": {
+          "bigip": "/{{partition_name}}/{{vs_name}}-psp"
+          }
+    },
+    "{{vs_name}}-clientssl": {
+        "class": "TLS_Server",
+        "authenticationInviteCA": {"bigip":"/{{partition_name}}/ca.f5lab.local.crt"},
+        "authenticationTrustCA": {"bigip":"/{{partition_name}}/ca.f5lab.local.crt"},
+        "certificates": [
+            {
+                "certificate": "tlsserver_local_cert"
+            }
+        ]
+    },
+    "tlsserver_local_cert": {
+        "class": "Certificate",
+        "certificate": {"bigip":"/{{partition_name}}/acme.com-wildcard"},
+        "privateKey": {"bigip":"/{{partition_name}}/acme.com-wildcard"}
+    },
+    "{{vs_name}}-iis-pool": {
+        "class": "Pool",
+        "monitors": [
+            "http"
+        ],
+        "members": [
+            {
+                "servicePort": 80,
+                "serverAddresses": [
+                    "{{iis_address}}"
+                ]            
+            }         
+        ]
+    }
+}

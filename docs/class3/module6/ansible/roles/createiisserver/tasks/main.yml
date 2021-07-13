@@ -1,0 +1,52 @@
+---
+# tasks file for roles/iisserver
+
+- name: Create IIS Website
+  uri:
+    url: http://10.1.20.6:81/website
+    method: POST
+    headers:
+      Content-Type: application/json
+    body: "{{ lookup('template','templates/website.j2', split_lines=False )}}"
+    body_format: json
+    status_code: 404, 200
+
+- name: Create AD A Record
+  uri:
+    url: http://10.1.20.6:81/dns
+    method: POST
+    headers:
+      Content-Type: application/json
+    body: "{{ lookup('template','templates/a-record.j2', split_lines=False )}}"
+    body_format: json
+    status_code: 404, 200
+
+- name: Create AD PTR Record
+  uri:
+    url: http://10.1.20.6:81/dns
+    method: POST
+    headers:
+      Content-Type: application/json
+    body: "{{ lookup('template','templates/ptr-record.j2', split_lines=False )}}"
+    body_format: json
+    status_code: 404, 200    
+
+- name: Create SPN
+  uri:
+    url: http://10.1.20.6:81/computer
+    method: POST
+    headers:
+      Content-Type: application/json
+    body: "{{ lookup('template','templates/spn.j2', split_lines=False )}}"
+    body_format: json
+    status_code: 404, 200    
+
+- name: Create AD Delegation Account
+  uri:
+    url: http://10.1.20.6:81/user
+    method: POST
+    headers:
+      Content-Type: application/json
+    body: "{{ lookup('template','templates/user.j2', split_lines=False )}}"
+    body_format: json
+    status_code: 200

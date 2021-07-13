@@ -1,0 +1,78 @@
+{
+    "class": "ADC",
+    "schemaVersion": "3.6.0",
+    "id": "{{partition_name}}",
+
+    "{{partition_name}}": {
+        "class": "Tenant",
+        "Application": {
+            "class": "Application",
+            "template": "shared",
+            "{{vs_name}}": {
+                "class": "GSLB_Domain",
+                "domainName": "{{dns_name}}",
+                "resourceRecordType": "A",
+                "pools": [
+                    {
+                        "use": "{{vs_name}}-pool"
+                    }                  
+
+                ]
+            },         
+            "{{vs_name}}-pool": {
+                "class": "GSLB_Pool",
+                "resourceRecordType": "A",
+                "members": [
+                    {
+                        "server": {
+                            "use": "/{{partition_name}}/Shared/{{ltm_name}}"
+                        },
+                        "virtualServer": "{{vs_name}}"
+                    }
+                ]
+            }
+        }
+    },
+    "{{partition_name}}": {
+        "class": "Tenant",
+        "Shared": {
+            "class": "Application",
+            "template": "shared",
+            "gtm.{{dc_name}}": {
+                "class": "GSLB_Data_Center"
+            },
+            "{{gtm_name}}": {
+                "class": "GSLB_Server",
+                "dataCenter": {
+                    "use": "gtm.{{dc_name}}"
+                },
+                "devices": [
+                    {
+                        "address": "{{gtm_address}}"
+                    }
+                ]
+            },
+            "ltm.{{dc_name}}": {
+                "class": "GSLB_Data_Center"
+            },
+            "{{ltm_name}}": {
+                "class": "GSLB_Server",
+                "dataCenter": {
+                    "use": "ltm.{{dc_name}}"
+                },
+                "devices": [
+                    {
+                        "address": "{{ltm_address}}"
+                    }
+                ],
+                "virtualServers": [
+                        {
+                            "address": "10.1.10.100",
+                            "port": 443,
+                            "name": "{{vs_name}}"
+                        }                       
+                ]
+            }
+        }
+    }
+}

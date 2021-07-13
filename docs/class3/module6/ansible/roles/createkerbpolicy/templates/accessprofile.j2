@@ -1,0 +1,38 @@
+{
+
+    "name": "{{vs_name}}-psp",
+    "partition": "{{partition_name}}",
+    "acceptLanguages": [
+        "en"
+    ],
+    "accessPolicy": "/{{partition_name}}/{{vs_name}}-psp",
+      "customizationGroup": "/{{partition_name}}/{{vs_name}}-psp_logout",
+    "epsGroup": "/{{partition_name}}/{{vs_name}}-psp_eps",
+    "errormapGroup": "/{{partition_name}}/{{vs_name}}-psp_errormap",
+    "frameworkInstallationGroup": "/{{partition_name}}/{{vs_name}}-psp_framework_installation",
+    "generalUiGroup": "/{{partition_name}}/{{vs_name}}-psp_general_ui",
+    "ssoName": "/{{partition_name}}/{{vs_name}}-kerbsso",
+    "accessPolicyTimeout": 300,
+    "defaultLanguage": "en",
+     "httponlyCookie": "false",
+    "inactivityTimeout": 900,
+    "logoutUriTimeout": 5,
+    "maxConcurrentSessions": 0,
+    "maxConcurrentUsers": 0,
+    "maxFailureDelay": 5,
+    "maxInProgressSessions": 128,
+    "maxSessionTimeout": 604800,
+    "minFailureDelay": 2,
+    "modifiedSinceLastPolicySync": "false",
+    "persistentCookie": "false",
+    "restrictToSingleClientIp": "false",
+    "scope": "profile",
+    "secureCookie": "true",
+    "type": "all",
+    "useHttp_503OnError": "false",
+    "userIdentityMethod": "http",
+    "logSettings": [
+        "/{{partition_name}}/default-log-setting"
+    ]
+
+}

@@ -1,0 +1,14 @@
+---
+# tasks file for roles/deletegslb
+
+- name: Delete GSLB
+  uri:
+    url: "https://{{ bigip }}/mgmt/shared/appsvcs/declare"
+    method: DELETE
+    body: "{{ lookup('template','templates/gslb.j2', split_lines=False) }}"
+    timeout: 300
+    body_format: json
+    headers:
+      X-F5-Auth-Token: "{{ f5_auth_token }}"
+    validate_certs: false
+  delegate_to: localhost

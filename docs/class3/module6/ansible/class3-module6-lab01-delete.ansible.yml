@@ -1,0 +1,73 @@
+- name: Get DHCP Scope
+  hosts: bigips
+  serial: 1
+  connection: local
+  gather_facts: no
+
+  vars:
+    vs_name: pua 
+    dns_name: pua.acme.com
+    path_name: pua
+    partition_name: pua
+    files_base: http://files-master.f5lab.local/solutions      
+
+  tasks:
+    - name: Return Webtop IP address
+      include_role:
+        name: checkinaddr
+      vars:
+        vs_name: webtop_address
+        dhcp_scope: 10.1.10.96
+
+    - name: GET BIGIP-1 AUTH Token
+      include_role:
+        name: bigipauth
+      vars:
+        bigip: 10.1.1.4  
+
+    - name: Delete APM PSP Policy
+      include_role:
+        name: remove_apm_psp
+      vars:
+        policy_name: pua.LDAP.psp
+        bigip: 10.1.1.4
+
+    - name: Delete APM Marcos
+      include_role:
+        name: remove_apm_macros
+      vars:
+        macro_names: 
+          - pua.LDAP.psp
+          - admin_access
+          - cac_auth
+          - get_upn_from_cac
+          - ldap_query
+
+        bigip: 10.1.1.4        
+
+    - name: Delete LDAP AAA    
+      include_role:
+        name: deleteldap_aaa
+      vars:
+        partition_name: Common       
+        bigip: 10.1.1.4
+
+    - name: Run DELETEAPP Role BIGIP-1
+      include_role:
+        name: deleteapp
+      vars:
+        partition_name: Common      
+        bigip: 10.1.1.4
+
+    - name: GET BIGIP-5 AUTH Token
+      include_role:
+        name: bigipauth
+      vars:
+        bigip: 10.1.1.11
+
+    - name: Run DELETEAPP Role BIGIP-5
+      include_role:
+        name: deleteapp
+      vars:
+        partition_name: Common      
+        bigip: 10.1.1.11

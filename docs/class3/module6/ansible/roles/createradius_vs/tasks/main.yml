@@ -1,0 +1,18 @@
+---
+# tasks file for ldap-vs
+
+- name: CREATE AS3 JSON BODY
+  set_fact:
+    as3_app_body: "{{ lookup('template', 'templates/as3_pool.j2', split_lines=False) }}"
+  
+- name: PUSH AS3
+  uri:
+    url: "https://{{ bigip }}/mgmt/shared/appsvcs/declare"
+    method: POST
+    body: "{{ lookup('template','templates/tenant_base.j2', split_lines=False) }}"
+    timeout: 300
+    body_format: json
+    headers:
+      X-F5-Auth-Token: "{{ f5_auth_token }}"
+    validate_certs: false
+  delegate_to: localhost

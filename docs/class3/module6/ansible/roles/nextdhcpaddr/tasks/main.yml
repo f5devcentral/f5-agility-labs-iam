@@ -1,0 +1,45 @@
+---
+# tasks file for roles/nextdhcpaddr
+- name: Clear Scope Result
+  set_fact:
+    scope_result: "unassigned"
+
+- name: Check DHCP Scope
+  include_role: 
+    name: getdhcpscope
+
+- name: Get the next address in DHCP
+  uri:
+    url: http://10.1.20.6:81/addr/available?scope={{dhcp_scope}}
+    method: GET
+    headers:
+      Content-Type: application/json
+    body_format: json
+    status_code:  200
+  register: nextdhcpaddr
+  when: (scope_result == "unassigned" or scope_result is undefined)
+
+- debug:
+    var: nextdhcpaddr.json.address
+   
+
+- name: Checkout Address  
+  uri:
+    url: http://10.1.20.6:81/addr/checkout
+    method: POST
+    headers:
+      Content-Type: application/json
+    body:
+      username: "{{ ansible_user}}"
+      password: "{{ ansible_ssh_pass }}"
+      scope: "{{dhcp_scope}}"
+      address: "{{nextdhcpaddr.json.address}}"
+      name: "{{vs_name}}"
+    body_format: json
+    status_code: 200
+  when: (scope_result == "unassigned" or scope_result is undefined)  
+
+- set_fact:
+    scope_result: "{{ nextdhcpaddr.json.address}}"
+  when: nextdhcpaddr.json.address is defined
+

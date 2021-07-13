@@ -1,0 +1,20 @@
+---
+# tasks file for bigipauth
+
+- name: Get authentication token
+  uri:
+    url: "https://{{ bigip }}:443/mgmt/shared/authn/login"
+    method: POST
+    timeout: 120
+    validate_certs: false
+    body:
+      username: "{{ ansible_user }}"
+      password: "{{ ansible_ssh_pass }}"
+    body_format: json
+  register: authtoken
+  delegate_to: localhost
+
+- name: Set the token fact if authentication succeeded
+  set_fact:
+    f5_auth_token: "{{ authtoken.json.token.token }}"
+  when: authtoken is success 

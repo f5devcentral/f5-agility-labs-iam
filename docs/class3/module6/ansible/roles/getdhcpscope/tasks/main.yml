@@ -1,0 +1,33 @@
+---
+# tasks file for getscope
+
+- name: Get DHCP Scope
+  uri:
+    url: http://10.1.20.6:81/addr/scope-status?scope={{dhcp_scope}}
+    method: GET
+    headers:
+      Content-Type: application/json
+
+    body_format: json
+    status_code: 200
+  register: scopestate
+
+- name: List Single IP address in Scope
+  set_fact: 
+    scope_result: "{{scopestate.json | json_query(jmesquery)}}"
+  vars:
+    jmesquery: "IPAddress.IPAddressToString"
+  when: "scopestate.json.IPAddress.IPAddressToString is defined and scopestate.json.Description == '{{vs_name}}'"
+
+- name: List Mutiple IP addresses in Scope
+  set_fact: 
+    scope_result: "{{scopestate.json | json_query(jmesquery)}}"
+  vars:
+    jmesquery: "[? Description == '{{vs_name}}'].IPAddress.IPAddressToString"
+  when: "scopestate.json.IPAddress.IPAddressToString is undefined and scopestate.json.status is undefined"
+  ignore_errors: true
+
+- debug:
+    msg: "Your IP address is {{scope_result}}"
+  when: scope_result is defined
+
