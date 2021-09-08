@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "3a8f06a8-5165-4e78-9da0-9c1a86d08d4d",
+		"_postman_id": "3ed45946-b660-4310-9534-21b001810fbf",
 		"name": "class1-module2-lab01-delete",
 		"description": "This solution was created using template 1.10",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -23,8 +23,7 @@
 									"",
 									""
 								],
-								"type": "text/javascript",
-								"id": "ae026496-f4bf-4f34-8ff8-de7fac98fc71"
+								"type": "text/javascript"
 							}
 						},
 						{
@@ -39,18 +38,28 @@
 									"pm.collectionVariables.set(\"PARTITION_NAME\", \"Common\");\r",
 									"\r",
 									"//This is the primary section defining the settings for the application the solutions is going to deploy\r",
-									"pm.collectionVariables.set(\"DNS1_NAME\", \"app.acme.com\");\r",
-									"pm.collectionVariables.set(\"VS1_NAME\", \"app\");\r",
+									"pm.collectionVariables.set(\"DNS1_NAME\", \"webtop.acme.com\");\r",
+									"pm.collectionVariables.set(\"VS1_NAME\", \"webtop\");\r",
+									"pm.collectionVariables.set(\"CONFLICT1_NAME\", \"webtop.acme.com\");\r",
 									"pm.collectionVariables.set(\"BIGIP_ADDRESS1\", \"10.1.10.101\");\r",
+									"pm.collectionVariables.set(\"IIS_ADDRESS1\", \"10.1.20.6\")\r",
+									"\r",
 									"\r",
 									"\r",
 									"//This section is used when building two virtrual servers as part of a solutions or when a reference is needed to another solutions.  For example, if your solutions involved Federation you will need to define both the FQDNs for the both the SP and IDP.  \r",
 									"pm.collectionVariables.set(\"DNS2_NAME\", \"template2.acme.com\");\r",
 									"pm.collectionVariables.set(\"VS2_NAME\", \"template2\");\r",
+									"\r",
+									"\r",
+									"//This variable is used for switching between standard and modern for logon pages, webtops, and other objects that support those changes.\r",
+									"pm.collectionVariables.set(\"CUSTOM_TYPE\", \"modern\");\r",
+									"\r",
+									"pm.collectionVariables.set(\"SERVICE_NAME_1\", \"service1\");\r",
+									"pm.collectionVariables.set(\"CHAIN_NAME_1\", \"chain1\");\r",
+									"\r",
 									""
 								],
-								"type": "text/javascript",
-								"id": "144da4c2-9373-4f8a-aeda-e7676fddf2ca"
+								"type": "text/javascript"
 							}
 						}
 					],
@@ -91,8 +100,7 @@
 					},
 					"response": []
 				}
-			],
-			"protocolProfileBehavior": {}
+			]
 		},
 		{
 			"name": "Start-Loop Datacenters",
@@ -106,8 +114,7 @@
 								"exec": [
 									""
 								],
-								"type": "text/javascript",
-								"id": "07887b6f-afc0-4a12-a011-04ef6b9afec5"
+								"type": "text/javascript"
 							}
 						},
 						{
@@ -131,8 +138,7 @@
 									"}\r",
 									""
 								],
-								"type": "text/javascript",
-								"id": "42f64194-d658-4a4a-bd61-b1a82059535a"
+								"type": "text/javascript"
 							}
 						}
 					],
@@ -178,8 +184,7 @@
 						"type": "text/javascript",
 						"exec": [
 							""
-						],
-						"id": "18ea9faa-0f4b-4251-b80a-ee3763f9802a"
+						]
 					}
 				},
 				{
@@ -188,12 +193,10 @@
 						"type": "text/javascript",
 						"exec": [
 							""
-						],
-						"id": "f1564349-94db-4028-9767-e62a6d5fdd0e"
+						]
 					}
 				}
-			],
-			"protocolProfileBehavior": {}
+			]
 		},
 		{
 			"name": "External DNS",
@@ -219,8 +222,7 @@
 											"} ",
 											""
 										],
-										"type": "text/javascript",
-										"id": "c39f5201-96b2-435d-b3f2-6b1ab957531a"
+										"type": "text/javascript"
 									}
 								},
 								{
@@ -229,8 +231,7 @@
 										"exec": [
 											""
 										],
-										"type": "text/javascript",
-										"id": "37cb9f23-58b8-44e5-82dd-bd104d92eae8"
+										"type": "text/javascript"
 									}
 								}
 							],
@@ -271,9 +272,7 @@
 							},
 							"response": []
 						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
+					]
 				},
 				{
 					"name": "Delete WideIP",
@@ -287,8 +286,7 @@
 										"exec": [
 											""
 										],
-										"type": "text/javascript",
-										"id": "ba796406-9f08-4398-9024-c3147831920c"
+										"type": "text/javascript"
 									}
 								},
 								{
@@ -309,8 +307,7 @@
 											"",
 											"setTimeout(function(){}, 1000);"
 										],
-										"type": "text/javascript",
-										"id": "39c9f9e8-696d-4cf4-a5a3-499b33cc9e19"
+										"type": "text/javascript"
 									}
 								}
 							],
@@ -356,13 +353,172 @@
 							},
 							"response": []
 						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
+					]
 				},
 				{
 					"name": "Delete Virtuals Server Address 1 from BIG-IP Server",
 					"item": [
+						{
+							"name": "bigip5-retrieve-addres-server-vs1",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var VS_NAME = pm.collectionVariables.get(\"VS1_NAME\");",
+											"var jsonData = JSON.parse(responseBody);",
+											"",
+											"if (responseCode.code === 200) {",
+											"  ",
+											"    pm.collectionVariables.set(\"DNS_DEST\", jsonData.destination);",
+											"    address = (pm.collectionVariables.get(\"DNS_DEST\")).split(\":\");",
+											"    pm.collectionVariables.set('BIGIP_ADDRESS1', address[0]);",
+											"    ",
+											"    pm.test(\"VS \"+VS_NAME+ \" Address \"+address[0]+ \" found\", function () {",
+											"        pm.response.to.have.status(200);",
+											"    });",
+											"",
+											"} else",
+											"    pm.test(\"VS \"+VS_NAME+\" does not exist\", function () {",
+											"        pm.response.to.have.status(404);",
+											"    });",
+											"",
+											"",
+											"",
+											"",
+											"",
+											"",
+											"",
+											"",
+											"",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://10.1.1.11/mgmt/tm/gtm/server/~Common~bigip{{DC_COUNTER}}.f5lab.local/virtual-servers/~{{PARTITION_NAME}}~{{PATH_NAME}}~{{VS1_NAME}}",
+									"protocol": "https",
+									"host": [
+										"10",
+										"1",
+										"1",
+										"11"
+									],
+									"path": [
+										"mgmt",
+										"tm",
+										"gtm",
+										"server",
+										"~Common~bigip{{DC_COUNTER}}.f5lab.local",
+										"virtual-servers",
+										"~{{PARTITION_NAME}}~{{PATH_NAME}}~{{VS1_NAME}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "bigip-checkin-address",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var ADDR = pm.collectionVariables.get(\"BIGIP_ADDRESS1\");",
+											"",
+											"var jsonData = pm.response.json();",
+											"",
+											"if(jsonData.status === \"Success\") {",
+											"    pm.test(\"Address \"+ADDR+\" returned to Scope\", function () {",
+											"        pm.response.to.have.status(200);",
+											"    });",
+											"} else {",
+											"    pm.test(\"Address \"+ADDR+\" not assigned in Scope\", function () {",
+											"        pm.response.to.have.status(200);",
+											"    });",
+											"}",
+											"",
+											"setTimeout(function(){}, 1000);",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://10.1.20.6:81/addr/checkin?address={{BIGIP_ADDRESS1}}",
+									"protocol": "http",
+									"host": [
+										"10",
+										"1",
+										"20",
+										"6"
+									],
+									"port": "81",
+									"path": [
+										"addr",
+										"checkin"
+									],
+									"query": [
+										{
+											"key": "address",
+											"value": "{{BIGIP_ADDRESS1}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
 						{
 							"name": "bigip5-delete-server-vs",
 							"event": [
@@ -372,8 +528,7 @@
 										"exec": [
 											""
 										],
-										"type": "text/javascript",
-										"id": "beb46b91-fed6-4fea-b039-704b701124ce"
+										"type": "text/javascript"
 									}
 								},
 								{
@@ -394,8 +549,7 @@
 											"",
 											""
 										],
-										"type": "text/javascript",
-										"id": "c1bb359d-39e0-4127-b744-b8a6d09ce894"
+										"type": "text/javascript"
 									}
 								}
 							],
@@ -449,12 +603,9 @@
 							},
 							"response": []
 						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
+					]
 				}
-			],
-			"protocolProfileBehavior": {}
+			]
 		},
 		{
 			"name": "Start Loop - Imperative Calls",
@@ -482,8 +633,7 @@
 									"pm.collectionVariables.set(\"DNS_NAME\", pm.collectionVariables.get(\"DNS\"+DNS_COUNTER+\"_NAME\"));\r",
 									"}"
 								],
-								"type": "text/javascript",
-								"id": "adc3abff-1bef-424d-9ee7-a49cf3d6eb78"
+								"type": "text/javascript"
 							}
 						},
 						{
@@ -492,8 +642,7 @@
 								"exec": [
 									""
 								],
-								"type": "text/javascript",
-								"id": "9ea97e6b-799e-475a-a907-bf4c4c88d9b9"
+								"type": "text/javascript"
 							}
 						}
 					],
@@ -539,8 +688,7 @@
 						"type": "text/javascript",
 						"exec": [
 							""
-						],
-						"id": "92276a42-2479-48b7-9196-1c09f7ad72fa"
+						]
 					}
 				},
 				{
@@ -549,12 +697,10 @@
 						"type": "text/javascript",
 						"exec": [
 							""
-						],
-						"id": "96fc5c5a-790b-4d8e-a610-4fa4e60d9225"
+						]
 					}
 				}
-			],
-			"protocolProfileBehavior": {}
+			]
 		},
 		{
 			"name": "IControlRest -Virtual Servers",
@@ -568,8 +714,7 @@
 								"exec": [
 									""
 								],
-								"type": "text/javascript",
-								"id": "22bb6f96-36ff-4978-827b-a3cd6009b0f4"
+								"type": "text/javascript"
 							}
 						},
 						{
@@ -579,11 +724,11 @@
 									"var VS_NAME = pm.collectionVariables.get(\"VS1_NAME\");",
 									"",
 									"if (responseCode.code === 200) {",
-									"    pm.test(\"Application \"+VS_NAME+\"-https deleted\", function () {",
+									"    pm.test(\"Application \"+VS_NAME+\" deleted\", function () {",
 									"        pm.response.to.have.status(200);",
 									"    });",
 									" } else {",
-									"     pm.test(\"Application \"+VS_NAME+\"-https does not exist\", function () {",
+									"     pm.test(\"Application \"+VS_NAME+\" does not exist\", function () {",
 									"        pm.response.to.have.status(404);",
 									"    });",
 									"",
@@ -592,8 +737,7 @@
 									"setTimeout(function(){}, 2000);",
 									""
 								],
-								"type": "text/javascript",
-								"id": "7521522f-d2c0-4195-9dbf-e359dd0d48f9"
+								"type": "text/javascript"
 							}
 						}
 					],
@@ -620,7 +764,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://{{BIGIP_MGMT}}/mgmt/tm/ltm/virtual/~{{PARTITION_NAME}}~{{VS_NAME}}-https",
+							"raw": "https://{{BIGIP_MGMT}}/mgmt/tm/ltm/virtual/~Common~{{VS_NAME}}-https",
 							"protocol": "https",
 							"host": [
 								"{{BIGIP_MGMT}}"
@@ -630,7 +774,7 @@
 								"tm",
 								"ltm",
 								"virtual",
-								"~{{PARTITION_NAME}}~{{VS_NAME}}-https"
+								"~Common~{{VS_NAME}}-https"
 							]
 						}
 					},
@@ -645,8 +789,7 @@
 								"exec": [
 									""
 								],
-								"type": "text/javascript",
-								"id": "a446dd99-b6f8-4e9c-ba9e-faa7a30e75ac"
+								"type": "text/javascript"
 							}
 						},
 						{
@@ -656,11 +799,11 @@
 									"var VS_NAME = pm.collectionVariables.get(\"VS1_NAME\");",
 									"",
 									"if (responseCode.code === 200) {",
-									"    pm.test(\"Application \"+VS_NAME+\"-redirect deleted\", function () {",
+									"    pm.test(\"Application \"+VS_NAME+\" deleted\", function () {",
 									"        pm.response.to.have.status(200);",
 									"    });",
 									" } else {",
-									"     pm.test(\"Application \"+VS_NAME+\"-redirect does not exist\", function () {",
+									"     pm.test(\"Application \"+VS_NAME+\" does not exist\", function () {",
 									"        pm.response.to.have.status(404);",
 									"    });",
 									"",
@@ -669,8 +812,7 @@
 									"setTimeout(function(){}, 2000);",
 									""
 								],
-								"type": "text/javascript",
-								"id": "3f1a3010-c4ab-4ef8-945c-9d62539b00d1"
+								"type": "text/javascript"
 							}
 						}
 					],
@@ -697,7 +839,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://{{BIGIP_MGMT}}/mgmt/tm/ltm/virtual/~{{PARTITION_NAME}}~{{VS_NAME}}-redirect",
+							"raw": "https://{{BIGIP_MGMT}}/mgmt/tm/ltm/virtual/~Common~{{VS_NAME}}-redirect",
 							"protocol": "https",
 							"host": [
 								"{{BIGIP_MGMT}}"
@@ -707,14 +849,13 @@
 								"tm",
 								"ltm",
 								"virtual",
-								"~{{PARTITION_NAME}}~{{VS_NAME}}-redirect"
+								"~Common~{{VS_NAME}}-redirect"
 							]
 						}
 					},
 					"response": []
 				}
-			],
-			"protocolProfileBehavior": {}
+			]
 		},
 		{
 			"name": "PSP",
@@ -757,8 +898,7 @@
 											"\r",
 											"setTimeout(function(){}, 2000);"
 										],
-										"type": "text/javascript",
-										"id": "6c7ebb11-ab4d-4c15-af03-65e5e3d8493b"
+										"type": "text/javascript"
 									}
 								},
 								{
@@ -767,8 +907,7 @@
 										"exec": [
 											""
 										],
-										"type": "text/javascript",
-										"id": "33151977-d759-418b-828f-3e81103b4b34"
+										"type": "text/javascript"
 									}
 								}
 							],
@@ -814,8 +953,7 @@
 								"type": "text/javascript",
 								"exec": [
 									""
-								],
-								"id": "19d26cb0-94e2-420f-866a-1e95082c5bf2"
+								]
 							}
 						},
 						{
@@ -824,13 +962,10 @@
 								"type": "text/javascript",
 								"exec": [
 									""
-								],
-								"id": "2ef9031b-dd68-4466-9a9e-bcfd6370d382"
+								]
 							}
 						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
+					]
 				},
 				{
 					"name": "Profile/Policy",
@@ -845,19 +980,18 @@
 											"var VS_NAME = pm.collectionVariables.get(\"VS_NAME\");\r",
 											"\r",
 											"if (responseCode.code === 200) {\r",
-											"    pm.test(\"Profile \"+VS_NAME+\"-psp Deleted\", function () {\r",
+											"    pm.test(\"Profile \"+VS_NAME+\" Deleted\", function () {\r",
 											"        pm.response.to.have.status(200);\r",
 											"    });\r",
 											"} else \r",
-											"    pm.test(\"Profile \"+VS_NAME+\"-psp Does Not Exist\", function () {\r",
+											"    pm.test(\"Profile \"+VS_NAME+\" Does Not Exist\", function () {\r",
 											"        pm.response.to.have.status(404);\r",
 											"    });\r",
 											"\r",
 											"setTimeout(function(){}, 2000);\r",
 											""
 										],
-										"type": "text/javascript",
-										"id": "d72e7ac4-b859-4117-b2a7-755dca9f26b6"
+										"type": "text/javascript"
 									}
 								},
 								{
@@ -866,8 +1000,7 @@
 										"exec": [
 											""
 										],
-										"type": "text/javascript",
-										"id": "d8c42163-e8eb-4762-b940-0a9b206b1fa1"
+										"type": "text/javascript"
 									}
 								}
 							],
@@ -924,92 +1057,6 @@
 							"response": []
 						},
 						{
-							"name": "bigip-delete-myaccesspolicy-psp",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"id": "bebee1e1-7d92-419e-933f-6f73fa921557",
-										"exec": [
-											"if (responseCode.code === 200) {\r",
-											"    pm.test(\"Profile myaccesspolicy Deleted\", function () {\r",
-											"        pm.response.to.have.status(200);\r",
-											"    });\r",
-											"} else \r",
-											"    pm.test(\"Profile myaccesspolicy Does Not Exist\", function () {\r",
-											"        pm.response.to.have.status(404);\r",
-											"    });\r",
-											"\r",
-											"setTimeout(function(){}, 2000);\r",
-											""
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "prerequest",
-									"script": {
-										"id": "24ef36b4-14a0-41c6-ab02-7eaf52cd6832",
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										}
-									]
-								},
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "Content-Type",
-										"type": "text",
-										"value": "application/json"
-									},
-									{
-										"key": "X-F5-REST-Coordination-Id",
-										"type": "text",
-										"value": "",
-										"disabled": true
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "https://{{BIGIP_MGMT}}/mgmt/tm/apm/profile/access/~Common~myacesspolicy",
-									"protocol": "https",
-									"host": [
-										"{{BIGIP_MGMT}}"
-									],
-									"path": [
-										"mgmt",
-										"tm",
-										"apm",
-										"profile",
-										"access",
-										"~Common~myacesspolicy"
-									]
-								}
-							},
-							"response": []
-						},
-						{
 							"name": "bigip-delete-policy-psp",
 							"event": [
 								{
@@ -1019,17 +1066,16 @@
 											"var VS_NAME = pm.collectionVariables.get(\"VS_NAME\");\r",
 											"\r",
 											"if (responseCode.code === 200) {\r",
-											"    pm.test(\"Policy \"+VS_NAME+\"-psp deleted\", function () {\r",
+											"    pm.test(\"Policy \"+VS_NAME+\" deleted\", function () {\r",
 											"        pm.response.to.have.status(200);\r",
 											"    });\r",
 											"} else \r",
-											"    pm.test(\"Policy \"+VS_NAME+\"-psp does not exist\", function () {\r",
+											"    pm.test(\"Policy \"+VS_NAME+\" does not exist\", function () {\r",
 											"        pm.response.to.have.status(404);\r",
 											"    });\r",
 											""
 										],
-										"type": "text/javascript",
-										"id": "74b422ef-ed77-412b-900e-cae6cc7af0f0"
+										"type": "text/javascript"
 									}
 								},
 								{
@@ -1038,8 +1084,7 @@
 										"exec": [
 											""
 										],
-										"type": "text/javascript",
-										"id": "28d82e31-6696-4dc3-8372-105c5252fcf7"
+										"type": "text/javascript"
 									}
 								}
 							],
@@ -1094,94 +1139,8 @@
 								}
 							},
 							"response": []
-						},
-						{
-							"name": "bigip-delete-myaccesspolicy-policy",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"id": "62b921a9-558d-43bc-a04a-4a0adbeccf57",
-										"exec": [
-											"if (responseCode.code === 200) {\r",
-											"    pm.test(\"Policy myaccesspolicy deleted\", function () {\r",
-											"        pm.response.to.have.status(200);\r",
-											"    });\r",
-											"} else \r",
-											"    pm.test(\"Policy myaccesspolicy does not exist\", function () {\r",
-											"        pm.response.to.have.status(404);\r",
-											"    });\r",
-											""
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "prerequest",
-									"script": {
-										"id": "fcb4a92c-f838-4474-92b4-0c4af7c048be",
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										}
-									]
-								},
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "Content-Type",
-										"type": "text",
-										"value": "application/json"
-									},
-									{
-										"key": "X-F5-REST-Coordination-Id",
-										"type": "text",
-										"value": "{{TRANSID}}",
-										"disabled": true
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "https://{{BIGIP_MGMT}}/mgmt/tm/apm/policy/access-policy/~Common~myaccesspolicy",
-									"protocol": "https",
-									"host": [
-										"{{BIGIP_MGMT}}"
-									],
-									"path": [
-										"mgmt",
-										"tm",
-										"apm",
-										"policy",
-										"access-policy",
-										"~Common~myaccesspolicy"
-									]
-								}
-							},
-							"response": []
 						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
+					]
 				},
 				{
 					"name": "End PSP",
@@ -1195,8 +1154,7 @@
 										"exec": [
 											""
 										],
-										"type": "text/javascript",
-										"id": "3c4671b4-59f7-4b42-ae3f-4912957d7ca2"
+										"type": "text/javascript"
 									}
 								},
 								{
@@ -1205,8 +1163,7 @@
 										"exec": [
 											""
 										],
-										"type": "text/javascript",
-										"id": "87f0212b-40ab-4586-9508-44e7073c2e74"
+										"type": "text/javascript"
 									}
 								}
 							],
@@ -1252,8 +1209,7 @@
 								"type": "text/javascript",
 								"exec": [
 									""
-								],
-								"id": "1be765ab-ff5f-4818-8b69-279aff224ef8"
+								]
 							}
 						},
 						{
@@ -1262,313 +1218,12 @@
 								"type": "text/javascript",
 								"exec": [
 									""
-								],
-								"id": "14f45e2c-db74-40d7-b4df-a5f40a8a08ca"
+								]
 							}
 						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
+					]
 				}
-			],
-			"protocolProfileBehavior": {}
-		},
-		{
-			"name": "PRP",
-			"item": [
-				{
-					"name": "start PRP",
-					"item": [
-						{
-							"name": "start-prp-1",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"//The NUMBER SPECIFICED BELOW CONTROL WHICH VIRTUAL THE OBJECTS WILL BE CONFIGURED FOR.  THE DEFAULT IS 1.\r",
-											"var VS = 1;\r",
-											"\r",
-											"var VS_COUNTER = pm.collectionVariables.get(\"VS_COUNTER\");\r",
-											"var DC_COUNTER = pm.collectionVariables.get(\"DC_COUNTER\");\r",
-											"var VS_NAME = pm.collectionVariables.get(\"VS_NAME\");\r",
-											"\r",
-											"\r",
-											"\r",
-											"\r",
-											"if (VS === VS_COUNTER) {\r",
-											"    pm.test(\"Deleting APM PSP for Virtual Server \"+VS_NAME+\" in Data Center \"+DC_COUNTER, function () {\r",
-											"        pm.response.to.have.status(200);\r",
-											"    });\r",
-											"} else if (VS<=VS_COUNTER) {\r",
-											"    pm.test(\"Proceeding to deletion of APM PSP for Virtual Server \"+VS_NAME+\" in Data Center \"+DC_COUNTER, function () {\r",
-											"        pm.response.to.have.status(200);\r",
-											"    });\r",
-											"    postman.setNextRequest(\"end-psp-\"+VS);\r",
-											"} else {\r",
-											"pm.test(\"Currently running loop \"+VS_COUNTER+\" for \"+ VS_NAME+\" in Data Center \"+DC_COUNTER+\". Continuing to next section \", function () {\r",
-											"        pm.response.to.have.status(200);\r",
-											"    });\r",
-											"    postman.setNextRequest(\"end-psp-\"+VS);\r",
-											"}"
-										],
-										"type": "text/javascript",
-										"id": "76c4edd4-fa7e-482b-99ac-57dc379e6615"
-									}
-								},
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript",
-										"id": "cff426b8-de7d-49c0-8597-e224523785c6"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										}
-									]
-								},
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "https://{{BIGIP_MGMT}}/mgmt/shared/appsvcs/info",
-									"protocol": "https",
-									"host": [
-										"{{BIGIP_MGMT}}"
-									],
-									"path": [
-										"mgmt",
-										"shared",
-										"appsvcs",
-										"info"
-									]
-								}
-							},
-							"response": []
-						}
-					],
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"type": "text/javascript",
-								"exec": [
-									""
-								],
-								"id": "5c16b036-b7e5-483e-a3d3-7faea820cfb8"
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"type": "text/javascript",
-								"exec": [
-									""
-								],
-								"id": "e89b4170-24bc-4ea4-a85c-c4aeae921028"
-							}
-						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
-				},
-				{
-					"name": "Policy",
-					"item": [
-						{
-							"name": "bigip-delete-policy-prp",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"var VS_NAME = pm.collectionVariables.get(\"VS_NAME\");\r",
-											"\r",
-											"if (responseCode.code === 200) {\r",
-											"    pm.test(\"Per-Request Policy \"+VS_NAME+\"-prp deleted\", function () {\r",
-											"        pm.response.to.have.status(200);\r",
-											"    });\r",
-											"} else \r",
-											"    pm.test(\"Per-Request Policy \"+VS_NAME+\"-prp does not exist\", function () {\r",
-											"        pm.response.to.have.status(404);\r",
-											"    });\r",
-											""
-										],
-										"type": "text/javascript",
-										"id": "a8a0397b-ea21-4f1d-bad4-b872b45a3f6d"
-									}
-								},
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript",
-										"id": "a602eda8-d152-4e8c-be78-32efc7470d7e"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										}
-									]
-								},
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "Content-Type",
-										"type": "text",
-										"value": "application/json"
-									},
-									{
-										"key": "X-F5-REST-Coordination-Id",
-										"type": "text",
-										"value": "{{TRANSID}}",
-										"disabled": true
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "https://{{BIGIP_MGMT}}/mgmt/tm/apm/policy/access-policy/~Common~{{VS_NAME}}-prp",
-									"protocol": "https",
-									"host": [
-										"{{BIGIP_MGMT}}"
-									],
-									"path": [
-										"mgmt",
-										"tm",
-										"apm",
-										"policy",
-										"access-policy",
-										"~Common~{{VS_NAME}}-prp"
-									]
-								}
-							},
-							"response": []
-						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
-				},
-				{
-					"name": "End PSP",
-					"item": [
-						{
-							"name": "end-prp-1",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript",
-										"id": "8331065a-ccf8-4b4d-bdd6-f30bda8483d1"
-									}
-								},
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript",
-										"id": "84ebe117-3ae6-410a-bcba-af52aabf00f7"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										}
-									]
-								},
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "https://{{BIGIP_MGMT}}/mgmt/shared/appsvcs/info",
-									"protocol": "https",
-									"host": [
-										"{{BIGIP_MGMT}}"
-									],
-									"path": [
-										"mgmt",
-										"shared",
-										"appsvcs",
-										"info"
-									]
-								}
-							},
-							"response": []
-						}
-					],
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"type": "text/javascript",
-								"exec": [
-									""
-								],
-								"id": "ea002649-37a8-4ac5-821c-abc481840bec"
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"type": "text/javascript",
-								"exec": [
-									""
-								],
-								"id": "4728388a-ce09-4eaa-bfc1-fa959d6f46ac"
-							}
-						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
-				}
-			],
-			"protocolProfileBehavior": {}
+			]
 		},
 		{
 			"name": "APM Objects",
@@ -1609,8 +1264,7 @@
 											"    postman.setNextRequest(\"end-apm-\"+VS);\r",
 											"}"
 										],
-										"type": "text/javascript",
-										"id": "9ed3da04-3ec4-4f9e-b0de-14486b9b3f94"
+										"type": "text/javascript"
 									}
 								},
 								{
@@ -1619,8 +1273,7 @@
 										"exec": [
 											""
 										],
-										"type": "text/javascript",
-										"id": "11bb6f4e-32bf-4904-a0e7-f98afdfaae47"
+										"type": "text/javascript"
 									}
 								}
 							],
@@ -1658,186 +1311,7 @@
 							},
 							"response": []
 						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
-				},
-				{
-					"name": "Connectivity Profile",
-					"item": [
-						{
-							"name": "bigip-delete-profile-connectivity",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript",
-										"id": "cf4c94da-ad1c-4a11-bd4b-ad0b0ab991da"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"var VS_NAME = pm.collectionVariables.get(\"VS_NAME\");",
-											"",
-											"if (responseCode.code === 200) {",
-											"",
-											"pm.test(\"Connectivity Profile \"+VS_NAME+\"-cp deleted\", function () {",
-											"    pm.response.to.have.status(200);",
-											"});",
-											"} else ",
-											"pm.test(\"Connectivity profile \"+VS_NAME+\"-cp does not exist\", function () {",
-											"    pm.response.to.have.status(404);",
-											"});",
-											"",
-											"setTimeout(function(){}, 2000);"
-										],
-										"type": "text/javascript",
-										"id": "67ad31ff-0d84-4195-9846-adf19194a74b"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										}
-									]
-								},
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "Content-Type",
-										"type": "text",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "https://{{BIGIP_MGMT}}/mgmt/tm/apm/profile/connectivity/{{VS_NAME}}-cp",
-									"protocol": "https",
-									"host": [
-										"{{BIGIP_MGMT}}"
-									],
-									"path": [
-										"mgmt",
-										"tm",
-										"apm",
-										"profile",
-										"connectivity",
-										"{{VS_NAME}}-cp"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "bigip-delete-tunnel-ppp",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"var VS_NAME = pm.collectionVariables.get(\"VS_NAME\");\r",
-											"\r",
-											"if (responseCode.code === 200) {\r",
-											"    pm.test(\"Tunnel \"+VS_NAME+\"-tunnel deleted\", function () {\r",
-											"        pm.response.to.have.status(200);\r",
-											"    });\r",
-											"} else \r",
-											"    pm.test(\"Tunnel \"+VS_NAME+\"-tunnel does not exist\", function () {\r",
-											"        pm.response.to.have.status(404);\r",
-											"    });\r",
-											"\r",
-											"\r",
-											""
-										],
-										"type": "text/javascript",
-										"id": "d655f349-c29d-426e-9673-af6fbb124c82"
-									}
-								},
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript",
-										"id": "bb38e8dc-5dbb-4b4a-8b05-6adb30bb79f1"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										}
-									]
-								},
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "Content-Type",
-										"type": "text",
-										"value": "application/json"
-									},
-									{
-										"key": "X-F5-REST-Coordination-Id",
-										"type": "text",
-										"value": "{{TRANSID}}",
-										"disabled": true
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "https://{{BIGIP_MGMT}}/mgmt/tm/net/tunnels/tunnel/~Common~{{VS_NAME}}-tunnel",
-									"protocol": "https",
-									"host": [
-										"{{BIGIP_MGMT}}"
-									],
-									"path": [
-										"mgmt",
-										"tm",
-										"net",
-										"tunnels",
-										"tunnel",
-										"~Common~{{VS_NAME}}-tunnel"
-									]
-								}
-							},
-							"response": []
-						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
+					]
 				},
 				{
 					"name": "AAA AD Servers",
@@ -1862,8 +1336,7 @@
 											"",
 											""
 										],
-										"type": "text/javascript",
-										"id": "fe1a6912-386d-4daf-9a0b-f52c591e3c8d"
+										"type": "text/javascript"
 									}
 								},
 								{
@@ -1872,8 +1345,7 @@
 										"exec": [
 											""
 										],
-										"type": "text/javascript",
-										"id": "40aaa7bc-0d5d-4abe-8953-d1e96977c8a0"
+										"type": "text/javascript"
 									}
 								}
 							],
@@ -1924,85 +1396,6 @@
 							"response": []
 						},
 						{
-							"name": "bigip-delete-lab_sso-AAA AD",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"id": "d332a8b5-ed5b-4bc2-a522-eb938638e544",
-										"exec": [
-											"if (responseCode.code === 200) {",
-											"    pm.test(\"AAA AD Servers lab_sso_ad_servers deleted\", function () {",
-											"        pm.response.to.have.status(200);",
-											"    });",
-											"} else ",
-											"    pm.test(\"AAA AD Servers lab_sso_ad_servers does not exist\", function () {",
-											"        pm.response.to.have.status(404);",
-											"    });",
-											"",
-											""
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "prerequest",
-									"script": {
-										"id": "534b533b-42b7-4bf0-9174-110cf0bc440d",
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										}
-									]
-								},
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "Content-Type",
-										"type": "text",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "https://{{BIGIP_MGMT}}/mgmt/tm/apm/aaa/active-directory/~Common~lab_sso_ad_servers",
-									"protocol": "https",
-									"host": [
-										"{{BIGIP_MGMT}}"
-									],
-									"path": [
-										"mgmt",
-										"tm",
-										"apm",
-										"aaa",
-										"active-directory",
-										"~Common~lab_sso_ad_servers"
-									]
-								}
-							},
-							"response": []
-						},
-						{
 							"name": "bigip-delete-AD server pool",
 							"event": [
 								{
@@ -2022,8 +1415,7 @@
 											"",
 											""
 										],
-										"type": "text/javascript",
-										"id": "37e840ea-8120-420a-809b-3af12b9b7fca"
+										"type": "text/javascript"
 									}
 								}
 							],
@@ -2081,8 +1473,7 @@
 										"exec": [
 											""
 										],
-										"type": "text/javascript",
-										"id": "2ab4fc8c-78b4-43c6-bba8-8c16fa80e73f"
+										"type": "text/javascript"
 									}
 								},
 								{
@@ -2105,8 +1496,7 @@
 											"",
 											""
 										],
-										"type": "text/javascript",
-										"id": "e80f30ed-68f5-4d1e-a1d2-82fe3448526e"
+										"type": "text/javascript"
 									}
 								}
 							],
@@ -2155,579 +1545,7 @@
 							},
 							"response": []
 						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
-				},
-				{
-					"name": "AAA LDAP Servers",
-					"item": [
-						{
-							"name": "bigip-delete-AAA LDAP Servers",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"var VS_NAME = pm.collectionVariables.get(\"VS_NAME\");",
-											"",
-											"if (responseCode.code === 200) {",
-											"    pm.test(\"AAA LDAP Servers \"+VS_NAME+\"-ldap-servers deleted\", function () {",
-											"        pm.response.to.have.status(200);",
-											"    });",
-											"} else ",
-											"    pm.test(\"AAA LDAP Servers \"+VS_NAME+\"-ldap-servers does not exist\", function () {",
-											"        pm.response.to.have.status(404);",
-											"    });",
-											"",
-											""
-										],
-										"type": "text/javascript",
-										"id": "b35dc974-5c7f-4be4-836f-d3b035a6b9b7"
-									}
-								},
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript",
-										"id": "7d1553e1-d8ce-4e71-84f5-60cd81f71812"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										}
-									]
-								},
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "Content-Type",
-										"type": "text",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "https://{{BIGIP_MGMT}}/mgmt/tm/apm/aaa/ldap/~Common~{{VS_NAME}}-ldap-servers",
-									"protocol": "https",
-									"host": [
-										"{{BIGIP_MGMT}}"
-									],
-									"path": [
-										"mgmt",
-										"tm",
-										"apm",
-										"aaa",
-										"ldap",
-										"~Common~{{VS_NAME}}-ldap-servers"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "bigip-delete-LDAP server pool",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"var VS_NAME = pm.collectionVariables.get(\"VS_NAME\");",
-											"",
-											"if (responseCode.code === 200) {",
-											"    pm.test(\"Pool \"+VS_NAME+\"-ldap-pool Deleted\", function () {",
-											"        pm.response.to.have.status(200);",
-											"    });",
-											"} else ",
-											"    pm.test(\"Pool \"+VS_NAME+\"-ldap-pool does not exist\", function () {",
-											"        pm.response.to.have.status(404);",
-											"    });",
-											"",
-											""
-										],
-										"type": "text/javascript",
-										"id": "b0aa4cb9-37d1-4f85-8ab0-7fa5019dd86d"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										}
-									]
-								},
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "Content-Type",
-										"type": "text",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "https://{{BIGIP_MGMT}}/mgmt/tm/ltm/pool/~Common~{{VS_NAME}}-ldap-pool",
-									"protocol": "https",
-									"host": [
-										"{{BIGIP_MGMT}}"
-									],
-									"path": [
-										"mgmt",
-										"tm",
-										"ltm",
-										"pool",
-										"~Common~{{VS_NAME}}-ldap-pool"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "bigip-delete-node",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript",
-										"id": "cb6e4e8f-f4fe-4d3d-88ad-397c0e068742"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"if (responseCode.code === 200) {",
-											"    pm.test(\"Node 10.1.20.7 deleted\", function () {",
-											"        pm.response.to.have.status(200);",
-											"    });",
-											"} else if (responseCode.code === 404) { ",
-											"    pm.test(\"Node 10.1.20.7 does not exist\", function () {",
-											"        pm.response.to.have.status(404);",
-											"    });",
-											"} else if (responseCode.code === 400) {",
-											"    pm.test(\"Unable to delete node 10.1.20.7. Still in use\", function () {",
-											"        pm.expect(pm.response.text()).to.include(\"member of pool\");",
-											"    });",
-											"}",
-											"",
-											""
-										],
-										"type": "text/javascript",
-										"id": "4e5a4aac-2b24-4025-8926-2a3e2c2c870a"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										}
-									]
-								},
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "Content-Type",
-										"type": "text",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "https://{{BIGIP_MGMT}}/mgmt/tm/ltm/node/10.1.20.7",
-									"protocol": "https",
-									"host": [
-										"{{BIGIP_MGMT}}"
-									],
-									"path": [
-										"mgmt",
-										"tm",
-										"ltm",
-										"node",
-										"10.1.20.7"
-									]
-								}
-							},
-							"response": []
-						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
-				},
-				{
-					"name": "AAA RADIUS Servers",
-					"item": [
-						{
-							"name": "bigip-delete-AAA RADIUS Servers",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"var VS_NAME = pm.collectionVariables.get(\"VS_NAME\");",
-											"",
-											"if (responseCode.code === 200) {",
-											"    pm.test(\"AAA RADIUS Servers \"+VS_NAME+\"-radius-servers deleted\", function () {",
-											"        pm.response.to.have.status(200);",
-											"    });",
-											"} else ",
-											"    pm.test(\"AAA RADIUS Servers \"+VS_NAME+\"-radius-servers does not exist\", function () {",
-											"        pm.response.to.have.status(404);",
-											"    });",
-											"",
-											""
-										],
-										"type": "text/javascript",
-										"id": "141b680f-8c56-4b5d-8061-69de8b18d301"
-									}
-								},
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript",
-										"id": "07b55644-8c06-4025-ab9c-c92560d77d8e"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										}
-									]
-								},
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "Content-Type",
-										"type": "text",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "https://{{BIGIP_MGMT}}/mgmt/tm/apm/aaa/radius/~Common~{{VS_NAME}}-radius-servers",
-									"protocol": "https",
-									"host": [
-										"{{BIGIP_MGMT}}"
-									],
-									"path": [
-										"mgmt",
-										"tm",
-										"apm",
-										"aaa",
-										"radius",
-										"~Common~{{VS_NAME}}-radius-servers"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "bigip-delete-RADIUS server pool",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"var VS_NAME = pm.collectionVariables.get(\"VS_NAME\");",
-											"",
-											"if (responseCode.code === 200) {",
-											"    pm.test(\"Pool \"+VS_NAME+\"-ldap-pool Deleted\", function () {",
-											"        pm.response.to.have.status(200);",
-											"    });",
-											"} else ",
-											"    pm.test(\"Pool \"+VS_NAME+\"-ldap-pool does not exist\", function () {",
-											"        pm.response.to.have.status(404);",
-											"    });",
-											"",
-											""
-										],
-										"type": "text/javascript",
-										"id": "5c017972-9f86-45f1-94dd-95ccf5f67833"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										}
-									]
-								},
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "Content-Type",
-										"type": "text",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "https://{{BIGIP_MGMT}}/mgmt/tm/ltm/pool/~Common~{{VS_NAME}}-radius-pool",
-									"protocol": "https",
-									"host": [
-										"{{BIGIP_MGMT}}"
-									],
-									"path": [
-										"mgmt",
-										"tm",
-										"ltm",
-										"pool",
-										"~Common~{{VS_NAME}}-radius-pool"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "bigip-delete-node",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript",
-										"id": "3d5b9a10-b574-4914-a5a8-c18f25717acc"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"if (responseCode.code === 200) {",
-											"    pm.test(\"Node 10.1.20.7 deleted\", function () {",
-											"        pm.response.to.have.status(200);",
-											"    });",
-											"} else if (responseCode.code === 404) { ",
-											"    pm.test(\"Node 10.1.20.7 does not exist\", function () {",
-											"        pm.response.to.have.status(404);",
-											"    });",
-											"} else if (responseCode.code === 400) {",
-											"    pm.test(\"Unable to delete node 10.1.20.7. Still in use\", function () {",
-											"        pm.expect(pm.response.text()).to.include(\"member of pool\");",
-											"    });",
-											"}",
-											"",
-											""
-										],
-										"type": "text/javascript",
-										"id": "db62a7fe-3b0c-4279-960c-04a363f0b042"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										}
-									]
-								},
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "Content-Type",
-										"type": "text",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "https://{{BIGIP_MGMT}}/mgmt/tm/ltm/node/10.1.20.7",
-									"protocol": "https",
-									"host": [
-										"{{BIGIP_MGMT}}"
-									],
-									"path": [
-										"mgmt",
-										"tm",
-										"ltm",
-										"node",
-										"10.1.20.7"
-									]
-								}
-							},
-							"response": []
-						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
-				},
-				{
-					"name": "OCSP Responders",
-					"item": [
-						{
-							"name": "bigip-delete-ocsp-responders",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript",
-										"id": "44ae7e94-60e7-4987-9695-bcd61dd1550f"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"var VS_NAME = pm.collectionVariables.get(\"VS_NAME\");",
-											"",
-											"if (responseCode.code === 200) {",
-											"    pm.test(\"OCSP Responders \"+VS_NAME+\"-ocsp-servers\", function () {",
-											"        pm.response.to.have.status(200);",
-											"    });",
-											"} else  { ",
-											"    pm.test(\"OCSP Responders \"+VS_NAME+\"-ocsp-servers does not exist\", function () {",
-											"        pm.response.to.have.status(404);",
-											"    });",
-											"} ",
-											""
-										],
-										"type": "text/javascript",
-										"id": "6d7eb940-e3c8-41a1-bd8c-c91569e59a59"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										}
-									]
-								},
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "Content-Type",
-										"type": "text",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "https://{{BIGIP_MGMT}}/mgmt/tm/apm/aaa/ocsp/~Common~{{VS_NAME}}-ocsp-servers",
-									"protocol": "https",
-									"host": [
-										"{{BIGIP_MGMT}}"
-									],
-									"path": [
-										"mgmt",
-										"tm",
-										"apm",
-										"aaa",
-										"ocsp",
-										"~Common~{{VS_NAME}}-ocsp-servers"
-									]
-								}
-							},
-							"response": []
-						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
+					]
 				},
 				{
 					"name": "Webtop",
@@ -2752,8 +1570,7 @@
 											"",
 											""
 										],
-										"type": "text/javascript",
-										"id": "4554f87a-9a76-42a3-9981-9074cd3df288"
+										"type": "text/javascript"
 									}
 								},
 								{
@@ -2762,8 +1579,7 @@
 										"exec": [
 											""
 										],
-										"type": "text/javascript",
-										"id": "8f161de3-024a-4735-9a42-60712b3fddb1"
+										"type": "text/javascript"
 									}
 								}
 							],
@@ -2796,7 +1612,7 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "https://{{BIGIP_MGMT}}/mgmt/tm/apm/resource/webtop/~Common~{{VS_NAME}}-webtop",
+									"raw": "https://{{BIGIP_MGMT}}/mgmt/tm/apm/resource/webtop/~Common~full-webtop",
 									"protocol": "https",
 									"host": [
 										"{{BIGIP_MGMT}}"
@@ -2807,949 +1623,13 @@
 										"apm",
 										"resource",
 										"webtop",
-										"~Common~{{VS_NAME}}-webtop"
+										"~Common~full-webtop"
 									]
 								}
 							},
 							"response": []
 						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
-				},
-				{
-					"name": "Network Access Resource",
-					"item": [
-						{
-							"name": "bigip-delete-resource-network",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"var VS_NAME = pm.collectionVariables.get(\"VS_NAME\");",
-											"",
-											"if (responseCode.code === 200) {",
-											"pm.test(\"Network Access Resource \"+VS_NAME+\"-vpn deleted\", function () {",
-											"    pm.response.to.have.status(200);",
-											"});",
-											"} else ",
-											"pm.test(\"Network Access Resource \"+VS_NAME+\"-vpn does not exist\", function () {",
-											"    pm.response.to.have.status(404);",
-											"});",
-											"",
-											""
-										],
-										"type": "text/javascript",
-										"id": "bdb3bda3-7404-4809-bc0d-0c4e7209c041"
-									}
-								},
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript",
-										"id": "34b609f3-9866-4416-80e1-e8aa58a1eefb"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										}
-									]
-								},
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "Content-Type",
-										"type": "text",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "https://{{BIGIP_MGMT}}/mgmt/tm/apm/resource/network-access/~Common~{{VS_NAME}}-vpn",
-									"protocol": "https",
-									"host": [
-										"{{BIGIP_MGMT}}"
-									],
-									"path": [
-										"mgmt",
-										"tm",
-										"apm",
-										"resource",
-										"network-access",
-										"~Common~{{VS_NAME}}-vpn"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "bigip-delete-resource-pool",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"var VS_NAME = pm.collectionVariables.get(\"VS_NAME\");",
-											"",
-											"if (responseCode.code === 200) {",
-											"pm.test(\"VPN Pool \"+VS_NAME+\"-vpn_pool deleted\", function () {",
-											"    pm.response.to.have.status(200);",
-											"});",
-											"} else ",
-											"pm.test(\"VPN Pool \"+VS_NAME+\"-vpn_pool does not exist\", function () {",
-											"    pm.response.to.have.status(404);",
-											"});",
-											"",
-											""
-										],
-										"type": "text/javascript",
-										"id": "8e30871f-e5e5-4a13-9566-4c12a2680128"
-									}
-								},
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript",
-										"id": "dba27a1b-94d4-48a6-9681-eeb56e1fed88"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										}
-									]
-								},
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "Content-Type",
-										"type": "text",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "https://{{BIGIP_MGMT}}/mgmt/tm/apm/resource/leasepool/~Common~{{VS_NAME}}-vpn_pool",
-									"protocol": "https",
-									"host": [
-										"{{BIGIP_MGMT}}"
-									],
-									"path": [
-										"mgmt",
-										"tm",
-										"apm",
-										"resource",
-										"leasepool",
-										"~Common~{{VS_NAME}}-vpn_pool"
-									]
-								}
-							},
-							"response": []
-						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
-				},
-				{
-					"name": "Webtop Section",
-					"item": [
-						{
-							"name": "bigip-delete-webtop-section",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"var VS_NAME = pm.collectionVariables.get(\"VS_NAME\");",
-											"",
-											"if (responseCode.code === 200) {",
-											"pm.test(\"Webtop Section \"+VS_NAME+\" deleted\", function () {",
-											"    pm.response.to.have.status(200);",
-											"});",
-											"} else ",
-											"pm.test(\"Webtop Section \"+VS_NAME+\" does not exist\", function () {",
-											"    pm.response.to.have.status(404);",
-											"});",
-											"",
-											""
-										],
-										"type": "text/javascript",
-										"id": "6f833b26-04ae-4b47-a643-44feddc21d59"
-									}
-								},
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript",
-										"id": "c53a2d43-fba1-4d94-8fca-3ac853902ff3"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										}
-									]
-								},
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "Content-Type",
-										"type": "text",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "https://{{BIGIP_MGMT}}/mgmt/tm/apm/resource/webtop-section/~Common~{{VS_NAME}}-network_access",
-									"protocol": "https",
-									"host": [
-										"{{BIGIP_MGMT}}"
-									],
-									"path": [
-										"mgmt",
-										"tm",
-										"apm",
-										"resource",
-										"webtop-section",
-										"~Common~{{VS_NAME}}-network_access"
-									]
-								}
-							},
-							"response": []
-						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
-				},
-				{
-					"name": "Portal Resource",
-					"item": [
-						{
-							"name": "Portal Resource",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"var VS_NAME = pm.collectionVariables.get(\"VS_NAME\");\r",
-											"\r",
-											"if (responseCode.code === 200) {\r",
-											"pm.test(\"Portal Resource \"+VS_NAME+\"-server1 deleted\", function () {\r",
-											"    pm.response.to.have.status(200);\r",
-											"});\r",
-											"} else \r",
-											"pm.test(\"Portal Resource \"+VS_NAME+\"-server1 doesn't exist\", function () {\r",
-											"    pm.response.to.have.status(404);\r",
-											"});\r",
-											"\r",
-											""
-										],
-										"type": "text/javascript",
-										"id": "14c89e79-3173-4c3d-be0f-b3ea30be8869"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										}
-									]
-								},
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "Content-Type",
-										"type": "text",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "https://{{BIGIP_MGMT}}/mgmt/tm/apm/resource/portal-access/~Common~{{VS_NAME}}-server1",
-									"protocol": "https",
-									"host": [
-										"{{BIGIP_MGMT}}"
-									],
-									"path": [
-										"mgmt",
-										"tm",
-										"apm",
-										"resource",
-										"portal-access",
-										"~Common~{{VS_NAME}}-server1"
-									]
-								}
-							},
-							"response": []
-						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
-				},
-				{
-					"name": "RDP Resource",
-					"item": [
-						{
-							"name": "delete-resource-rdp",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"var VS_NAME = pm.collectionVariables.get(\"VS_NAME\");\r",
-											"\r",
-											"if (responseCode.code === 200) {\r",
-											"pm.test(\"RDP Resource \"+VS_NAME+\"-rdp-resource deleted\", function () {\r",
-											"    pm.response.to.have.status(200);\r",
-											"});\r",
-											"} else \r",
-											"pm.test(\"RDP Resource \"+VS_NAME+\"-rdp-resource doesn't exist\", function () {\r",
-											"    pm.response.to.have.status(404);\r",
-											"});\r",
-											"\r",
-											""
-										],
-										"type": "text/javascript",
-										"id": "11225822-78a5-4ca0-a618-abd297d09244"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										}
-									]
-								},
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "Content-Type",
-										"type": "text",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "https://{{BIGIP_MGMT}}/mgmt/tm/apm/resource/remote-desktop/rdp/~Common~{{VS_NAME}}-rdp-resource",
-									"protocol": "https",
-									"host": [
-										"{{BIGIP_MGMT}}"
-									],
-									"path": [
-										"mgmt",
-										"tm",
-										"apm",
-										"resource",
-										"remote-desktop",
-										"rdp",
-										"~Common~{{VS_NAME}}-rdp-resource"
-									]
-								}
-							},
-							"response": []
-						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
-				},
-				{
-					"name": "BIGIP SP",
-					"item": [
-						{
-							"name": "bigip-delete-sp service",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"var DNS_NAME = pm.collectionVariables.get(\"DNS_NAME\");",
-											"",
-											"if (responseCode.code === 200) {",
-											"",
-											"    pm.test(\"SAML SP Service \"+DNS_NAME+\"-sp deleted\", function () {",
-											"        pm.response.to.have.status(200);",
-											"    });",
-											"} else {",
-											"    pm.test(\"SAML SP Service \"+DNS_NAME+\"-sp does not exist\", function () {",
-											"        pm.response.to.have.status(404);",
-											"    });",
-											"}"
-										],
-										"type": "text/javascript",
-										"id": "34aab6d2-6ea2-4ca0-a7a2-042519927a8e"
-									}
-								},
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript",
-										"id": "77fd8c1b-32f3-4374-a00a-9f4d90ef0481"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										}
-									]
-								},
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "Content-Type",
-										"type": "text",
-										"value": "application/json"
-									},
-									{
-										"key": "X-F5-REST-Coordination-Id",
-										"type": "text",
-										"value": "{{TRANSID}}",
-										"disabled": true
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "https://{{BIGIP_MGMT}}/mgmt/tm/apm/aaa/saml/~Common~{{DNS_NAME}}-sp",
-									"protocol": "https",
-									"host": [
-										"{{BIGIP_MGMT}}"
-									],
-									"path": [
-										"mgmt",
-										"tm",
-										"apm",
-										"aaa",
-										"saml",
-										"~Common~{{DNS_NAME}}-sp"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "bigip-delete-idp connector",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"var VS_NAME = pm.collectionVariables.get(\"VS_NAME\");",
-											"",
-											"if (responseCode.code === 200) {",
-											"",
-											"    pm.test(\"SAML IDP connector \"+VS_NAME+\"-idp deleted\", function () {",
-											"        pm.response.to.have.status(200);",
-											"    });",
-											"} else ",
-											"    pm.test(\"SAML IDP connector \"+VS_NAME+\"-idp does not exist\", function () {",
-											"        pm.response.to.have.status(404);",
-											"    });",
-											"",
-											""
-										],
-										"type": "text/javascript",
-										"id": "e24ea062-dc7f-427e-904c-b07d0aaeb313"
-									}
-								},
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript",
-										"id": "496abe25-9325-40bd-a458-f0da06f0cc0d"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										}
-									]
-								},
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "Content-Type",
-										"type": "text",
-										"value": "application/json"
-									},
-									{
-										"key": "X-F5-REST-Coordination-Id",
-										"type": "text",
-										"value": "{{TRANSID}}",
-										"disabled": true
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "https://{{BIGIP_MGMT}}/mgmt/tm/apm/aaa/saml-idp-connector/~Common~{{VS_NAME}}-sso",
-									"protocol": "https",
-									"host": [
-										"{{BIGIP_MGMT}}"
-									],
-									"path": [
-										"mgmt",
-										"tm",
-										"apm",
-										"aaa",
-										"saml-idp-connector",
-										"~Common~{{VS_NAME}}-sso"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "bigip-delete-idp cert",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"var DNS_NAME = pm.collectionVariables.get(\"DNS_NAME\");\r",
-											"\r",
-											"if (responseCode.code === 200) {\r",
-											"\r",
-											"    pm.test(\"SAML SP Service \"+DNS_NAME+\"-idp deleted\", function () {\r",
-											"        pm.response.to.have.status(200);\r",
-											"    });\r",
-											"} else {\r",
-											"    pm.test(\"SAML SP Service \"+DNS_NAME+\"-idp does not exist\", function () {\r",
-											"        pm.response.to.have.status(404);\r",
-											"    });\r",
-											"}"
-										],
-										"type": "text/javascript",
-										"id": "dd660e77-2853-412d-a1b7-d994f8271361"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										}
-									]
-								},
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "Content-Type",
-										"type": "text",
-										"value": "application/json"
-									},
-									{
-										"key": "X-F5-REST-Coordination-Id",
-										"type": "text",
-										"value": "",
-										"disabled": true
-									},
-									{
-										"key": "Content-Range",
-										"type": "text",
-										"value": "0-1321/1322",
-										"disabled": true
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "https://{{BIGIP_MGMT}}/mgmt/tm/sys/crypto/cert/~Common~{{VS_NAME}}-idp",
-									"protocol": "https",
-									"host": [
-										"{{BIGIP_MGMT}}"
-									],
-									"path": [
-										"mgmt",
-										"tm",
-										"sys",
-										"crypto",
-										"cert",
-										"~Common~{{VS_NAME}}-idp"
-									]
-								}
-							},
-							"response": []
-						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
-				},
-				{
-					"name": "BIGIP IDP",
-					"item": [
-						{
-							"name": "bigip-delete-IDP Service",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript",
-										"id": "ac17d96b-331b-428f-aef8-ce473d8e3160"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"var VS_NAME = pm.collectionVariables.get(\"VS_NAME\");\r",
-											"\r",
-											"if (responseCode.code === 200) {\r",
-											"\r",
-											"    pm.test(\"SAML IDP service \"+VS_NAME+\"-sso deleted\", function () {\r",
-											"        pm.response.to.have.status(200);\r",
-											"    });\r",
-											"} else \r",
-											"    pm.test(\"SAML IDP service \"+VS_NAME+\"-sso does not exist\", function () {\r",
-											"        pm.response.to.have.status(404);\r",
-											"    });"
-										],
-										"type": "text/javascript",
-										"id": "5ba231c0-7cea-45fa-bbb4-7d965524a032"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										}
-									]
-								},
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "Content-Type",
-										"type": "text",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "https://{{BIGIP_MGMT}}/mgmt/tm/apm/sso/saml/~Common~{{VS_NAME}}-sso",
-									"protocol": "https",
-									"host": [
-										"{{BIGIP_MGMT}}"
-									],
-									"path": [
-										"mgmt",
-										"tm",
-										"apm",
-										"sso",
-										"saml",
-										"~Common~{{VS_NAME}}-sso"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "bigip-delete-SP Connector",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript",
-										"id": "c8ae3ec9-37a8-442e-96c0-2375fbe36269"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"var DNS_NAME = pm.collectionVariables.get(\"DNS2_NAME\");\r",
-											"\r",
-											"if (responseCode.code === 200) {\r",
-											"\r",
-											"    pm.test(\"SAML SP Connector \"+DNS_NAME+\" deleted\", function () {\r",
-											"        pm.response.to.have.status(200);\r",
-											"    });\r",
-											"} else \r",
-											"    pm.test(\"SAML IDP service \"+DNS_NAME+\" does not exist\", function () {\r",
-											"        pm.response.to.have.status(404);\r",
-											"    });"
-										],
-										"type": "text/javascript",
-										"id": "2881ae44-5f9a-4f36-8f80-814a360f8892"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										}
-									]
-								},
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "https://{{BIGIP_MGMT}}/mgmt/tm/apm/sso/saml-sp-connector/~Common~{{DNS2_NAME}}-sp",
-									"protocol": "https",
-									"host": [
-										"{{BIGIP_MGMT}}"
-									],
-									"path": [
-										"mgmt",
-										"tm",
-										"apm",
-										"sso",
-										"saml-sp-connector",
-										"~Common~{{DNS2_NAME}}-sp"
-									]
-								}
-							},
-							"response": []
-						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
-				},
-				{
-					"name": "Kerberos SSO",
-					"item": [
-						{
-							"name": "bigip-delete-profile-kerberos-sso",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript",
-										"id": "519dbc08-310e-4d47-9a11-d924c9b8fcf9"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"var VS_NAME = pm.collectionVariables.get(\"VS_NAME\");",
-											"",
-											"if (responseCode.code === 200) {",
-											"    pm.test(\"Kerberos SSO profile \"+VS_NAME+\" deleted\", function () {",
-											"        pm.response.to.have.status(200);",
-											"    });",
-											"} else  { ",
-											"    pm.test(\"Kerberos SSO profile \"+VS_NAME+\" does not exist\", function () {",
-											"        pm.response.to.have.status(404);",
-											"    });",
-											"} ",
-											""
-										],
-										"type": "text/javascript",
-										"id": "70faabec-a7d8-4896-bf0e-861626fbcaa3"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										}
-									]
-								},
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "Content-Type",
-										"type": "text",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "https://{{BIGIP_MGMT}}/mgmt/tm/apm/sso/kerberos/~Common~{{VS_NAME}}-sso1",
-									"protocol": "https",
-									"host": [
-										"{{BIGIP_MGMT}}"
-									],
-									"path": [
-										"mgmt",
-										"tm",
-										"apm",
-										"sso",
-										"kerberos",
-										"~Common~{{VS_NAME}}-sso1"
-									]
-								}
-							},
-							"response": []
-						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
+					]
 				},
 				{
 					"name": "Webtop Links",
@@ -3763,8 +1643,7 @@
 										"exec": [
 											""
 										],
-										"type": "text/javascript",
-										"id": "a6b146f9-9162-4f99-a48c-565688f3117a"
+										"type": "text/javascript"
 									}
 								},
 								{
@@ -3784,8 +1663,7 @@
 											"} ",
 											""
 										],
-										"type": "text/javascript",
-										"id": "73796500-0ab2-4a93-b9ba-b1e17294d52a"
+										"type": "text/javascript"
 									}
 								}
 							],
@@ -3818,7 +1696,7 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "https://{{BIGIP_MGMT}}/mgmt/tm/apm/resource/webtop-link/~{{PARTITION_NAME}}~{{DNS_NAME}}",
+									"raw": "https://{{BIGIP_MGMT}}/mgmt/tm/apm/resource/webtop-link/~Common~F5",
 									"protocol": "https",
 									"host": [
 										"{{BIGIP_MGMT}}"
@@ -3829,450 +1707,13 @@
 										"apm",
 										"resource",
 										"webtop-link",
-										"~{{PARTITION_NAME}}~{{DNS_NAME}}"
+										"~Common~F5"
 									]
 								}
 							},
 							"response": []
 						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
-				},
-				{
-					"name": "OAuth Profile",
-					"item": [
-						{
-							"name": "bigip-delete-oauth profile",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript",
-										"id": "1d533e78-571f-4925-9e91-b78aeb3355fb"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"var VS_NAME = pm.collectionVariables.get(\"VS_NAME\");",
-											"",
-											"if (responseCode.code === 200) {",
-											"    pm.test(\"OAuth Profile \"+VS_NAME+\"-oauth deleted\", function () {",
-											"        pm.response.to.have.status(200);",
-											"    });",
-											"} else  { ",
-											"    pm.test(\"OAuth Profile \"+VS_NAME+\"-oauth does not exist\", function () {",
-											"        pm.response.to.have.status(404);",
-											"    });",
-											"} ",
-											""
-										],
-										"type": "text/javascript",
-										"id": "3bf72d1b-14d2-4a68-ac7b-6a15119dd99b"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										}
-									]
-								},
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "Content-Type",
-										"type": "text",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "https://{{BIGIP_MGMT}}/mgmt/tm/apm/profile/oauth/~Common~{{VS_NAME}}-oauth",
-									"protocol": "https",
-									"host": [
-										"{{BIGIP_MGMT}}"
-									],
-									"path": [
-										"mgmt",
-										"tm",
-										"apm",
-										"profile",
-										"oauth",
-										"~Common~{{VS_NAME}}-oauth"
-									]
-								}
-							},
-							"response": []
-						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
-				},
-				{
-					"name": "OAuth Client",
-					"item": [
-						{
-							"name": "bigip1-delete-OAuth Client",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"if (responseCode.code === 200) {\r",
-											"    pm.test(\"Client Deleted\", function () {\r",
-											"        pm.response.to.have.status(200);\r",
-											"    });\r",
-											"} else \r",
-											"    pm.test(\"Client Does Not exist\", function () {\r",
-											"        pm.response.to.have.status(404);\r",
-											"    });\r",
-											"\r",
-											""
-										],
-										"type": "text/javascript",
-										"id": "c5055556-b818-476f-b791-efc20f82071b"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										}
-									]
-								},
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "https://{{BIGIP_MGMT}}/mgmt/tm/apm/oauth/oauth-client-app/~Common~{{VS_NAME}}",
-									"protocol": "https",
-									"host": [
-										"{{BIGIP_MGMT}}"
-									],
-									"path": [
-										"mgmt",
-										"tm",
-										"apm",
-										"oauth",
-										"oauth-client-app",
-										"~Common~{{VS_NAME}}"
-									]
-								}
-							},
-							"response": []
-						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
-				},
-				{
-					"name": "JWT",
-					"item": [
-						{
-							"name": "bigip-delete-jwt",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript",
-										"id": "d98daab9-61e9-45f6-9705-f4908d759d49"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"var VS_NAME = pm.collectionVariables.get(\"VS_NAME\");",
-											"",
-											"if (responseCode.code === 200) {",
-											"    pm.test(\"JWT \"+VS_NAME+\"-jwt deleted\", function () {",
-											"        pm.response.to.have.status(200);",
-											"    });",
-											"} else  { ",
-											"    pm.test(\"JWT \"+VS_NAME+\"-jwt does not exist\", function () {",
-											"        pm.response.to.have.status(404);",
-											"    });",
-											"} ",
-											""
-										],
-										"type": "text/javascript",
-										"id": "655770c8-94d5-41cc-be8d-d2a17297f367"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										}
-									]
-								},
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "Content-Type",
-										"type": "text",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "https://{{BIGIP_MGMT}}/mgmt/tm/apm/oauth/jwt-config/~Common~{{VS_NAME}}-jwt",
-									"protocol": "https",
-									"host": [
-										"{{BIGIP_MGMT}}"
-									],
-									"path": [
-										"mgmt",
-										"tm",
-										"apm",
-										"oauth",
-										"jwt-config",
-										"~Common~{{VS_NAME}}-jwt"
-									]
-								}
-							},
-							"response": []
-						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
-				},
-				{
-					"name": "JWK",
-					"item": [
-						{
-							"name": "Preshared Keys",
-							"item": [
-								{
-									"name": "bigip-delete-jwk",
-									"event": [
-										{
-											"listen": "prerequest",
-											"script": {
-												"exec": [
-													""
-												],
-												"type": "text/javascript",
-												"id": "1b695974-5efa-47f2-a8f8-2449ddeb89a7"
-											}
-										},
-										{
-											"listen": "test",
-											"script": {
-												"exec": [
-													"var VS_NAME = pm.collectionVariables.get(\"VS_NAME\");",
-													"",
-													"if (responseCode.code === 200) {",
-													"    pm.test(\"JWK \"+VS_NAME+\"-jwk deleted\", function () {",
-													"        pm.response.to.have.status(200);",
-													"    });",
-													"} else  { ",
-													"    pm.test(\"JWK \"+VS_NAME+\"-jwk does not exist\", function () {",
-													"        pm.response.to.have.status(404);",
-													"    });",
-													"} ",
-													""
-												],
-												"type": "text/javascript",
-												"id": "f498adb6-629d-4eb3-931e-845b4c5ac5ae"
-											}
-										}
-									],
-									"request": {
-										"auth": {
-											"type": "basic",
-											"basic": [
-												{
-													"key": "password",
-													"value": "admin",
-													"type": "string"
-												},
-												{
-													"key": "username",
-													"value": "admin",
-													"type": "string"
-												}
-											]
-										},
-										"method": "DELETE",
-										"header": [
-											{
-												"key": "Content-Type",
-												"type": "text",
-												"value": "application/json"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": ""
-										},
-										"url": {
-											"raw": "https://{{BIGIP_MGMT}}/mgmt/tm/apm/oauth/jwk-config/~Common~{{VS_NAME}}-jwk",
-											"protocol": "https",
-											"host": [
-												"{{BIGIP_MGMT}}"
-											],
-											"path": [
-												"mgmt",
-												"tm",
-												"apm",
-												"oauth",
-												"jwk-config",
-												"~Common~{{VS_NAME}}-jwk"
-											]
-										}
-									},
-									"response": []
-								}
-							],
-							"protocolProfileBehavior": {},
-							"_postman_isSubFolder": true
-						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
-				},
-				{
-					"name": "VDI profile",
-					"item": [
-						{
-							"name": "bigip-delete-profile-vdi",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript",
-										"id": "c45d9fa8-10b7-4ba7-96b6-c28bc6fea508"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"var VS_NAME = pm.collectionVariables.get(\"VS_NAME\");",
-											"",
-											"if (responseCode.code === 200) {",
-											"    pm.test(\"VDI Profile \"+VS_NAME+\"-vdi deleted\", function () {",
-											"        pm.response.to.have.status(200);",
-											"    });",
-											"} else  { ",
-											"    pm.test(\"VDI Profile \"+VS_NAME+\"-vdi does not exist\", function () {",
-											"        pm.response.to.have.status(404);",
-											"    });",
-											"} ",
-											""
-										],
-										"type": "text/javascript",
-										"id": "2c0e0b34-753d-4603-a8ff-236d106e6cce"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										}
-									]
-								},
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "Content-Type",
-										"type": "text",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "https://{{BIGIP_MGMT}}/mgmt/tm/apm/profile/vdi/~Common~{{VS_NAME}}-vdi",
-									"protocol": "https",
-									"host": [
-										"{{BIGIP_MGMT}}"
-									],
-									"path": [
-										"mgmt",
-										"tm",
-										"apm",
-										"profile",
-										"vdi",
-										"~Common~{{VS_NAME}}-vdi"
-									]
-								}
-							},
-							"response": []
-						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
+					]
 				},
 				{
 					"name": "End APM Objects",
@@ -4286,8 +1727,7 @@
 										"exec": [
 											""
 										],
-										"type": "text/javascript",
-										"id": "7b61ff56-b0ef-405b-91fb-2c1a35af869e"
+										"type": "text/javascript"
 									}
 								},
 								{
@@ -4296,8 +1736,7 @@
 										"exec": [
 											""
 										],
-										"type": "text/javascript",
-										"id": "e5285fac-b541-45be-affe-06fe312ff1ed"
+										"type": "text/javascript"
 									}
 								}
 							],
@@ -4343,8 +1782,7 @@
 								"type": "text/javascript",
 								"exec": [
 									""
-								],
-								"id": "e0ce8732-6305-495c-a159-6941c6c5bd68"
+								]
 							}
 						},
 						{
@@ -4353,16 +1791,12 @@
 								"type": "text/javascript",
 								"exec": [
 									""
-								],
-								"id": "47537a05-338e-4764-b282-9c79805cc490"
+								]
 							}
 						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
+					]
 				}
-			],
-			"protocolProfileBehavior": {}
+			]
 		},
 		{
 			"name": "LTM Objects",
@@ -4401,8 +1835,7 @@
 											"    postman.setNextRequest(\"end-ltm-\"+VS);\r",
 											"}"
 										],
-										"type": "text/javascript",
-										"id": "aa6b4020-0237-4514-8fab-0f2d64864bbc"
+										"type": "text/javascript"
 									}
 								},
 								{
@@ -4411,8 +1844,7 @@
 										"exec": [
 											""
 										],
-										"type": "text/javascript",
-										"id": "4bb208c3-0783-461d-8318-4ea96b28b745"
+										"type": "text/javascript"
 									}
 								}
 							],
@@ -4450,94 +1882,11 @@
 							},
 							"response": []
 						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
+					]
 				},
 				{
 					"name": "pool",
 					"item": [
-						{
-							"name": "get-pool-members",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"var PARTITION_NAME = pm.collectionVariables.get(\"PARTITION_NAME\");\r",
-											"var VS_NAME = pm.collectionVariables.get(\"VS2_NAME\");\r",
-											"var DNS_COUNTER = 1\r",
-											"\r",
-											"\r",
-											"\r",
-											"if (responseCode.code === 200) {\r",
-											"    var jsonData = pm.response.json();\r",
-											"\r",
-											"    pm.collectionVariables.set(\"IIS_ADDRESS\"+DNS_COUNTER, jsonData.items[0].address);\r",
-											"    pm.collectionVariables.set(\"IIS_ADDRESS\", pm.collectionVariables.get(\"IIS_ADDRESS\"+DNS_COUNTER))\r",
-											"    var ADDR = pm.collectionVariables.get(\"IIS_ADDRESS\");\r",
-											"\r",
-											"    pm.test(\"Retrieved address \"+ADDR + \" from \"+PARTITION_NAME+\"-\"+VS_NAME+\"-pool\", function () {\r",
-											"        pm.response.to.have.status(200);\r",
-											"    });\r",
-											"} else {\r",
-											"    pm.test(PARTITION_NAME+\"-\"+VS_NAME+\"-pool does not exist\", function () {\r",
-											"        pm.response.to.have.status(404);\r",
-											"    });\r",
-											"}\r",
-											"   "
-										],
-										"type": "text/javascript",
-										"id": "a45099cf-2012-4ca4-846d-16a0a8d04ad3"
-									}
-								},
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript",
-										"id": "429194d4-23b9-48b6-a544-af128c1e8056"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										}
-									]
-								},
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "https://{{BIGIP_MGMT}}/mgmt/tm/ltm/pool/~Common~{{VS_NAME}}-pool/members",
-									"protocol": "https",
-									"host": [
-										"{{BIGIP_MGMT}}"
-									],
-									"path": [
-										"mgmt",
-										"tm",
-										"ltm",
-										"pool",
-										"~Common~{{VS_NAME}}-pool",
-										"members"
-									]
-								}
-							},
-							"response": []
-						},
 						{
 							"name": "delete-pool",
 							"event": [
@@ -4546,7 +1895,7 @@
 									"script": {
 										"exec": [
 											"var PARTITION_NAME = pm.collectionVariables.get(\"PARTITION_NAME\");\r",
-											"var VS_NAME = pm.collectionVariables.get(\"VS2_NAME\");\r",
+											"var VS_NAME = pm.collectionVariables.get(\"VS_NAME\");\r",
 											"\r",
 											"\r",
 											"if (responseCode.code === 200) {\r",
@@ -4561,8 +1910,7 @@
 											"}\r",
 											"   "
 										],
-										"type": "text/javascript",
-										"id": "66dbfc7a-5dba-428b-9f34-aaae83d31701"
+										"type": "text/javascript"
 									}
 								},
 								{
@@ -4571,8 +1919,7 @@
 										"exec": [
 											""
 										],
-										"type": "text/javascript",
-										"id": "a209f18c-74b2-4650-a337-6b3f515b3e49"
+										"type": "text/javascript"
 									}
 								}
 							],
@@ -4595,7 +1942,7 @@
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "https://{{BIGIP_MGMT}}/mgmt/tm/ltm/pool/~{{PARTITION_NAME}}~{{VS_NAME}}-pool/",
+									"raw": "https://{{BIGIP_MGMT}}/mgmt/tm/ltm/pool/~Common~{{VS_NAME}}-pool",
 									"protocol": "https",
 									"host": [
 										"{{BIGIP_MGMT}}"
@@ -4605,8 +1952,7 @@
 										"tm",
 										"ltm",
 										"pool",
-										"~{{PARTITION_NAME}}~{{VS_NAME}}-pool",
-										""
+										"~Common~{{VS_NAME}}-pool"
 									]
 								}
 							},
@@ -4621,8 +1967,7 @@
 										"exec": [
 											""
 										],
-										"type": "text/javascript",
-										"id": "b7942902-c000-44ae-8c01-fcf0be2a2459"
+										"type": "text/javascript"
 									}
 								},
 								{
@@ -4630,7 +1975,7 @@
 									"script": {
 										"exec": [
 											" var DNS_COUNTER = pm.collectionVariables.get(\"DNS_COUNTER\");",
-											"var ADDR = pm.collectionVariables.get(\"IIS_ADDRESS\"+DNS_COUNTER)",
+											" var ADDR = pm.collectionVariables.get(\"IIS_ADDRESS\")",
 											"",
 											"if (responseCode.code === 200) {",
 											"    pm.test(\"Node \"+ADDR+ \" deleted\", function () {",
@@ -4648,8 +1993,7 @@
 											"",
 											""
 										],
-										"type": "text/javascript",
-										"id": "6caef7fc-7e07-4198-9120-505bda48773a"
+										"type": "text/javascript"
 									}
 								}
 							],
@@ -4682,7 +2026,7 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "https://{{BIGIP_MGMT}}/mgmt/tm/ltm/node/10.1.20.6",
+									"raw": "https://{{BIGIP_MGMT}}/mgmt/tm/ltm/node/{{IIS_ADDRESS1}}",
 									"protocol": "https",
 									"host": [
 										"{{BIGIP_MGMT}}"
@@ -4692,15 +2036,13 @@
 										"tm",
 										"ltm",
 										"node",
-										"10.1.20.6"
+										"{{IIS_ADDRESS1}}"
 									]
 								}
 							},
 							"response": []
 						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
+					]
 				},
 				{
 					"name": "ClientSide SSL Profile",
@@ -4714,8 +2056,7 @@
 										"exec": [
 											""
 										],
-										"type": "text/javascript",
-										"id": "9f67dc42-16e4-4486-9b1e-c78b6563368c"
+										"type": "text/javascript"
 									}
 								},
 								{
@@ -4736,8 +2077,7 @@
 											"} ",
 											""
 										],
-										"type": "text/javascript",
-										"id": "f0acba8a-40f3-43a7-a86d-01b867f3ca16"
+										"type": "text/javascript"
 									}
 								}
 							],
@@ -4770,7 +2110,7 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "https://{{BIGIP_MGMT}}/mgmt/tm/ltm/profile/client-ssl/~{{PARTITION_NAME}}~{{VS_NAME}}-client",
+									"raw": "https://{{BIGIP_MGMT}}/mgmt/tm/ltm/profile/client-ssl/~Common~{{VS_NAME}}-client",
 									"protocol": "https",
 									"host": [
 										"{{BIGIP_MGMT}}"
@@ -4781,192 +2121,13 @@
 										"ltm",
 										"profile",
 										"client-ssl",
-										"~{{PARTITION_NAME}}~{{VS_NAME}}-client"
+										"~Common~{{VS_NAME}}-client"
 									]
 								}
 							},
 							"response": []
 						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
-				},
-				{
-					"name": "HTTP Profile",
-					"item": [
-						{
-							"name": "bigip-delete-profile-http",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript",
-										"id": "b3e3385d-27b3-41de-9c02-cefd946ee302"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											" var VS_NAME = pm.collectionVariables.get(\"VS_NAME\");",
-											"",
-											"",
-											"if (responseCode.code === 200) {",
-											"    pm.test(\"Client-side SSL profile \"+VS_NAME+\"-client deleted\", function () {",
-											"        pm.response.to.have.status(200);",
-											"    });",
-											"} else if (responseCode.code === 404) { ",
-											"    pm.test(\"Client-side SSL profile \"+VS_NAME+\"-client does not exist\", function () {",
-											"        pm.response.to.have.status(404);",
-											"    });",
-											"} ",
-											""
-										],
-										"type": "text/javascript",
-										"id": "aa591523-137a-48e3-87b3-edfaef05b382"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										}
-									]
-								},
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "Content-Type",
-										"type": "text",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "https://{{BIGIP_MGMT}}/mgmt/tm/ltm/profile/client-ssl/~{{PARTITION_NAME}}~{{VS_NAME}}-http",
-									"protocol": "https",
-									"host": [
-										"{{BIGIP_MGMT}}"
-									],
-									"path": [
-										"mgmt",
-										"tm",
-										"ltm",
-										"profile",
-										"client-ssl",
-										"~{{PARTITION_NAME}}~{{VS_NAME}}-http"
-									]
-								}
-							},
-							"response": []
-						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
-				},
-				{
-					"name": "DNS Resolver",
-					"item": [
-						{
-							"name": "bigip-delete-DNS Resolver",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript",
-										"id": "5922078d-d0b7-4d25-9420-69cae2830c64"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											" var VS_NAME = pm.collectionVariables.get(\"VS_NAME\");",
-											"",
-											"",
-											"if (responseCode.code === 200) {",
-											"    pm.test(\"DNS Resolver \"+VS_NAME+\"-dns deleted\", function () {",
-											"        pm.response.to.have.status(200);",
-											"    });",
-											"} else if (responseCode.code === 404) { ",
-											"    pm.test(\"DNS Resolver \"+VS_NAME+\"-dns does not exist\", function () {",
-											"        pm.response.to.have.status(404);",
-											"    });",
-											"} ",
-											""
-										],
-										"type": "text/javascript",
-										"id": "ac2c32e9-22c0-41a7-8ad1-cafad2d1fa5c"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										}
-									]
-								},
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "Content-Type",
-										"type": "text",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "https://{{BIGIP_MGMT}}/mgmt/tm/net/dns-resolver/~Common~{{VS_NAME}}-dns",
-									"protocol": "https",
-									"host": [
-										"{{BIGIP_MGMT}}"
-									],
-									"path": [
-										"mgmt",
-										"tm",
-										"net",
-										"dns-resolver",
-										"~Common~{{VS_NAME}}-dns"
-									]
-								}
-							},
-							"response": []
-						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
+					]
 				},
 				{
 					"name": "End LTM Objects",
@@ -4980,8 +2141,7 @@
 										"exec": [
 											""
 										],
-										"type": "text/javascript",
-										"id": "90ca173d-7be5-489d-be3a-55a6ef7ac43b"
+										"type": "text/javascript"
 									}
 								},
 								{
@@ -4990,8 +2150,7 @@
 										"exec": [
 											""
 										],
-										"type": "text/javascript",
-										"id": "f747e30e-081e-4bc6-803d-51b1c5d65632"
+										"type": "text/javascript"
 									}
 								}
 							],
@@ -5037,8 +2196,7 @@
 								"type": "text/javascript",
 								"exec": [
 									""
-								],
-								"id": "1c178555-6ee1-48cf-88b1-7841a2e4fd38"
+								]
 							}
 						},
 						{
@@ -5047,16 +2205,12 @@
 								"type": "text/javascript",
 								"exec": [
 									""
-								],
-								"id": "297ab7e0-dcef-47d3-be80-e74e9ec4df68"
+								]
 							}
 						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
+					]
 				}
-			],
-			"protocolProfileBehavior": {}
+			]
 		},
 		{
 			"name": "End Loop - Imperative Calls",
@@ -5091,8 +2245,7 @@
 									"",
 									""
 								],
-								"type": "text/javascript",
-								"id": "7b9dcbe6-a03f-4af9-a0b1-11400da2f0af"
+								"type": "text/javascript"
 							}
 						},
 						{
@@ -5101,8 +2254,7 @@
 								"exec": [
 									""
 								],
-								"type": "text/javascript",
-								"id": "7c2ab9ab-df77-445c-b1b6-c4a437a297f1"
+								"type": "text/javascript"
 							}
 						}
 					],
@@ -5148,8 +2300,7 @@
 						"type": "text/javascript",
 						"exec": [
 							""
-						],
-						"id": "4c6b4174-1e5a-4a2a-bd16-e2cc3426f336"
+						]
 					}
 				},
 				{
@@ -5158,12 +2309,10 @@
 						"type": "text/javascript",
 						"exec": [
 							""
-						],
-						"id": "74b9dc0e-b1c6-4c5d-96b9-9ce06db8b54c"
+						]
 					}
 				}
-			],
-			"protocolProfileBehavior": {}
+			]
 		},
 		{
 			"name": "End Loop Datacenters",
@@ -5201,8 +2350,7 @@
 									"",
 									""
 								],
-								"type": "text/javascript",
-								"id": "32acc773-ef31-4d4a-9dbd-c6afbe4ced96"
+								"type": "text/javascript"
 							}
 						},
 						{
@@ -5211,8 +2359,7 @@
 								"exec": [
 									""
 								],
-								"type": "text/javascript",
-								"id": "ed126c51-f213-462a-98e4-1195ccab7574"
+								"type": "text/javascript"
 							}
 						}
 					],
@@ -5250,1636 +2397,7 @@
 					},
 					"response": []
 				}
-			],
-			"protocolProfileBehavior": {}
-		},
-		{
-			"name": "del solution6",
-			"item": [
-				{
-					"name": "bigip5-Test AS3 is running",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"if (responseCode.code === 200) {",
-									"    pm.collectionVariables.set('PRIOR_RESPONSE', 'OK');",
-									"",
-									"}",
-									"",
-									"",
-									"pm.test(\"AS3 is Running\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});",
-									"",
-									""
-								],
-								"type": "text/javascript",
-								"id": "6de49f2d-3cde-4002-a8ba-aa1c6ce090cd"
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									"pm.collectionVariables.set(\"DNS1_NAME\", \"solution6.acme.com\");",
-									"pm.collectionVariables.set(\"VS1_NAME\", \"solution6\");",
-									"pm.collectionVariables.set(\"PATH_NAME\", \"solution6\");",
-									"pm.collectionVariables.set(\"PARTITION_NAME\", \"solution6\");",
-									"pm.collectionVariables.set(\"CUSTOM_TYPE\", \"modern\");",
-									"",
-									"var COUNTER = pm.collectionVariables.get(\"COUNTER\");",
-									"",
-									"if (COUNTER === \"2\") {",
-									"pm.collectionVariables.set(\"BIGIP_MGMT\", \"10.1.1.5\");",
-									"pm.collectionVariables.set(\"BIGIP_NUMBER\", \"2\");",
-									"pm.collectionVariables.set(\"BIGIP_SCOPE\", pm.environment.get(\"BIGIP2_SCOPE\"));",
-									"} else {",
-									"pm.collectionVariables.set(\"BIGIP_MGMT\", \"10.1.1.4\");",
-									"pm.collectionVariables.set(\"BIGIP_NUMBER\", \"1\");",
-									"pm.collectionVariables.set(\"BIGIP_SCOPE\", pm.environment.get(\"BIGIP1_SCOPE\"));",
-									"pm.collectionVariables.set('COUNTER',\"1\" );",
-									"",
-									"}"
-								],
-								"type": "text/javascript",
-								"id": "90d4d803-6f74-442b-8909-ce0538cf95ff"
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "admin",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "admin",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "https://10.1.1.11/mgmt/shared/appsvcs/info",
-							"protocol": "https",
-							"host": [
-								"10",
-								"1",
-								"1",
-								"11"
-							],
-							"path": [
-								"mgmt",
-								"shared",
-								"appsvcs",
-								"info"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "bigip5-Delete WideIP1",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									"",
-									"var PRIOR_RESPONSE = pm.collectionVariables.get(\"PRIOR_RESPONSE\");",
-									"",
-									"if (PRIOR_RESPONSE === 'OK') {",
-									"",
-									"}"
-								],
-								"type": "text/javascript",
-								"id": "df516180-3b92-4fc7-8f3a-473185e777a6"
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"",
-									"if (responseCode.code === 200) {",
-									"pm.collectionVariables.set('PRIOR_RESPONSE', 'OK' );",
-									"pm.test(\"Wide IP deleted\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});",
-									"} else if (responseCode.code === 422) {",
-									"pm.test(\"WideIP does not exist\", function () {",
-									"    pm.expect(pm.response.text()).to.include(\"path does not exist\");",
-									"});",
-									"",
-									"}"
-								],
-								"type": "text/javascript",
-								"id": "3f07f0fb-526e-4525-99b2-2c3f04554fb3"
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "admin",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "admin",
-									"type": "string"
-								}
-							]
-						},
-						"method": "PATCH",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "[\n{\n\t\"op\":\"remove\",\n\t\"path\":\"{{PARTITION_NAME}}/Application\"\n \n}\n]"
-						},
-						"url": {
-							"raw": "https://10.1.1.11/mgmt/shared/appsvcs/declare",
-							"protocol": "https",
-							"host": [
-								"10",
-								"1",
-								"1",
-								"11"
-							],
-							"path": [
-								"mgmt",
-								"shared",
-								"appsvcs",
-								"declare"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "bigip5-Get bigip Server VS1 address",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									"setTimeout(function(){}, 1000);"
-								],
-								"type": "text/javascript",
-								"id": "8d0a8565-3841-4590-a116-de34e0abda31"
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"if (responseCode.code === 200) {",
-									"    pm.collectionVariables.set('PRIOR_RESPONSE', 'OK');",
-									"    pm.test(\"VS Address found\", function () {",
-									"        pm.response.to.have.status(200);",
-									"",
-									"        var jsonData = JSON.parse(responseBody);",
-									"        pm.collectionVariables.set(\"DNS_DEST\", jsonData.destination);",
-									"        address = (pm.collectionVariables.get(\"DNS_DEST\")).split(\":\");",
-									"        pm.collectionVariables.set('BIGIP_ADDRESS1', address[0]);",
-									"    });",
-									"} else",
-									"    pm.test(\"VS does not exist\", function () {",
-									"        pm.response.to.have.status(404);",
-									"    });",
-									"",
-									"",
-									"",
-									"",
-									"",
-									"",
-									"",
-									"",
-									"",
-									"",
-									""
-								],
-								"type": "text/javascript",
-								"id": "d39da16b-a386-43ce-ae3d-fdbeae75add4"
-							}
-						}
-					],
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "admin",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "admin",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "https://10.1.1.11/mgmt/tm/gtm/server/~Common~bigip{{BIGIP_NUMBER}}.f5lab.local/virtual-servers/~{{PARTITION_NAME}}~{{PATH_NAME}}~{{VS1_NAME}}",
-							"protocol": "https",
-							"host": [
-								"10",
-								"1",
-								"1",
-								"11"
-							],
-							"path": [
-								"mgmt",
-								"tm",
-								"gtm",
-								"server",
-								"~Common~bigip{{BIGIP_NUMBER}}.f5lab.local",
-								"virtual-servers",
-								"~{{PARTITION_NAME}}~{{PATH_NAME}}~{{VS1_NAME}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "bigip-Checkin Address",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"var jsonData = pm.response.json();",
-									"",
-									"",
-									"",
-									"  if(jsonData.status === \"Success\") {",
-									"pm.test(\"Address returned to Scope\", function () {",
-									"    pm.response.to.have.status(200);",
-									"",
-									"});",
-									"} else {",
-									"",
-									"pm.test(\"Address not assigned in Scope\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});",
-									"}",
-									""
-								],
-								"type": "text/javascript",
-								"id": "8f246ea8-3896-4e16-93da-9012528b08ce"
-							}
-						}
-					],
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "http://10.1.20.6:81/addr/checkin?address={{BIGIP_ADDRESS1}}",
-							"protocol": "http",
-							"host": [
-								"10",
-								"1",
-								"20",
-								"6"
-							],
-							"port": "81",
-							"path": [
-								"addr",
-								"checkin"
-							],
-							"query": [
-								{
-									"key": "address",
-									"value": "{{BIGIP_ADDRESS1}}"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "bigip5-Delete bigip1 Server VS",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									"setTimeout(function(){}, 1000);"
-								],
-								"type": "text/javascript",
-								"id": "9640ed8b-b0de-45f1-bd72-a30b3a209a5e"
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"if (responseCode.code === 200) {",
-									"pm.collectionVariables.set('PRIOR_RESPONSE', 'OK' );",
-									"pm.test(\"VS deleted from server\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});",
-									"} else ",
-									"pm.test(\"VS does not exist\", function () {",
-									"    pm.response.to.have.status(404);",
-									"});",
-									"",
-									"",
-									""
-								],
-								"type": "text/javascript",
-								"id": "95026980-275c-4136-b405-108c24e1cf1f"
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "admin",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "admin",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "https://10.1.1.11/mgmt/tm/gtm/server/~Common~bigip{{BIGIP_NUMBER}}.f5lab.local/virtual-servers/~{{PARTITION_NAME}}~{{PATH_NAME}}~{{VS1_NAME}}",
-							"protocol": "https",
-							"host": [
-								"10",
-								"1",
-								"1",
-								"11"
-							],
-							"path": [
-								"mgmt",
-								"tm",
-								"gtm",
-								"server",
-								"~Common~bigip{{BIGIP_NUMBER}}.f5lab.local",
-								"virtual-servers",
-								"~{{PARTITION_NAME}}~{{PATH_NAME}}~{{VS1_NAME}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "bigip-Test AS3 is running",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"if (responseCode.code === 200) {",
-									"pm.collectionVariables.set('PRIOR_RESPONSE', 'OK' );",
-									"}",
-									"",
-									"",
-									"pm.test(\"AS3 is Running\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});",
-									"",
-									""
-								],
-								"type": "text/javascript",
-								"id": "d7483e3a-9a56-4bff-a418-1e931171d898"
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "admin",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "admin",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "https://{{BIGIP_MGMT}}/mgmt/shared/appsvcs/info",
-							"protocol": "https",
-							"host": [
-								"{{BIGIP_MGMT}}"
-							],
-							"path": [
-								"mgmt",
-								"shared",
-								"appsvcs",
-								"info"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "bigip-delete Application",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									"",
-									"var PRIOR_RESPONSE = pm.collectionVariables.get(\"PRIOR_RESPONSE\");",
-									"",
-									"if (PRIOR_RESPONSE === 'OK') {",
-									"",
-									"}"
-								],
-								"type": "text/javascript",
-								"id": "f6ac26e3-b01f-4ccd-9b36-d12c5c83099a"
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"if (responseCode.code === 200) {",
-									"pm.collectionVariables.set('PRIOR_RESPONSE', 'OK' );",
-									"}",
-									"",
-									"pm.test(\"Application deleted\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});",
-									"",
-									"",
-									""
-								],
-								"type": "text/javascript",
-								"id": "e8c69916-774d-4688-8c96-4b771d8bb9a5"
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "admin",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "admin",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "https://{{BIGIP_MGMT}}/mgmt/shared/appsvcs/declare/{{PARTITION_NAME}}",
-							"protocol": "https",
-							"host": [
-								"{{BIGIP_MGMT}}"
-							],
-							"path": [
-								"mgmt",
-								"shared",
-								"appsvcs",
-								"declare",
-								"{{PARTITION_NAME}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "bigip-get-node-iis",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									"setTimeout(function(){}, 1000);"
-								],
-								"type": "text/javascript",
-								"id": "1e44b187-359d-40b4-81b8-ea8514da8098"
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"var IIS_NAME = pm.collectionVariables.get(\"VS1_NAME\")+\"-iis\"",
-									"",
-									"",
-									"var jsonData = pm.response.json();",
-									"",
-									"",
-									"\tfor (var i = 0; i < jsonData.items.length; i++) {",
-									" ",
-									"\t\tif (jsonData.items[i].name === IIS_NAME) {",
-									"\t\t\tpm.collectionVariables.set(\"IIS_ADDRESS1\", jsonData.items[i].address);",
-									"                pm.test(\"Node address returned\", function () {",
-									"                pm.response.to.have.status(200);",
-									"                });",
-									"\t\t}",
-									"\t}"
-								],
-								"type": "text/javascript",
-								"id": "64748115-3177-47d5-b903-8a7f559d715e"
-							}
-						}
-					],
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "admin",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "admin",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "https://{{BIGIP_MGMT}}/mgmt/tm/ltm/node",
-							"protocol": "https",
-							"host": [
-								"{{BIGIP_MGMT}}"
-							],
-							"path": [
-								"mgmt",
-								"tm",
-								"ltm",
-								"node"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "bigip-delete-node-iis",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									"setTimeout(function(){}, 1000);"
-								],
-								"type": "text/javascript",
-								"id": "d6ecac1f-6146-4cbd-a58f-389a0d3686dd"
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"if (responseCode.code === 200) {",
-									"pm.collectionVariables.set('PRIOR_RESPONSE', 'OK' );",
-									"pm.test(\"Node deleted\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});",
-									"} else if (responseCode.code === 404) { ",
-									"pm.test(\"Node does not exist\", function () {",
-									"    pm.response.to.have.status(404);",
-									"});",
-									"} else if (responseCode.code === 400) {",
-									"pm.test(\"Unable to Delete Node. Still in use\", function () {",
-									"    pm.expect(pm.response.text()).to.include(\"member of pool\");",
-									"});",
-									"",
-									"}"
-								],
-								"type": "text/javascript",
-								"id": "2c5b7805-6dd9-465d-94a6-453621110a80"
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "admin",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "admin",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "https://{{BIGIP_MGMT}}/mgmt/tm/ltm/node/~Common~{{VS1_NAME}}-iis",
-							"protocol": "https",
-							"host": [
-								"{{BIGIP_MGMT}}"
-							],
-							"path": [
-								"mgmt",
-								"tm",
-								"ltm",
-								"node",
-								"~Common~{{VS1_NAME}}-iis"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "bigip-delete-profile",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"if (responseCode.code === 200) {\r",
-									"pm.test(\"Profile Deleted\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});\r",
-									"} else \r",
-									"pm.test(\"Profile Does Not Exist\", function () {\r",
-									"    pm.response.to.have.status(404);\r",
-									"});\r",
-									""
-								],
-								"type": "text/javascript",
-								"id": "e94b7c59-101e-4f9a-88f8-0941402c669d"
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									"setTimeout(function(){}, 2000);"
-								],
-								"type": "text/javascript",
-								"id": "e4a3f326-cf86-488f-a352-8d3f16079e08"
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "admin",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "admin",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							},
-							{
-								"key": "X-F5-REST-Coordination-Id",
-								"type": "text",
-								"value": "",
-								"disabled": true
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "https://{{BIGIP_MGMT}}/mgmt/tm/apm/profile/access/~Common~{{PARTITION_NAME}}-psp",
-							"protocol": "https",
-							"host": [
-								"{{BIGIP_MGMT}}"
-							],
-							"path": [
-								"mgmt",
-								"tm",
-								"apm",
-								"profile",
-								"access",
-								"~Common~{{PARTITION_NAME}}-psp"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "bigip-delete-Policy",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"if (responseCode.code === 200) {\r",
-									"pm.test(\"Policy Deleted\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});\r",
-									"} else \r",
-									"pm.test(\"Policy Does Not Exist\", function () {\r",
-									"    pm.response.to.have.status(404);\r",
-									"});\r",
-									""
-								],
-								"type": "text/javascript",
-								"id": "6236f1b7-6e8d-4760-b63e-ac30ace001c3"
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									"setTimeout(function(){}, 2000);"
-								],
-								"type": "text/javascript",
-								"id": "2a983a90-1655-47dc-83b9-450e5c9231ea"
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "admin",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "admin",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							},
-							{
-								"key": "X-F5-REST-Coordination-Id",
-								"type": "text",
-								"value": "{{TRANSID}}",
-								"disabled": true
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "https://{{BIGIP_MGMT}}/mgmt/tm/apm/policy/access-policy/~Common~{{PARTITION_NAME}}-psp",
-							"protocol": "https",
-							"host": [
-								"{{BIGIP_MGMT}}"
-							],
-							"path": [
-								"mgmt",
-								"tm",
-								"apm",
-								"policy",
-								"access-policy",
-								"~Common~{{PARTITION_NAME}}-psp"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "bigip-delete-kerberos SSO profile",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"if (responseCode.code === 200) {",
-									"pm.collectionVariables.set('PRIOR_RESPONSE', 'OK' );",
-									"pm.test(\"APM Kerberos Object Deleted\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});",
-									"} else ",
-									"pm.test(\"APM Kerberos Object does not exist\", function () {",
-									"    pm.response.to.have.status(404);",
-									"});",
-									""
-								],
-								"type": "text/javascript",
-								"id": "e20da479-abee-4713-8eda-a836a8cbc1f1"
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"id": "1bae221a-582f-4ce7-9a63-7e6305adb8aa"
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "admin",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "admin",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "https://{{BIGIP_MGMT}}/mgmt/tm/apm/sso/kerberos/~Common~{{VS1_NAME}}-kerbsso",
-							"protocol": "https",
-							"host": [
-								"{{BIGIP_MGMT}}"
-							],
-							"path": [
-								"mgmt",
-								"tm",
-								"apm",
-								"sso",
-								"kerberos",
-								"~Common~{{VS1_NAME}}-kerbsso"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "bigip-delete-OCSP Servers",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"if (responseCode.code === 200) {",
-									"pm.collectionVariables.set('PRIOR_RESPONSE', 'OK' );",
-									"pm.test(\"APM OCSP Responsder Object Deleted\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});",
-									"} else ",
-									"pm.test(\"APM AAA AD Object does not exist\", function () {",
-									"    pm.response.to.have.status(404);",
-									"});",
-									""
-								],
-								"type": "text/javascript",
-								"id": "678e8081-70ff-47c5-9a02-66ebdab206d3"
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"id": "10d52702-23cf-4d4c-a9c8-dc825597aadd"
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "admin",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "admin",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "https://{{BIGIP_MGMT}}/mgmt/tm/apm/aaa/ocsp/~Common~{{VS1_NAME}}-ocsp-servers",
-							"protocol": "https",
-							"host": [
-								"{{BIGIP_MGMT}}"
-							],
-							"path": [
-								"mgmt",
-								"tm",
-								"apm",
-								"aaa",
-								"ocsp",
-								"~Common~{{VS1_NAME}}-ocsp-servers"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "bigip-delete-APM AAA LDAP",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"if (responseCode.code === 200) {",
-									"pm.collectionVariables.set('PRIOR_RESPONSE', 'OK' );",
-									"pm.test(\"APM AAA LDAP Object Deleted\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});",
-									"} else ",
-									"pm.test(\"APM AAA LDAP Object does not exist\", function () {",
-									"    pm.response.to.have.status(404);",
-									"});",
-									"",
-									""
-								],
-								"type": "text/javascript",
-								"id": "0cdc52d8-53b1-40ad-872a-6e82ea20e909"
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									"",
-									"var PRIOR_RESPONSE = pm.collectionVariables.get(\"PRIOR_RESPONSE\");",
-									"",
-									"if (PRIOR_RESPONSE === 'OK') {",
-									"",
-									"}"
-								],
-								"type": "text/javascript",
-								"id": "1405a704-214b-4bb3-a387-b941c5a7e6a7"
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "admin",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "admin",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "https://{{BIGIP_MGMT}}/mgmt/tm/apm/aaa/ldap/~Common~{{VS1_NAME}}-ldap-servers",
-							"protocol": "https",
-							"host": [
-								"{{BIGIP_MGMT}}"
-							],
-							"path": [
-								"mgmt",
-								"tm",
-								"apm",
-								"aaa",
-								"ldap",
-								"~Common~{{VS1_NAME}}-ldap-servers"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "bigip-delete-LDAP Server Pool",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"if (responseCode.code === 200) {",
-									"pm.collectionVariables.set('PRIOR_RESPONSE', 'OK' );",
-									"pm.test(\"Pool Deleted\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});",
-									"} else ",
-									"pm.test(\"Pool does not exist\", function () {",
-									"    pm.response.to.have.status(404);",
-									"});",
-									"",
-									""
-								],
-								"type": "text/javascript",
-								"id": "64c61124-229f-4d48-9c56-8b3dd844448c"
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "admin",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "admin",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "https://{{BIGIP_MGMT}}/mgmt/tm/ltm/pool/~Common~{{VS1_NAME}}-ldap-pool",
-							"protocol": "https",
-							"host": [
-								"{{BIGIP_MGMT}}"
-							],
-							"path": [
-								"mgmt",
-								"tm",
-								"ltm",
-								"pool",
-								"~Common~{{VS1_NAME}}-ldap-pool"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "bigip-delete-node-10.1.20.7",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									"setTimeout(function(){}, 1000);"
-								],
-								"type": "text/javascript",
-								"id": "c5ef5631-74be-4cb4-8399-eff117bcf175"
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"if (responseCode.code === 200) {",
-									"pm.collectionVariables.set('PRIOR_RESPONSE', 'OK' );",
-									"pm.test(\"Node deleted\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});",
-									"} else if (responseCode.code === 404) { ",
-									"pm.test(\"Node does not exist\", function () {",
-									"    pm.response.to.have.status(404);",
-									"});",
-									"} else if (responseCode.code === 400) {",
-									"pm.test(\"Unable to Delete Node. Still in use\", function () {",
-									"    pm.expect(pm.response.text()).to.include(\"member of pool\");",
-									"});",
-									"",
-									"}"
-								],
-								"type": "text/javascript",
-								"id": "2e08d01b-fff0-4b9e-9850-b3095621bfd3"
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "admin",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "admin",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "https://{{BIGIP_MGMT}}/mgmt/tm/ltm/node/10.1.20.7",
-							"protocol": "https",
-							"host": [
-								"{{BIGIP_MGMT}}"
-							],
-							"path": [
-								"mgmt",
-								"tm",
-								"ltm",
-								"node",
-								"10.1.20.7"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "bigip-delete-ca.f5lab.local cert",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"var DC2_APM = pm.environment.get(\"DC2_APM\");\r",
-									"var COUNTER = pm.collectionVariables.get(\"COUNTER\");\r",
-									"\r",
-									"if (DC2_APM === \"true\" && COUNTER === \"1\") {\r",
-									"postman.setNextRequest(\"bigip5-Test AS3 is running\");\r",
-									"pm.collectionVariables.set(\"COUNTER\", \"2\" );\r",
-									"\r",
-									"} else {\r",
-									"\r",
-									"\r",
-									"}"
-								],
-								"type": "text/javascript",
-								"id": "45a98875-783d-4728-9b15-5c14c9920320"
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "admin",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "admin",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							},
-							{
-								"key": "X-F5-REST-Coordination-Id",
-								"type": "text",
-								"value": "",
-								"disabled": true
-							},
-							{
-								"key": "Content-Range",
-								"type": "text",
-								"value": "0-1321/1322",
-								"disabled": true
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "https://{{BIGIP_MGMT}}/mgmt/tm/sys/crypto/cert/~Common~ca.f5lab.local",
-							"protocol": "https",
-							"host": [
-								"{{BIGIP_MGMT}}"
-							],
-							"path": [
-								"mgmt",
-								"tm",
-								"sys",
-								"crypto",
-								"cert",
-								"~Common~ca.f5lab.local"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "ad-delete-dns",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"   var jsonData = pm.response.json();",
-									"\t",
-									"    if (jsonData.status === \"nonexistent\") {",
-									"        pm.test(\"nonexistent\", function () {",
-									"        pm.expect(jsonData.status).to.eql(\"nonexistent\");",
-									"        });",
-									"    } else {",
-									"",
-									"        ",
-									"        pm.test(\"Success\", function () {",
-									"        pm.expect(jsonData[1].status).to.eql(\"Success\");",
-									"        });",
-									"    }"
-								],
-								"type": "text/javascript",
-								"id": "8f33e2af-4372-44a1-bbfc-958effe537ea"
-							}
-						}
-					],
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\"record_type\":\"a\",\n\"fqdn\":\"{{DNS1_NAME}}\",\n\"computer_ip\":\"{{IIS_ADDRESS1}}\" \n}"
-						},
-						"url": {
-							"raw": "http://10.1.20.6:81/dns",
-							"protocol": "http",
-							"host": [
-								"10",
-								"1",
-								"20",
-								"6"
-							],
-							"port": "81",
-							"path": [
-								"dns"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "ad-delete-delegation account",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"    ",
-									"    var jsonData = pm.response.json();",
-									"\t",
-									"    if (jsonData.status === \"nonexistent\") {",
-									"        pm.test(\"nonexistent\", function () {",
-									"        pm.expect(jsonData.status).to.eql(\"nonexistent\");",
-									"        });",
-									"    } else {",
-									"        pm.test(\"Success\", function () {",
-									"        pm.expect(jsonData.status).to.eql(\"Success\");",
-									"        });",
-									"    }",
-									""
-								],
-								"type": "text/javascript",
-								"id": "a5547795-5504-4049-b721-15416fc7f77b"
-							}
-						}
-					],
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n\"username\":\"{{VS1_NAME}}\"\r\n}"
-						},
-						"url": {
-							"raw": "http://10.1.20.6:81/user",
-							"protocol": "http",
-							"host": [
-								"10",
-								"1",
-								"20",
-								"6"
-							],
-							"port": "81",
-							"path": [
-								"user"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Delete SPN",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"",
-									"",
-									"var jsonData = pm.response.json();",
-									"pm.test(\"SPN Deleted\", function () {",
-									"",
-									"    pm.expect(jsonData.status).to.eql(\"Success\");",
-									"});",
-									"",
-									"",
-									""
-								],
-								"type": "text/javascript",
-								"id": "f3caf246-aa62-4b2a-965c-8a4de5933869"
-							}
-						}
-					],
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\"computer\":\"IIS\",\n\"spn\":\"HTTP/{{DNS1_NAME}}\"\n}"
-						},
-						"url": {
-							"raw": "http://10.1.20.6:81/computer",
-							"protocol": "http",
-							"host": [
-								"10",
-								"1",
-								"20",
-								"6"
-							],
-							"port": "81",
-							"path": [
-								"computer"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "iis-delete website",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"",
-									"",
-									"var jsonData = pm.response.json();",
-									"pm.test(\"Website Deleted\", function () {",
-									"",
-									"    pm.expect(jsonData.status).to.eql(\"Success\");",
-									"});",
-									"",
-									"",
-									""
-								],
-								"type": "text/javascript",
-								"id": "a6be6c19-1711-4153-afe0-7b5ba58b6748"
-							}
-						}
-					],
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\"site_name\":\"{{DNS1_NAME}}\" \n}"
-						},
-						"url": {
-							"raw": "http://10.1.20.6:81/website",
-							"protocol": "http",
-							"host": [
-								"10",
-								"1",
-								"20",
-								"6"
-							],
-							"port": "81",
-							"path": [
-								"website"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "iis-checkin address",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"    ",
-									"    var jsonData = pm.response.json();",
-									"\t",
-									"    if (jsonData.status === \"nonexistent\") {",
-									"        pm.test(\"nonexistent\", function () {",
-									"        pm.expect(jsonData.status).to.eql(\"nonexistent\");",
-									"        });",
-									"    } else {",
-									"        pm.test(\"Success\", function () {",
-									"        pm.expect(jsonData.status).to.eql(\"Success\");",
-									"        });",
-									"    }",
-									"",
-									"pm.collectionVariables.set(\"COUNTER\", \"1\" );",
-									"",
-									"    ",
-									"",
-									"",
-									"",
-									"",
-									""
-								],
-								"type": "text/javascript",
-								"id": "c902f270-7517-4596-9170-ffa6329431ce"
-							}
-						}
-					],
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "http://10.1.20.6:81/addr/checkin?address={{IIS_ADDRESS1}}",
-							"protocol": "http",
-							"host": [
-								"10",
-								"1",
-								"20",
-								"6"
-							],
-							"port": "81",
-							"path": [
-								"addr",
-								"checkin"
-							],
-							"query": [
-								{
-									"key": "address",
-									"value": "{{IIS_ADDRESS1}}"
-								}
-							]
-						}
-					},
-					"response": []
-				}
-			],
-			"protocolProfileBehavior": {}
+			]
 		}
 	],
 	"event": [
@@ -6889,8 +2407,7 @@
 				"type": "text/javascript",
 				"exec": [
 					""
-				],
-				"id": "8beb5c08-33f7-43fc-a294-8eeccda09ac2"
+				]
 			}
 		},
 		{
@@ -6899,122 +2416,94 @@
 				"type": "text/javascript",
 				"exec": [
 					""
-				],
-				"id": "9bc34b3b-126f-4c80-ae00-3392a925d192"
+				]
 			}
 		}
 	],
 	"variable": [
 		{
-			"id": "e771a0ea-d88e-41a5-a759-a0222ae32766",
-			"key": "DNS1_NAME",
-			"value": ""
-		},
-		{
-			"id": "5e829273-2823-4330-a1f0-ab23e425235f",
-			"key": "DNS2_NAME",
-			"value": ""
-		},
-		{
-			"id": "3be37cc3-d1f9-41b8-a01d-1898e0e2b2b0",
-			"key": "PARTITION_NAME",
-			"value": ""
-		},
-		{
-			"id": "e6a178fc-5b32-4d5a-aa60-2eaf0ad3d817",
-			"key": "PATH_NAME",
-			"value": ""
-		},
-		{
-			"id": "dcb843a9-ad0f-491a-b2c7-a5b810e72a5b",
 			"key": "VIPS",
 			"value": ""
 		},
 		{
-			"id": "d588bcce-c8d7-4ec8-af9e-61c500bf630f",
+			"key": "PATH_NAME",
+			"value": ""
+		},
+		{
+			"key": "PARTITION_NAME",
+			"value": ""
+		},
+		{
+			"key": "DNS1_NAME",
+			"value": ""
+		},
+		{
 			"key": "VS1_NAME",
 			"value": ""
 		},
 		{
-			"id": "f3503c67-4d34-4e04-949d-7fc20968b1b6",
-			"key": "VS2_NAME",
+			"key": "CONFLICT1_NAME",
 			"value": ""
 		},
 		{
-			"id": "12177051-5019-435f-bf9b-c48356b7904f",
-			"key": "BIGIP_MGMT",
-			"value": ""
-		},
-		{
-			"id": "4639d28f-0b57-4cb8-8396-a0310d23f734",
-			"key": "BIGIP_SCOPE",
-			"value": ""
-		},
-		{
-			"id": "129ec5c8-2a2f-42d9-805d-3dd6557349dd",
-			"key": "DC_COUNTER",
-			"value": ""
-		},
-		{
-			"id": "dd723ac2-05a6-421e-ba7f-4025af3931ee",
-			"key": "DNS_COUNTER",
-			"value": ""
-		},
-		{
-			"id": "19e6f5cd-1642-43b9-8af2-e4ff083a39c8",
-			"key": "DNS_NAME",
-			"value": ""
-		},
-		{
-			"id": "ba69a370-811a-44cd-b727-dbd37db9e934",
-			"key": "VS_COUNTER",
-			"value": ""
-		},
-		{
-			"id": "5cc7719e-af8a-4f6f-a1f3-8414a58c68b7",
-			"key": "VS_NAME",
-			"value": ""
-		},
-		{
-			"id": "b9ccc3be-13a0-48a4-a59b-db22b2810a1d",
-			"key": "BIGIP_NUMBER",
-			"value": ""
-		},
-		{
-			"id": "bfe4dd4c-360a-475e-8041-25b9e5e61573",
-			"key": "COUNTER",
-			"value": ""
-		},
-		{
-			"id": "a133bc59-36cf-4717-83eb-394b40f8e711",
-			"key": "CUSTOM_TYPE",
-			"value": ""
-		},
-		{
-			"id": "402d48f6-2e16-49e4-82fb-b540fea3b3e6",
-			"key": "PRIOR_RESPONSE",
-			"value": ""
-		},
-		{
-			"id": "ba97d031-5373-4880-b256-d42c2ec68f62",
 			"key": "BIGIP_ADDRESS1",
 			"value": ""
 		},
 		{
-			"id": "f3cb60e7-a8fc-441e-b75b-a59910cbf263",
-			"key": "DNS_DEST",
-			"value": ""
-		},
-		{
-			"id": "76f0ebae-b2bb-4990-9495-acfce16333b1",
 			"key": "IIS_ADDRESS",
 			"value": ""
 		},
 		{
-			"id": "8266e591-e9c5-4be8-a51c-15e2b85e552f",
+			"key": "DNS2_NAME",
+			"value": ""
+		},
+		{
+			"key": "VS2_NAME",
+			"value": ""
+		},
+		{
+			"key": "CUSTOM_TYPE",
+			"value": ""
+		},
+		{
+			"key": "SERVICE_NAME_1",
+			"value": ""
+		},
+		{
+			"key": "CHAIN_NAME_1",
+			"value": ""
+		},
+		{
+			"key": "BIGIP_MGMT",
+			"value": ""
+		},
+		{
+			"key": "BIGIP_SCOPE",
+			"value": ""
+		},
+		{
+			"key": "DC_COUNTER",
+			"value": ""
+		},
+		{
+			"key": "VS_COUNTER",
+			"value": ""
+		},
+		{
+			"key": "DNS_COUNTER",
+			"value": ""
+		},
+		{
+			"key": "VS_NAME",
+			"value": ""
+		},
+		{
+			"key": "DNS_NAME",
+			"value": ""
+		},
+		{
 			"key": "IIS_ADDRESS1",
 			"value": ""
 		}
-	],
-	"protocolProfileBehavior": {}
+	]
 }

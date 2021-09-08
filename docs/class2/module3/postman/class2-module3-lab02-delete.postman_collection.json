@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "b0b3cbfa-313a-439a-ae13-4a0f4f5b1924",
+		"_postman_id": "d35613cd-d39a-4787-92c7-7c29d7cfe537",
 		"name": "class2-module3-lab02-delete",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -1088,7 +1088,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://{{BIGIP_MGMT}}/mgmt/tm/apm/aaa/active-directory/~Common~{{VS1_NAME}}-ad-servers",
+							"raw": "https://{{BIGIP_MGMT}}/mgmt/tm/apm/aaa/active-directory/~Common~f5lab.local",
 							"protocol": "https",
 							"host": [
 								"{{BIGIP_MGMT}}"
@@ -1099,7 +1099,7 @@
 								"apm",
 								"aaa",
 								"active-directory",
-								"~Common~{{VS1_NAME}}-ad-servers"
+								"~Common~f5lab.local"
 							]
 						}
 					},
@@ -1164,7 +1164,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://{{BIGIP_MGMT}}/mgmt/tm/ltm/pool/~Common~{{VS1_NAME}}-ad-pool",
+							"raw": "https://{{BIGIP_MGMT}}/mgmt/tm/ltm/pool/~Common~ad-pool",
 							"protocol": "https",
 							"host": [
 								"{{BIGIP_MGMT}}"
@@ -1174,7 +1174,7 @@
 								"tm",
 								"ltm",
 								"pool",
-								"~Common~{{VS1_NAME}}-ad-pool"
+								"~Common~ad-pool"
 							]
 						}
 					},

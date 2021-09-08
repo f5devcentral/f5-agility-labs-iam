@@ -1,19 +1,16 @@
-Lab 3: Access Logs Overview
-=============================================
-
-Access Policy Manager (APM) provides a default-log-setting. When you create an access profile, the default-log-setting is automatically assigned to it. The default-log-setting can be retained, removed, or replaced for the access profile. The default-log-setting is applied to user sessions only when it is assigned to an access profile.
-
-Regardless of whether it is assigned to an access profile, the default-log-setting applies to APM processes that run outside of a user session. Specifically, on a BIG-IP system with an SWG subscription, the default-log-setting applies to URL database updates
+Lab 3: Intro to Per-Request Policies
+=====================================
 
 
-Task 1 - Setup Lab Environment
+
+Section 1 - Setup Lab Environment
 -----------------------------------
 
-To access your dedicated student lab environment, you will need a web browser and Remote Desktop Protocol (RDP) client software. The web browser will be used to access the Unified Demo Framework (UDF) Training Portal. The RDP client will be used to connect to the jumphost, where you will be able to access the BIG-IP management interfaces (HTTPS, SSH).
+To access your dedicated student lab environment, you will require a web browser and Remote Desktop Protocol (RDP) client software. The web browser will be used to access the Lab Training Portal. The RDP client will be used to connect to the Jump Host, where you will be able to access the BIG-IP management interfaces (HTTPS, SSH).
 
 #. Click **DEPLOYMENT** located on the top left corner to display the environment
 
-#. Click **ACCESS** next to jumphost.f5lab.local
+#. Click **ACCESS** next to jumpohost.f5lab.local
 
    |image001|
 
@@ -32,245 +29,272 @@ To access your dedicated student lab environment, you will need a web browser an
 
 	|image002|
 
-
 #. Scroll down the page until you see **101 Intro to Access Foundational Concepts** on the left
 
    |image003|
 
-#. Hover over tile **Access Logs Overview**. A start and stop icon should appear within the tile.  Click the **Play** Button to start the automation to build the environment
+#. Hover over tile **Intro to Per-Request Policies**. A start and stop icon should appear within the tile.  Click the **Play** Button to start the automation to build the environment
 
-   |image004|
+   +---------------+-------------+
+   | |image004|    | |image005|  |
+   +---------------+-------------+
 
-#. The screen should refresh displaying the progress of the automation within 30 seconds.  Scroll to the bottom of the automation workflow to ensure all requests succeeded.  If you you experience errors try running the automation a second time or open an issue on the `Access Labs Repo <https://github.com/f5devcentral/access-labs>`__.
+#. The screen should refresh displaying the progress of the automation within 30 seconds.  Scroll to the bottom of the automation workflow to ensure all requests succeeded.  If you experience errors try running the automation a second time or open an issue on the `Access Labs Repo <https://github.com/f5devcentral/access-labs>`__.
 
-   |image005|
+   |image006|
+
+
+Section 2 - Step-up Authentication
+----------------------------------------------------
 
 
 
-Task 2 -  Active Sessions
----------------------------------------
+Task 1 - Test the existing Configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Open a new tab in browser and then navigate to https://server1.acme.com.  You will be redirected to /my.policy and be presented a logon page.
+#. From the jumpbox, navigate to  https://app.acme.com.  You will be redirected to the SAML IdP and be presented a logon page.
 
-    |image006|
-
-#. At the logon page enter the Username:**user1** and Password:**user1**
-#. Click **Logon**
-
-    |image007|
-
-#.  You will be be presented the following website if the logon was successful.
-
-    |image008|
-
-#. Now that you have fully authenticated session open another tab and navigate to https://bigip1.f5lab.local
+#. Logon with the credentials username: **coyote@acme.com** password: **user1**
 
     |image009|
 
-#. Login with username **admin** and password **admin**
+
+#. After a successful logon at the IdP you are redirected to back to https://app.acme.com and presented a portal page. 
+#. Click the **Admin View** button.
 
     |image010|
 
-#. Navigate to Access >> Overview >> Active Sessions.
+#. You are succesfully logged into admin view without asking for any further credentials.  We want to add additional security to the admin view by requiring MFA at the IdP for this portion of the website.
 
     |image011|
 
-#. This **Active Sessions** page provides instance feedback on which users have successfully authenticated to APM along with their associated session information.
+Task 2 - Create a Step-up Authentication Per-Request Policy
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#. From a browser navigate to https://bigip1.f5lab.local
+
+#. Login with username **admin** and password **admin**
 
     |image012|
 
-#.  The Auto Refresh timer is disabled by default.  Various timers settings can be applied to auto update the Active session page.  Select 10 seconds is selected it will immediately begin counting down.  Alternatively, the Refresh button and be clicked to immediately update the table.
+#. Navigate to Access >> Profiles/Policies >> Per-Request Policies >> click the **Plus Sign(+)**.
 
     |image013|
 
-#. Active Session Count displays the number of completed and inactive sessions.  Notice the session count is currently **1**.
+#. Enter the Name **app-prp**
+#. Toggle **English (en)** to the list of Accepted Languages
+#. Click **Finished**
 
     |image014|
 
-#. Open a new **incognito** browser tab and navigate to https://server1.acme.com.  Do this will create a new session. Once presented a logon page, **DO NOT** logon and simply close the incognito browser window.
+#.  Click **Edit**
 
     |image015|
 
-#. Return to the BIG-IP active session screen. If auto refresh is still enabled the next time it refreshes a new session will appear.  **Stop** the auto refresh.
-
-#. Notice the Active Session Count is now **2**
-
-#. Notice the Status of the new session is a blue square rather than a green circle.  A green circle means the entire access policy has been completed from beginning to end.  A blue circle means the session is not complete and is still in process.
+#. Click **Add New Subroutine**
 
     |image016|
 
-#. **Check** the empty square next to the new session with a blue square.
-
-#.  Click **Kill Selected Session**
+#. Enter the Name **SAML Auth**
+#. Click **Save** 
 
     |image017|
 
-#. A second screen will appear asking you to confirm you want to delete the session.  Click **Delete**
+#. Click **Edit Terminals**
 
     |image018|
 
-#. Only **1** Active Session should appear on the screen.
+#. Click **Add Terminal**
 
     |image019|
 
-#.  Clicking the **+ (plus symbol)** next to the session ID expands the session to display an subsessions associated with the primary session.  Subsessions are created when using a Per-Request Policy that contains a subroutine.  Subesssions have their own variables, settings, and timers separate from the primary session.
+#. Enter the Name **Fail** on the line with a red #2
+#. Enter the Name **Pass** on the line with a green #1 
+#. Click the **up arrow** on the pass line to move it above the Fail Terminal
 
     |image020|
 
-#.  The **Session ID** is a unique hex value for tracking a user throughout the life of their connection.  The sessionID is derived from the last 8 digits of the MRHSession cookie passed to the client.  If you click the session ID it will open a session report.  Session reports will be covered in Task 3
+#. Click the **Set Default** tab
 
     |image021|
 
-#. Click **Variables** to open a new window that displays all the session variables currently associated with the session. A session variable contains a number or string that represents a specific piece of information. This information is organized in a hierarchical arrangement and is stored as the user's session data.
+#. Select **Fail** as the default
+#. Click **Save**
 
     |image022|
 
-#. Each variable contains a piece of information that APM gathered during the life of the session.  This information can come from various sources such as traffic flow, device Information or user Information.  Variables can be created, modified, or deleted throughout the life of a session.  Once a variable is defined it can used as condition for access control decisions. Click **Cancel** to return to the Active Session Screen.
-
+#. Click the **Plus Symbol (+)** between In and Pass
+    
     |image023|
+
+#. Click thee **Authentication** tab
+
+#. Select **SAML Auth**
+
+#. Click **Add Item**
 
     |image024|
 
-#. The Username displayed references the username stored in the session variable session.logon.last.username.
+#. From the AAA Server dropdown select **/Common/app.acme.com-1-sp-serv**
+#. Click **Save**
 
     |image025|
 
-#. The client IP displayed references the IP Address stored in the session variable session.user.clientip
+#. Click the **Plus Symbol (+)** between Start and Allow
 
     |image026|
 
-#. The Virtual Server displayed references the initial virtual server the policy was evaluated on for that session.
+#. Click the **Classification** tab
+#. Select **URL Branching**
+#. Click **Add Item**
 
     |image027|
 
-#. The Start Time for a session is when the initial request was made and the session ID assigned.
+#. Click the **Branch Rules** tab
+#. Enter the Name **MFA**
+#. Click **change**
 
     |image028|
 
-#. The expiration time's initial value is be based on the **Inactivity Timeout** defined on the Access Profile.  The default is 15 minutes and can be modified.  The Inactivity Timeout setting controls how long (in seconds) a client can keep a live session without sending traffic.
+#. For URL Contains enter **https://app.acme.com/admin/** 
+#. Click **Finished**
 
     |image029|
 
-#. Session Type the type of resources assigned in the session
-
-    - n/a: Session completion still pending
-    - network_access: A webtop with a network access resource (VPN)
-    - web_application: A virtual server with APM profile and a rewrite profile (APM doing L7 reverse proxy)
-    - full: A webtop, that can have multiple type of resources: Web Resources, Reverse Proxy, VDI Resources, SSH Resources, and  network access resource (VPN)
-    - ltm_apm: A virtual server with an APM profile.  No rewrite profile or webtop attached.
+#. Click **Save**
 
     |image030|
 
-#. Profile Name shows the Access profile used in the evaluation of the session.
+#. Click the **Plus Symbol (+)** on the MFA branch between URL branching and Allow
 
     |image031|
 
-
-Task 3 - Access Reports
---------------------------------------
-
-
-Access Reports allow an administrator to quickly locate current and historical session information.
-
-
-#. Navigate to Access >> Overview >> Access Reports.
+#. Click the **Subrooutines** tab
+#. Select **SAML Auth**
+#. Click **Add Item**
 
     |image032|
 
-#. When running a report you can specify the timeframe and then click **Run Report**
+#. Click the **Reject** Terminal located at the end of the URL Branching fallback branch
 
     |image033|
 
-#. All current and historical sessions are displayed.  You can see **user1** currently has an Active Session.
+#. Select **Allow**
+#. Click **Save**
 
     |image034|
 
-#. Click on user1's session ID to open a session details report.
+#. The policy should now look like the one below
 
     |image035|
 
-#.  A session details report displays every step of policy evaluation from the start item to the End Terminal. You can see in line 3 that username **user1** was collected. Then in line 4 the username and password were authenticated against Active Directory and down the **Allow** End branch.  This makes troubleshooting access control decisions easy because every step is logged and it can be easily seen where the failure is and potential reasons why it happened.
+Task 3 - Attach the Per-Request Policy 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#. Navigate to Local Traffic >> Virtual Servers >> Virtual Server List. Not the Plus Symbol (+)   
 
     |image036|
 
-
-Task 4 - Log Settings
---------------------------------------------------
-
-In Task 2, you learned how to view access reports.  In this Task you will learn how to modify the existing logging profile.  This is sometimes necessary when more detailed logging information is needed due to Organizational requirements or when troubleshooting an issue.
-
-
-#. Navigate to Access >> Overview >> Event Logs >> Settings.
+#. Click **app-https**
 
     |image037|
 
-#. On the screen you see single logging profile names **default-log-setting**.  All Access Policies created will always be associated with this Logging profile.  It's important to understand that if you have multiple policies all sharing the same logging profile that when changes are made it impacts all the profiles associated with it.  In many cases it is best practice to create a new logging profile when settings are going to be modified from the defaults and associated with the Access Profile that requires a different in logging capabilities.
-#. Click the **checkmark box** next to default-log-settings
-#. Click **Edit**
+#. Scroll to the Access Policy section of the virtual server
+#. From the Per-Request Policy dropdown select **app-prp**
+#. Click **Update**
 
     |image038|
 
-#. The **General Information** has two options for enabling or disabling Access System logging and URL Request Logs.
+Task 4 - Test Step-Up Authentication
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#. From the jumpbox, navigate to  https://app.acme.com.  You will be redirected to the SAML IdP and be presented a logon page.
+
+#. Logon with the credentials username: **coyote@acme.com** password: **user1**
+
+    |image009|
+
+#. After a successful logon at the IdP you are redirected to back to https://app.acme.com and presented a portal page. 
+#. Click the **Admin View** button.
+
+    |image010|
+
+#. The page is now requires a new SAML assertion with a higher level authentication context class.  The user is now prompted for certificte authentication.  Selet the **user1** certifcate
 
     |image039|
 
-#. Click **Access System Logs**
-#. Select **Debug** from the Access Policy Dropdown
-
-    .. note::  The Publisher defines where log messages are sent.  By default they are logged local to /var/log/apm.   To learn more about Log publishers and how to configure external logging read Tech Article on `High-Speed Logging <https://techdocs.f5.com/en-us/bip-upd-16-0-0-u2/external-monitoring-of-big-ip-systems-implementations/configuring-remote-high-speed-logging.html>`_
-
-    |image040|
-
-#. Click **URL Request Logs**.  This section determines what type of events you want to log in SWG deployments
-
-    |image041|
-
-#. Click **Access Profiles**.  This section allows you to select which Access Profiles will use this logging profile.
-
-    |image042|
-
-#. Click **SSO Objects**.  This section allows you to select which SSLO Objects Profiles will use this logging profile.
-#. Click **OK**
-
-    |image043|
-
-#. Navigate to Access >> Overview >> Active Sessions.  Kill any existing sessions.
+#.  After successfully providing a certificate you kow have access to the admin page.
 
     |image011|
 
-#. Open a new tab in browser and then navigate to https://server1.acme.com.  You will be redirected to /my.policy and be presented a logon page.
 
-    |image006|
+Section 3 -  Header Injection
+-------------------------------
 
-#. At the logon page enter the following credentials:
+Task 1 - Add Header Injection to an existing Per-Request Policy
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    - Username:**user1**
-    - Password:**user1**
 
-#. Click **Logon**
 
-    |image007|
+#. BIG-IP APM often has access to information that the application may not have access to natively.  Through the power of the per-request policy we can inject additional headers into each request .  Let's explore adding an additional header after the SAML auth subroutine.
+#. From a browser navigate to https://bigip1.f5lab.local
 
-#.  You will be presented the following website if the logon was successful.
+#. Login with username **admin** and password **admin**
 
-    |image008|
+    |image012|
 
-#. Return to the BIG-IP GUI and navigate to Access >> Overview >> Active Sessions.
-
-    |image011|
-
-#. Click the **session ID** to open its Session Report
-
-    |image044|
-
-#. Notice a more detailed session report is provided beyond the six lines displayed with only **Notice** logging enabled.
+#. Navigate to Access >> Profiles/Policies >> Per-Request Policies.
 
     |image045|
 
-.. note:: to learn more about logging levels see https://support.f5.com/csp/article/K24826763
+#.  Click **Edit** to the right of add-prp
 
+    |image015|
 
-Task 5 - Lab Cleanup
+#. Click the **Plus Symbol (+)** on the Pass branch between SAML Auth and Allow Terminal
+
+    |image041|
+
+#. Click the **General Purpose** tab.
+#. Select **HTTP Headers**
+#. Click **Add Item**
+
+    |image042|   
+
+#. Click **Add new entry**
+#. Enter the Header Name **email**
+#. Enter the Header Value **%{session.saml.last.nameIDValue}**
+#. Click **Save**
+
+    |image043|
+
+#. The Per-Request Policy should now look like below
+    
+    |image044|
+
+Task 2 - Test Header Injection
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#. From the jumpbox, navigate to  https://app.acme.com.  You will be redirected to the SAML IdP and be presented a logon page.
+
+#. Logon with the credentials username: **coyote@acme.com** password: **user1**
+
+    |image009|
+
+#. After a successful logon at the IdP you are redirected to back to https://app.acme.com and presented a portal page. 
+#. Click the **Admin View** button.
+
+    |image010|
+
+#. Selet the **user1** certifcate
+
+    |image039|
+
+#.  The admin page succesfully parsed the new email header and displays it on the screen
+
+    |image040|
+
+Section 4 - Lab Cleanup
 ------------------------
 
 #. From a browser on the jumphost navigate to https://portal.f5lab.local
@@ -283,13 +307,16 @@ Task 5 - Lab Cleanup
 
    |image003|
 
-#. Hover over tile **Access Logs Overview**. A start and stop icon should appear within the tile.  Click the **Stop** Button to trigger the automation to remove any prebuilt objects from the environment
+#. Hover over tile **Visual Policy Editor (VPE) Overview**. A start and stop icon should appear within the tile.  Click the **Stop** Button to trigger the automation to remove any prebuilt objects from the environment
 
-   |image998|
+    +---------------+-------------+
+    | |image004|    | |image007|  |
+    +---------------+-------------+
+
 
 #. The screen should refresh displaying the progress of the automation within 30 seconds.  Scroll to the bottom of the automation workflow to ensure all requests succeeded.  If you experience errors try running the automation a second time or open an issue on the `Access Labs Repo <https://github.com/f5devcentral/access-labs>`__.
 
-   |image999|
+   |image008|
 
 #. This concludes the lab.
 
@@ -343,5 +370,4 @@ Task 5 - Lab Cleanup
 .. |image043| image:: ./media/lab03/043.png
 .. |image044| image:: ./media/lab03/044.png
 .. |image045| image:: ./media/lab03/045.png
-.. |image998| image:: ./media/lab03/998.png
-.. |image999| image:: ./media/lab03/999.png
+

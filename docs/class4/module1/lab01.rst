@@ -40,7 +40,7 @@ Task 2 - Import Postman Collections
 
     |image002|
 
-#. Click **Import** located on the top left of the Postman application
+#. Click **Import** located on the **Scratch Pad** menu bar
 
     |image003|
 
@@ -56,7 +56,9 @@ Task 2 - Import Postman Collections
 
     |image006|
 
-#. A collection called **student-class4-module1-lab1** will appear on the left side in Postman
+#. Click on **Collections** from the left menu and a collection called **student-class4-module1-lab1** will be listed
+
+    |image032|
 
 
 Task 3 - Import IDP Signing Certificate
@@ -64,37 +66,37 @@ Task 3 - Import IDP Signing Certificate
 
 #. Expand the **student-class4-module1-lab1** collection to see the subfolders and requests.
 
-   |image007|
+     |image007|
 
 #. Select the **bigip-import-cert-idp** request.
 
 #. Notice the request endpoint is **/mgmt/shared/file-transfer/uploads**.  This endpoint allows us to upload files to the /var/config/rest/downloads directory on the BIG-IP.
 
-    .. note:: If you are unfamiliar with Postman, the information in curly braces are variables that have been defined inside the collection.  If you wish to see the variable values simply click the three dots on the collection that allows you display more options. Click Edit and then Variables.
+     .. note:: If you are unfamiliar with Postman, the information in curly braces are variables that have been defined inside the collection.  If you wish to see the variable values simply click the three dots on the collection that allows you display more options. Click Edit and then Variables.
 
 #. Click **Body** to display what will be passed in the POST request
 
-    .. note:: The request contains only the PEM formated certificate of our AzureAD Identity Provider.
+     .. note:: The request contains only the PEM formated certificate of our AzureAD Identity Provider.
 
-   |image008|
+     |image008|
 
 #. Click the blue **Send** button in the upper right corner
 
-#.  In the response body we see where the file is stored and its file name.
+#. In the response body we see where the file is stored and its file name.
 
-    |image009|
+     |image009|
 
 #. Select the **bigip-install-cert-idp** request.
 
 #. Examine the body of this request.  This request installs the certificate we previously uploaded to the BIG-IPs crypto store.
 
-    |image010|
+     |image010|
 
 #. Click the blue **Send** button in the upper right corner
 
 #. In the response body we a see certificate named **class4-module1-lab1-idp** has been installed to the crypto store.
 
-    |image011|
+     |image011|
 
 
 
@@ -110,13 +112,13 @@ In order to create an SP service the IDP Connector must exist.  This is because 
 
 #. Click **Body** to display what will be passed in the POST request.  The body contains all the necessary setting in order to integrate with AzureAD.
 
-    |image012|
+     |image012|
 
 #. Click the blue **Send** button in the upper right corner
 
 #. The response body contains all of the information related the connector and links to other endpoints that are related to this connectors configuration.
 
-    |image013|
+     |image013|
 
 
 Task 5 - Create an SAML SP Service
@@ -128,13 +130,13 @@ Task 5 - Create an SAML SP Service
 
 #. Click **Body** to display what will be passed in the POST request.  The body contains all the necessary setting for the SP service, plus a binding to the IDP Connector we just created.
 
-    |image014|
+     |image014|
 
 #. Click the blue **Send** button in the upper right corner
 
 #. The response body contains all of the information related the SP Service and links to other endpoints that are related to this SP Services configuration.
 
-    |image015|
+     |image015|
 
 Task 6 - Explore configuration via the BIG-IP GUI
 -----------------------------------------------------------------------
@@ -143,24 +145,24 @@ Task 6 - Explore configuration via the BIG-IP GUI
 
 #. Login to the BIG-IP GUI with the following credentials:
 
-    - Username: **admin**
-    - Password: **admin**
+     - Username: **admin**
+     - Password: **admin**
 
 #. Navigate to System -> Certificate Management -> Traffic Certificate Management -> SSL Certificate List.  Click on **SSL Certificate List** and not the + plus symbol.
 
-    |image016|
+     |image016|
 
 #. You can see the certificate **class4-module1-lab1-idp** from Task 1 was successfully imported.
 
-    |image017|
+     |image017|
 
 #. Navigate to Access >> Federation >> SAML Service Provider >> Local SP Services.  Click on **Local SP Services** and not the + (plus symbol).
 
-    |image018|
+     |image018|
 
 #. You can see a SP service object was created with the name **class4-module1-lab1-sp** and successfully bound to an IDP Connector named **class4-module1-lab1-idp**.
 
-    |image019|
+     |image019|
 
 Task 7 - Deleting a SAML Service Provider(SP) Service Configuration
 ------------------------------------------------------------------------
@@ -174,37 +176,37 @@ With imperative call objects must be deleted in the reverse order they are typic
 
 #. Notice the body is empty.  Also, the endpoint we are using is the same endpoint we used to create the SP service plus the partition and object name.
 
-    |image020|
+     |image020|
 
 #. Click the blue **Send** button in the upper right corner.
 
 #. Notice nothing is returned in the response body but the Response code is a 200 OK.
 
-    |image021|
+     |image021|
 
 #. If you click **Send** a second time you will you get a message back stating the object is not found and a Status Code of 404.  That's because the object was deleted with the prior request.
 
-    |image022|
+     |image022|
 
 #. Click **bigip-delete-idp connector**
 
 #. Click the blue **send** button in the upper right corner.
 
-    |image023|
+     |image023|
 
 #. You will receive a response code of 200 OK.
 
-    |image024|
+     |image024|
 
 #. Click **bigip-delete-idp cert**
 
 #. Click the blue **send** button in the upper right corner.
 
-    |image025|
+     |image025|
 
 #. You will receive a response code of 200 OK.
 
-    |image026|
+     |image026|
 
 
 Task 8 - Ensure objects were removed via GUI
@@ -214,47 +216,45 @@ Task 8 - Ensure objects were removed via GUI
 
 #. Login to the BIG-IP GUI with the following credentials:
 
-    - Username: **admin**
-    - Password: **admin**
+     - Username: **admin**
+     - Password: **admin**
 
 #. Navigate to System >> Certificate Management >> Traffic Certificate Management >> SSL Certificate List.  Click on **SSL Certificate List** and not the + (plus symbol).
 
-    |image016|
+     |image016|
 
-#.  Notice the certificate **class4-module1-lab1-idp** was deleted
+#. Notice the certificate **class4-module1-lab1-idp** was deleted
 
-    |image027|
+     |image027|
 
 #. Navigate to Access >> Federation >> SAML Service Provider >> Local SP Services.  Click on **Local SP Services** and not the + (plus symbol).
 
-    |image018|
+     |image018|
 
 #. Notice the SP Service was deleted
 
-    |image028|
+     |image028|
 
 #. Mouse over SAML Service Provider on the top of the screen and click External IdP Connectors.
 
-    |image029|
+     |image029|
 
 #. Notice the IDP Connector was deleted.
 
-    |image030|
+     |image030|
 
 Task 9 - Lab Clean up
 ---------------------------------
-
-
-#. From Postman, Click the **3 dots** on the bottom right of the student-class4-module1-lab1 Collection.
+#. From Postman, Mouse over the title of the collection and click the **3 dots** next to student-class4-module1-lab1 Collection.
 
 #. Click **Delete**
 
-|image031|
+     |image031|
 
 
 This concludes the APM lab on creating and deleting APM objects via iControlREST.
 
-    |image000|
+     |image000|
 
 
 .. |image000| image:: media/lab01/000.png
@@ -289,4 +289,5 @@ This concludes the APM lab on creating and deleting APM objects via iControlREST
 .. |image029| image:: media/lab01/029.png
 .. |image030| image:: media/lab01/030.png
 .. |image031| image:: media/lab01/031.png
+.. |image032| image:: media/lab01/032.png
 .. |image101| image:: media/lab01/101.png

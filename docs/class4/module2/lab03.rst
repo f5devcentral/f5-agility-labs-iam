@@ -40,7 +40,7 @@ Task 1 - Import Postman Collections
 
     |image002|
 
-#. Click **Import** located on the top left of the Postman application
+#. Click **Import** located on the **Scratch Pad** menu bar
 
     |image003|
 

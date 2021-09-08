@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "e9b93ace-3434-43e7-b358-27feb53a7671",
+		"_postman_id": "cee6b322-77b4-4ba5-ba95-09b298614d37",
 		"name": "class3-module1-lab05-create",
 		"description": "This solution was created using template 1.8",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -3069,7 +3069,7 @@
 			"name": "idp.acme.com",
 			"item": [
 				{
-					"name": "idp.acme.com- cert and key",
+					"name": "idp.acme.com-cert and key",
 					"item": [
 						{
 							"name": "bigip-import idp.acme.com key",
@@ -3078,7 +3078,7 @@
 									"listen": "test",
 									"script": {
 										"exec": [
-											"pm.test(\"idp.acme.com key imported\", function () {\r",
+											"pm.test(\"ca.f5lab.local.crt installed\", function () {\r",
 											"    pm.response.to.have.status(200);\r",
 											"});"
 										],
@@ -3089,7 +3089,10 @@
 									"listen": "prerequest",
 									"script": {
 										"exec": [
-											""
+											"var requestLength = request.data.length;\r",
+											"pm.collectionVariables.set(\"CONTENT_LENGTH\", requestLength);\r",
+											"var requestrange = requestLength - 1;\r",
+											"pm.collectionVariables.set(\"CONTENT_RANGE\", requestrange);"
 										],
 										"type": "text/javascript"
 									}
@@ -3120,18 +3123,18 @@
 									},
 									{
 										"key": "Content-Range",
-										"value": "0-1729/1730",
+										"value": "0-{{CONTENT_RANGE}}/{{CONTENT_LENGTH}}",
 										"type": "text"
 									},
 									{
 										"key": "Content-Length",
-										"value": "1730",
+										"value": "{{CONTENT_LENGTH}}",
 										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "-----BEGIN PRIVATE KEY-----\r\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDkGdVy0/5NzTAE\r\nfnrpRWsEwI+JhZofX6sY24VHZdL4wcs8lp68I6A+VYFglioC2IRp85e/wKAt+y+Y\r\nV/4u8WSiJ0dnO8E8Idy7o9/Glvk0R3YrnYaoIrntwMR+57gqvTJEt0DMjvCkvD/8\r\nzYYnECyWOC+rdJqxg+dm5qMcROCLWlzalsexHbRvF63OW/d3V/9eIQvJ6IDZBTEA\r\nbm07b6TmFS4UkLf/E6LBXDiTjW+4B0l7geRZBrQdWigs40FN9pOOHI2vZLvLcUyg\r\nYqGYvW0R30qa8taTgENIPhZj7dITmkeD64L9URDzk6br1yyeg/9xr4ctmFUYUgnk\r\nfk+YjvmhAgMBAAECggEAGdOYfMPGyo+Z2Rpqh4TH/x3f6qvlRVnfTSVW1/yOGIMV\r\nxEaQEsCMZV5oU5OxDkkuZfIyK4CPimFDVHIbGjzT/n2oyqYkBQ9W9ypw/QLtVLdm\r\nKH5Rp7Il3+b4gJ9zNWieW1Qt6rNhCR/09UZegwgEal5SfGzrkn+bOOYSkBH25CQo\r\ngDhcyxW32f2q7x4wschqvSBYPS2jr7S4blhe10vzh8nMP3W5PoPLZ1gjpwdu1iwq\r\nCc6KnUHPv1CaHFxaGcX4LoxxtlInp92UK2d5tZZN3UCGR2/p70zxeE3Hme3rJXRa\r\nwiteeqv4BKgj2MfSt6F4tlgjHRu/a1G9khzvCXIbiQKBgQDyaHQguYjvu+lAXoSB\r\nMwe+Z9nR8W3ayX5qRJGJ8CPGQDnHX3XB0Y5TwkGjYurM8uGeSW21heOXUBovMAMu\r\nS2U60bBWh8a1NZ6xc7zDpD/pLRyV9Ke4SriBtCf3n8P1k4LxqVN3SOozmOnKeaVr\r\nziix3kKyAIR9j10lLjGlmM85CQKBgQDw5AO/rMo2+hpu6RctIO0NwAvZIScDbAKb\r\nn9NpSx9WMZUA5hq3qAO6ADgi2AdblLJdINonKgbnlO4f9wq1XpWb3yNN8g6SpyaQ\r\nZNRwA/0gaXwAgKo6wIPwF7g7l5OPql23QQpYrjcaHvGNGYdggE+hXVFUUN8OfHml\r\nuaZsK9fZ2QKBgFO+lEft8QnpYDa1sI82AvnbxNuLzcjlDYBG+gSuap2F+LARIYx5\r\nCfOTy7tXZAiz7BAUDAvHGo5exP0CWEb5ExrT8FikhZh60r05X8AzEUVMKXEA2aSI\r\nY9+jTp90mW1Qrc8xET3HeemjbTle9zAcQ+DXCTGXji4WhjZfFBXCieyJAoGBAIzR\r\nThuzf7ZpuCAT5Hd+IvWByatRRQQsFM4yvRx1TMlPTMJswTuRXTRTQn2j+ZEguK/W\r\nL5DrcYPZPOa0vK7PrveilnnPQZObYODSAJnGyycyYsnMbTbRKY+l3g4ACsPWHNiu\r\njcTPeuirJBuOy+Ouvl4fNhbq+6n1PAuUHmRnsNPpAoGAZpW+++EKLqr9AEIVZ1Au\r\niGHwEu1JUnG70HBUB27wzQ5+Tbz2qUv8100ROVmKMwbmn1a88pZTCkXU81esnK+E\r\nXCbkEz5cdIeKtFX/8y+aY5mS2CUeMbzw9KA2BCTyYTQj+3REUvRbXb2+EeHv2Dey\r\nD/UT17pJ7Cl6FxwPf+ezDiA=\r\n-----END PRIVATE KEY-----\r\n\r\n"
+									"raw": "-----BEGIN PRIVATE KEY-----\r\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDkGdVy0/5NzTAE\r\nfnrpRWsEwI+JhZofX6sY24VHZdL4wcs8lp68I6A+VYFglioC2IRp85e/wKAt+y+Y\r\nV/4u8WSiJ0dnO8E8Idy7o9/Glvk0R3YrnYaoIrntwMR+57gqvTJEt0DMjvCkvD/8\r\nzYYnECyWOC+rdJqxg+dm5qMcROCLWlzalsexHbRvF63OW/d3V/9eIQvJ6IDZBTEA\r\nbm07b6TmFS4UkLf/E6LBXDiTjW+4B0l7geRZBrQdWigs40FN9pOOHI2vZLvLcUyg\r\nYqGYvW0R30qa8taTgENIPhZj7dITmkeD64L9URDzk6br1yyeg/9xr4ctmFUYUgnk\r\nfk+YjvmhAgMBAAECggEAGdOYfMPGyo+Z2Rpqh4TH/x3f6qvlRVnfTSVW1/yOGIMV\r\nxEaQEsCMZV5oU5OxDkkuZfIyK4CPimFDVHIbGjzT/n2oyqYkBQ9W9ypw/QLtVLdm\r\nKH5Rp7Il3+b4gJ9zNWieW1Qt6rNhCR/09UZegwgEal5SfGzrkn+bOOYSkBH25CQo\r\ngDhcyxW32f2q7x4wschqvSBYPS2jr7S4blhe10vzh8nMP3W5PoPLZ1gjpwdu1iwq\r\nCc6KnUHPv1CaHFxaGcX4LoxxtlInp92UK2d5tZZN3UCGR2/p70zxeE3Hme3rJXRa\r\nwiteeqv4BKgj2MfSt6F4tlgjHRu/a1G9khzvCXIbiQKBgQDyaHQguYjvu+lAXoSB\r\nMwe+Z9nR8W3ayX5qRJGJ8CPGQDnHX3XB0Y5TwkGjYurM8uGeSW21heOXUBovMAMu\r\nS2U60bBWh8a1NZ6xc7zDpD/pLRyV9Ke4SriBtCf3n8P1k4LxqVN3SOozmOnKeaVr\r\nziix3kKyAIR9j10lLjGlmM85CQKBgQDw5AO/rMo2+hpu6RctIO0NwAvZIScDbAKb\r\nn9NpSx9WMZUA5hq3qAO6ADgi2AdblLJdINonKgbnlO4f9wq1XpWb3yNN8g6SpyaQ\r\nZNRwA/0gaXwAgKo6wIPwF7g7l5OPql23QQpYrjcaHvGNGYdggE+hXVFUUN8OfHml\r\nuaZsK9fZ2QKBgFO+lEft8QnpYDa1sI82AvnbxNuLzcjlDYBG+gSuap2F+LARIYx5\r\nCfOTy7tXZAiz7BAUDAvHGo5exP0CWEb5ExrT8FikhZh60r05X8AzEUVMKXEA2aSI\r\nY9+jTp90mW1Qrc8xET3HeemjbTle9zAcQ+DXCTGXji4WhjZfFBXCieyJAoGBAIzR\r\nThuzf7ZpuCAT5Hd+IvWByatRRQQsFM4yvRx1TMlPTMJswTuRXTRTQn2j+ZEguK/W\r\nL5DrcYPZPOa0vK7PrveilnnPQZObYODSAJnGyycyYsnMbTbRKY+l3g4ACsPWHNiu\r\njcTPeuirJBuOy+Ouvl4fNhbq+6n1PAuUHmRnsNPpAoGAZpW+++EKLqr9AEIVZ1Au\r\niGHwEu1JUnG70HBUB27wzQ5+Tbz2qUv8100ROVmKMwbmn1a88pZTCkXU81esnK+E\r\nXCbkEz5cdIeKtFX/8y+aY5mS2CUeMbzw9KA2BCTyYTQj+3REUvRbXb2+EeHv2Dey\r\nD/UT17pJ7Cl6FxwPf+ezDiA=\r\n-----END PRIVATE KEY-----\r\n"
 								},
 								"url": {
 									"raw": "https://{{BIGIP_MGMT}}/mgmt/shared/file-transfer/uploads/idp.key",
@@ -3157,7 +3160,7 @@
 									"listen": "test",
 									"script": {
 										"exec": [
-											"pm.test(\"idp.acme.com key installed\", function () {\r",
+											"pm.test(\"ca.f5lab.local.crt imported\", function () {\r",
 											"    pm.response.to.have.status(200);\r",
 											"});"
 										],
@@ -3217,7 +3220,7 @@
 									"listen": "test",
 									"script": {
 										"exec": [
-											"pm.test(\"idp.acme.com certificate imported\", function () {\r",
+											"pm.test(\"ca.f5lab.local.crt installed\", function () {\r",
 											"    pm.response.to.have.status(200);\r",
 											"});"
 										],
@@ -3228,7 +3231,10 @@
 									"listen": "prerequest",
 									"script": {
 										"exec": [
-											""
+											"var requestLength = request.data.length;\r",
+											"pm.collectionVariables.set(\"CONTENT_LENGTH\", requestLength);\r",
+											"var requestrange = requestLength - 1;\r",
+											"pm.collectionVariables.set(\"CONTENT_RANGE\", requestrange);"
 										],
 										"type": "text/javascript"
 									}
@@ -3259,18 +3265,18 @@
 									},
 									{
 										"key": "Content-Range",
-										"value": "0-1999/2000",
+										"value": "0-{{CONTENT_RANGE}}/{{CONTENT_LENGTH}}",
 										"type": "text"
 									},
 									{
 										"key": "Content-Length",
-										"value": "2000",
+										"value": "{{CONTENT_LENGTH}}",
 										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "-----BEGIN CERTIFICATE-----\r\nMIIFgTCCBGmgAwIBAgITXgAAAASdfcIAI44jXAAAAAAABDANBgkqhkiG9w0BAQsF\r\nADBIMRUwEwYKCZImiZPyLGQBGRYFbG9jYWwxFTATBgoJkiaJk/IsZAEZFgVmNWxh\r\nYjEYMBYGA1UEAxMPZGMxLmY1bGFiLmxvY2FsMB4XDTE5MTEyMTE5MjUxN1oXDTIx\r\nMTEyMTE5MzUxN1owFTETMBEGA1UEAwwKKi5hY21lLmNvbTCCASIwDQYJKoZIhvcN\r\nAQEBBQADggEPADCCAQoCggEBAOQZ1XLT/k3NMAR+eulFawTAj4mFmh9fqxjbhUdl\r\n0vjByzyWnrwjoD5VgWCWKgLYhGnzl7/AoC37L5hX/i7xZKInR2c7wTwh3Luj38aW\r\n+TRHdiudhqgiue3AxH7nuCq9MkS3QMyO8KS8P/zNhicQLJY4L6t0mrGD52bmoxxE\r\n4ItaXNqWx7EdtG8Xrc5b93dX/14hC8nogNkFMQBubTtvpOYVLhSQt/8TosFcOJON\r\nb7gHSXuB5FkGtB1aKCzjQU32k44cja9ku8txTKBioZi9bRHfSpry1pOAQ0g+FmPt\r\n0hOaR4Prgv1REPOTpuvXLJ6D/3Gvhy2YVRhSCeR+T5iO+aECAwEAAaOCApUwggKR\r\nMD0GCSsGAQQBgjcVBwQwMC4GJisGAQQBgjcVCIeMjBaGrP9Eg62ZKIXeqwiDssRr\r\nMYWv4SiD+qRBAgFkAgEDMBMGA1UdJQQMMAoGCCsGAQUFBwMBMA4GA1UdDwEB/wQE\r\nAwIFoDAbBgkrBgEEAYI3FQoEDjAMMAoGCCsGAQUFBwMBMB0GA1UdDgQWBBRm1NLR\r\nQygmFXonudgqNM4sQ1EIFzAVBgNVHREEDjAMggoqLmFjbWUuY29tMB8GA1UdIwQY\r\nMBaAFNhpUMHsIixtS9g6y/FyNrayg9V6MIHJBgNVHR8EgcEwgb4wgbuggbiggbWG\r\ngbJsZGFwOi8vL0NOPWRjMS5mNWxhYi5sb2NhbCxDTj1kYzEsQ049Q0RQLENOPVB1\r\nYmxpYyUyMEtleSUyMFNlcnZpY2VzLENOPVNlcnZpY2VzLENOPUNvbmZpZ3VyYXRp\r\nb24sREM9ZjVsYWIsREM9bG9jYWw/Y2VydGlmaWNhdGVSZXZvY2F0aW9uTGlzdD9i\r\nYXNlP29iamVjdENsYXNzPWNSTERpc3RyaWJ1dGlvblBvaW50MIHqBggrBgEFBQcB\r\nAQSB3TCB2jCBrgYIKwYBBQUHMAKGgaFsZGFwOi8vL0NOPWRjMS5mNWxhYi5sb2Nh\r\nbCxDTj1BSUEsQ049UHVibGljJTIwS2V5JTIwU2VydmljZXMsQ049U2VydmljZXMs\r\nQ049Q29uZmlndXJhdGlvbixEQz1mNWxhYixEQz1sb2NhbD9jQUNlcnRpZmljYXRl\r\nP2Jhc2U/b2JqZWN0Q2xhc3M9Y2VydGlmaWNhdGlvbkF1dGhvcml0eTAnBggrBgEF\r\nBQcwAYYbaHR0cDovL2RjMS5mNWxhYi5sb2NhbC9vY3NwMA0GCSqGSIb3DQEBCwUA\r\nA4IBAQCsf2mREYnGaLise44ArUzs1Hp4VTa5jMJQh7VoO04kceh+gCUb9KYD5z8O\r\nGADrbnlP1A8d4bjLl2+5EGhVQySwdddELoAYNuWMbfgjL6aZUOKeGgZ+eAtiOpKu\r\n24HcZ/IgcaJkBpMG10GjUPnv188JK1mwx8fRB8DyjDrg5yUGRt23FCaI5ClAwFFx\r\npWfsrXiWWJIV/hTRwKr2O0kbEfpubT9Bw9Cu/avPVDHjVdjHobvxVOU3Xs/19cnE\r\nrbR4JV/HPoWDaTsoOzF3e+oUuap26XCrzLL/KPGb4XT0YNDgz3Zvg35fg12QWWwh\r\n5f2ccg+g/8mE73+SAQHbT3yg720r\r\n-----END CERTIFICATE-----\r\n\r\n"
+									"raw": "-----BEGIN CERTIFICATE-----\r\nMIIFgTCCBGmgAwIBAgITXgAAAEF4mnUdwOW1owAAAAAAQTANBgkqhkiG9w0BAQsF\r\nADBIMRUwEwYKCZImiZPyLGQBGRYFbG9jYWwxFTATBgoJkiaJk/IsZAEZFgVmNWxh\r\nYjEYMBYGA1UEAxMPZGMxLmY1bGFiLmxvY2FsMB4XDTIxMDcyMzE1MzMxN1oXDTI5\r\nMTEyMDIyMTc0NVowFTETMBEGA1UEAwwKKi5hY21lLmNvbTCCASIwDQYJKoZIhvcN\r\nAQEBBQADggEPADCCAQoCggEBAOQZ1XLT/k3NMAR+eulFawTAj4mFmh9fqxjbhUdl\r\n0vjByzyWnrwjoD5VgWCWKgLYhGnzl7/AoC37L5hX/i7xZKInR2c7wTwh3Luj38aW\r\n+TRHdiudhqgiue3AxH7nuCq9MkS3QMyO8KS8P/zNhicQLJY4L6t0mrGD52bmoxxE\r\n4ItaXNqWx7EdtG8Xrc5b93dX/14hC8nogNkFMQBubTtvpOYVLhSQt/8TosFcOJON\r\nb7gHSXuB5FkGtB1aKCzjQU32k44cja9ku8txTKBioZi9bRHfSpry1pOAQ0g+FmPt\r\n0hOaR4Prgv1REPOTpuvXLJ6D/3Gvhy2YVRhSCeR+T5iO+aECAwEAAaOCApUwggKR\r\nMD0GCSsGAQQBgjcVBwQwMC4GJisGAQQBgjcVCIeMjBaGrP9Eg62ZKIXeqwiDssRr\r\nMYWv4SiD+qRBAgFkAgEEMBMGA1UdJQQMMAoGCCsGAQUFBwMBMA4GA1UdDwEB/wQE\r\nAwIFoDAbBgkrBgEEAYI3FQoEDjAMMAoGCCsGAQUFBwMBMBUGA1UdEQQOMAyCCiou\r\nYWNtZS5jb20wHQYDVR0OBBYEFGbU0tFDKCYVeie52Co0zixDUQgXMB8GA1UdIwQY\r\nMBaAFNhpUMHsIixtS9g6y/FyNrayg9V6MIHJBgNVHR8EgcEwgb4wgbuggbiggbWG\r\ngbJsZGFwOi8vL0NOPWRjMS5mNWxhYi5sb2NhbCxDTj1kYzEsQ049Q0RQLENOPVB1\r\nYmxpYyUyMEtleSUyMFNlcnZpY2VzLENOPVNlcnZpY2VzLENOPUNvbmZpZ3VyYXRp\r\nb24sREM9ZjVsYWIsREM9bG9jYWw/Y2VydGlmaWNhdGVSZXZvY2F0aW9uTGlzdD9i\r\nYXNlP29iamVjdENsYXNzPWNSTERpc3RyaWJ1dGlvblBvaW50MIHqBggrBgEFBQcB\r\nAQSB3TCB2jCBrgYIKwYBBQUHMAKGgaFsZGFwOi8vL0NOPWRjMS5mNWxhYi5sb2Nh\r\nbCxDTj1BSUEsQ049UHVibGljJTIwS2V5JTIwU2VydmljZXMsQ049U2VydmljZXMs\r\nQ049Q29uZmlndXJhdGlvbixEQz1mNWxhYixEQz1sb2NhbD9jQUNlcnRpZmljYXRl\r\nP2Jhc2U/b2JqZWN0Q2xhc3M9Y2VydGlmaWNhdGlvbkF1dGhvcml0eTAnBggrBgEF\r\nBQcwAYYbaHR0cDovL2RjMS5mNWxhYi5sb2NhbC9vY3NwMA0GCSqGSIb3DQEBCwUA\r\nA4IBAQBfX7L5lf4ERkLVgAvPxP4PQ33dyr9aZykXtq8AFGiwfK0uZhjQWAPtgAi8\r\nTVm8EAUAdKFX+l6nADrQR85DAQ4FJZm59n6Igfcjv+e5HRzlVolgi/9pvNBuZY3z\r\nk3mevlELmbEyFendl6G4x8N76zRncCbDhkIN9ZQgPtbHgUpC95lforl9fyz6bpCH\r\nX22dhFUeSpVBotrMqJFScLWjAL3AKjmYhh1J0WrE0YFeKDmTCrH6nXqweeEI8m8t\r\nM6+QKsyN+4eOE1sgbPs9rbIOv+oRVtSR/aY7E21pSrmkmf0CvAW/2lbjZ5baJ5sc\r\nYI7PPVa08eMh6QKAeY1xTrSPfDvg\r\n-----END CERTIFICATE-----\r\n"
 								},
 								"url": {
 									"raw": "https://{{BIGIP_MGMT}}/mgmt/shared/file-transfer/uploads/idp.crt",
@@ -3296,7 +3302,7 @@
 									"listen": "test",
 									"script": {
 										"exec": [
-											"pm.test(\"idp.acme.com certificate installed\", function () {\r",
+											"pm.test(\"ca.f5lab.local.crt imported\", function () {\r",
 											"    pm.response.to.have.status(200);\r",
 											"});"
 										],

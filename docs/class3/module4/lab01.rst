@@ -212,11 +212,10 @@ Task 8 - Retreive your OAuth clientID
 
 #. Select the request **Request1: Retrieve Postman ClientID**
 
-   |image112|
-
 #. Click **Send**
 
-   |image25|
+   |image112|
+
 
 #. You receive a **200 OK** with a response body.  The clientID is now stored as a Postman Variable to be used in future requests.  Your ClientID will not be the same as displayed in the screenshot below.
 
@@ -248,7 +247,7 @@ Task 10 -  Retrieve User1\'s Attributes with a JWT
 
    |image28|
 
-#. Click **Use Token** at the top.
+#. Click **Use Token**.
 
    |image29|
 
@@ -513,13 +512,7 @@ Task 4 - Test the Fine-Grained Access Control with user2
 
 #. Select the **Authorization** tab
 
-
-#. Click **Edit token configuration**
-
-   |image205|
-
-
-#. Enter **User2** for the Token Name and review the Postman Configuration. Nothing else should need to be modified
+#. Ensure the Token Name is set to **user2**
 #. Click **Get New Access Token**
 
    |image044|
@@ -550,15 +543,7 @@ The API Protection Profile allows a BIG-IP administrator to throttle the amount 
 Task 1 - Test pre-rate limiting Access
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. From Postman, Select the request **Request 3: Retrieve User Attributes with JWT**
-
-#. Click **Save**, so the current token is saved as part of the API request.
-
-   |image88|
-
 #. Click the **arrow** located to the right of the student-class3-module4-lab01 collection.
-
-   |image89|
 
 #. Click **Run**
 
@@ -568,7 +553,7 @@ Task 1 - Test pre-rate limiting Access
 
 #. Set the iterations to **100**
 
-#. Click the blue **Run Student-class....** button
+#. Click the blue **Run Student-class3-module4-la...** button
 
    |image105|
 
@@ -705,11 +690,9 @@ Task 5 - Test Rate Limiting
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-#. From Postman, return to Runner
+#. Return to Postman
 
-   |image89|
-
-#. Click **Retry** to rerun the request an additional 100 times.
+#. Click **Run Again** to rerun the request an additional 100 times.
 
    |image103|
 
@@ -736,7 +719,9 @@ Task 1 - Verify no access to API
 
 #. Click **Send**
 
-#. You receive a **403 Forbidden** response status code because the the new API has not been published at the Gateway. WARNING: If you executed this step too quickly after the prior 1.6 lab, you may still be rate limited and need to wait a minute.
+#. You receive a **403 Forbidden** response status code because the the new API has not been published at the Gateway. 
+
+    .. warning: If you executed this step too quickly after the prior 1.6 lab, you may still be rate limited and need to wait a minute.
 
 
 Task 2 - Add the new API path
@@ -782,7 +767,6 @@ Task 3 - Test Access to the new path
 |image102|
 
 
-
 .. |image0| image:: media/lab01/image000.png
 	:width: 800px
 .. |image1| image:: media/lab01/image001.png
@@ -816,8 +800,7 @@ Task 3 - Test Access to the new path
 	:width: 700px
 .. |image22| image:: media/lab01/image022.png
 .. |image24| image:: media/lab01/024.png
-.. |image25| image:: media/lab01/image025.png
-.. |image26| image:: media/lab01/image026.png
+.. |image26| image:: media/lab01/026.png
 .. |image27| image:: media/lab01/027.png
 	:width: 600px
 .. |image28| image:: media/lab01/image028.png
@@ -831,7 +814,7 @@ Task 3 - Test Access to the new path
 .. |image36| image:: media/lab01/image036.png
 .. |image37| image:: media/lab01/037.png
 .. |image38| image:: media/lab01/image038.png
-.. |image39| image:: media/lab01/image039.png
+.. |image39| image:: media/lab01/039.png
 .. |image40| image:: media/lab01/image040.png
 .. |image41| image:: media/lab01/image041.png
 .. |image42| image:: media/lab01/image042.png
@@ -890,9 +873,6 @@ Task 3 - Test Access to the new path
 	:width: 1200px
 .. |image87| image:: media/lab01/image087.png
 	:width: 1200px
-.. |image88| image:: media/lab01/088.png
-	:width: 800px
-.. |image89| image:: media/lab01/089.png
 .. |image90| image:: media/lab01/image090.png
 	:width: 800px
 .. |image91| image:: media/lab01/image091.png
@@ -913,8 +893,7 @@ Task 3 - Test Access to the new path
 .. |image99| image:: media/lab01/099.png
 	:width: 800px
 .. |image101| image:: media/lab01/101.png
-.. |image103| image:: media/lab01/image103.png
-	:width: 800px
+.. |image103| image:: media/lab01/103.png
 .. |image102| image:: media/lab01/102.png
 .. |image104| image:: media/lab01/104.png
 .. |image105| image:: media/lab01/105.png
@@ -931,7 +910,6 @@ Task 3 - Test Access to the new path
 .. |image202| image:: media/lab01/202.png
 .. |image203| image:: media/lab01/203.png
 .. |image204| image:: media/lab01/204.png
-.. |image205| image:: media/lab01/205.png
 .. |image206| image:: media/lab01/206.png
 
 
