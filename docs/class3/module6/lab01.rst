@@ -1,4 +1,4 @@
-Lab 1: Deploy Priviledged User Access (PUA) or Ephemeral Authentication using LDAP
+Lab 1: Deploy Priviledged User Access (PUA) using LDAP
 ======================================================================================
 
 In this lab ephemeral authentication is configured on Access Policy Manager (APM) using LDAP authentication. 

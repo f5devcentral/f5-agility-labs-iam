@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "014e9bf6-9604-4555-a9f7-47d160261bd9",
+		"_postman_id": "4838100f-cbb8-4fc1-86b6-992261f5bd22",
 		"name": "class2-module4-lab02-create",
 		"description": "This solution was created using template 1.8",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -981,7 +981,7 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "-----BEGIN CERTIFICATE-----\r\nMIIC1jCCAb6gAwIBAgIQXC7bYerNWLlCq/hummMUWDANBgkqhkiG9w0BAQsFADAn\r\nMSUwIwYDVQQDExxBREZTIFNpZ25pbmcgLSBhZGZzLmFjbWUuY29tMB4XDTIxMDUx\r\nODE2MTUzMloXDTIyMDUxODE2MTUzMlowJzElMCMGA1UEAxMcQURGUyBTaWduaW5n\r\nIC0gYWRmcy5hY21lLmNvbTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB\r\nAMxas3Jl4ZepH/RVvF9uNuTUoZgg1D/ULbgtIPvajn18+4HbJa+P+TJFb8HkRY0u\r\n985EaPHky+u9EoxMvmTjaEEFOz3foSECdaR76XhpIdmMgFcAEDDcWrOie2TwmA1O\r\nALCY3nrBbr0iPsIoo5z085ZhvkDlWZxrY3/hoVV/xi+qoS3gBi/9beEfjZme0l9r\r\nvNsJi39SxMOiJb7yN0TqOZW7PyK85Nz8OD59ofkd57Ai44B8dWOo38iEAHgKvd8+\r\n1vUk1Qy362x1QiKdLL2/gNgl7qIv3211imqLLrbjtQdsni+9sD8CJlwc/6KIciGR\r\nqDrdN26O/bC9oXfwMHvRTVECAwEAATANBgkqhkiG9w0BAQsFAAOCAQEAdbtkrlbP\r\nWG+duPCznLD9nEXF+qpIItd3udhr5FNXqsYMySMkliTp6A+VT5MMka2e8uN5oBZ1\r\n+Z7daeSCVbeIgZfS96n2ez5ynsfm5saWQMI58gPZuR16D5ji0jgA1NgO0uf1lnQ/\r\n2Dhm+JbfGQAWH5AK3ESNS/CIPVYNRNu8sgnBR0TjhZypGIqkjMEbZzwxeLITrUJ8\r\nD6Kp+YPm2Z1aiGJvP4uYklvmL++bf954W15vwgZaVXIk1PsP+AuhUIm/NX7KPfbA\r\ng7rLf6vp6897YMwlbLcIpqIIPYYjuaUboEC2xshoXl8EZmSKQUGnsci7A+80MQTU\r\nUbyrAP9YUR/5VA==\r\n-----END CERTIFICATE-----\r\n"
+													"raw": "-----BEGIN CERTIFICATE-----\r\nMIIC1jCCAb6gAwIBAgIQGqZb6OpFQ7BIPJXitcQtDDANBgkqhkiG9w0BAQsFADAn\r\nMSUwIwYDVQQDExxBREZTIFNpZ25pbmcgLSBhZGZzLmFjbWUuY29tMB4XDTIxMDgy\r\nNTE5MzIyNFoXDTIyMDgyNTE5MzIyNFowJzElMCMGA1UEAxMcQURGUyBTaWduaW5n\r\nIC0gYWRmcy5hY21lLmNvbTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB\r\nAOlU4IXCnFhboXZBbngiPnJnBI5n7S4pFGo2t+hbUzxjHlB9gx80Cye3exHP43ck\r\nJTAQHFw5qUUmo0GCCxFbWyU+LpJEOExSfQIAcE5xAyHZ5XwBYi22L78uEV7/FI9p\r\nJdN1K5/Kbu1iTKoH1ytNwo2cnsCRA2eVw3FNGg4R6aaUYO51iKkJl++xT/M0D9NH\r\nqEPfWD3RhmfsCVsDCqav9CcFOISlUiRHwglN2jLuF/8opKwEla6XI7ndd4H0mzq8\r\n4DDeNlNIKQT36Z22NLvuZ7vaP3bL1cH5CsEEqNVa4ENCdKHKD1ieaBHKZ2dUDpMZ\r\nbq23IOGmdnem7C0sR5rh0rkCAwEAATANBgkqhkiG9w0BAQsFAAOCAQEATL6kQPHT\r\nHs5iYlBZPYw35BRQ+N9u2CFBmh/0bwuUdNx4poJKmWbmTR9Svy7HyEt+UrAdRlOq\r\noPMFqVn2jeTnQfzjqq98d67nDUKGIpkndREmjbZIT3t6kxjK+4/w4KYILhmef7go\r\nolNki90fKOIAg0RJwozX/gzRt0u/C45oOFuXrtxlZgKYqhPYZmyT9/2g8yuLB/K9\r\nCzkOuFbRXbDn4d0BmpLg/mhA1cfqOqMSTqYrSUQEwPQssHlxz9Ox/oDP6NOtIIok\r\nDpNu/Xsc+elX3+kSRWiL5Uks5LAWzM4fEulMhe3zT+TNy2wG7Ol0gJp1tvP31vDp\r\nmjpjeElLaod6vA==\r\n-----END CERTIFICATE-----"
 												},
 												"url": {
 													"raw": "https://{{BIGIP_MGMT}}/mgmt/shared/file-transfer/uploads/{{DNS2_NAME}}.crt",

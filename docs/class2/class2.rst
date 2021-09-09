@@ -19,7 +19,7 @@ This lab documents provides foundational concepts for understanding Access Polic
 
 .. toctree::
    :maxdepth: 1
-   :caption: Version 16.0 Labs:
+   :caption: Version 16.1 Labs:
    :glob:
 
    module2/intro.rst

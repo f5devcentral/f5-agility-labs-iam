@@ -1,319 +1,260 @@
-Lab 2: Step up Authentication with Per-Request Policies
-========================================================
+Lab 2: Portal Resources
+=========================
 
-Objectives
-----------
+A full webtop provides an access policy ending for an access policy branch to which you can optionally assign portal access resources, app tunnels, remote desktops, and webtop links, in addition to network access tunnels.
 
-The purpose of this lab is to familiarize the Student with Per Request Policies.
-The F5 Access Policy Manager (APM) provides two types of policies.
+In this lab we will explore how to configure a Portal Access Resource to perform reverse proxy functionality.
 
-**Access Policy** - The access policy runs when a client initiates a session. Depending
-on the actions you include in the access policy, it can authenticate the user
-and perform group or class queries to populate session variables with data for
-use throughout the session. We created one of these in the prior lab
 
-**Per-Request Policy** - After a session starts, a per-request policy runs each time
-the client makes an HTTP or HTTPS request.  A per-request policy can include a
-subroutine, which starts a sub-session.  Multiple sub-sessions can exist at one
-time. One access policy and one per-request are specified within a virtual server.
+Section 1 - Setup Lab Environment
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**It's important to note that APM first executes a per-session policy when a client
-attempts to connect to a resource.   After the session starts then a per-request
-policy runs on each HTTP/HTTPS request.  Per-Request policies can be utilized in a
-number of different scenarios; however, in the interest of time this lab will only
-demonstrate one method of leveraging Per-Request policies for controlling access
-to specific URI's and submitting information from Active Directory as a header to the application.**
+Task 1 - Deploy prebuilt objects
+-----------------------------------
 
+To access your dedicated student lab environment, you will require a web browser and Remote Desktop Protocol (RDP) client software. The web browser will be used to access the Lab Training Portal. The RDP client will be used to connect to the Jump Host, where you will be able to access the BIG-IP management interfaces (HTTPS, SSH).
 
-Objective:
-----------
+#. Click **DEPLOYMENT** located on the top left corner to display the environment
 
--  Gain an understanding of Per Request policies
+#. Click **ACCESS** next to jumpohost.f5lab.local
 
--  Gain an understanding of use for Per Request Policy
+   |image001|
 
+#. Select your RDP resolution.
 
-Lab Requirements:
------------------
+#. The RDP client on your local host establishes a RDP connection to the Jump Host.
 
--  All lab requirements will be noted in the tasks that follow
+#. Login with the following credentials:
 
-Estimated completion time: 15 minutes
+         - User: **f5lab\\user1**
+         - Password: **user1**
 
-Lab 2 Tasks:
------------------
+#. After successful logon the Chrome browser will auto launch opening the site https://portal.f5lab.local.  This process usually takes 30 seconds after logon.
 
-TASK 1: Create Per Session Policy
-----------------------------------
+#. Click the **Classes** tab at the top of the page.
 
-Refer to the instructions and screen shots below:
+	|image002|
 
-#. Login to your lab provided **Virtual Edition BIG-IP**
+#. Scroll down the page until you see **102 Webtop Features** on the left
 
-     - On your jumphost launch Chrome and click the bigip1 link from the app shortcut menu
-     - Login with credentials admin/admin
+   |image003|
 
-#. Begin by selecting: **Access -> Profiles/Policies -> Per Session Policies** ->
+#. Hover over tile **Portal Resources**. A start and stop icon should appear within the tile.  Click the **Play** Button to start the automation to build the environment
 
-#. Click the + Sign next to **Access Profiles (Per-Session Policies)**
+   +---------------+-------------+
+   | |image004|    | |image005|  |
+   +---------------+-------------+
 
-    |Lab2-Image1|
+#. The screen should refresh displaying the progress of the automation within 30 seconds.  Scroll to the bottom of the automation workflow to ensure all requests succeeded.  If you experience errors try running the automation a second time or open an issue on the `Access Labs Repo <https://github.com/f5devcentral/access-labs>`__.
 
-#. Enter the name of the policy, profile type, and profile scope
+   |image006|
 
-    +--------------------------+-------------------------+
-    |**Name**:                 |**app.acme.com-PSP**     |
-    +--------------------------+-------------------------+
-    |**Profile Type**:         |**All**                  |
-    +--------------------------+-------------------------+
-    |**Profile Scope**:        |**Profile**              |
-    +--------------------------+-------------------------+
-    |**Accept Languages**:     | **English (en)**        |
-    +--------------------------+-------------------------+
+Section 2 - Basic Portal Resource
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    .. Note:: You will need a per session policy and a per request policy but we will be leaving the per session policy blank and performing our auth in per Request
+Task 1 - Create a Webtop 
+--------------------------
 
-    |Lab2-Image2|
+#. From a browser navigate to https://bigip1.f5lab.local
 
-#. On the app.acme.com-PSP policy click **Edit**
+#. Login with username **admin** and password **admin**
 
-#. Click on the **Deny** and change the Select Ending to **Allow**
+   |image009|
 
-#. Click **Save**
 
-#. Click Apply policy
+#. Navigate to **Access** >> **Webtops** >> **Webtop Lists** >> click the **Plus Sign(+)**.
 
-    .. Note::  Nothing will be set in this policy we will simply establish a session and manage all the authentication in the Per-Request Policy
+   |image010|
 
-    |Lab2-Image3|
+#. Enter the Name **full-webtop**
+#. From the Type dropdown menu select **Full**
+#. Click **Finished**.
 
-    |Lab2-Image4|
+   |image011|
 
-#. Close Visual Policy Editor
 
-    |Lab2-Image40|
+Task 2 - Create a portal resource
+---------------------------------------
 
+#. Navigate to **Access** >> **Connectivity/VPN** >> **Portal Access Lists** >> click the **Plus Sign(+)**.
 
-Task 2: Step Up Authentication with Per Request Policies
----------------------------------------------------------------
+   |image012|
 
-Step-up authentication can be used to protect layers or parts of a web application that manage more sensitive data. It can be used to increase protection by requiring stronger authentication within an already authenticated access to the web application.
-Step-up authentication can be a part of using the portal access or web application management (reverse proxy) features of Access Policy Manager.
 
-In this example we're going to use a Per-Request Policy with a subroutine to authenticate user when they access a specific URI, extract information from Active Directory and submit that information as a header
+#. Enter the Name **files**
+#. From the Link Type dropdown menu select **Application URI**
+#. Enter the Application URI **http://files-master.f5lab.local**
+#. Enter the Caption *files**
+#. Click **Create**
 
+   |image013|
 
-#. Begin by selecting: **Access -> Profiles/Policies -> Per Request Policies** ->
+Task 3 - Create a Connectivity Profile
+---------------------------------------
 
-#. Click the **Create** button (far right)
+#. Navigate to **Access** >> **Connectivity/VPN** >> **Connectivity** >>  **Profiles** >>click the **Plus Sign(+)**.
 
-    |Lab2-Image7|
+   |image014|
 
-#. Give the policy a name and select the Language Settings
 
-    +-------------------------+---------------------+
-    |**Name**:                |**app.acme.com-PRP** |
-    +-------------------------+---------------------+
-    |**Accept Languages**:    |**English (en)**     |
-    +-------------------------+---------------------+
+#. Enter the Name **webtop-cp**
+#. From the Parent Profile dropdown menu select **/Common/connectivity**
+#. Click **OK**
 
-    |Lab2-Image8|
+   |image015|
 
-#. Click **Finished**
+Task 4 - Add new profiles to an existing Virtual Server
+---------------------------------------------------------
 
-#. Back in the **Access** --> **Profiles/Policies** --> **Per-Request Policies** screen locate **app.acme.com-PRP** policy you just created.
+#. Navigate to **Local Traffic** >> **Virtual Servers** >> **Virtual Server List**
 
-#. Click **Edit** to the right of the name
+   |image016|
 
-#. Click on **Add New Subroutine**
+#. Click **webtop-https**
 
-    |Lab2-Image10|
+   |image017|
 
-#. Give it a name and Click Save
+#. In Content Rewrite Section, select **rewrite** from the Rewrite Profile dropdown menu.
+#. In Access Policy Section, select **webtop-cp** from the Connectivity Profile dropdown menu.
+#. Click **Update**
 
-    +-----------+------------------+
-    |**Name**:  | **AD_Subroutine**|
-    +-----------+------------------+
+   |image018|
 
-    +------------------------------+---------------------------------------------------------------+
-    | |Lab2-Image11|               |       |Lab2-Image13|                                          |
-    +------------------------------+---------------------------------------------------------------+
+Task 5 - Add a Webtop Resource to an existing Policy
+------------------------------------------------------
 
-#. Click the + between In and Out In the subroutine
+#. Navigate to **Access** > **Profiles / Policies** > **Access Profiles (Per-Session Policies)**, 
 
-#. Click the **Logon** Tab
+    |image019|
 
-#. At the middle of the list choose **Logon Page** and click **Add Item**
+#. Click on **Edit** for **webtop-psp**. 
 
-#. Select **Save** at the bottom of the Logon Page dialog box
+   |image020|
 
-#. In the subroutine, between the Logon page and the green **out** terminal click the **+** and select the **Logon Tab** and click the **Logon Page** radio button
+#. Click the Plus Sign(+) in between the AD Auth policy item and the Allow Terminal .
 
+   |image021|
 
-     |Lab2-Image15|
+#. Click on the **Assignment Tab**
+#. Select the **Advanced Resource Assign** radio button
+#. Click **Add Item**
 
-     |Lab2-Image16|
+   |image022|
 
-#. Click the + sign between Logon Page and Out and select the **Authentication** tab and click the **AD Auth** radio Button
+#. Click the **Add New Entry** button.
+#. Click the **Add/Delete** button
 
-    |Lab2-Image17|
+   |image023|
 
-#. Select AD Auth and click **Add Item** at the bottom
+#. Click on the **Portal Access** tab
+#. Select the radio button for **/Common/files**
 
-    |Lab2-Image18|
+   |image024|
 
-#. Give the item a name
+#. Click on the **Webtop** tab
+#. Select the radio button for **/Common/full-webtop**
+#. Click the **Update** button at the bottom of the screen.
 
-    +------------+-------------+
-    |**Name**:   | **AD_Auth** |
-    +------------+-------------+
+   |image025|
 
-#. Select **/Common/lab_sso_sd_server** for the Server option
+#. Click **Save**.
 
-    .. Note:: The lab_sso_ad_server object was created in Lab 1
+   |image026|
 
-#. Click the **Save**
+#. At the top left of the browser window, click on **Apply Access Policy**
 
-    |Lab2-Image19|
+   |image027|
 
-#. Between **AD Auth** and the Out endpoint click the + Sign
 
-    |Lab2-Image38|
 
-#. Select Authentication and Select the **AD Query** radio button and click **Add Item**
+Task 3 - Test the Configuration
+---------------------------------
 
-#. Change the **Server** option to **/Common/lab_sso_ad_server** and click **Save**
+#. Open a **New Incognito** web browser and navigate to **https://webtop.acme.com**. 
+#. Enter the following credentials:
 
-#. Between **AD Query** and the Out endpoint click the + Sign
+    +-------------+--------------+
+    |Username:    |**user1**     |
+    +-------------+--------------+
+    |Password:    |**user1**     |
+    +-------------+--------------+
 
-     |Lab2-Image39|
+#. Click **Logon**.
 
-#. Navigate to the **Assignment** tab and select **Variable Assign** and click **Add Item**
+   |image028|
 
-#. Under Variable Assign click **Add New Entry**
 
-    |Lab2-Image20|
+   .. note:: This will open the APM landing page that shows the resources you are allowed to access. In this lab, we've only configured a single resource but you can add as many as you want and they will appear on this Webtop page.
 
-#. Next to "Empty" click the **Change** link
+#. Click the **F5** Resource on the webtop
 
-#. Change the drop down on the right hand side to **Session Varaible** and input the following value
+   |image029|
 
-    +----------------------------------------+
-    | **subsession.ad.last.attr.memberOf**   |
-    +----------------------------------------+
+#.  The Files site opens in a new tab,  but notice you are not redirected to http://files.f5lab.local.  Instead you are being reverse proxied to the site through https://webtop.acme.com   
 
-#. In the left hand box type the following then click **Finished** and **Save**
+   |image030| 
 
-    +----------------------------------+
-    | **session.adgroups.custom**      |
-    +----------------------------------+
+Section 3 - Lab Cleanup
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    |Lab2-Image21|
+Task 1 - Run Cleanup automation
+---------------------------------
 
-    |Lab2-Image22|
+#. From a browser on the jumphost navigate to https://portal.f5lab.local
 
-#. Click the + sign between Start and Allow directly under the Per Request Policy at the top of the page
+#. Click the **Classes** tab at the top of the page.
 
-    |Lab2-Image23|
+    |image002|
 
-#. Select the **Classification** tab, click the **URL Branching Radio Button** and click **Add Item**
+#. Scroll down the page until you see **102 Webtop Features** on the left
 
-    |Lab2-Image24|
+   |image003|
 
-#. Click the **Branch Rules** tab and then click the **change** hyperlink
+#. Hover over tile **Portal Resources**. A start and stop icon should appear within the tile.  Click the **Stop** Button to trigger the automation to remove any prebuilt objects from the environment
 
-    |Lab2-Image25|
+    +---------------+-------------+
+    | |image004|    | |image007|  |
+    +---------------+-------------+
 
-#. Change the value **domain.com** to **app.acme.com/apps/app1/** and click finished
 
-    |Lab2-Image26|
+#. The screen should refresh displaying the progress of the automation within 30 seconds.  Scroll to the bottom of the automation workflow to ensure all requests succeeded.  If you experience errors try running the automation a second time or open an issue on the `Access Labs Repo <https://github.com/f5devcentral/access-labs>`__.
 
-    |Lab2-Image27|
+   |image008|
 
-#. Change the name from **Allow** to **/apps/app1/** and then click **Save**
+#. This concludes the lab.
 
-    |Lab2-Image28|
+   |image000|
 
-#. Click the + sign after the **/apps/app1/** branch you just added and select the subroutines tab and click the **AD_Subroutine** radio button and click Add Item
 
-    |Lab2-Image34|
 
-#. Click the + sign after the AD_Subroutine Box you just added and select the **General Purpose** tab and click the **HTTP Headers** radio Button
-
-    |Lab2-Image29|
-
-#. Under **HTTP Header Modify**, click **Add new entry**
-
-    |Lab2-Image30|
-
-#. Type **AD_Groups** for header name and **%{session.adgroups.custom}** for **Header Value** and click Save
-
-    |Lab2-Image31|
-
-#. In the Per-Request Policy follow the **fallback** branch for the URL Branching.  Click on the **Reject** terminal and change to **Allow**
-
-#. Your Per-Request Policy should now look like this
-
-    |Lab2-Image32|
-
-#. Navigate back to Local Traffic -> Virtual Servers and select your VIP, under the Access policy section of your VIP bind your Per-Session and Per Request policies
-
-    |Lab2-Image33|
-
-#. In a browser on your jumphost access https://app.acme.com you should see the webpage listed below, click the Application1 link
-
-    |Lab2-Image35|
-
-#. Authenticate with the **user1** username and **user1** password
-
-    |Lab2-Image36|
-
-#. Notice the **Ad-Groups** header which contains the extracted AD group information submitted to the application as a HTTP Header
-
-    |Lab2-Image37|
-
-What we have demonstrated here is the application of step-up authentication to a portion of the webpage, from there we extracted information from Active Directory to submit to
-the application in the form of an HTTP Headers
-
-
-
-Lab 2 is now complete.
-
-.. |Lab2-Image1| image:: ./media/Lab2-Image1.png
-.. |Lab2-Image2| image:: ./media/Lab2-Image2.png
-.. |Lab2-Image3| image:: ./media/Lab2-Image3.png
-.. |Lab2-Image4| image:: ./media/Lab2-Image4.png
-.. |Lab2-Image7| image:: ./media/Lab2-Image7.png
-.. |Lab2-Image8| image:: ./media/Lab2-Image8.png
-.. |Lab2-Image9| image:: ./media/Lab2-Image9.png
-.. |Lab2-Image10| image:: ./media/Lab2-Image10.PNG
-.. |Lab2-Image11| image:: ./media/Lab2-Image11.png
-.. |Lab2-Image12| image:: ./media/Lab2-Image12.png
-.. |Lab2-Image13| image:: ./media/Lab2-Image13.png
-.. |Lab2-Image14| image:: ./media/Lab2-Image14.png
-.. |Lab2-Image15| image:: ./media/Lab2-Image15.png
-.. |Lab2-Image16| image:: ./media/Lab2-Image16.png
-.. |Lab2-Image17| image:: ./media/Lab2-Image17.png
-.. |Lab2-Image18| image:: ./media/Lab2-Image18.png
-.. |Lab2-Image19| image:: ./media/Lab2-Image19.png
-.. |Lab2-Image20| image:: ./media/Lab2-Image20.png
-.. |Lab2-Image21| image:: ./media/Lab2-Image21.png
-.. |Lab2-Image22| image:: ./media/Lab2-Image22.png
-.. |Lab2-Image23| image:: ./media/Lab2-Image23.png
-.. |Lab2-Image24| image:: ./media/Lab2-Image24.png
-.. |Lab2-Image25| image:: ./media/Lab2-Image25.png
-.. |Lab2-Image26| image:: ./media/Lab2-Image26.png
-.. |Lab2-Image27| image:: ./media/Lab2-Image27.png
-.. |Lab2-Image28| image:: ./media/Lab2-Image28.png
-.. |Lab2-Image29| image:: ./media/Lab2-Image29.png
-.. |Lab2-Image30| image:: ./media/Lab2-Image30.png
-.. |Lab2-Image31| image:: ./media/Lab2-Image31.png
-.. |Lab2-Image32| image:: ./media/Lab2-Image32.png
-.. |Lab2-Image33| image:: ./media/Lab2-Image33.png
-.. |Lab2-Image34| image:: ./media/Lab2-Image34.png
-.. |Lab2-Image35| image:: ./media/Lab2-Image35.png
-.. |Lab2-Image36| image:: ./media/Lab2-Image36.png
-.. |Lab2-Image37| image:: ./media/Lab2-Image37.png
-.. |Lab2-Image38| image:: ./media/Lab2-Image38.png
-.. |Lab2-Image39| image:: ./media/Lab2-Image39.png
-.. |Lab2-Image40| image:: ./media/Lab2-Image40.png
+.. |image000| image:: ./media/lab02/000.png
+.. |image001| image:: ./media/lab02/001.png
+.. |image002| image:: ./media/lab02/002.png
+.. |image003| image:: ./media/lab02/003.png
+.. |image004| image:: ./media/lab02/004.png
+.. |image005| image:: ./media/lab02/005.png
+.. |image006| image:: ./media/lab02/006.png
+.. |image007| image:: ./media/lab02/007.png
+.. |image008| image:: ./media/lab02/008.png
+.. |image009| image:: ./media/lab02/009.png
+.. |image010| image:: ./media/lab02/010.png
+.. |image011| image:: ./media/lab02/011.png
+.. |image012| image:: ./media/lab02/012.png
+.. |image013| image:: ./media/lab02/013.png
+.. |image014| image:: ./media/lab02/014.png
+.. |image015| image:: ./media/lab02/015.png
+.. |image016| image:: ./media/lab02/016.png
+.. |image017| image:: ./media/lab02/017.png
+.. |image018| image:: ./media/lab02/018.png
+.. |image019| image:: ./media/lab02/019.png
+.. |image020| image:: ./media/lab02/020.png
+.. |image021| image:: ./media/lab02/021.png
+.. |image022| image:: ./media/lab02/022.png
+.. |image023| image:: ./media/lab02/023.png
+.. |image024| image:: ./media/lab02/024.png
+.. |image025| image:: ./media/lab02/025.png
+.. |image026| image:: ./media/lab02/026.png
+.. |image027| image:: ./media/lab02/027.png
+.. |image028| image:: ./media/lab02/028.png
+.. |image029| image:: ./media/lab02/029.png
+.. |image030| image:: ./media/lab02/030.png

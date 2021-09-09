@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "cc38d912-350d-4fd2-90a3-153a0f4f15f8",
+		"_postman_id": "396ba5dd-474d-4ced-bdb3-c922beb95ea0",
 		"name": "class3-module2-lab01-create",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -19,8 +19,7 @@
 							"",
 							""
 						],
-						"type": "text/javascript",
-						"id": "dea409df-ca3d-4119-8e1e-27d798dced20"
+						"type": "text/javascript"
 					}
 				},
 				{
@@ -32,8 +31,7 @@
 							"pm.collectionVariables.set(\"SERVER_SSL_NAME\", \"apiadmin-serverssl\");",
 							""
 						],
-						"type": "text/javascript",
-						"id": "169286e0-3c95-4fd6-9b55-7bdd55b4a6fd"
+						"type": "text/javascript"
 					}
 				}
 			],
@@ -83,8 +81,7 @@
 						"exec": [
 							""
 						],
-						"type": "text/javascript",
-						"id": "e307ba5e-7101-4631-adea-3e244bdf0d92"
+						"type": "text/javascript"
 					}
 				},
 				{
@@ -103,8 +100,7 @@
 							"",
 							""
 						],
-						"type": "text/javascript",
-						"id": "5bef4fa8-db3f-4329-8360-66ee7ad3c505"
+						"type": "text/javascript"
 					}
 				}
 			],
@@ -174,8 +170,7 @@
 							"",
 							""
 						],
-						"type": "text/javascript",
-						"id": "db6bc945-5cf1-465e-87b7-74c080b70705"
+						"type": "text/javascript"
 					}
 				},
 				{
@@ -184,8 +179,7 @@
 						"exec": [
 							""
 						],
-						"type": "text/javascript",
-						"id": "7f1cf73a-42d9-4158-b25f-c66cb6d82048"
+						"type": "text/javascript"
 					}
 				}
 			],
@@ -215,7 +209,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n\"name\": \"{{SERVER_SSL_NAME}}\",\r\n \"cert\": \"/Common/apiadmin.crt\",\r\n \"key\": \"/Common/apiadmin.key\"\r\n}"
+					"raw": "{\r\n\"name\": \"{{SERVER_SSL_NAME}}\",\r\n \"cert\": \"/Common/apiadmin\",\r\n \"key\": \"/Common/apiadmin\"\r\n}"
 				},
 				"url": {
 					"raw": "https://10.1.1.4/mgmt/tm/ltm/profile/server-ssl/",
@@ -257,8 +251,7 @@
 							"",
 							""
 						],
-						"type": "text/javascript",
-						"id": "56d41d70-129a-4f4c-9ddf-2367017bf711"
+						"type": "text/javascript"
 					}
 				},
 				{
@@ -267,8 +260,7 @@
 						"exec": [
 							""
 						],
-						"type": "text/javascript",
-						"id": "67262ec5-8137-4650-bc69-1ebea1db7006"
+						"type": "text/javascript"
 					}
 				}
 			],
@@ -334,8 +326,7 @@
 							"",
 							""
 						],
-						"type": "text/javascript",
-						"id": "2560c480-7944-4d3e-86ea-1e4dad982dcb"
+						"type": "text/javascript"
 					}
 				},
 				{
@@ -348,8 +339,7 @@
 							"",
 							"}"
 						],
-						"type": "text/javascript",
-						"id": "586f78ef-8c21-4cca-adeb-708f02c23c83"
+						"type": "text/javascript"
 					}
 				}
 			],
@@ -408,8 +398,7 @@
 							"});",
 							""
 						],
-						"type": "text/javascript",
-						"id": "88477c24-6f74-4d9a-9e9a-8eb79f943b25"
+						"type": "text/javascript"
 					}
 				},
 				{
@@ -418,8 +407,7 @@
 						"exec": [
 							""
 						],
-						"type": "text/javascript",
-						"id": "a7a712b4-54f4-42ba-b5e7-09d385700ea1"
+						"type": "text/javascript"
 					}
 				}
 			],
@@ -488,8 +476,7 @@
 							"});",
 							""
 						],
-						"type": "text/javascript",
-						"id": "41b8826d-289b-40a8-b210-c336c034a106"
+						"type": "text/javascript"
 					}
 				},
 				{
@@ -498,8 +485,7 @@
 						"exec": [
 							""
 						],
-						"type": "text/javascript",
-						"id": "4041213c-4a54-4694-8e81-43c88ec0cd3d"
+						"type": "text/javascript"
 					}
 				}
 			],
@@ -568,8 +554,7 @@
 							"});",
 							""
 						],
-						"type": "text/javascript",
-						"id": "62cd3bca-1208-437a-99a2-6753968c4acc"
+						"type": "text/javascript"
 					}
 				},
 				{
@@ -578,8 +563,7 @@
 						"exec": [
 							""
 						],
-						"type": "text/javascript",
-						"id": "02652495-27e4-4044-b594-5ab904c21914"
+						"type": "text/javascript"
 					}
 				}
 			],
@@ -646,8 +630,7 @@
 							"    pm.response.to.have.status(409);",
 							"});"
 						],
-						"type": "text/javascript",
-						"id": "a7cde112-d692-4145-8833-6308c086f854"
+						"type": "text/javascript"
 					}
 				},
 				{
@@ -660,8 +643,7 @@
 							"",
 							""
 						],
-						"type": "text/javascript",
-						"id": "d171381d-e6a4-44e1-9062-9d7ac9be7b5b"
+						"type": "text/javascript"
 					}
 				}
 			],
@@ -721,7 +703,6 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "0aa17de4-4074-4386-8c20-e823abefa11e",
 						"exec": [
 							"var DNS_NAME = pm.collectionVariables.get(\"APP_NAME\");",
 							"",
@@ -743,7 +724,6 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "fdac702a-c7cd-42e2-9331-7f48ff172a5c",
 						"exec": [
 							"setTimeout(function(){}, 2000);",
 							"",
@@ -803,40 +783,32 @@
 	],
 	"variable": [
 		{
-			"id": "36eef39c-65fd-4c7c-a45a-3fdef6297380",
 			"key": "PRIOR_RESPONSE",
 			"value": ""
 		},
 		{
-			"id": "97a1d7cc-a5df-4c7f-ab46-3547000289b7",
 			"key": "DNS_RESOLVER_NAME",
 			"value": ""
 		},
 		{
-			"id": "98e44397-672c-4068-b361-a5f6193282e9",
 			"key": "SERVER_SSL_NAME",
 			"value": ""
 		},
 		{
-			"id": "d1433698-27bf-45a8-8d47-6fa2150a1481",
 			"key": "APP_NAME",
 			"value": ""
 		},
 		{
-			"id": "4365610f-0e84-40a2-8a84-da952e2da8e5",
 			"key": "PARTITION_NAME",
 			"value": ""
 		},
 		{
-			"id": "9973467d-2910-484c-be37-c40b9fa2480e",
 			"key": "PATH_NAME",
 			"value": ""
 		},
 		{
-			"id": "e7d2b04b-8695-455b-9f40-1dabea5225db",
 			"key": "IRULE_NAME",
 			"value": ""
 		}
-	],
-	"protocolProfileBehavior": {}
+	]
 }

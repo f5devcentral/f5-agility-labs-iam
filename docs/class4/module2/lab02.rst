@@ -4,7 +4,7 @@ Lab 2: Create a SAML SP Per-Session Policy
 
 In this lab your will learn about the API calls necessary to build a SAML SP Access Policy.  The graphic below depicts the basic flow required for creating the policy via API.
 
-    |image100|
+      |image100|
 
 
 Access Lab Environment
@@ -16,7 +16,7 @@ To access your dedicated student lab environment, you will need a web browser an
 
 #. Click **ACCESS** next to jumphost.f5lab.local
 
-    |image101|
+      |image101|
 
 #. Select your RDP resolution.
 
@@ -35,27 +35,27 @@ Task 1 - Import Postman Collections
 
     .. note::  Dismiss any prompts to update Postman.
 
-    |image001|
+      |image001|
 
 #. Click **Yes** if prompted for "Do you want to allow this app to make changes to your device?"
 
-    |image002|
+      |image002|
 
-#. Click **Import** located on the top left of the Postman application
+#. Click **Import** located on the **Scratch Pad** menu bar
 
-    |image003|
+      |image003|
 
-#.  Click **Upload Files**
+#. Click **Upload Files**
 
-    |image004|
+      |image004|
 
 #. Navigate to C:\\access-labs\\class4\\module2\\student_files, select **student-class4-module2-lab2.postman_collection.json**, and click **Open**
 
-    |image005|
+      |image005|
 
 #.  Click **Import**
 
-    |image006|
+      |image006|
 
 #. A collection called **student-class4-module2-lab2** will appear on the left side in Postman
 
@@ -65,29 +65,26 @@ Task 2 - Create Required SAML Objects
 
 #. Expand the **student-class4-module2-lab2** collection and **Create Access Objects** folder.  These requests will import the IdP signing certificate, create a IdP Connector, and also the SP Service.  If you are unfamiliar with these requests please review :ref:`Creating a SAML Service Provider(SP) Service <class4-module1-lab1>` for more detail.
 
-    |image007|
+      |image007|
 
 
-#.  Hover over the collection name **student-class4-module2-lab2** with your mouse and click the **Arrow** icon.
+#. Located at the bottom right of the **Postman** application is an option for **Runner**.  Click this icon to open the **Runner** tab
 
-    |image008|
+      |image008|
 
-#. Click the **Create Access Objects** folder. You will see the four requests in the folder.
+#. From the **Scratchpad** pane locate the **student-class4-module2-lab2** collection.  Expand the collection, drag and drop the **Create Access Objects** folder to the **Runner** tab.
 
-    |image009|
+      |image009|
+      |image041|
 
-#.  Click the blue **Run**  button and Postman Runner will open.
+#. Check only **Save Response** and click **Run student-class4-module2-lab2**
 
-    |image010|
+      |image010|
 
-#. Click the blue button **Run student-class...** and the API requests will start being sent to the BIG-IP.
+#. The **Passed** results will display a value 4.
+#. Close Runner by clicking the **X** on the tab open for runner.
 
-    |image011|
-
-#. The **Pass** circle will display a value 4.
-#. Close Runner by clicking the **X** in the top right corner.
-
-    |image012|
+      |image012|
 
 
 Task 3 - Review the SAML SP Policy-item
@@ -95,47 +92,48 @@ Task 3 - Review the SAML SP Policy-item
 
 #. Expand the **Create Policy** folder.  There are two subfolders containing the baseline policy and also the SAML SP Policy-item.  If you are unfamiliar with the requests inside of the baseline policy please review :ref:`Creating a Baseline Per-Session Policy <class4-module2-lab1>`.
 
-    |image013|
+      |image013|
 
 #. Expand the Policy-item SAML SP subfolder
 
-    |image014|
+      |image014|
 
 #. Click **bigip-create-agent-saml-sp** and then **Body**.  The JSON Body specifies the SP service using the **server** JSON key.   This is the name of the service we just created using runner.
 
 
-    |image015|
+      |image015|
 
 #. Click **bigip-create-policy item-saml-sp** and then **Body**.  The JSON Body of the policy-item contains a reference to the previously reviewed SAML agent along with two branch rules.  One branch rule contains an expression that if the SAML auth is 1(True) then proceed to the allow terminal.  Everything else goes down the fallback branch to the Deny Terminal.  Lastly take notice of the SAML SP policy-item name because we will be using it later in the lab.
 
+      |image016|
 
-    |image016|
 
 Task 4 - Create a SAML SP policy
 -------------------------------------------
 
-
 #.  Expand the **Baseline Policy** subfolder.
 
-    |image017|
+      |image017|
 
-#. We will now add the policy-item SAML SP folder to the baseline Policy folder in its proper place.  Click and drag the **policy-item SAML SP** folder between the Allow Ending and Start Item folders.
+#. We will now add the policy-item SAML SP folder to the baseline Policy folder in its proper place.  Click and drag the **policy-item SAML SP** folder between the **Allow Ending** and **Start Item** folders.
 
-    |image018|
+      |image018|
 
-#. Now the the requests are in the folder we need to modify a couple baseline requests to ensure the policy is created correctly.
+#. Now the requests are in the folder we need to modify a couple baseline requests to ensure the policy is created correctly.
 
 #. First, we need to adjust the start item's rule to go to the **SAML SP Policy-item**.   Open the **Start Item** folder, click on **bigip-create-policy item-start**, and then **Body**.
 
-#. Change the NextItem key value from **"/Common/{{VS_NAME}}-psp_end_deny"** to **"/Common/{{VS_NAME}}-psp_act_saml_auth"**.
+#. Change the **NextItem** key value from **"/Common/{{VS_NAME}}-psp_end_deny"** to **"/Common/{{VS_NAME}}-psp_act_saml_auth"**.
 
-    |image019|
+      |image019|
 
 #. After you are done editing the request, click **Save** in the upper right corner.  Runner will not pickup any changes that are not saved causing the automation to fail.
 
 #. Now the workflow of the policy is complete. The flow of the policy is as follows:  A user enters the **start** policy-item, proceed to the **SAML Auth** Policy-item.Then based on success or failure of SAML authentication a user will proceed to the **Allow** or **Deny** Terminal.
 
 #. Every Policy-item must be defined inside of the **items** list of the policy.  Expand the **Create Policy** subfolder located inside the **Baseline Policy** folder, click on **bigip-create-policy** and then **Body**.
+
+      |image038| |image039|
 
 #. Copy and paste the below JSON inside the items array in front of the allow Terminal.  The placement of policy-items inside of the items array is not important to the order they used within branch rules or Visual Policy Editors.
 
@@ -153,30 +151,23 @@ Task 4 - Create a SAML SP policy
 #. After you are done editing the request, click **Save** in the upper right corner.  Runner will not pickup any changes that are not saved causing the automation to fail.
 
 
-#.  Now that we have the automation updated let's deploy the policy.  Hover over the Collection name **student-class4-module2-lab2** with your mouse and click the **Arrow** icon.
+#. Now that we have the automation updated let's deploy the policy.  Locate the runner icon in the bottom right corner of the **Postman** application.
 
-    |image021|
+      |image008|
 
-#. Click **student-class4-module...** to return to the main folder if you are not already there.
+#. Drag and drop the **Create Policy** folder to the **Runner** tab
 
-    |image035|
+      |image040|
+      |image035|
 
-#. Click the **Create Policy** folder.
+#. Check on **Save Responses** and click **Run student-class4-module2-lab2**
 
-    |image022|
+      |image022|
 
-#.  Click the blue **Run** button and Postman Runner will open.
+#. The **Passed** results will display a value 2.
+#. Close Runner by clicking the **X** on the tab open for Runner.
 
-    |image023|
-
-#. Click the blue button **Run student-class...** and the API requests will start being sent to the BIG-IP.
-
-    |image024|
-
-#. The **Pass** circle will display a value 2.
-#. Close Runner by clicking the **X** in the top right corner.
-
-    |image025|
+      |image025|
 
 
 #. From the jumphost, open browser and navigate to https://bigip1.f5lab.local
@@ -188,58 +179,50 @@ Task 4 - Create a SAML SP policy
 
 #. Navigate to Access>>Profiles/Policies>>Access Profiles (Per-Session Policies).  Do not click the plus symbol.
 
-    |image026|
+      |image026|
 
 #. The policy **class4-module2-lab2-psp** you created via automation is displayed.  Click **Edit** to view Visual Policy Editor(VPE).
 
-    |image027|
+      |image027|
 
 #. The policy was successfully deployed with the SAML Auth Policy-Item.
 
-    |image034|
+      |image034|
 
 
 Task 5 - Lab Cleanup
 -------------------------------------------
 
-#.  Expand the **Lab Cleanup** subfolder and its subfolders. There are a total of five requests.  The first two requests delete the Policy, while the last three requests delete the SP Service, IdP Connector, and IdP signing certificate.  To understand these requests further review :ref:`Deleting an Access Profile <class4-module2-lab1-delete>` or :ref:`Deleting a SAML Service Provider(SP) Service Configuration <class4-module1-lab1-delete>`
+#. Expand the **Lab Cleanup** subfolder and its subfolders. There are a total of five requests.  The first two requests delete the Policy, while the last three requests delete the SP Service, IdP Connector, and IdP signing certificate.  To understand these requests further review :ref:`Deleting an Access Profile <class4-module2-lab1-delete>` or :ref:`Deleting a SAML Service Provider(SP) Service Configuration <class4-module1-lab1-delete>`
 
-    |image028|
+      |image028|
 
 
-#.  Hover over the Collection name **student-class4-module2-lab2** with your mouse and click the **Arrow** icon.
+#. Locate the runner icon in the bottom right corner of the **Postman** application.
 
-    |image029|
+      |image008|
 
- #. Click **student-class4-module2-lab2** to return to the main folder if you are not already there.
+#. Drag and drop **Lab Cleanup** to the **Runner** tab
 
-    |image036|
+      |image036|
 
-#. Click the **Lab Cleanup** folder.
+#. Check on **Save Responses** and click **Run student-class4-module2-lab2**
 
-    |image030|
+      |image030|
 
-#.  Click the blue **Run** button and Postman Runner will open.
+#. The **Passed** results will display a value of 5. Click the **x** to close the **Runner** tab
 
-    |image031|
+      |image033|
 
-#. Click the blue button **Run student-class...** and the API requests will start being sent to the BIG-IP.
-
-    |image032|
-
-#. The **Pass** circle will display a value of 5.
-
-    |image033|
-
-#. From Postman, Click the **3 dots** on the bottom right of the student-class4-module2-lab2 Collection.
+#. Hover over the postman collection. Click the **3 dots** the student-class4-module2-lab2 collection.
 
 #. Click **Delete**
 
-    |image037|
+      |image037|
 
 This concludes the lab on creating and deleting a SAML SP Access Policy.
 
-   |image000|
+      |image000|
 
 
 
@@ -254,7 +237,6 @@ This concludes the lab on creating and deleting a SAML SP Access Policy.
 .. |image008| image:: media/lab02/008.png
 .. |image009| image:: media/lab02/009.png
 .. |image010| image:: media/lab02/010.png
-.. |image011| image:: media/lab02/011.png
 .. |image012| image:: media/lab02/012.png
 .. |image013| image:: media/lab02/013.png
 .. |image014| image:: media/lab02/014.png
@@ -266,20 +248,20 @@ This concludes the lab on creating and deleting a SAML SP Access Policy.
 .. |image020| image:: media/lab02/020.png
 .. |image021| image:: media/lab02/021.png
 .. |image022| image:: media/lab02/022.png
-.. |image023| image:: media/lab02/023.png
-.. |image024| image:: media/lab02/024.png
 .. |image025| image:: media/lab02/025.png
 .. |image026| image:: media/lab02/026.png
 .. |image027| image:: media/lab02/027.png
 .. |image028| image:: media/lab02/028.png
 .. |image029| image:: media/lab02/029.png
 .. |image030| image:: media/lab02/030.png
-.. |image031| image:: media/lab02/031.png
-.. |image032| image:: media/lab02/032.png
 .. |image033| image:: media/lab02/033.png
 .. |image034| image:: media/lab02/034.png
 .. |image035| image:: media/lab02/035.png
 .. |image036| image:: media/lab02/036.png
 .. |image037| image:: media/lab02/037.png
+.. |image038| image:: media/lab02/038.png
+.. |image039| image:: media/lab02/039.png
+.. |image040| image:: media/lab02/040.png
+.. |image041| image:: media/lab02/041.png
 .. |image100| image:: media/lab02/100.png
 .. |image101| image:: media/lab02/101.png
