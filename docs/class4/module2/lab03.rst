@@ -34,27 +34,27 @@ Task 1 - Import Postman Collections
 
     .. note::  Dismiss any prompts to update Postman.
 
-    |image001|
+      |image001|
 
 #. Click **Yes** if prompted for "Do you want to allow this app to make changes to your device?"
 
-    |image002|
+      |image002|
 
 #. Click **Import** located on the **Scratch Pad** menu bar
 
-    |image003|
+      |image003|
 
 #.  Click **Upload Files**
 
-    |image004|
+      |image004|
 
 #. Navigate to C:\\access-labs\\class4\\module2\\student_files, select **student-class4-module2-lab3.postman_collection.json**, and click **Open**
 
-    |image005|
+      |image005|
 
 #.  Click **Import**
 
-    |image006|
+      |image006|
 
 #. A collection called **student-class4-module2-lab3** will appear on the left side in Postman
 
@@ -62,28 +62,24 @@ Task 1 - Import Postman Collections
 Task 2 - Create A Webtop Policy
 -----------------------------------------------------------------------
 
-#.  Hover over the collection name **student-class4-module2-lab3** with your mouse and click the **Arrow** icon.
+#.  Bottom right of the Postman application click on the **Runner** icon
 
-    |image007|
+      |image007|
 
-#. Click the **Create Policy** folder.
+#. Expand the **student-class4-module2-lab3** collection.  Click and drag the **Create Policy** folder to the **Runner** tab.
 
-    |image008|
+      |image008|
 
-#.  Click the blue **Run** button and Postman Runner will open.
+#.  All the tasks in the *Create Policy** folder will appear in the **Runner** tab.  Check only **Save responses** and click **Run student-class4-module2-lab3**
 
-    |image009|
+      |image009|
 
-#. Click the blue button **Run student-class...** and the API requests will start being sent to the BIG-IP.
+#. The **Passed** results will display a value 10.
+#. Close the **Runner** tab by clicking the **X**
 
-    |image010|
+      |image011|
 
-#. The **Pass** circle will display a value 10.
-#. Close Runner by clicking the **X** in the top right corner.
-
-    |image011|
-
-#. From the jumphost, ppen a browser and navigate to https://bigip1.f5lab.local
+#. From the jumphost, open a browser and navigate to https://bigip1.f5lab.local
 
 #. Login to the BIG-IP GUI with the following credentials:
 
@@ -92,19 +88,19 @@ Task 2 - Create A Webtop Policy
 
 #. Navigate to Access>>Profiles/Policies>>Access Profiles (Per-Session Policies).  Do not click the **+** (plus symbol).
 
-    |image012|
+      |image012|
 
 #. The policy **class4-module2-lab3-psp** you created via automation is displayed.  Click **Edit** to view the policy in Visual Policy Editor(VPE).
 
-    |image013|
+      |image013|
 
-#. The policy was successfully deployed using SAML Authenticaiton and an Advanced Resource Assign. Click on the **Advanced Resource Assign** action.
+#. The policy was successfully deployed using SAML Authentication and an Advanced Resource Assign. Click on the **Advanced Resource Assign** action.
 
-    |image014|
+      |image014|
 
 #. The Advanced Resource Assign contains a webtop and a single webtop link.
 
-    |image015|
+      |image015|
 
 
 Task 3 - Create a Webtop Link
@@ -112,25 +108,25 @@ Task 3 - Create a Webtop Link
 
 #. From Postman, expand the **student-class4-module2-lab3** collection and then the **Create Webtop Link** subfolder.
 
-    |image016|
+      |image016|
 
 #. Click the request **bigip-create-customization group-resource** and then **Body**.  The body of this request specifies that we will be creating a webtop link resource.
 
     .. note:: One thing to note, all webtop link resources use "/Common/standard" as the source type even if the policy is using "/Common/Modern".
 
-    |image017|
+      |image017|
 
 #. Click the blue **send** button in the upper right corner.  You will receive a 200 OK status code with a response body.  This is an indication that the customization group was created.
 
-    |image018|
+      |image018|
 
 #. Click the request **bigip-create-webtop-link** and then **Body**.  The body of this request creates the webtop link Resource.  The applicationUri JSON key contains the resource destination.  The Postman Variable ((DNS3_NAME)) is set to server2.acme.com
 
-    |image019|
+      |image019|
 
 #. Click the blue **send** button in the upper right corner.  You will receive a 200 OK status code with a response body.  This is an indication that the webtop link resource was created.
 
-    |image020|
+      |image020|
 
 Task 4 - Add a webtop to an Advanced Resource Assign
 -----------------------------------------------------------------------
@@ -141,40 +137,32 @@ Task 4 - Add a webtop to an Advanced Resource Assign
 
 #. Expand the **Modify Policy** folder.  Since the only change to the policy is the addition of a single webtop link you will only review that single request. Expand the **Modify Advanced Resource Assign** subfolder.
 
-    |image021|
+      |image021|
 
-#.  Click **bigip-create-agent-adv resource assign** and then **Body**.
+#. Click **bigip-create-agent-adv resource assign** and then **Body**.
 
-#.  The request method is a PATCH since the advanced resource assign agent exists.  We do not want to create the agent, but modify an existing agent.
+#. The request method is a PATCH since the advanced resource assign agent exists.  We do not want to create the agent, but modify an existing agent.
 
 #. The request body is the same as the request used to create the advanced resource assign agent.  The only difference is the addition of the new webtop resource.
 
-    |image022|
+      |image022|
 
-#.  Hover over the Collection name **student-class4-module2-lab3** with your mouse and click the **Arrow** icon.
+#. Bottom right of the Postman application click on the **Runner** icon
 
-    |image023|
+      |image007|
 
- #. Click **student-class4-module2-lab3** to return to the main folder if you are not already there.
+#. Click and drag the **Modify Policy** folder to the **Runner** tab
 
-    |image033|
+      |image033|
 
-#. Click the **Modify Policy** folder. You will see four subfolders in the folder.
+#. All the tasks for **Modify Policy** will appear in the **Runner** tab.  Check only the **Save responses** and click **Run student-class4-module2-lab3**
 
-    |image024|
+      |image025|
 
-#.  Click the blue **Run** button and Postman Runner will open.
+#. The **Passed** results will display a value 2.
+#. Close **Runner** tab by clicking the **X**.
 
-    |image025|
-
-#. Click the blue button **Run student-class...** and the API requests will start being sent to the BIG-IP.
-
-    |image026|
-
-#. The **Pass** circle will display a value 2.
-#. Close Runner by clicking the **X** in the top right corner.
-
-    |image027|
+      |image027|
 
 #. From the jumphost, open a browser and navigate to https://bigip1.f5lab.local
 
@@ -203,41 +191,33 @@ Task 4 - Add a webtop to an Advanced Resource Assign
 Task 4 - Lab Cleanup
 ------------------------
 
-#.  Hover over the Collection name **student-class4-module2-lab3** with your mouse and click the **Arrow** icon.
+#. Bottom right of the Postman application click on the **Runner** icon
 
-    |image023|
+      |image007|
 
- #. Click **student-class4-module2-lab3** to return to the main folder if you are not already there.
+ #. Click and drag the **Lab Cleanup** folder to the **Runner** tab
 
-    |image034|
+      |image034|
+
+#. Check only the **Save responses** box and click **Run student-class4-module2-lab3**
+
+      |image029|
 
 
-#. Click the **Lab Cleanup** folder.
+#. The **Passed** results will display a value 7.
 
-    |image029|
+      |image032|
 
-#.  Click the blue **Run** button and Postman Runner will open.
-
-    |image030|
-
-#. Click the blue button **Run student-class...** and the API requests will start being sent to the BIG-IP.
-
-    |image031|
-
-#. The **Pass** circle will display a value 7.
-
-    |image032|
-
-#. From Postman, Click the **3 dots** on the bottom right of the student-class4-module2-lab3 Collection.
+#. Hover over the **student-class4-module2-lab3** Postman collection and then click on the **three dots**
 
 #. Click **Delete**
 
-    |image035|
+      |image035|
 
 This concludes our lab on modifying a webtop via automation.
 
 
-   |image000|
+      |image000|
 
 
 
@@ -251,7 +231,6 @@ This concludes our lab on modifying a webtop via automation.
 .. |image007| image:: media/lab03/007.png
 .. |image008| image:: media/lab03/008.png
 .. |image009| image:: media/lab03/009.png
-.. |image010| image:: media/lab03/010.png
 .. |image011| image:: media/lab03/011.png
 .. |image012| image:: media/lab03/012.png
 .. |image013| image:: media/lab03/013.png
@@ -264,15 +243,10 @@ This concludes our lab on modifying a webtop via automation.
 .. |image020| image:: media/lab03/020.png
 .. |image021| image:: media/lab03/021.png
 .. |image022| image:: media/lab03/022.png
-.. |image023| image:: media/lab03/023.png
-.. |image024| image:: media/lab03/024.png
 .. |image025| image:: media/lab03/025.png
-.. |image026| image:: media/lab03/026.png
 .. |image027| image:: media/lab03/027.png
 .. |image028| image:: media/lab03/028.png
 .. |image029| image:: media/lab03/029.png
-.. |image030| image:: media/lab03/030.png
-.. |image031| image:: media/lab03/031.png
 .. |image032| image:: media/lab03/032.png
 .. |image033| image:: media/lab03/033.png
 .. |image034| image:: media/lab03/034.png
