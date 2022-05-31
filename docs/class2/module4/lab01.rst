@@ -3,14 +3,15 @@ Lab 1: Azure AD Easy Button integration
 
 .. warning :: For any remark or mistake in this lab, please send a Teams chat to Matthieu DIERICK.
 
-In this lab, you will learn how to connect APM to Azure AD as IDaaS. Since v15.1, you can enable APM as SAML SP and Azure AD as SAML IDP. 
-In this lab, we will use the new **Easy Button** Guided Configuration template. This template:
+In this lab, you will learn how to leverage Azure AD as an IDaaS provider while using APM as a SAML SP. Since v15.1, F5 has offered a "Guided Configuration" template to make this integration easier for administrators.
 
-#. Publish on-prems apps
-#. Enable Single Sign on
-#. Interconnect (SAML binding) APM with Azure AD tenant
+This template:
 
-.. note :: You will notice we will never connect to Azure AD interface. APM will use Microsoft Graph API to configure AAD tenant accordingly.
+#. Publishes on-prem apps
+#. Enables Single Sign-on
+#. Interconnect (SAML binding) APM with an Azure AD tenant
+
+.. note :: You will notice we will never connect directly to the Azure AD interface. APM will use Microsoft's Graph API to configure the AAD tenant accordingly.
 
    |image001|
 
@@ -405,7 +406,7 @@ Task 7 - Single Sign-On Settings
 
 #. In ``Credentials Source``, fill as below
 
-    #. Username Source : ``session.saml.last.identity``
+    #. Username Source : ``session.logon.last.username``
     #. Delete User Realm Source value - keep it empty. The domain is similar between Azure AD and on-prems AD.
 
 #. In ``SSO Method Configuration``, fill as below
