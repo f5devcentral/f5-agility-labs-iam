@@ -1,7 +1,7 @@
 Lab 1: Azure AD Easy Button integration
 =============================================
 
-.. warning :: For any remark or mistake in this lab, please send a Teams chat to Matthieu DIERICK.
+.. warning :: If you have any feedback on this guide, please raise an issue at https://github.com/f5devcentral/f5-agility-labs-iam/issues .
 
 In this lab, you will learn how to leverage Azure AD as an IDaaS provider while using APM as a SAML SP. Since v15.1, F5 has offered a "Guided Configuration" template to make this integration easier for administrators.
 
@@ -15,7 +15,7 @@ This template:
 
    |image001|
 
-In the video below, you can see the use case. This is **not** the **lab video**, it is the public facing use case demo.
+The video below illustrates the APM & Azure AD integration. This is **not** the **lab video**. It's simply a demo of the use-case.
 
 .. raw:: html
 
@@ -46,9 +46,9 @@ Architecture of Internal Apps
 Bluesky application
 *******************
 
-This application resides on-prems in IIS server. Its FQDN is ``https://bluesky.f5access.onmicrosoft.com`` 
+This application resides on-prem in IIS. Its FQDN is ``https://bluesky.f5access.onmicrosoft.com`` 
 
-This application is not **authenticated**, meaning there is no **Single Sign on** required in front of this app.
+This application is not **authenticated**, meaning there is no **Single Sign-On** required in front of this app.
 
    |image003|
 
@@ -56,15 +56,15 @@ This application is not **authenticated**, meaning there is no **Single Sign on*
 Vanilla application
 *******************
 
-This application resides on-prems in IIS server. Its FQDN is ``https://vanilla.f5access.onmicrosoft.com`` 
+This application also resides on-prem in IIS. Its FQDN is ``https://vanilla.f5access.onmicrosoft.com`` 
 
-This application is **authenticated** by Kerberos. So a **Signle Sign On** will be required to connect to this app.
+This application is **authenticated** by Kerberos so a **Signle Sign-On** will be required to connect to this app.
 
    |image004|
 
 
 
-Task 1  - Check IIS configuration
+Task 1  - Check IIS configuration (Optional)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -87,7 +87,7 @@ Task 1  - Check IIS configuration
 Architecture of Cloud App
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. note :: In this use case, we don't cover only internal, sensitive or legacy applications. In a real world, customers have applications on-prems and in the public cloud.
+.. note :: In this use case, we don't cover only internal, sensitive or legacy applications. In a real world, customers have applications on-prem and in the public cloud.
 
 .. note :: A Wordpress application is already up and running in Azure Cloud at this address ``https://wordpress-apm-aad.azurewebsites.net/``
 
@@ -117,7 +117,7 @@ Task 1 - Publish and protect Bluesky app
 
 Let's start with ``Bluesky`` application. Reminder, Bluesky does not have any ``Authentication`` enabled. 
 
-#. Connect to BIG-IP HTTPS user interface from UDF as ``admin`` and password ``admin``
+#. RDP to win10 (user/user) and launch Edge or Chrome. Using the BIG-IP bookmark, connect to the BIG-IP user interface (admin/admin)
 #. In ``Access`` > ``Guided Configuration``, select ``Microsoft Integration`` > ``Azure AD application`` 
 
 
@@ -130,14 +130,14 @@ Task 2 - Configuration Properties
 #. Click ``Next`` and start the configuration
 #. Configure the page as below
 
-   #. Configuration Name : ``IIS-Bluesky-<My Name>``  Why my name ? Because this app will be created in Azure AD tenant. And we need to differentiate all apps. Example : ``IIS-Bluesky-Matt``
+   #. Configuration Name : ``IIS-Bluesky-<My Name>``  Why my name ? This app will be created in Azure AD tenant and we need to differentiate all apps. Example : ``IIS-Bluesky-MattD`` If possible, please at least use your first name and last initial.
    #. In ``Azure Service Account Details``, Select ``Copy Account Info form Existing Configuration``, and select ``IIS-baseline``, then click ``Copy``
 
       |image012|
 
 
     
-      .. note:: In a real world, you will set here the values from the Azure Service Application created for APM. You have to create an Azure Application so that APM gets access to Microsoft Graph API. But for **security concerns**, I can't show in this lab the application secret.
+      .. note:: In the real world, this is where you'd configure the application settings from the Azure Service Application created for APM. You have to create an Azure Application so that APM gets access to Microsoft Graph API. Due to **security best practices**, we won't show the application secret in this lab.
 
       .. note:: The steps to create this Azure applications are below
 
