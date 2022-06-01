@@ -3,15 +3,15 @@ Lab 1: Azure AD Easy Button integration
 
 .. warning :: If you have any feedback on this guide, please raise an issue at https://github.com/f5devcentral/f5-agility-labs-iam/issues .
 
-In this lab, you will learn how to leverage Azure AD as an IDaaS provider while using APM as a SAML SP. Since v15.1, F5 has offered a "Guided Configuration" template to make this integration easier for administrators.
+In this lab, students will learn how to leverage Azure AD as an IDaaS provider while using APM as a SAML SP. Since v15.1, F5 has offered a "Guided Configuration" template to make this integration easier for administrators.
 
 This template:
 
 #. Publishes on-prem apps
 #. Enables Single Sign-on
-#. Interconnect (SAML binding) APM with an Azure AD tenant
+#. Interconnects (SAML binding) APM with an Azure AD tenant
 
-.. note :: You will notice we will never connect directly to the Azure AD interface. APM will use Microsoft's Graph API to configure the AAD tenant accordingly.
+.. note :: You will notice we never connect directly to the Azure AD interface. APM will use Microsoft's Graph API to configure the AAD tenant accordingly.
 
    |image001|
 
@@ -65,7 +65,7 @@ This application is **authenticated** by Kerberos so a **Signle Sign-On** will b
 
 
 Task 1  - Check IIS configuration (Optional)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 #. RDP to IIS with ``f5access\user`` as user, and ``user`` as password
@@ -103,21 +103,21 @@ Architecture of Cloud App
    |image010|
 
  
-.. warning :: It is important to note this application is **not tied** to APM. APM only publishes and protects on-prems apps. All other cloud and SaaS apps are directly connected to Azure AD.
+.. warning :: It is important to note that this application is **not tied** to APM. In this lab, APM only publishes and protects on-prem apps. All other cloud and SaaS apps are directly connected to Azure AD.
 
 
 Section 1.2 - Deploy APM to protect Bluesky App
 --------------------------------------------------------
 
-In this section, we will publish the ``Bluesky`` application hosted on-prems.
+In this section, we will publish the ``Bluesky`` application hosted on-prem.
 
 
 Task 1 - Publish and protect Bluesky app
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Let's start with ``Bluesky`` application. Reminder, Bluesky does not have any ``Authentication`` enabled. 
+Let's start with the ``Bluesky`` application. Reminder, Bluesky does not have any ``Authentication`` enabled. 
 
-#. RDP to win10 (user/user) and launch Edge or Chrome. Using the BIG-IP bookmark, connect to the BIG-IP user interface (admin/admin)
+#. Either access TMUI via UDF > Access > BIG-IP > TMUI or RDP to win10 (user/user) and launch Edge or Chrome. Using the BIG-IP bookmark, connect to the BIG-IP user interface (admin/admin)
 #. In ``Access`` > ``Guided Configuration``, select ``Microsoft Integration`` > ``Azure AD application`` 
 
 
@@ -130,7 +130,7 @@ Task 2 - Configuration Properties
 #. Click ``Next`` and start the configuration
 #. Configure the page as below
 
-   #. Configuration Name : ``IIS-Bluesky-<My Name>``  Why my name ? This app will be created in Azure AD tenant and we need to differentiate all apps. Example : ``IIS-Bluesky-MattD`` If possible, please at least use your first name and last initial.
+   #. Configuration Name : ``IIS-Bluesky-<My Name>``  Why my name ? This app will be created in Azure AD tenant and we need to differentiate all apps. Example : ``IIS-Bluesky-ChrisMi`` The chance of name conflicts increases with the number of students so if possible, please at least use your first name and two character of your last name.
    #. In ``Azure Service Account Details``, Select ``Copy Account Info form Existing Configuration``, and select ``IIS-baseline``, then click ``Copy``
 
       |image012|
@@ -180,7 +180,7 @@ Task 4 - Azure Active Directory
 
 #. Select ``Azure BIG-IP APM Azure AD...`` template
 
-   .. note :: As you can notice, there are several templates available for different applications. Here, in this lab, we will publish a generic app. So we select the first template.
+   .. note :: As you notice, there are several templates available for different applications. In this lab, we will publish a generic app so we select the first template.
 
 #. Click ``Add``
 #. In the new screen, configure as below
