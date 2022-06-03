@@ -58,7 +58,7 @@ Vanilla application
 
 This application also resides on-prem in IIS. Its FQDN is ``https://vanilla.f5access.onmicrosoft.com`` 
 
-This application is **authenticated** by Kerberos so a **Signle Sign-On** will be required to connect to this app.
+This application is **authenticated** by Kerberos so a **Single Sign-On** will be required to connect to this app.
 
    |image004|
 
@@ -73,23 +73,21 @@ Task 1  - Check IIS configuration (Optional)
 
    |image005|
 
-#. In the Connections tree, click on ``vanilla`` and ``Authentication``
+#. In the Connections tree, expand ``IIS``, ``Sites``, click ``vanilla``, and finally, double-click ``Authentication``
 
    |image006|
 
-#. You can notice ``Anonymous Auth`` is **Disabled** and ``Windows Authentication`` is **Enabled**
+#. You'll notice ``Anonymous Auth`` is **Disabled** and ``Windows Authentication`` is **Enabled**
 
    |image007|
 
-.. note :: In the next class we will configure APM to publish, protect and SSO to internal apps.
+.. note :: In the next class we will configure APM to publish, protect and SSO to internal apps. Feel free to close your RDP session to the IIS Server.
 
 
 Architecture of Cloud App
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. note :: In this use case, we don't cover only internal, sensitive or legacy applications. In a real world, customers have applications on-prem and in the public cloud.
-
-.. note :: A Wordpress application is already up and running in Azure Cloud at this address ``https://wordpress-apm-aad.azurewebsites.net/``
+.. note :: Since customers often have a mixture of authenticated and non-authenticated apps running on-prem and in the public cloud, this lab utilizes an Application hosted in Azure that doesn't leverage APM for authentication. This application does leverage Azure AD and is meant simply to illustrate the user-experience with such a mixture of application types. This wordpress application is already up and running in Azure Cloud at this address ``https://wordpress-apm-aad.azurewebsites.net/``
 
    |image008|
 
@@ -101,9 +99,6 @@ Architecture of Cloud App
 #. This App Service is already bound with our demo Azure AD tenant.
 
    |image010|
-
- 
-.. warning :: It is important to note that this application is **not tied** to APM. In this lab, APM only publishes and protects on-prem apps. All other cloud and SaaS apps are directly connected to Azure AD.
 
 
 Section 1.2 - Deploy APM to protect Bluesky App
@@ -130,7 +125,7 @@ Task 2 - Configuration Properties
 #. Click ``Next`` and start the configuration
 #. Configure the page as below
 
-   #. Configuration Name : ``IIS-Bluesky-<My Name>``  Why my name ? This app will be created in Azure AD tenant and we need to differentiate all apps. Example : ``IIS-Bluesky-ChrisMi`` The chance of name conflicts increases with the number of students so if possible, please at least use your first name and two character of your last name.
+   #. Configuration Name : ``IIS-Bluesky-<My Name>``  Why my name ? This app will be created in Azure AD tenant and we need to differentiate all apps. Example : ``IIS-Bluesky-ChrisMi`` The chance of name conflicts increases with the number of students so if possible, please at least use your first name and two characters of your last name. You can leave ``SSO``, ``Endpoint Checks``, and ``Additional Checks`` at their defaults (not selected.)
    #. In ``Azure Service Account Details``, Select ``Copy Account Info form Existing Configuration``, and select ``IIS-baseline``, then click ``Copy``
 
       |image012|
@@ -139,7 +134,7 @@ Task 2 - Configuration Properties
     
       .. note:: In the real world, this is where you'd configure the application settings from the Azure Service Application created for APM. You have to create an Azure Application so that APM gets access to Microsoft Graph API. Due to **security best practices**, we won't show the application secret in this lab.
 
-      .. note:: The steps to create this Azure applications are below
+      .. note:: For those curious, the steps to create this Azure applications are below
 
          #. In Azure AD, create a service application under your organization's tenant directory using App Registration.
          #. Register the App as Azure AD only single-tenant.
@@ -155,11 +150,11 @@ Task 2 - Configuration Properties
          #. Grant admin consent for your organization's directory.
          #. Copy the Client ID, Client Secret, and Tenant ID and add them to the Azure AD Application configuration.
 
-   #. Click ``Test Connection`` button --> Connection is valid
+   #. In the guided configuration UI, Click the ``Test Connection`` button and the result should yield --> Connection is valid
 
       |image013|
 
-    #. Click ``Next``
+    #. Click ``Save & Next``
 
 
 Task 3 - Service Provider
@@ -178,11 +173,10 @@ Task 3 - Service Provider
 Task 4 - Azure Active Directory
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Select ``Azure BIG-IP APM Azure AD...`` template
+#. Double-click the ``F5 BIG-IP APM Azure AD...`` template
 
    .. note :: As you notice, there are several templates available for different applications. In this lab, we will publish a generic app so we select the first template.
 
-#. Click ``Add``
 #. In the new screen, configure as below
 
    #. Signing Key : ``default.key``
@@ -196,7 +190,7 @@ Task 4 - Azure Active Directory
 
       .. note :: We have to assign Azure AD users/group to this app, so that they can be allowed to connect to it.
 
-      #. In the list, click ``Add`` for the user ``user1``. If you can't find it, search for it in the ``search`` field.
+      #. In the list, click ``Assign`` for the user ``user1``. If you can't find it, search for it in the ``search`` field.
          
 
          |image016|
@@ -216,7 +210,7 @@ Task 5 - Virtual Server Properties
 #. Configure the VS as below
 
    #. IP address : ``10.1.10.104``
-   #. ``ClientSSL`` profile. We will get a TLS warning in the browser, but it does not matter for this lab.
+   #. The ``ClientSSL`` profile is selected by default so let's use that one. We'll get a TLS warning in the browser, but it doesn't matter for this lab.
 
       |image018|
 
@@ -226,8 +220,9 @@ Task 5 - Virtual Server Properties
 Task 6 - Pool Properties
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Select ``Create New``
-#. In Pool Servers, select ``/Common/10.1.20.9`` This is the IIS server.
+#. Leave the ``Select a Pool` setting as ``Create New``
+#. In Pool Servers, select ``/Common/10.1.20.9`` from the drop-down menu. This is the Lab's IIS server whose config you may have viewed earlier. 
+#. Click ``Save & Next``
 
    |image019|
 
@@ -245,42 +240,42 @@ Task 8 - Deploy your app template
    |image020|
 
 
-#. Behind the scene, the deployment creates an ``Azure Enterprise Application`` for ``Bluesky``. We can see it in ``Azure portal`` (you don't have access in this lab). With this Enterprise Application, Azure knows where to redirect the user when authenticated. And this app has the certificate and key used to sign the SAML assertion.
+#. Behind the scenes, the deployment creates an ``Azure Enterprise Application`` for ``Bluesky``. We can see it in ``Azure portal`` (you don't have access in this lab). With this Enterprise Application, Azure knows where to redirect the user after they're authenticated. This app will also have the certificate and key used to sign the SAML assertion.
 
    |image021|
-
+#. Click ``Finish`` and ``OK`` on the Confirmation Pop-Up Dialog Box.
 
 Task 9 - Test your deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #. RDP to Win10 machine as ``user`` and password ``user``
-#. Open ``Microsoft Edge`` browser - icon is on the Desktop
-#. Click on the ``bookmark`` ``Bluesky``
-#. You will be redirected to Azure AD login page. Login as ``user1@f5access.onmicrosoft.com``, and for the password please ask to the instructor.
+#. Open ``Google Chrome`` or the ``Microsoft Edge`` browser - both icons are on the Desktop and the Taskbar
+#. From the bookmarks list/toolbar, choose ``Bluesky`` and ignore the inevitable cert warnings.
+#. You will be redirected to Azure AD login page. Login as ``user1@f5access.onmicrosoft.com`` and hit ``Next``. When asked for the password, use XX.
 
-   .. warning :: Don't reset or change the password so that all students can use it.
+   .. warning :: Don't reset or change the password.
 
    |image022|
 
-#. You are redirected to APM with a SAML assertion, and can access to Bluesky application
+#. After being successfully authenticated by Azure AD, you're redirected to APM with a SAML assertion. After validating this assertion, APM allows you to access the Bluesky application. You'll want to keep your RDP session to ``Win10`` open since you'll use it again for subsequent testing.
 
    |image023|
 
 Section 1.3 - Deploy APM to protect the Vanilla App
 --------------------------------------------------------
 
-In this section, we will publish the ``Vanilla`` application hosted on-prems.
+In this section, we will publish the ``Vanilla`` application which like bluesky, is hosted on-prem.
 
 
 Task 1 - Publish and protect Vanilla app
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Let's continue with ``Vanilla`` application. Reminder, Vanilla application as ``Authentication`` enabled with Kerberos auth. So, we will need to enable ``Kerberos Constrained Delegation``. 
+Unlike Bluesky, the Vanilla application has ``Authentication`` enabled via Kerberos and because APM won't have access to an Azure AD user's password, we'll need to enable and leverage ``Kerberos Constrained Delegation``. 
 
-#. Connect to BIG-IP HTTPS user interface from UDF as ``admin`` and password ``admin``
+#. As before, Connect to the BIG-IP GUI directly from UDF or via Win10 with admin/admin.
 #. In ``Access`` > ``Guided Configuration``, select ``Microsoft Integration`` > ``Azure AD application`` 
 
-   .. note :: As you can notice, we deploy one template per application
+   .. note :: As you'll notice, we only deploy one application per Guided Config template.
 
    |image011|
 
@@ -291,7 +286,7 @@ Task 2 - Configuration Properties
 #. Click ``Next`` and start the configuration
 #. Configure the page as below
 
-   #. Configuration Name : ``IIS-Vanilla-<My Name>``  Why my name ? Because this app will be created in Azure AD tenant. And we need to differentiate all apps. 
+   #. Configuration Name : ``IIS-Vanilla-<My Name>``  Just like before, please try to use a unique string for My Name, IE your first name and first two characters of your last name. IIS-Vanilla-ChrisMi is an example name.  
    #. Enable ``Single Sign-on (SSO)``
 
       |image024|
@@ -301,7 +296,7 @@ Task 2 - Configuration Properties
 
       |image025|
     
-      .. note:: In a real world, you will set here the values from the Azure Service Application created for APM. You have to create an Azure Application so that APM get access to Microsoft Graph API. But for **security concerns**, I can't show in this lab the application secret.
+      .. note:: Just like before, a real-world deployment would require an administrator to obtain these values via the Azure Service App created for APM. This Azure Application must be created so that APM can access the Microsoft Graph API. 
 
       .. note:: The steps to create this Azure applications are below
 
@@ -319,12 +314,12 @@ Task 2 - Configuration Properties
          #. Grant admin consent for your organization's directory.
          #. Copy the Client ID, Client Secret, and Tenant ID and add them to the Azure AD Application configuration.
 
-   #. Click ``Test Connection`` button --> Connection is valid
+   #. In the Guided Config GUI, Click the ``Test Connection`` buttonwhich should yield --> Connection is valid
 
       |image026|
 
 
-   #. Click Next
+   #. Click ``Save & Next``
 
 
 Task 3 - Service Provider
@@ -333,7 +328,7 @@ Task 3 - Service Provider
 #. Configure the page as below
 
    #. Host ``vanilla.f5access.onmicrosoft.com``
-   #. Entity ID is auto-filled ``https://vanilla.f5access.onmicrosoft.com/IIS-Bluesky-my name>``
+   #. The Entity ID is auto-filled ``https://vanilla.f5access.onmicrosoft.com/IIS-Bluesky-my name>``
 
 
       |image027|
@@ -344,7 +339,7 @@ Task 3 - Service Provider
 Task 4 - Azure Active Directory
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Select ``Azure BIG-IP APM Azure AD...`` template
+#. Double click the  ``F5 BIG-IP APM Azure AD...`` template
 
    .. note :: As you can notice, there are several templates available for different applications. Here, in this lab, we will publish a generic app. So we select the first template.
 
@@ -362,7 +357,7 @@ Task 4 - Azure Active Directory
 
       .. note :: We have to assign Azure AD users/group to this app, so that they can be allowed to connect to it.
 
-      #. In the list, click ``Add`` for the user ``user1``. If you can't find it, search for it in the ``search`` field.
+      #. In the list, click ``Assign`` for the user ``user1``. If you can't find it, search for it in the ``search`` field.
          
          |image029|
 
@@ -380,7 +375,7 @@ Task 5 - Virtual Server Properties
 #. Configure the VS as below
 
    #. IP address : ``10.1.10.103``
-   #. ``ClientSSL`` profile. We will get a TLS warning in the browser, but it does not matter for this lab.
+   #. Since we'll use the already-selected, existing ``ClientSSL`` profile, you don't have to do anything for the Client SSL Profile section. We'll get a TLS warning in the browser, but it doesn't matter for this lab.
 
 
       |image031|
@@ -391,8 +386,9 @@ Task 5 - Virtual Server Properties
 Task 6 - Pool Properties
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Select ``Create New``
-#. In Pool Servers, select ``/Common/10.1.20.9`` This is the IIS server.
+#. For ``Select a Pool``, leave ``Create New`` selected
+#. In Pool Servers, select ``/Common/10.1.20.9`` This is once again the lab's IIS server whose config you investigated earlier. 
+#. Click ``Save & Next``
 
    |image032|
 
@@ -400,20 +396,22 @@ Task 6 - Pool Properties
 Task 7 - Single Sign-On Settings
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. In ``Selected Single Sign-on Type``, select ``Kerberos``, and select ``Advanced Settings``
+#. Check the ``Advanced Settings`` box so it's ``On``
+#. Check the ``Single Sign-On box.
+#. In ``Selected Single Sign-on Type``, select ``Kerberos``, and select ``Create New`` for ``SSO Configuration Object``
 
    |image033|
 
 #. In ``Credentials Source``, fill as below
 
-    #. Username Source : ``session.logon.last.username``
-    #. Delete User Realm Source value - keep it empty. The domain is similar between Azure AD and on-prems AD.
+    #. Username Source : Change this value to ``session.logon.last.username``
+    #. Clear out the text in  ``User Realm Source``. The domain is similar between Azure AD and on-prem AD so we don't need a realm variable.
 
 #. In ``SSO Method Configuration``, fill as below
 
     #. Kerberos Realm : ``f5access.onmicrosoft.com``
     #. Account name : ``host/apm-deleg.f5access.onmicrosoft.com``
-    #. Account Password : ``F5twister$``
+    #. Account Password : ``F5twister$`` (You'll be asked to enter this password twice for confirmation)
     #. KDC : ``10.1.20.8``
     #. UPN Support : ``Enaled``
     #. SPN Pattern : ``HTTP/%s@f5access.onmicrosoft.com``
@@ -421,7 +419,7 @@ Task 7 - Single Sign-On Settings
       |image034|
 
 
-#. Click ``Save & Next``
+#. Leave the other settings at their default values and Click ``Save & Next``
 
 
 
@@ -433,11 +431,11 @@ Task 8 - Session Management Properties
 Task 9 - Deploy your app template
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Click ``Deploy``
+#. Click ``Deploy`` and after patiently waiting, click ``Finish`` and ``OK`` on thhe Pop-Up Dialog Box once the deployment is successful
 
    |image035|
 
-#. Behind the scene, the deployment creates an ``Azure Enterprise Application`` for ``Bluesky``. We can see it in ``Azure portal`` (you don't have access in this lab). With this Enterprise Application, Azure knows where to redirect you when authenticated. And this app has the certificate and key used to sign the SAML assertion.
+#. Behind the scenes, the deployment creates an ``Azure Enterprise Application`` for ``Bluesky``. We can see it in ``Azure portal`` (you don't have access in this lab). With this Enterprise Application, Azure knows where to redirect the user after they're authenticated. This app will also have the certificate and key used to sign the SAML assertion.
 
    |image036|
 
@@ -448,43 +446,42 @@ Task 9 - Deploy your app template
 Task 10 - Test your deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. RDP to Win10 machine as ``user`` and password ``user``
-#. Open ``Microsoft Edge`` browser - icon is on the Desktop
-#. Click on the ``bookmark`` ``Vanilla``
-#. You will be redirected to Azure AD login page - only if your previous session with ``Bluesky`` expired in APM. Login as ``user1@f5access.onmicrosoft.com``, and for the password please ask to your instructor (if you are prompted). But as you already authenticated against Azure AD, you still have a session in Azure AD.
+#. If you closed your RDP session to Win10, pleae re-connect as ``user`` and password ``user``
+#. Open ``Google Chrome`` or ``Microsoft Edge`` - the icons are on the Desktop and the Taskbar
+#. From the bookmarks menu/toolbar, select ``Vanilla`` and ignore the Cert Errors.
+#. Since you already logged into Azure AD when accessing ``BlueSky``, you may notice you didn't need to sign-in again and were automatically taken into the application. Your previous assertion was still validated but it was done transparently. If you were sent to Azure AD again for authenticaton, please use the same credentials as before: Login as ``user1@f5access.onmicrosoft.com``, and XX for the password.
 
    |image037|
 
 
    
 
-#. You are redirected to APM with a SAML assertion, and can access to Vanilla application.
-#. APM did ``Single Sign-on`` with Vanilla application (Kerberos Constrained Delegation)
+#. Reminder: Since APM doesn't have a SAML user's password if it isn't the IdP, it performs server-side ``Single Sign-on`` with the Vanilla application via ``Kerberos Constrained Delegation`` in which it requests a Kerberos Ticket on behalf of the user leveraging the username found in the SAML Assertion sent by Azure AD.
 
    |image038|
   
-#. Click ``Bluesky`` bookmark, you can access ``Bluesky`` application as well.
-#. Extra lab, enable ``Inspect mode`` in Edge, and follow the SAML redirections to understand the workflow.
+#. In your already-open browser, Click the ``Bluesky`` bookmark. You'll notice you were automatically authenticated with your already-existing Azure AD session. 
+#. Optional: enable ``Inspect mode`` in Edge or ``Dev Tools`` in Chrome, and follow the SAML redirections to understand the workflow.
 
 Section 1.4 - Leverage Azure AD to protect Cloud Apps
 --------------------------------------------------------
 
-In this lab, we will check that ``user1`` can access any cloud app federated with Azure AD.
+In this lab, we will verify that ``user1`` can access any cloud app federated with Azure AD.
 
-In a real world, companies deploy applications ``on-prems`` and in ``public clouds``. If the company uses **Azure AD as IDaaS**, it will federate all cloud apps with this Azure AD tenant.
+As mentioned earlier, customers often deploy applications ``on-prem`` and in ``public clouds``. If the customer uses **Azure AD as their IDaaS**, it will federate all cloud apps within this Azure AD tenant.
 
-This is what we prepared for you in this lab. This application is **federated** with our Azure AD tenant.
+As an example, we've configured a ``Wordpress Cloud Application``. This application is **federated** with our Azure AD tenant.
 
-You have **nothing** to configure on APM side, as everything is dealed between the ``cloud app`` and ``Azure AD``. In Azure portal, we configured ``Oauth`` for the cloud app, so that every user reaching this app will be redirected to Azure login page.
+Since everything is handled between the App and Azure AD, you have **nothing** to configure on the APM side. In the Azure portal, we configured ``OAuth`` for the cloud app so that every user attempting to access this App would be redirected to Azure AD for Authentication. 
 
    |image039|
 
 
-#. RDP to Win10 machine as ``user`` and password ``user``
-#. Open ``Microsoft Edge`` browser - icon is on the Desktop
-#. Click on the ``bookmark`` ``Wordpress Cloud App``
-#. You will be redirected to Azure AD login page (it can take a while - look at the address bar). Login as ``user1@f5access.onmicrosoft.com``, and for the password please ask to the instructor (if prompted). You already have a session up and running in Azure AD, from previous class.
-#. You are redirected to the ``cloud app`` in Azure cloud, and can access to Wordpress-UDF application.
+#. If not already connected, RDP to Win10 as ``user`` and password ``user``
+#. Open ``Google Chrome`` or ``Microsoft Edge`` - icons are on the Desktop and Taskbar
+#. Click on the bookmarks menu/toolbar and select ``Wordpress Cloud App``
+#. Just like before, you'll only be redirected to the Azure AD login page if your prior session expired. Accessing this app can take a while so be patient. Pay special attention to the address bar and you'll notice the redirects during the authentication process. If prompted for creds, Login as ``user1@f5access.onmicrosoft.com``, and XX for the password.
+#. After Azure AD authenticates (either transparently or via login,) you're redirected to the ``cloud app`` in Azure cloud, and can access to Wordpress-UDF application.
 
    |image040|
 
@@ -492,13 +489,13 @@ You have **nothing** to configure on APM side, as everything is dealed between t
 Section 1.5 - Clean up the Lab
 --------------------------------------------------------
 
-.. warning :: In order to keep the Azure AD tenant clean, it is important you delete your application in Guided Configuration, when your demo is finished.
+.. warning :: In order to keep the Azure AD tenant clean, it is important you delete your application in the Guided Configuration, when your demo is finished.
 
-#. In Guided Configuration menu, click on the ``Undeploy`` icon, then ``OK``
+#. In Guided Configuration menu, click on the ``Undeploy`` icon for IIS-Bluesky, then ``OK``. After it finishes, do the same for IIS-Vanilla. You don't need to do anything for IIS-baseline.
 
    |image041|
    
-#. When finished, click on ``Delete`` icon
+#. After undeploying has finished, click on the ``Delete`` icon for each app, then ``OK``. 
 
    |image042|
 
