@@ -14,7 +14,7 @@ This lab documents provides foundational concepts for understanding Access Polic
    module1/lab*
    module1/appendix.rst
 
-102- Webtop Features
+102- Access Building Blocks
 ------------------------------
 .. toctree::
    :maxdepth: 1
@@ -24,12 +24,11 @@ This lab documents provides foundational concepts for understanding Access Polic
    module2/lab*
 
 
+103- Webtop Features
+------------------------------
+.. toctree::
+   :maxdepth: 1
+   :glob:
 
-
-
-
-
-
-
-
-   
+   module3/intro.rst
+   module3/lab*
