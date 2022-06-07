@@ -251,7 +251,7 @@ Task 9 - Test your deployment
 #. RDP to Win10 machine as ``user`` and password ``user``
 #. Open ``Google Chrome`` or the ``Microsoft Edge`` browser - both icons are on the Desktop and the Taskbar
 #. From the bookmarks list/toolbar, choose ``Bluesky`` and ignore the inevitable cert warnings.
-#. You will be redirected to Azure AD login page. Login as ``user1@f5access.onmicrosoft.com`` and hit ``Next``. When asked for the password, use XX.
+#. You will be redirected to Azure AD login page. Login as ``user1@f5access.onmicrosoft.com`` and hit ``Next``. The password is stored in a text file named ``azure_ad_creds.txt`` on the Win10 Desktop.
 
    .. warning :: Don't reset or change the password.
 
@@ -449,7 +449,7 @@ Task 10 - Test your deployment
 #. If you closed your RDP session to Win10, pleae re-connect as ``user`` and password ``user``
 #. Open ``Google Chrome`` or ``Microsoft Edge`` - the icons are on the Desktop and the Taskbar
 #. From the bookmarks menu/toolbar, select ``Vanilla`` and ignore the Cert Errors.
-#. Since you already logged into Azure AD when accessing ``BlueSky``, you may notice you didn't need to sign-in again and were automatically taken into the application. Your previous assertion was still validated but it was done transparently. If you were sent to Azure AD again for authenticaton, please use the same credentials as before: Login as ``user1@f5access.onmicrosoft.com``, and XX for the password.
+#. Since you already logged into Azure AD when accessing ``BlueSky``, you may notice you didn't need to sign-in again and were automatically taken into the application. Your previous assertion was still validated but it was done transparently. If you were sent to Azure AD again for authenticaton, please use the same credentials as before: ``user1@f5access.onmicrosoft.com`` and the password is stored in a text file named ``azure_ad_creds.txt`` on the Win10 Desktop.
 
    |image037|
 
@@ -480,7 +480,7 @@ Since everything is handled between the App and Azure AD, you have **nothing** t
 #. If not already connected, RDP to Win10 as ``user`` and password ``user``
 #. Open ``Google Chrome`` or ``Microsoft Edge`` - icons are on the Desktop and Taskbar
 #. Click on the bookmarks menu/toolbar and select ``Wordpress Cloud App``
-#. Just like before, you'll only be redirected to the Azure AD login page if your prior session expired. Accessing this app can take a while so be patient. Pay special attention to the address bar and you'll notice the redirects during the authentication process. If prompted for creds, Login as ``user1@f5access.onmicrosoft.com``, and XX for the password.
+#. Just like before, you'll only be redirected to the Azure AD login page if your prior session expired. Accessing this app can take a while so be patient. Pay special attention to the address bar and you'll notice the redirects during the authentication process. If prompted for creds, Login as ``user1@f5access.onmicrosoft.com`` and the password is stored in a text file named ``azure_ad_creds.txt`` on the Win10 Desktop.
 #. After Azure AD authenticates (either transparently or via login,) you're redirected to the ``cloud app`` in Azure cloud, and can access to Wordpress-UDF application.
 
    |image040|
