@@ -314,7 +314,7 @@ Task 2 - Configuration Properties
          #. Grant admin consent for your organization's directory.
          #. Copy the Client ID, Client Secret, and Tenant ID and add them to the Azure AD Application configuration.
 
-   #. In the Guided Config GUI, Click the ``Test Connection`` buttonwhich should yield --> Connection is valid
+   #. In the Guided Config GUI, Click the ``Test Connection`` button which should yield --> Connection is valid
 
       |image026|
 
@@ -413,7 +413,7 @@ Task 7 - Single Sign-On Settings
     #. Account name : ``host/apm-deleg.f5access.onmicrosoft.com``
     #. Account Password : ``F5twister$`` (You'll be asked to enter this password twice for confirmation)
     #. KDC : ``10.1.20.8``
-    #. UPN Support : ``Enaled``
+    #. UPN Support : ``Enabled``
     #. SPN Pattern : ``HTTP/%s@f5access.onmicrosoft.com``
 
       |image034|
