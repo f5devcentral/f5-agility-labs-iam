@@ -214,6 +214,7 @@ html_theme_options = {
                         'next_prev_link': True
                      }
 html_last_updated_fmt = '%Y-%m-%d %H:%M:%S'
+html_codeblock_linenos_style = 'table'
 
 if on_rtd:
     templates_path = ['_templates']
