@@ -1,15 +1,20 @@
-Lab 1: APM GUI Overview
+Lab 1: Configure Identity Aware Proxy(16.0)
 ===========================================
 
-Objectives
-----------
+The Zero Trust Architecture shifts many of the objects that would exist in a per-session policy to the per-request policy thereby creating a more secure authentication and authorization scheme. The authenticity of each request is further enhanced through the use of F5’s Access Guard agent installed on a client.  This agent provides a PKI signed report of the posture assessment performed on the client real-time rather than the historical way plug-ins reported status. Previously, after a user connected to an application they would experience a delay in access as the agent performed the posture assessment to provide an unsigned report to the BIG-IP. 
 
-The intention of this lab will be to show how to enable Access Policy Manager (APM) through resource provisioning.  Next we will explore all the components within the **Access** left menu.
-This is not a deep dive on the components but an overview of the components, features and concepts of APM.
+Topics Covered
+----------------
+- Real-time Posture Assessments
+- Per-Request Frameworks
+- Contextual Access
+- HTTP Connector
+
+Expected time to complete: **1 hour**
 
 
 Setup Lab Environment
------------------------------------
+--------------------------
 
 To access your dedicated student lab environment, you will need a web browser and Remote Desktop Protocol (RDP) client software. The web browser will be used to access the Unified Demo Framework (UDF) Training Portal. The RDP client will be used to connect to the jumphost, where you will be able to access the BIG-IP management interfaces (HTTPS, SSH).
 
@@ -17,9 +22,9 @@ To access your dedicated student lab environment, you will need a web browser an
 
 #. Click **ACCESS** next to jumphost.f5lab.local
 
-   |accessjh|
+   |image90|
 
-#. Select your RDP resolution.
+#. Select your RDP resolution.  
 
 #. The RDP client on your local host establishes a RDP connection to the Jump Host.
 
@@ -30,876 +35,509 @@ To access your dedicated student lab environment, you will need a web browser an
 
 #. After successful logon the Chrome browser will auto launch opening the site https://portal.f5lab.local.  This process usually takes 30 seconds after logon.
 
+	|image91|
+
 #. Click the **Classes** tab at the top of the page.
 
-	|accessportal|
+#. Scroll down the page until you see **201- 16.0 Zero Trust - Identity Aware Proxy** on the left
 
+   |image87|
 
-#. Scroll down the page until you see **101 Intro to Access Foundational Concepts** on the left
+#. Hover over tile **Configure Identity Aware Proxy(16.0)**. A start and stop icon should appear within the tile.  Click the **Play** Button to start the automation to build the environment
 
-   |101intro|
+   |image88|
 
-#. Hover over tile **APM GUI Overview**. A start and stop icon should appear within the tile.  Click the **Play** Button to start the automation to build the environment
+#. The screen should refresh displaying the progress of the automation within 30 seconds.  Scroll to the bottom of the automation workflow to ensure all requests succeeded.  If you you experience errors try running the automation a second time or open an issue on the `Access Labs Repo <https://github.com/f5devcentral/access-labs>`__.
 
+   |image89|
 
-   +---------------+-------------+
-   | |guioverview| | |guiflyout| |
-   +---------------+-------------+
+#. Close Chrome.
 
-#. After the click it may take up to 30 seconds before you see processing
 
-   |process|
 
-#. Scroll to the bottom of the automation workflow to ensure all requests succeeded.  If you experience errors try running the automation a second time or open an issue on the `Access Labs Repo <https://github.com/f5devcentral/access-labs>`__.
+Section 1.1 - Access Guided Configuration
+----------------------------------------------
 
-   |issues|
+The first step in deploying the IAP is accessing Guided Configuration
 
-Task 1: Resource Provisioning
----------------------------------------
-Access Policy Manager (APM) is a module available for use on the BIG-IP platform (Hardware and Virtual).  Unlike other modules, APM can be provisioned with limited functionality on any BIG-IP platform without a specific license (`see F5 KB15854 <https://support.f5.com/csp/article/K15854>`__).  APM is licensed based on the number of Access Sessions and Concurrent Users Sessions (`see APM Operations Guide <https://support.f5.com/csp/article/K72971039>`__). You can provision APM limited and immediately start using all the functions of APM with a limitation of 10 Access and Concurrent user session.
+Task  1 - Access the Zero Trust IAP guided configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-      .. Important::  APM has already been provisioned for this lab.  The next step would be completed if you are provisioning on your own BIG-IP.
+#. Open Firefox, and navigate to https://bigip1.f5lab.local
 
-#. Log in to bigip1.f5lab.local with administrative credentials provided
-#. On the left menu navigate to **System** --> **Resource Provisioning**
-#. Click box and on the drop down next to the module and choose **Nominal**
+#. Login with username **admin** and password **admin**
 
-      .. Note:: In most use cases you will want to use **Nominal** for provisioning modules.  What does each setting mean?
+   |image2|
 
-      +---------------+---------------------------------------------------------------------------------------+
-      |Dedicated      |Specifies that all resources are dedicated to the module you are provisioning. For all |
-      |               |other modules, the level option must be set to none.                                   |
-      +---------------+---------------------------------------------------------------------------------------+
-      |Minimum        |Specifies that you want to provision the minimum amount of  resources for the module   |
-      |               |you are provisioning.                                                                  |
-      +---------------+---------------------------------------------------------------------------------------+
-      |Nominal        |Specifies that you want to share all of the available resources equally among all of   |
-      |               |the modules that are licensed on the unit.                                             |
-      +---------------+---------------------------------------------------------------------------------------+
+#. Click on the **Access** tab located on the left side
 
-      |image01|
+   |image3|
 
+#. Click **Guided Configuration**
 
-#. Before you click on Submit note that this operation will halt operations while the module provisions.  Do not do this on an active unit processing traffic unless you are in an outage window. This will not require a reboot but will take approximately 1 to 5 minutes to complete.
+   |image4|
 
-      |image02|
-      |image03|
+#. Click **Zero Trust**
 
-      .. Note::  Resource Provisioning is not a synced item between HA pairs.  You will need to provision the module on all devices in the cluster.
+   |image5|
 
-Task 2: Guided Configuration
------------------------------
-Access Guided Configuration (AGC) provides an easy way to create BIG-IP configurations for categories of Access use cases. This feature is an independent release from TMOS and requires updates for new configurations from time to time. To find updates and expanded use cases it will be necessary to download and install updates from https://downloads.f5.com. In this task we are going to explore the menu and take a look at a few options. We will not be deploying any of these solutions in this lab.
+#. Click **Identity Aware Proxy**
 
-#.  Go to **Access** --> **Guided Configuration**
-#.  A set of tiles appears at top listing the areas of use cases where Guided Configuration can be used
+   |image6|
 
-      |image06|
+#. Click **Next**
 
-#.  Click on the Federation Tile.
-#.  Under this tile are several Identity Federation use cases available.  Each use case has an accompanying guide to walk you through the configuration.  This is not designed for already deployed applications but used for new deployments.  All the components needed to create the configuration will be deployed on the BIG-IP through this guide.  Editing and configuring of the solution will be maintained within this menu.
-#.  Click on **SAML Service Provider**
-#.  Here you will find there are couple topologies.  SAML SP Initiated and SAML IdP Initiated.
+   .. NOTE::  Review the design considerations for deploying IAP in a **Single Proxy** versus a **Multi-proxy** solution.
 
-      +------------+-----------+
-      | |image08|  | |image09| |
-      +------------+-----------+
+   |image7|
+   
+   
+Section 1.2 - General Properties
+------------------------------------------------
 
-#. If there are any required configuration pieces missing to complete guided configuration they will appear in the right pane
+In this section, you will configure the IAP policy to perform posture assessment from client devices.  
 
-      |image07|
+Task 1 - Select the component to configure for Lab 1
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Below the topologies you will find all the components that will be configured using the guided configured
+#. Define the configuration name **IAP_DEMO**
 
-      |image10|
+#. Click **Device Posture**
 
-#.  From here you would click next to begin configuration. (We will explore this further in the 300 Series labs)
-#.  Click on the Guide Configuration bread crumb at the top of the screen to return to the main menu.
-#.  Click on the Zero Trust tile.
-#.  Zero trust follows the principle never trust, always verify and thus enforces authentication and verification for every user or device attempting to access resources whether from within or outside of the network.
+#. Click **Multi Factor Authentication**
 
-      **About Identity Aware proxy**
+#. Click **Single Sign-On (SSO)& HTTP Header**
 
-      The easiest way to create policies to support zero trust security is to use the Zero Trust-Identity Aware Proxy template in Access Guided Configuration. The template takes you through the
-      steps needed to create an Identity Aware Proxy. Access Policy Manager (APM) acts as the Identity Aware Proxy helping to simplify client access to both multi-cloud and on-premise web applications,
-      and securely manage access from client devices.
+#. Click **Webtop**
 
-      On APM, you can develop per-request policies with subroutines that perform different levels of authentication, federated identity management, SSO (single sign on), and MFA (multi-factor
-      authentication) depending on the requirements. Subroutines perform continuous checking based on a specified duration or gating criteria. Policies can be as complex or as simple as you need
-      them to be to provide seamless yet secure access to resources. Refer to Implementing Zero Trust with Per-Request Policies for many examples of per-request policies that implement different
-      aspects of zero trust.
+#. Click **Save & Next**
 
-      For additional security, device posture checking provides instantaneous device posture information. The system can continuously check clients to be sure, for example, that their antivirus,
-      firewall, and patches meet company requirements, ensuring that the device maintains trust at all times.
+   |image8|
 
-      On the client side, F5 Access Guard allows real-time posture information to be inspected with per-request policy subroutines. F5 Access Guard generates posture information asynchronously,
-      and transparently transmits it to chosen APM server endpoints using special HTTP headers. Refer to BIG-IP Access Policy Manager: Configuring F5 Access Guard
-      for details on client requirements.
 
-#.  Click on the **Identity Aware Proxy** configuration option
-#.  There are two topologies available:
+Section 1.3 - Device Posture
+------------------------------------------------
 
-      +---------------+-------------+-------------+
-      |Single Proxy   | |image13|   |  |image17|  |
-      +---------------+-------------+-------------+
-      |Multi-Proxy    | |image019|  |  |image16|  |
-      +---------------+-------------+-------------+
+Task 1 - Enable Posture Checks
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#.  Proceeding with this configuration will create a number of object as seen here.
+#. Check **Enable F5 Client Posture Check**
 
-      .. Note::  If you are interested in learning more on this specific solution please consider taking the Zero Trust Identity Aware Proxy class.
+#. select **ca.f5lab.local** from the CA Trust Certificate dropdown list
 
-      |image18|
+#. Select **Add** to create a posture assessment group
 
-      .. Note:: Webtop is available as of version 16.0
+   |image9|
 
+Task 2 - Define a firewall Posture Assessment
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+#. Define the Posture Group Name **FW_CHECK**
+#. Check the **Firewall** box
+#. Check the **Domain Managed Devices** box
+#. Enter the Domain Name **f5lab.local** 
+#. Click **Done**
 
-Task 3: Overview
------------------
-The Overview menu is where an administrator can view active sessions, previous sessions, and view various reports.
+   |image10|
 
-#.  Click on **Access** --> **Overview** from the left menu
-#.  Here is where we would see Active Sessions.  When users login to applications using APM policies the sessions will appear in this pane.
 
-      |activesessions|
+Task 3 - Verify the posture assessment 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#.  This is also where you will be able to kill sessions.  For more on logging see Lab 3
+#. The Posture Settings box should contain **FW_CHECK**
+#. Click **Save & Next**
 
-      |killsession|
+   |image11|
+   
+   
+Section  1.4 - Virtual Server
+------------------------------------------------
 
-#.  Click on **Access** --> **Overview** --> **Access Report**
-#.  This section will give you details on the all sessions active and inactive.  Each log item is a message on the policy flow as a user walks through an Access policy.  (We will cover Per Session and Per Request policies in in more detail later).
-#.  You will be prompted to enter a time period to run the report
+In this section, you will define the virtual server IP address and its SSL profile settings 
 
-      |image22|
+Task 1 - Create a virtual server
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-      .. Note:: This is how you can view past sessions.  Pick a time frame and run a report.
+#. Enable **Advanced Settings** located in the top left corner
+#. Enter the IP address **10.1.10.100** in Destination Address
+#. In the **Client SSL Profile** section, move **clientssl**  profile to **Available** side
+#. Double click the **acme.com-wildcard** to move the profile to **Selected**
 
-#.  There are two other reporting functions in this screen, **OAuth Report** and **SWG Reports**.  We will not cover these reports in this lab.
-#.  The last section is Event Logs.
+   |image12|
 
-    .. Note:: URL Request Logs is part of SWG functionality and will not be covered in this lab
+#. In the **Server SSL Profile** section, double-click the **serverssl** SSL Profile to move it to the **Selected** side (or select it and then click the right-arrow to move)
+#. Click **Save & Next**
 
-#.  From the top menu bar Click on the drop down next to **Event Logs** and choose **Settings**. This is where you can create logging profiles for access policies.  From here you can specify what information to collect and to what detail.
-#.  Click the **Create** button
-#.  We will create a new APM Log profile
+   |image13|
 
-      +----------------------+---------------------------+----------------------------------+
-      |General Information   | Name                      |  basic_log_profile               |
-      +----------------------+---------------------------+----------------------------------+
-      |                      | Enable Access System Logs |  Check box                       |
-      +----------------------+---------------------------+----------------------------------+
-      |Access System Logs    | Publisher                 |  /Common/sys-db-access-publisher |
-      +----------------------+---------------------------+----------------------------------+
-      |                      | Access Policy             |  Notice                          |
-      +----------------------+---------------------------+----------------------------------+
-      |                      | ACL                       |  Notice                          |
-      +----------------------+---------------------------+----------------------------------+
-      |                      | Secure Web Gateway        |  Notice                          |
-      +----------------------+---------------------------+----------------------------------+
-      |                      | OAuth                     |  Notice                          |
-      +----------------------+---------------------------+----------------------------------+
-      |                      | VDI                       |  Notice                          |
-      +----------------------+---------------------------+----------------------------------+
-      |                      | ADFS Proxy                |  Notice                          |
-      +----------------------+---------------------------+----------------------------------+
-      |                      | Per-Request Policy        |  Notice                          |
-      +----------------------+---------------------------+----------------------------------+
-      |                      | SSO                       |  Notice                          |
-      +----------------------+---------------------------+----------------------------------+
-      |                      | ECA                       |  Notice                          |
-      +----------------------+---------------------------+----------------------------------+
-      |                      | PingAccess Profile        |  Notice                          |
-      +----------------------+---------------------------+----------------------------------+
-      |                      | Endpoint Management System|  Notice                          |
-      +----------------------+---------------------------+----------------------------------+
-      |Access Profile        | Selected                  |  (leave this blank for now)      |
-      +----------------------+---------------------------+----------------------------------+
 
-      .. Note:: Within the Access System Logs section of the log profile is where you can change the logging for various portions of the APM Policies.  The one you will use most will be to move Access Policy from Notice to Debug and/or Pre-Request Policy from Notice to Debug.  As you can see you can pick and choose what level of notifications you want in your logs.  This will impact what you see in Access Reports for a session and what appears in /var/log/apm.
+Section 1.5 - User Identity
+---------------------------------
 
-#.  Click OK
+In this section you will configure a single User Identity using Active Directory.  
 
-#.  From the left menu go to **Access** --> **Overview** --> **Dashboard**
+Task 1 - Configure Active Directory AAA
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-      |image23|
+#. Click **Add**
 
-#.  The Dashboard can give you a quick synopsis on Access Session, Network Access Session, Portal Access and Access control Lists.
+   |image14|
 
-      |Dashboard|
+#. Enter **"ad"** for the name
+#. Ensure the Authentication Type is **AAA**
+#. Ensure the Choose Authentication Server Type is set to **Active Directory**
+#. Select **ad-servers** from the Choose Authentication Server dropdown box
+#. Check **Active Directory Query Properties**
 
-      .. Note:: For more reporting on APM stats look to BIG-IQ or exporting logs to 3rd party SIEMs and create your own dashboard.
+   |image15|
 
-Task 4: Profile/Policies
-------------------------
-Profiles and Policies are where we begin to learn about what makes APM function.  In order for APM functions to be added to a Virtual server we need to create Access Profiles and Policies.  These entities take all the components we will look at below and put them in a logical flow through the Visual Policy Editor (VPE). These entities are things like login pages, authentication, single sign on methods and endpoint checks.  To being we have to create an Access Profile.  Within that profile we create a per session policy.  When that is completed we attach that profile to a Virtual Server.
-
-.. Note::  You can associate one Access Profile (which includes a per-session policy) and one per-request policy per virtual server.
-
-.. Important:: We will creating objects for use within this task.
-
-#.  From the left menu go to **Access** --> **Profiles/Policies** --> **Access Profiles (Per-Session Policies)**
-
-      The per-session policy runs when a client initiates a session. (A per-session policy is also known as an access policy.) Depending on the actions you include in the access policy, it can authenticate the user and perform other actions that populate session variables with data for use throughout the session.
-
-#.  Click on the Create button on the far right
-
-      +----------------------+---------------------------+----------------------------------+
-      |General Properties    | Name                      | server1-psp                      |
-      +----------------------+---------------------------+----------------------------------+
-      |                      | Profile Type              |  All                             |
-      +----------------------+---------------------------+----------------------------------+
-      |                      | Profile Scope             |  Profile                         |
-      +----------------------+---------------------------+----------------------------------+
-      |                      | Customization Type        |  Modern                          |
-      +----------------------+---------------------------+----------------------------------+
-      |Language Settings     | Accepted Languages        |  English                         |
-      +----------------------+---------------------------+----------------------------------+
-
-      .. Note:: Customization Type is a newer setting that changes the look and feel of login pages.  For the traditional look you can **Standard**
-
-#.  Click **Finished**
-#.  Now we have a basic profile.  There were a number of other settings to modify and use in the profile.  For now we will focus just on the basics.
-#.  From the **Access Profiles (Per-Session Policies)** section locate the **server1-psp**
-#.  There are two ways to edit the Policy piece of the profile.
-
-    First way
-
-    +----------------------------------------------------------------------------+
-    | Click on the profile                                                       |
-    +----------------------------------------------------------------------------+
-    | Click on **Access Policy** from the top menu bar                           |
-    +----------------------------------------------------------------------------+
-    | Click on the link to **Edit Access Policy for Profile "server1-psp"**      |
-    +----------------------------------------------------------------------------+
-    | This will take you to the Visual Policy Editor (VPE)                       |
-    +----------------------------------------------------------------------------+
-
-    Second way
-
-    +-----------------------------------------------------------------------------------+
-    | Locate the **server1-psp** in the Profile list and follow the line to the right.  |
-    +-----------------------------------------------------------------------------------+
-    | Middle of the line there will be an **Edit** link                                 |
-    +-----------------------------------------------------------------------------------+
-    | Click the **Edit** link                                                           |
-    +-----------------------------------------------------------------------------------+
-
-#.  Close the VPE (we will visit the VPE and policy in more detail later)
-#.  Return to **Access** --> **Profiles/Policies** --> **Access Profiles (Per-Session Policies)**
-#.  Click on the **server1-psp** and explore the settings for the Profile.
-
-    +----------------------+------------------------------------------------------------------------------------+
-    | Settings             | Here you can manage settings for the profile. You may want to change timeouts, max |
-    |                      | sessions and login attempts. These are settings specifically for this profile.     |
-    +----------------------+------------------------------------------------------------------------------------+
-    | Configurations       | These are more advanced options and covered in other labs                          |
-    +----------------------+------------------------------------------------------------------------------------+
-    | Language Settings    | You have to set this at creation.                                                  |
-    +----------------------+------------------------------------------------------------------------------------+
-
-    .. Note:: If you are unsure of the settings you need at profile creation you can see that you can return to the profile and make adjustments.
-
-#.  Still in the profile click on **SSO/Auth Domain** at the top
-
-      BIG-IP APM offers a number of Single Sign On (SSO) options.  The SSO/Auth Domain tab in a Per Session Profile is where you will select what SSO method to use for your application. In Task 6 we will cover the objects that need to be created in order to associate that SSO method to a policy.  At this time the drop down for the SSO Configuration will have a pre-built SSO object we will use later.
-
-      .. Note::  We will not discuss Multi-Domain in this lab but you can find more information in the Appendix
-
-#.  From the top menu bar click on **Logs**
-#.  The log profile we created earlier is now listed here.  The Default log profile is attached but we can remove that and add the **basic_log_profile**
-#.  Click Update.
-
-    That concludes the review of the Per Session policy.
-
-    .. Note:: A per session profile is required (even if it is blank) to be deployed with a per request policy
-
-**Per Request policies**
-
-#.  From the left menu navigate to **Access** --> **Profiles/Policies** --> **Per Request Policies**
-
-      APM executes per-session policies when a client attempts to connect to the enterprise. After a session starts, a per-request policy runs each time the client makes an HTTP or HTTPS request. Because of this behavior, a per-request policy is particularly useful in the context of a Secure Web Gateway or Zero Trust scenario, where the client requires re-verification on every request, or changes based on gating criteria.
-
-      A per-request policy can include a subroutine, which starts a subsession. Multiple subsessions can exist at one time. You can use nearly all of the same agents in per-request policies that you can use in per-session policies. However, most of the agents (including authentication agents) have to be used in a subroutine in per-request policies.
-
-#. Click **Create**
-
-      +----------------------+---------------------------+----------------------------------+
-      |General Properties    | Name                      |  server1_prp_policy              |
-      +----------------------+---------------------------+----------------------------------+
-      |                      | Profile Type              |  All                             |
-      +----------------------+---------------------------+----------------------------------+
-      |                      | Incomplete Action         |  Deny                            |
-      +----------------------+---------------------------+----------------------------------+
-      |                      | Customization Type        |  Modern                          |
-      +----------------------+---------------------------+----------------------------------+
-      |Language Settings     | Accepted Languages        |  English                         |
-      +----------------------+---------------------------+----------------------------------+
-
-#. Click **Finished**
-
-#. Click **Edit**
-
-      A per request policy creation will work the same way as a per session policy allowing you to add various items to the main policy and create macros. In addition a per request policy can also contain subroutines.
-
-      .. Note:: A per-request policy subroutine is a collection of actions. What distinguishes a subroutine from other collections of actions (such as macros), is that a subroutine starts a subsession that, for its duration, controls user access to specified resources. If a subroutine has an established subsession, subroutine execution is skipped. A subroutine is therefore useful for cases that require user interaction (such as a confirmation dialog or a step-up authentication), since it allows skipping that interaction in a subsequent access.
-
-      You cannot use subroutines in macros within per-request policies.
-      Subroutine properties specify subsession timeout values, maximum macro loop count, and gating criteria. You can reauthenticate, check for changes on the client, or take other actions based on timeouts or gating criteria.
-
-      .. Note:: A subsession starts when a subroutine runs and continues until reaching the maximum lifetime specified in the subroutine properties, or until the session terminates. A subsession populates subsession variables that are available for the duration of the subsession. Subsession variables and events that occur during a subsession are logged. Multiple subsessions can exist at the same time. The maximum number of subsessions allowed varies across platforms. The total number of subsessions is limited by the session limits in APM (128 * max sessions). Creating a subsession does not count against the license limit.
-
-#. If you click on the plus between Start and Allow a new box will appear and you can explore the various components that can be added.  At this time we will leave the policy blank and return to populate it in later tasks.
-#. Close the VPE tab when you are done exploring.
-
-**Policy Sync**
-
-#. Click on **Access** --> **Profiles/Policies** --> **Policy sync**
-
-      BIG-IP APM Policy Sync maintains access policies on multiple BIG-IP APM devices while adjusting appropriate settings for objects that are specific to device locations, such as network addresses. You can synchronize policies from one BIG-IP APM device to another BIG-IP APM device, or to multiple devices in a device group.
-
-      A sync-only device group configured for automatic and full sync is required to synchronize access policies between multiple devices.
-
-      .. Important:: USE WITH CAUTION.  This is an advanced feature and you should consult with your F5 Account team or Professional Services before implementing this configuration.
-
-      .. Note:: In BIG-IP 13.1.0, a maximum of eight BIG-IP APM systems are supported in a sync-only group type.
-
-**Customization**
-
-#. Click on **Access** --> **Profiles/Policies** --> **Customization**
-
-      **What are customization and localization?**
-
-      Customization and localization are ways to change the text and the language that users see, and to change the appearance of the user interface that Access Policy Manager presents to client users. Customization provides numerous settings that let you adapt the interface to your particular operation. Localization allows you to use different languages in different countries.
-
-      **About the Customization tool**
-
-      The Customization tool is part of Access Policy Manager (APM). With the Customization tool, you can personalize screen messages and prompts, change screen layouts, colors, and images, and customize error messages and other messages using specific languages and text for policies and profiles developed in APM. You can customize settings in the Basic Customization view (fewer settings) or change the view to General Customization (many settings). In the General Customization view, you can use the Customization tool in the BIG-IP admin console, or click Popout to open it in a separate browser window. In either view, you can click Preview to see what an object (such as Logon page or Deny Ending Page) will look like.
-
-      After you personalize settings, remember to click the **Save** icon to apply your changes.
-
-#. About basic, general, and advanced customization
-
-      The Customization tool provides three views that you can use to customize the interface. The General Customization view provides the greatest number of options
-      and is where most of the customization takes place.
-
-      +----------------------+--------------------------------------------------------------------------------------------------------------------+
-      | View                 | Description                                                                                                        |
-      +======================+====================================================================================================================+
-      | Quick Start/Basic    |Basic customization provides a limited set of options intended for quick modification of the objects that are       |
-      | Customization        |commonly displayed to users. This is the default customization view. Use this to configure basic look and feel      |
-      |                      |for pages, and common text labels and captions for resources on the webtop. Different options exist depending on    |
-      |                      |the Customization Type selected when the policy was created.                                                        |
-      +----------------------+--------------------------------------------------------------------------------------------------------------------+
-      | General              |This view provides a tree structure containing all the configuration elements, and more detailed options to         |
-      | Customization        |customize objects, such as:                                                                                         |
-      |                      |                                                                                                                    |
-      |                      |- The size, color, and placement of forms and screens.                                                              |
-      |                      |- The look and feel of objects with more opportunities to replace images.                                           |
-      |                      |- Text on the screen, including headers and footers.                                                                |
-      |                      |- Messages, including installation and error messages.                                                              |
-      |                      |                                                                                                                    |
-      |                      |Any text or image that you can customize using the visual policy editor, can also be adjusted using the general     |
-      |                      |customization UI. Different options exist depending on the Customization Type selected when the policy was created, |
-      |                      |and which elements were added to the access or per-request policy.                                                  |
-      +----------------------+--------------------------------------------------------------------------------------------------------------------+
-      | Advanced             |Advanced customization provides direct access to PHP, Cascading Style Sheets (CSS), JavaScript, and HTML files that |
-      | Customization        |you can edit to control the display and function of web and client pages in Access Policy Manager.                  |
-      +----------------------+--------------------------------------------------------------------------------------------------------------------+
-
-      .. Note:: See the `APM Customization guide <https://techdocs.f5.com/en-us/bigip-16-0-0/big-ip-access-policy-manager-customization.html>`__ for further details on customization
-
-#. Under **Available Profiles** choose the **/Common/server1-psp**
-#. Select Language:  **English**
-#. Let's upload a new image.  Click **Upload New Image**
-#. Browse to **Desktop** and locate the **Lab01_images** folder
-#. Choose an image from the selection and click **Open**
-#. Pick a Background color
-#. Pick a Header Background color
-#. Change the footer Text
-#. Remember to click **Save** icon at the bottom
-
-    |image014|
-
-    ..Note:: If you click the Preview button at the bottom of this screen you will get to preview the page you are editing.  However, we are going to use the Preview button located at the top right of this GUI.
-
-#. Click on the **Preview** button (At the top right)
-
-    |image015|
-
-#. Choose **Access Profiles** --> **/Common/server1-psp** --> **Access Policy** --> **Ending pages** -- **Deny**
-
-      Bonus Answer:  Why don't we see logon pages?
-
-      .. Hint::  What is in the policy so far?
-
-Task 5: Authentication
-----------------------------
-
-BIG-IP APM serves as an authentication gateway or proxy. As an authentication proxy, BIG-IP APM provides separate client-side and server-side authentication. Client-side authentication occurs between the client and BIG-IP APM. Server-side authentication occurs between BIG-IP APM and servers.
-
-Loose coupling between the client-side and server-side layers allows for a rich set of identity transformation services. Combined with a Visual Policy Editor and an expansive set of access iRules functionality, BIG-IP APM provides flexible and dynamic identity and access, based on a variety of contexts and conditions.
-
-For example, a client accessing Microsoft SharePoint through BIG-IP APM in a corporate environment may silently authenticate to BIG-IP APM with NT LAN Manager (NTLM) or Kerberos credentials. On leaving that environment, or on using a different non-sanctioned device, the client may be required to go through another potentially stronger authentication, such as a smart card or other client certificate, RSA SecurID, or one-time passcode. You can require additional device vetting such as file, folder, and registry checks and antivirus and firewall software validation.
-
-A BIG-IP APM authentication and SSO features access and identity security posture can automatically change depending on environmental factors, such as who or where the user is, what resource the user is accessing, or when or with what method the user is attempting to gain access.
-
-Data centers and Cloud deployments often face the challenge of offering multiple applications with different authentication requirements. You can deploy BIG-IP APM to consolidate and enforce all client-side authentication into a single process. BIG-IP APM can also perform identity transformation on the server side to authenticate to server services using the best-supported methods. This can reduce operational costs since applications remain in the most-supported and documented configurations. Common examples of identity transformation are client-side public key infrastructure (PKI) certificate to server-side Kerberos and client-side HTTP form to server-side HTTP Basic.
-
-The following figure shows BIG-IP APM acting as an authentication gateway. Information received during pre-authentication is transformed to authenticate to multiple enterprise applications with different requirements.
-
-|image25|
-
-#. Client-side authentication
-
-      Client-side authentication involves the client (typically a user employing a browser) accessing a BIG-IP APM virtual server and presenting identity. This is called authentication, authorization, and accounting (AAA).
-
-      BIG-IP APM supports industry standard authentication methods, including:
-
-      - NTLM
-      - Kerberos
-      - Security Assertion Markup Language (SAML)
-      - Client certificate
-      - RSA SecurID
-      - One-time passcode
-      - HTTP Basic
-      - HTTP Form
-      - OAuth 2.0
-      - OpenId Connect
-
-      After access credentials are submitted, BIG-IP APM validates the listed methods with industry-standard mechanisms, including:
-
-      - Active Directory authentication and query
-      - LDAP and LDAPS authentication and query
-      - Remote Authentication Dial-in User Service (RADIUS)
-      - Terminal Access Controller Access Control System (TACACS)
-      - Online Certificate Status Protocol (OCSP) and Certificate Revocation List Distribution Point (CRLDP) (for client certificates)
-      - Local User Database authentication
-
-#. Go to **Access** --> **Authentication** --> **Active Directory**
-#. Click on basic-ad-servers and review the settings.  You can choose to use go direct or use a pool of AD servers.
-
-      +----------------------+-----------------------------+----------------------------------+
-      |General Properties    | Name                        |  basic-ad-servers                |
-      +----------------------+-----------------------------+----------------------------------+
-      |Configuration         | Domain Name                 |  f5lab.local                     |
-      +----------------------+-----------------------------+----------------------------------+
-      |                      | Server Connection           |  Use Pool                        |
-      +----------------------+-----------------------------+----------------------------------+
-      |                      | Domain Controller Pool Name |  /Common/basic-ad-pool           |
-      +----------------------+-----------------------------+----------------------------------+
-      |                      | IP Address                  |  10.1.20.7                       |
-      +----------------------+-----------------------------+----------------------------------+
-      |                      | Hostname                    |  dc1.f5lab.local                 |
-      +----------------------+-----------------------------+----------------------------------+
-      |                      | Admin Name                  |  admin                           |
-      +----------------------+-----------------------------+----------------------------------+
-      |                      | Admin Password              |  admin                           |
-      +----------------------+-----------------------------+----------------------------------+
-
-      .. Note:: If you choose to use a pool you can create the pool as you create the AD object.  You can also choose to use Direct which allows you to only use one server. Go back and click create to see what this looks like.
-
-      |adpool|
-
-      You now have an object that can be used to facilitate Active Directory authentication in front of any application.  The application itself does not need to require authentication. If you were to deploy a policy with AD Auth on a Virtual Server for a web application the policy would preset a login page, prompt for credentials, verify the credentials against this AD object before allowing a user to access the web application.
-
-#. Go to **Access** --> **Profiles/Policies** --> **Access Profiles (Per-Session Policies)**
-#. Locate the **server1-psp** and click **Edit**
-#. Click the **+** symbol between Start and Deny.
-#. From the **Logon** tab select the **Logon Page** radio button
-#. Click **Add Item**
-#. Notice that you can add fields and change the names of the fields.  Click **Save**
-#. Click the **+** between **Logon Page** and Deny
-#. Click the **Authentication** tab
-#. Choose the **AD Auth** radio button and click **Add Item**
-#. Under the **Server** field click on the drop down menu and choose the AAA server **basic-ad-servers**
+#. Double-click **memberOf** in the Required Attributes box 
 #. Click **Save**
-#. On the Success branch click on the **Deny** end point and choose **Allow** then click **Save**
-#. Click **Apply Access Policy**
 
-      |basicpolicy|
+   |image16|
 
-      Now you have a basic policy with AD Authentication that you can leverage for Web Pre-Authorization in front of any application.
+Section 1.6 - MFA
+------------------------------------------------
 
-#. Go to **Local Traffic** --> **Virtual Servers**
-#. Locate **server1-https** and click on it
-#. Scroll down to the **Access Policy** section.  Next to **Access Profile** click the drop and chose server1-psp
-#. Scroll down to the bottom and click **Update**
-#. In a new browser tab go to http://server1.acme.com and Login
+In this section you will configure a RADIUS server to enable simulated MFA capabilities.
 
-      +---------------+--------------+
-      | username      | user1        |
-      +---------------+--------------+
-      | password      | user1        |
-      +---------------+--------------+
 
-Task 6: Single Sign-On
-----------------------------
+Task 1 - Configure a RADIUS AAA Server
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-..Note:: All the objects used to demonstrate Server-side Single Sign-On have already been created.  The next steps will walk you through what the configuration looks like.
+#. Click the **MFA** tab
 
-Client side and server side are loosely coupled in the authentication proxy. Because of this, BIG-IP APM can transform client-side identity values of one type into server-side identity values of another type. You configure SSO within an SSO profile, which is applied to an access profile. The system triggers SSO at the end of successful access policy evaluation and on subsequent client-side requests.
+   |image17|
 
-BIG-IP APM supports industry standard authentication methods, including:
+#. Click **Add**
 
-    - NTLM
-    - Kerberos
-    - HTTP Basic
-    - HTTP Form
-    - Security Assertion Markup Language (SAML)
+   |image18|
 
-    .. Note:: Client-side authentication methods outnumber server-side methods. This is because BIG-IP APM does not transmit client certificate, RSA SecurID, or one-time passcodes to the server on the client’s behalf.
+#. Double click **Custom Radius Based**
 
-#.  Go to **Access** --> **Single Sign-On** --> **HTTP Basic**
-#.  Click **basic-sso**
+   |image19|
 
-        +----------------------+-----------------------------+----------------------------------+
-        |General Properties    | Name                        |  basic-sso                       |
-        +----------------------+-----------------------------+----------------------------------+
-        |Credential Source     | Username Source             |  session.sso.token.last.username |
-        +----------------------+-----------------------------+----------------------------------+
-        |                      | Password Source             |  session.sso.token.last.password |
-        +----------------------+-----------------------------+----------------------------------+
-        |SSO Method Conversion | Username Conversion         |  unchecked                       |
-        +----------------------+-----------------------------+----------------------------------+
+#. Select **Create New** from the Choose RADIUS Server dropdown
 
-        .. Note::  Username conversion can be enabled if you want domain\\username or username@domain to convert to just username.
+   |image20|
 
-#. Click on **Access** --> **Profiles/Policies** --> **Access Profiles (Per-Session Policies)**
-#. Locate the **basic-psp** profile and click on the name
-#. Click on **SSO/Auth Domains**
-#. Under SSO Configuration notice **basic_sso** is selected
-#. From the top menu bar click **Access Policy** and click **Edit Access Policy for Profile "basic-psp"** link
+#. Enter the Server Pool Name **radius_pool**
+#. Enter the Server Address **10.1.20.8**
+#. Enter the Secret **secret**
+#. Click **Save**
 
-      |basicpsp|
+   |image21|
 
-#. Click on **SSO Credential Mapping**
+#. Verify **Custom RADIUS based Authentication** appears
+#. Click **Save & Next**
 
-      |ssocredmap|
+   |image22|
 
-      .. Note:: You can modify these options based on the variables collected in the user's session.  In this case we accept the defaults.
 
-#. Open an incognito window and try go to https://basic.acme.com
-#. You should have been prompted with a windows login.  Close the Window
-#. Go to **Local Traffic** --> **Virtual Servers** and open **basic-https**
-#. Scroll to **Access Policy** and click the drop down next to **Access Profile**.  Choose **basic-psp**
+Section 1.7 - SSO & HTTP Header
+------------------------------------------------
 
-      |policyattach|
+In this section you will configure HTTP Basic SSO.
 
-#. Scroll down click **Update**
-#. Open a new incognito tab.  Go to https://basic.acme.com
-#. Login **user1** and **user1**
-#. Now you should have been signed in to the backend server with Single Sign On.
+Task 1 - Create a HTTP basic SSO object
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Task 7: Federation
-----------------------------
 
-..Note:: In this task we will examine SAML IDP and SP configuration.  All the configuration has been completed the next several steps you will just be examining the objects and testing the configuraiton.  For more in depth instruction on Federatoion consider taking a 300 series course.
+#. Click **Add**
 
-**BIG-IP APM federation with SAML**
+   |image23|
 
-    BIG-IP APM supports SAML 2.0 and can act as the IdP for popular SPs, such as Microsoft Office 365 and Salesforce. The system supports both IdP- and SP-initiated identity federation deployments.
+#. Enter the name **basic_sso**
+#. Verify **HTTP Basic** is selected
+#. Select **Create New** from the SSO Configuration Object dropdown box
 
-**IdP-initiated federation with BIG-IP APM**
+   |image24|
 
-      |samlidp|
+#. Verify the Username Source is **session.sso.token.last.username**
+#. Verify the Password Source is **session.sso.token.last.password**
+#. Click **Save**
 
-      - The user logs in to the BIG-IP APM IdP and the system directs them to the BIG-IP APM webtop.
-      - The user selects the SP they want, such as Salesforce.
-      - The system retrieves any required attributes from the user data store to pass on to the SP.
-      - The system uses the browser to direct the request to the SP, along with the SAML assertion and any required attributes.
+   |image25|
 
 
-#. In a new tab go to https://idp.acme.com
-#. Login to the SAML IdP
+#. Verify the **basic_sso** object was created
+#. click **Save & Next**
 
-      +------------+-----------+
-      | Username:  | user1     |
-      +------------+-----------+
-      | Password:  | user1     |
-      +------------+-----------+
+   |image26|
 
-      |samlidplogin|
 
 
-#. You are logged in to a webtop where a SAML SP object resides.  Click on the SAML Resource sp.acme.com
 
-      |webtopsaml|
+Section 1.8 - Applications
+------------------------------------------------
 
-#. Since you authenticated through the SAML IdP you will not be prompted for authentication again and are connected to the SAML SP resource.
+In this section you will define a single application
 
-      |spacme|
+Task 1 - Create basic.acme.com application
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Return to bigip1.f5lab.local.  From the left menu click **Access** --> **Profiles/Policies** --> **Access Profiles (Per-Session Policies)**
-#. Locate the policy **idp-psp** and click on **Edit**
+#. Enter Auth Domain **iap1.acme.com** 
+#. Click **Add**
 
-      |idppsp|
+   |image27|
 
-#. Click *AD Auth** object within the Policy.  Examine the settings
+#. Enter **basic.acme.com** for the application name
+#. Enter **basic.acme.com** for the FQDN
+#. Enter the IP address **10.1.20.6** for the pool member
+#. Click **Save** 
 
-      |idpadauth|
+   |image28|
 
-      .. Note::  If you look at the AAA server under Active directory you will find the idp-ad-server object.  We are leveraging Active Directory as the credential verification but BIG-IP is acting as a SAML Identity Provider.  BIG-IP will verify the credentials against Active Directory and create a SAML Assertion for the user requesting access.  That assertion can then be used by the SAML Service Provider to provide access to the SAML SP resource.
+#. Verfiy **basic.acme.com** application was created
+#. Click **Save & Next**
 
-      |samlidpaaa|
+   |image29|
 
-#. Click **Advanced Resource Assign**. Examine the settings
+Section 1.9 - Webtop
+---------------------------
 
-      |samladvres|
+Task 1 - Modify the Webtop setting
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-      .. Note::  You can click on the Add/Delete button and add other SAML Resources (if available).  We will cover more on Webtop in the Access 102 lab.
+#. Set the Primary Authentication to **ad**
+#. Verify **basic.acme.com** is listed under Application
+#. Click **Save & Next**
 
-#. Return to the BIG-IP click on **Access** --> **Federation** --> **SAML Identity Provider**
+   |image30|
 
-      |samlidpobj|
-      |samlbindexp|
+Section 1.10 - Contextual Access
+-------------------------------------
 
-      In order for the BIG-IP to be configured as a SAML IdP you must define the Identity provider and bind it with a SAML Service Provider.  This object contains the settings required to configure BIG-IP as a SAML SP.  For more information on SAML and uses with BIG-IP consider taking the Federation lab.
+In this section you will define contextual access for the previously created application.  Context access is where all of the previously created objects are put together to provide fine-grain access control.
 
-      .. Note::  You can export the Metadata of the SAML IdP in this menu by clicking the SAML IdP and clicking the Export Metadata button.  It will output an XML file that you can use to upload in to a SAML Service Provider with all the IdP setting particular to this IdP.
+Task 1 - Create Contextual Access for basic.acme.com
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**SP-initiated federation with BIG-IP APM**
+#. Click **Add**
 
-      |samlsp|
+   |image31|
 
-      - The user logs in to the SP, such as Salesforce.
-      - The SP uses the browser to redirect the user back to the BIG-IP APM IdP.
-      - The BIG-IP APM IdP prompts the user to log in.
-      - The system retrieves any required attributes from the user data store to pass on to the SP.
-      - The system uses the browser to send the SAML assertion and any required attributes to the SP.
+#. Enter **basic.acme.com** for the contextual access name
+#. Select **basic.acme.com** from the Resource dropdown box
+#. Select **fw_check** from the Device Posture dropdown box
+#. Select **ad** from the Primary Authentication dropdown box
+#. Select **basic_sso** from the Single Sign-On dropdown box
+#. Enter **Sales Engineering** in the Filter by Group Name.  This group assignment section controls the display of resources on the Webtop.  It does not control the access to the actual resource.  That will be covered in lab2.
+#. Click **Add** beside the Group Name
 
-#. Open a new incognito window and go to https://sp.acme.com
-#. Notice that you get redirected to https://idp.acme.com for authentication
+   |image32|
 
-      |spinitiated|
+#. Check **Additional Checks**
+#. For the Default Fallback rule, select **Step Up** from the dropdown box under **Match Action**
+#. Select **Custom Radius based Authentication (MFA)** from the Step Up Authentication box
+#. Click **Save**
 
-      +------------+-----------+
-      | Username:  | user1     |
-      +------------+-----------+
-      | Password:  | user1     |
-      +------------+-----------+
+   |image33|
 
-#. Once logged in you arrive at https://sp.acme.com
+#. Verify **basic.acme.com** Contextual Access
+#. Click **Save & Next**
 
-      |spacme|
+   |image33-2|
 
-#. Return to the BIG-IP.  From the left menu navigate to **Access** --> **Profiles/Policies** --> **Access Profiles (Per-Session Policies)**
-#. Locate the sp-psp profile and cick **Edit**
 
-      |sppsp|
 
-      SAML Auth
+Section 1.11 - Customization
+------------------------------------------------
 
-      |samlspauth|
+The Customization section allows an administrator to define the images, colors, and messages that are presented to a user.
 
-#. Return to the BIG-IP and navigate to **Access** --> **Federation** --> **SAML Service Provider**
+Task 1 - Customize the Remediation Page URL
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-      |samlspobj|
+The default **remediation Page** URL uses the hostname site **request.com**.  This should be changed to reference a real host where users can download and install the EPI updates.
 
-      The SAML SP object contains information about the SAML SP object and the binding to the SAML Identity Provider.  You can see on the screen that we have a Service Provider object defined and it is bound to a SAML Identity Provider.  The configuration of these objects is covered in more detail in the Access Federation labs.
+#. Scroll down to the Remediation Page Section
 
+   |image36|
 
-Task 8: Connectivity/VPN
-----------------------------
+#. Enter the URL **https://iap1.acme.com/epi/downloads**
 
-..Note:: In interest of time the VPN configuration has already been completed.  The next several steps will be observing what the configuration looks like and testing out the connectivity.
+   |image37|
 
-**Policy Walk-Through**
+#. Click **Save & Next**
 
-#.  Navigate to **Access** --> **Profiles/Policies** --> **Access Profiles (Per-Session Policies)**
-#.  Locate profile **vpn-psp** and click on **Edit**.  This opens the Visual Policy Editor (VPE) and we can take a look at the policy
+#. On the Session Management Properties menu, Click **Save & Next**
 
-      |image001|
 
-#.  A user enters their credentials into the logon page agent.
-    - Those credentials are collected, stored as the default system session variables of session.logon.last.username and session.logon.last.password.
+Section 1.12 - Summary
+------------------------------------------------
 
-#.  The AD Auth Agent validates the username and password session variables against the configured AD Domain Controller.
-#.  The user is assigned resources defined in the Advanced Resource Assign Agent
-#.  The user is granted access via the Allow Terminal
-#.  If unsuccessful, the user proceeds down the fallback branch and denied access via the Deny Terminal
+The **Summary** page allows you to review the configuration that is about to be deployed.  In the event a change is required anywhere in the configuration the **pencil icon** on the right side can be selected to quickly edit the appropriate section.
 
-**Policy Agent Configuration**
 
-The Logon Page contains only the default setting
 
-      |image002|
+Task 1 - Deploy the configuration 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The AD Auth agent defines the AAA AD Servers that a user will be authenticated against.  All Setting are the default.
+#. Click **Deploy**
 
-      |image003|
+   |image38|
 
+#. Once the deployment is complete, click **Finish**
 
-The Advanced Resource Assign agent grants a user access to the assigned resources.
 
-      |image004|
+Section 1.13 - Testing 
+------------------------------------------------
 
+In this section you will access the application basic.acme.com and watch how the BIG-IP restricts access when a device fails it's posture assessment.
 
-**Supporting APM Objects**
+.. warning::
+   You must use **Firefox** for testing!
 
-**Network Access Resource**
+Task 1 - Access basic.acme.com
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Navigate to **Access** --> **Connectivity/VPN** --> **Network Access (VPN)** --> **Network Access Lists**
-#. Click the **vpn** Network Access Profile
+.. NOTE:: Posture Assessments in a Per-Request Policy use F5 Access Guard(running on clients) to perform posture assessments prior to accessing an application.  This improves the user experience since posture checks do not introduce any delay when accessing the application. This also improves security by allowing posture assessments to occur continuously throughout the life of the session.
 
-      The Properties page contains the Caption name **VPN**.  This is the name displayed to a user.
+#. From the jumpbox, browse to https://iap1.acme.com
+#. At the logon page enter the Username:**user1** and Password:**user1**
+#. Click **Logon**
 
-            |image005|
+   |image39|
 
+#. Click the **basic.acme.com** tile on the webtop
 
-      - The Network Settings tab assigns the **lease pool** of ip addresses that will be used for the VPN.
-      - Split Tunneling is configured to permit only the **10.1.20.0/24** subnet range inside the VPN.
+   |image40|
 
-            |image006|
 
+#. The RADIUS logon page, prepopulates the username:**user1**.  Enter the PIN: **123456** in the password field
 
-**Lease Pool**
+   |image41|
 
-#. Navigate to **Access** --> **Connectivity/VPN** --> **Network Access (VPN)** --> **IPV4 Lease Pools**
-#. Click **vpn-vpn_pool** lease pool object
+#. The SSO profile passes the username and password to the website for logon.
 
-      A single address of **10.1.20.254** is assigned inside the lease pool.
+   |image42|
 
-            |image007|
+#. Close the browser Window to ensure there is not cached data
 
 
-**Webtop Sections**
 
-#. Navigate to **Access** --> **Webtops** --> **Webtop Sections**
-#. Click on **vpn-network_access**
+Task 2 - Disable Windows Firewall
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-      A single section is configured to display a custom name.
+#. Right click the computer icon in the taskbar and open **Network and Sharing Center**
 
-      |image008|
+   |image43|
 
+#. Click **Windows Firewall**
 
-**Webtop Lists**
+   |image44|
 
-#. Navigate to **Access** --> **Webtops** --> **Webtop Lists**
-#. Click on **vpn-webtop**
+#. Click **Turn Windows Firewall on or off**
 
-      - A Full Webtop was defined with modified default settings.
-      - The Minimize to Tray box is **checked** to ensure the Webtop is not displayed when a user connects to the VPN.
+   |image45|
 
-      |image009|
+#. Click the radio button **Turn off Windows Firewall** 
+#. Click **Ok**
 
-**The Policy from a user's perspective**
+   |image46|
 
 
-#. The connects to https://vpn.acme.com with the following credentials
+Task 3 - See Deny Page iap1.acme.com
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-      +------------+-----------+
-      | Username:  | user1     |
-      +------------+-----------+
-      | Password:  | user1     |
-      +------------+-----------+
+#. From the jumpbox, browse to https://iap1.acme.com
+#. At the logon page enter the Username:**user1** and Password:**user1**
+#. Click **Logon**
 
-      |image010|
+   |image39|
 
-#. Once authenticated the user is presented a Webtop with a single VPN icon.
+#. Click the **basic.acme.com** tile on the webtop
 
-      |image011|
+   |image40|
 
-#. Assuming the VPN has already been installed the user is notified that the client is attempting to start
 
-      |image012|
+#. After approximately 15 seconds you will receive a deny page from the IAP stating that you have failed the network firewall check
 
-      .. Note::  You may be prompted to download the VPN update.  This is what a user will experience if you have auto-update enabled in the VPN Connectivity Profile. Click Download and wait for the components to update.
+   |image47|
 
-#. A popup opens displaying the status of the VPN connection.  The status will eventually become **Connected**
+#. Close the browser Window to ensure there is no cached data
 
-      |image013|
 
-      .. Note::  If you lose the pop-up check the system tray for the little red ball.  Right click and choose **restore**
+Task 4 - Enable Windows Firewall
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Click **Disconnect**
+#. Right click the computer icon in the taskbar and open **Network and Sharing Center**
 
+   |image43|
 
-.. Note:: For more information on API Protection consider taking the API Protection lab.  For more information on SWG, ACL and Webtops see the appendix or further APM labs.
+#. Click **Windows Firewall**
 
+   |image44|
 
-Task 8: Lab Cleanup
-----------------------------
+#. Click **Turn Windows Firewall on or off**
 
-#. Open a new tab and click on the Access: PORTAL bookmark then select **CLASSES**
-#. Locate the **APM GUI Overview** Tile and click on the **Stop** button
+   |image45|
 
-      +---------------+-------------+
-      | |guioverview| | |guistop|   |
-      +---------------+-------------+
+#. Click the radio button **Turn on Windows Firewall** 
+#. Click **Ok**
 
-#. Wait about 30 seconds for the processing to begin
+   |image48|
+   
+#. From the jumpbox, connect to https://iap1.acme.com webtop, and then access the **basic.acme.com** application
 
-      |process|
 
-#. This process will take up to 30 seconds.  Scroll to the bottom of the script and verify no issues.
+#. This concludes lab 1.
 
+   |image100|
 
-Lab 1 is now complete.
 
 
-
-.. |accessjh| image:: ./media/lab01/setup/accessjh.png
-.. |accessportal| image:: ./media/lab01/setup/accessportal.png
-.. |101intro| image:: ./media/lab01/setup/101intro.png
-.. |guioverview| image:: ./media/lab01/setup/guioverview.png
-.. |guiflyout| image:: ./media/lab01/setup/guiflyout.png
-.. |guistop| image:: ./media/lab01/setup/guistop.png
-.. |process| image:: ./media/lab01/setup/process.png
-.. |issues| image:: ./media/lab01/setup/issues.png
-.. |Dashboard| image:: ./media/lab01/Dashboard.png
-.. |image01| image:: ./media/lab01/image01.png
-.. |image02| image:: ./media/lab01/image02.png
-.. |image03| image:: ./media/lab01/image03.png
-.. |image06| image:: ./media/lab01/image6.png
-.. |image07| image:: ./media/lab01/image7.png
-.. |image08| image:: ./media/lab01/image8.png
-.. |image09| image:: ./media/lab01/image9.png
-.. |image10| image:: ./media/lab01/image10.png
-.. |image13| image:: ./media/lab01/image13.png
-.. |image16| image:: ./media/lab01/image16.png
-.. |image17| image:: ./media/lab01/image17.png
-.. |image18| image:: ./media/lab01/image18.png
-.. |sessionid| image:: ./media/lab01/sessionid.png
-.. |activesessions| image:: ./media/lab01/activesessions.png
-.. |killsession| image:: ./media/lab01/killsession.png
-.. |image22| image:: ./media/lab01/image22.png
-.. |image23| image:: ./media/lab01/image23.png
-.. |image25| image:: ./media/lab01/image25.png
-.. |adpool| image:: ./media/lab01/adpool.png
-.. |basicpsp| image:: ./media/lab01/basicpsp.png
-.. |ssocredmap| image:: ./media/lab01/ssocredmap.png
-.. |policyattach| image:: ./media/lab01/policyattach.png
-.. |basicpolicy| image:: ./media/lab01/basicpolicy.png
-.. |samlidp| image:: ./media/lab01/samlidp.png
-.. |samlidplogin| image:: ./media/lab01/samlidplogin.png
-.. |webtopsaml| image:: ./media/lab01/webtopsaml.png
-.. |spacme| image:: ./media/lab01/spacme.png
-.. |idppsp| image:: ./media/lab01/idppsp.png
-.. |idpadauth| image:: ./media/lab01/idpadauth.png
-.. |samlidpaaa| image:: ./media/lab01/samlidpaaa.png
-.. |samladvres| image:: ./media/lab01/samladvres.png
-.. |samlidpobj| image:: ./media/lab01/samlidpobj.png
-.. |samlbindexp| image:: ./media/lab01/samlbindexp.png
-.. |samlsp| image:: ./media/lab01/samlsp.png
-.. |spinitiated| image:: ./media/lab01/spinitiated.png
-.. |sppsp| image:: ./media/lab01/sppsp.png
-.. |samlspauth| image:: ./media/lab01/samlspauth.png
-.. |samlspobj| image:: ./media/lab01/samlspobj.png
-.. |image001| image:: ./media/lab01/001.png
-.. |image002| image:: ./media/lab01/002.png
-.. |image003| image:: ./media/lab01/003.png
-.. |image004| image:: ./media/lab01/004.png
-.. |image005| image:: ./media/lab01/005.png
-.. |image006| image:: ./media/lab01/006.png
-.. |image007| image:: ./media/lab01/007.png
-.. |image008| image:: ./media/lab01/008.png
-.. |image009| image:: ./media/lab01/009.png
-.. |image010| image:: ./media/lab01/010.png
-.. |image011| image:: ./media/lab01/011.png
-.. |image012| image:: ./media/lab01/012.png
-.. |image013| image:: ./media/lab01/013.png
-.. |image014| image:: ./media/lab01/014.png
-.. |image015| image:: ./media/lab01/015.png
-.. |image019| image:: ./media/lab01/019.png
+.. |image1| image:: media/lab01/image001.png
+.. |image2| image:: media/lab01/image002.png
+.. |image3| image:: media/lab01/image003.png
+.. |image4| image:: media/lab01/image004.png
+.. |image5| image:: media/lab01/image005.png
+.. |image6| image:: media/lab01/image006.png
+.. |image7| image:: media/lab01/image007.png
+.. |image8| image:: media/lab01/image008.png
+.. |image9| image:: media/lab01/image009.png
+.. |image10| image:: media/lab01/image010.png
+.. |image11| image:: media/lab01/image011.png
+.. |image12| image:: media/lab01/image012.png
+.. |image13| image:: media/lab01/image013.png
+.. |image14| image:: media/lab01/image014.png
+.. |image15| image:: media/lab01/image015.png
+.. |image16| image:: media/lab01/image016.png
+.. |image17| image:: media/lab01/image017.png
+.. |image18| image:: media/lab01/image018.png
+.. |image19| image:: media/lab01/image019.png
+.. |image20| image:: media/lab01/image020.png
+.. |image21| image:: media/lab01/image021.png
+.. |image22| image:: media/lab01/image022.png
+.. |image23| image:: media/lab01/image023.png
+.. |image24| image:: media/lab01/image024.png
+.. |image25| image:: media/lab01/image025.png
+.. |image26| image:: media/lab01/image026.png
+.. |image27| image:: media/lab01/image027.png
+.. |image28| image:: media/lab01/image028.png
+.. |image29| image:: media/lab01/image029.png
+.. |image30| image:: media/lab01/image030.png
+.. |image31| image:: media/lab01/image031.png
+.. |image32| image:: media/lab01/image032.png
+.. |image33| image:: media/lab01/image033.png
+.. |image33-2| image:: media/lab01/image033-2.png
+.. |image36| image:: media/lab01/image036.png
+.. |image37| image:: media/lab01/image037.png
+.. |image38| image:: media/lab01/image038.png
+.. |image39| image:: media/lab01/image039.png
+.. |image40| image:: media/lab01/image040.png
+.. |image41| image:: media/lab01/image041.png
+.. |image42| image:: media/lab01/image042.png
+.. |image43| image:: media/lab01/image043.png
+.. |image44| image:: media/lab01/image044.png
+.. |image45| image:: media/lab01/image045.png
+.. |image46| image:: media/lab01/image046.png
+.. |image47| image:: media/lab01/image047.png
+.. |image48| image:: media/lab01/image048.png
+.. |image87| image:: media/lab01/087.png
+.. |image88| image:: media/lab01/088.png
+.. |image89| image:: media/lab01/089.png
+.. |image90| image:: media/lab01/090.png
+.. |image91| image:: media/lab01/091.png
+.. |image100| image:: media/lab01/image100.png
