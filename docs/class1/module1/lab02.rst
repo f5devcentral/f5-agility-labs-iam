@@ -1,529 +1,380 @@
-Lab 2: Visual Policy Editor (VPE) Overview
-========================================================
+Lab 2: Onboard a Second Application(16.0)
+======================================================
 
+Guided Configuration supports more than a single application per Identity Aware Proxy Deployment.  In this module you will learn how to modify an existing IAP deployment  to onboard new authentication methods, SSO methods, and applications. 
 
-Setup Lab Environment
------------------------------------
+This Module also introduces the **Application Group** to provide different contextual access controls on parts of a website. 
+   
+   
+Section 2.1 - Access Guided Configuration
+---------------------------------------------
 
-To access your dedicated student lab environment, you will require a web browser and Remote Desktop Protocol (RDP) client software. The web browser will be used to access the Lab Training Portal. The RDP client will be used to connect to the Jump Host, where you will be able to access the BIG-IP management interfaces (HTTPS, SSH).
+To onboard a new application to the IAP, you will first access the Guided Configuration menu.
 
-#. Click **DEPLOYMENT** located on the top left corner to display the environment
+Task 1 - Access the Zero Trust IAP guided configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Click **ACCESS** next to jumpohost.f5lab.local
+#. From Firefox, click on the **Access** tab located on the left side.
 
-   |image001|
+   |image1|
 
-#. Select your RDP resolution.
+#. Click **Guided Configuration**
 
-#. The RDP client on your local host establishes a RDP connection to the Jump Host.
+   |image2|
 
-#. Login with the following credentials:
+#. Click **IAP_DEMO**
 
-         - User: **f5lab\\user1**
-         - Password: **user1**
+   |image3|
 
-#. After successful logon the Chrome browser will auto launch opening the site https://portal.f5lab.local.  This process usually takes 30 seconds after logon.
+#. Click **Config Properties** from the top ribbon
 
-#. Click the **Classes** tab at the top of the page.
+   |image4|
 
-	|image002|
+#. Enable **Application Groups**
+#. Click **Save & Next**
 
+   |image4-1|
 
-#. Scroll down the page until you see **101 Intro to Access Foundational Concepts** on the left
 
-   |image003|
+Section 2.2 - User Identity
+------------------------------------------------
 
-#. Hover over tile **Visual Policy Editor (VPE) Overview**. A start and stop icon should appear within the tile.  Click the **Play** Button to start the automation to build the environment
+Adding an additional User Identity to IAP is just a few simple steps. 
 
-   |image004|
+Task 1 - Configure Certificate Authentication with OCSP
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. The screen should refresh displaying the progress of the automation within 30 seconds.  Scroll to the bottom of the automation workflow to ensure all requests succeeded.  If you experience errors try running the automation a second time or open an issue on the `Access Labs Repo <https://github.com/f5devcentral/access-labs>`__.
+#. Click **User Identity** in the Ribbon
 
-   |image005|
+    |image5|
 
+#. Click **Add** to create a new User Identity
 
-Section 1 - The Access Profile
---------------------------------
+    |image6|
 
-#. From a browser navigate to https://bigip1.f5lab.local
-
-#. Login with username **admin** and password **admin**
-
-    |image006|
-
-#. Navigate to Access >> Profiles/Policies >> Access Profiles (Per-Session Policies).
-
-    |image007|
-
-#. The **Status** flag indicates if there are changed pending to the policy.  When the flag is yellow there are changes pending to the policy.  We will interact with **Pending Changes** later in the lab.
-
-    |image008|
-
-#. Click **server1-psp**
-
-    |image009|
-
-#. The **Properties** section provides baseline settings related to Scope, timers, and languages across the all sessions that will use the policy regardless of how Visual Policy Editor is configured.
-
-    |image010|
-
-    +-------------------------+-------------------------+--------------------------------------------------------------------------------------------------------------------+
-    | Setting                 | Value                   | Description and defaults                                                                                           |
-    +=========================+=========================+====================================================================================================================+
-    | Name                    | text                    | Specifies the name of the access profile.                                                                          |
-    +-------------------------+-------------------------+--------------------------------------------------------------------------------------------------------------------+
-    | Inactivity Timeout      | Number of seconds, or 0 | Specifies the inactivity timeout for the connection. If there is no activity between the client and server within  |
-    |                         |                         | the specified threshold time, the system closes the current session. By default, the threshold is 0, which         |
-    |                         |                         | specifies that as long as a connection is established, the inactivity timeout is inactive. However, if an          |
-    |                         |                         | inactivity timeout value is set, when server traffic exceeds the specified threshold, the inactivity timeout is    |
-    |                         |                         | reset.                                                                                                             |
-    +-------------------------+-------------------------+--------------------------------------------------------------------------------------------------------------------+
-    | Access Policy Timeout   | Number of seconds, or 0 | Designed to keep malicious users from creating a denial-of-service (DoS) attack on your server. The timeout        |
-    |                         |                         | requires that a user, who has followed through on a redirect, must reach the webtop before the timeout expires.    |
-    |                         |                         | The default value is 300 seconds.                                                                                  |
-    +-------------------------+-------------------------+--------------------------------------------------------------------------------------------------------------------+
-    | Maximum Session Timeout | Number of seconds, or 0 | The maximum lifetime is from the time a session is created, to when the session terminates. By default, it is set  |
-    |                         |                         | to 0, which means no limit. When you configure a maximum session timeout setting other than 0, there is no way to  |
-    |                         |                         | extend the session lifetime, and the user must log out and then log back in to the server when the session expires.|
-    +-------------------------+-------------------------+--------------------------------------------------------------------------------------------------------------------+
-    | Max Concurrent Users    | Number of users, or 0   | The number of sessions allowed at one time for this access profile. The default value is 0 which specifies         |
-    |                         |                         | unlimited sessions.                                                                                                |
-    +-------------------------+-------------------------+--------------------------------------------------------------------------------------------------------------------+
-    | Max Sessions Per User   | Number between 1 and    | Specifies the number of sessions for one user that can be active concurrently. The default value is 0, which       |
-    |                         | 1000, or 0              | specifies unlimited sessions. You can set a limit from 1-1000. Values higher than 1000 cause the access profile    |
-    |                         |                         | to fail.                                                                                                           |
-    +-------------------------+-------------------------+--------------------------------------------------------------------------------------------------------------------+
-    | Max In Progress Sessions| Number 0 or greater     | Specifies the maximum number of sessions that can be in progress for a client IP address. When setting this value, |
-    | Per Client IP           |                         | take into account whether users will come from a NAT-ed or proxied client address and, if so, consider increasing  |
-    |                         |                         | the value accordingly. The default value is 0 which represents unlimited sessions.                                 |
-    +-------------------------+-------------------------+--------------------------------------------------------------------------------------------------------------------+
-    | Restrict to Single      | Selected or cleared     | When selected, limits a session to a single IP address.                                                            |
-    | Client IP               |                         |                                                                                                                    |
-    +-------------------------+-------------------------+--------------------------------------------------------------------------------------------------------------------+
-    | Logout URI Include      | One or more URIs        | Specifies a list of URIs to include in the access profile to initiate session logout.                              |
-    |                         |                         |                                                                                                                    |
-    +-------------------------+-------------------------+--------------------------------------------------------------------------------------------------------------------+
-    | Logout URI Timeout      | Logout delay URI in     | Specifies the time delay before the logout occurs, using the logout URIs defined in the logout URI include list.   |
-    |                         | seconds                 |                                                                                                                    |
-    +-------------------------+-------------------------+--------------------------------------------------------------------------------------------------------------------+
-
-#. Click **SSO/Auth Domains**
-
-    |image011|
-
-    +-------------------------+-------------------------+--------------------------------------------------------------------------------------------------------------------+
-    | Setting                 | Value                   | Description and defaults                                                                                           |
-    +=========================+=========================+====================================================================================================================+
-    | Domain Mode             | Single Domain or        | Select Single Domain to apply your SSO configuration to a single domain. Select Multiple Domain to apply your SSO  |
-    |                         | Multiple Domains        | configuration across multiple domains. This is useful in cases where you want to allow your users a single Access  |
-    |                         |                         | Policy Manager® (APM®) login session and apply it across multiple Local Traffic Manager™ or APM virtual servers,   |
-    |                         |                         | front-ending different domains.                                                                                    |
-    +-------------------------+-------------------------+--------------------------------------------------------------------------------------------------------------------+
-    | Domain Cookie           | A Domain Cookie         | If you specify a domain cookie, then the line domain=specified_domain is added to the MRHsession                   |
-    |                         |                         | cookie.                                                                                                            |
-    +-------------------------+-------------------------+--------------------------------------------------------------------------------------------------------------------+
-    | Cookie Options:         | Enable or disable check | Enabled, this setting specifies to add the secure keyword to the session cookie. If you are configuring an         |
-    | Secure                  | box                     | application access control scenario where you are using an HTTPS virtual server to authenticate the user, and then |
-    |                         |                         | sending the user to an existing HTTP virtual server to use applications, clear this check box.                     |
-    +-------------------------+-------------------------+--------------------------------------------------------------------------------------------------------------------+
-    | Cookie Options:         | Enable or disable check | Enabled, this setting specifies to set cookies if the session does not have a webtop. When the session is first    |
-    | Persistent              | box                     | established, session cookies are not marked as persistent, but when the first response is sent to the client after |
-    |                         |                         | the access policy completes successfully, the cookies are marked persistent.                                       |
-    +-------------------------+-------------------------+--------------------------------------------------------------------------------------------------------------------+
-    | Cookie Options:         | Enable or disable check | HttpOnly is an additional flag included in a Set-Cookie HTTP response header. Use the HttpOnly flag when generating|
-    | HTTP only               | box                     | a cookie to help mitigate the risk of a client-side script accessing the protected cookie, if the browser supports |
-    |                         |                         | HttpOnly.                                                                                                          |
-    +-------------------------+-------------------------+--------------------------------------------------------------------------------------------------------------------+
-    | SSO Configuration       | Predefined SSO          | SSO configurations contain settings to configure single sign-on with an access profile. Select the SSO             |
-    |                         | Configuration           | configuration from the list that you want applied to your domain.                                                  |
-    |                         |                         |                                                                                                                    |
-    +-------------------------+-------------------------+--------------------------------------------------------------------------------------------------------------------+
-
-
-#. Click **Multiple Domains**.  Notice additional fields now appear on the screen.
-
-    |image012|
-
-    +-------------------------+-------------------------+--------------------------------------------------------------------------------------------------------------------+
-    | Setting                 | Value                   | Description and defaults                                                                                           |
-    +=========================+=========================+====================================================================================================================+
-    | Primary Authentication  | URI                     | The URI of your primary authentication server, for example https://logon.siterequest.com. This is required if you  |
-    | URI                     |                         | use SSO across multiple domains. You provide this URI so your users can access multiple back-end applications from |
-    |                         |                         | multiple domains and hosts without requiring them to re-enter their credentials, because the user session is stored|
-    |                         |                         | on the primary domain.                                                                                             |
-    +-------------------------+-------------------------+--------------------------------------------------------------------------------------------------------------------+
-    | Cookie                  | Domain or Host          | If you specify multiple domains, populate this area with hosts or domains. Each host or domain can have a separate |
-    |                         |                         | SSO config, and you can set persistent or secure cookies. Click Add to add each host you configure.                |
-    +-------------------------+-------------------------+--------------------------------------------------------------------------------------------------------------------+
-
-
-#. Click **Access Policy**
-
-    .. note::  Object builds outside visual policy editor, but used within the policy are displayed here.
-
-#. Click **Edit Access Policy for Profile "server1-psp"** to open Visual Policy Editor(VPE) in a new tab.
-
-    |image013|
-
-
-Section 2 - Visual Policy Editor(VPE)
-----------------------------------------
-
-Visual Policy Editor is used for configuration of Access Policies in APM.  Using an access policy, you can define a sequence of checks to enforce the required level of security on a users system, before the user is granted access to servers, applications, and other resources on your network.
-
-The policy below presents a user with a logon page to collect credentials.  Once the credentials are collected they are validated against Active Directory. If the credentials are valid the connection to the server is allowed, if they are invalid access is denied.
-
-    |image014|
-
-Let's explore the components that make up Visual Policy Editor workflows.
-
-
-
-Task 2.1 - Branches
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-A branch rule evaluates the result of an access policy action, findings about a client system, or other access policy item. The outcome of the evaluation of a branch rule grants or denies access, or continues on to the next action. The order of branch rules in an access policy determines the flow of action.
-
-Some actions such as Logon Pages only have a single default branch, while other actions such as authentication will have a minimum of two branches.
-
-When a creating a policy from scratch there will only be a single branch connecting the **Start** item to the **Deny** Terminal as depicted below.
-
-
-#. Click on the **AD Auth** action to explore its configuration.
-
-    |image015|
-
-#.  Actions will have at least two tabs.  One contains the settings for that action, while the second one contains the Branch Rules. Click **Branch Rules**.
-
-    |image016|
-
-#.  The AD Auth action has two branch rules. In order to proceed down the Successful branch **Active Directory Auth has Passed** must be true.  If not the user will proceed down the fallback branch. Click **change** to take a deeper look at the Expression.
-
-    |image017|
-
-#. Expressions can be modified under the **Simple** or **Advanced** Tabs.  The Simple tab allows you create expression using boolean logic.  If something is added to the AND expression both conditions must be true.  While if something is add the OR condition either condition must be true.  Click **Advanced**.
-
-    |image018|
-
-#.  The **Advanced** tab allows direct modification of the expression using TCL.  You can now see that AD Auth action evaluates the session variable session.ad.last.authresult to determine if the value is a 1(true).
-#.  Click **Cancel** because we do not want to modify anything in the AD Auth action.
-
-    |image019|
-
-
-
-Task 2.2 - Building Blocks
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-APM includes a number of pre-defined actions. You can see the available actions in the visual policy editor when you click the Add Item button , which is activated by positioning the cursor along the actions rule branch. The Add Item popup screen opens as a floating popup screen on top of the visual policy editor.
-
-#. Click the **+ (Plus Symbol)** on the Successful of the AD Auth Action.
-
-    |image064|
-
-    The Actions selection screen has a default set of six tabs.  Each tab contains a collection of predefined actions related to that tab.
-
-#. The **Logon** tab contains various ways of collections user credentials.
-
-    |image020|
-
-#. Click the Authentication Tab.  It contains actions that either validate credentials or interact with directory servers in some way.
-
-    |image022|
-
-    |image023|
-
-#.  Click the **Assignment** tab.  It determines the association between resources and users.  Secondly this is where mechanisms such as ACLs or bandwidth controls are chosen.
-
-    |image024|
-
-
-#. Click the Endpoint Security (Server-side) tab.  These endpoint checks do not require anything to be installed on the client.
-
-    |image025|
-
-#. Click the Endpoint Security (Client-side) tab.  These endpoints checks require software to be installed on the client.  Either the Edge Client is using VPN or F5 Helper Agent if performing posture via a web browser.  It's important to know the initial installation requires administrative privileges on the client machine.  In this environment the software is already installed on the jumphost.
-
-    |image026|
-
-
-#. Click the **General Purpose** tab. We are now going to add a new action to the policy.
-#. Click **Message Box**
-#. Click **Add Item**
-
-    |image027|
-
-#. Enter the text **Learning APM** in the Title Section.
+#. Enter Name **ocsp** 
+#. Select **On-Demand Certificate Authentication** from the Authentication Type dropdown
+#. Select **OCSP Responder** from the Authentication Server Type dropdown
+#. Select **ocsp-servers** from the Authentication Server dropdown
+#. Leave **Request** selected under Choose Auth Mode
 #. Click **Save**
 
-    |image028|
+    |image7|
 
-#.  We have successfully added our first new action to this policy.  Now After the user credentials are successfully validated against Active Directory the user will see a message box with the text "Learning APM".
-#.  Also notice a new set of text has appeared in the top left corner of the policy.  When you see **Apply Access Policy** in the left corner it means a policy has changes that have been saved but yet to be committed.  It is important to understand that changes made to a per-session policy do not impact existing sessions. we will leave it that way for now as we have more changes to make.
+#. Verify the **ocsp** object was created and click **Save & Next**
 
-    |image029|
+    |image8|
+	
+	
+Section 2.3 - SSO & HTTP Header
+------------------------------------------------
 
-Task 2.3 - Macros
-~~~~~~~~~~~~~~~~~~~
+In this section, you will create a custom header value to pass to the web server. 
 
-A macro is a collection of actions that you can configure to provide common access policy functions. You can create a macro for any action or series of actions in an access policy. You can also create macros that contain macrocalls to other macros (nested macros).
-After you create a macro, you place it in the access policy by adding an item called a macrocall to your policy. A macrocall is an action that performs the functions defined in a macro. In the visual policy editor, a macrocall appears in an access policy, or in a macro definition, as a single rectangular item, surrounded by a double line, with one or more outgoing macro terminal branches, called terminals.
+Task 1 - Create Custom Header
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In this task we are going to create a Macro that detects the client operating system.  If the system is Windows it proceed to a Firewall check.  If the system is anything but Windows the client will proceed down the **Fail** branch.
+#. Click **Add**
 
-    |image030|
+   |image9|
 
-#. Click **Add New Macro**.
-
-    |image031|
-
-#. Enter the name for the macro **Posture Assessments**
-#. Click Save
-
-    |image032|
-
-#.  The empty Macro name now Appears under the policy and can be edited just like the main Per-session Policy.
-#.  Expand the Macro by clicking the plus symbol
-
-    |image033|
-
-#.  By default a Macro only has a single terminal.  We know upfront that we intent to have a pass/fail condition so it is best create our additional terminal upfront.
-#.  Click **Edit Terminals**
-
-    |image034|
-
-#. Click **Add Terminal**
-
-    |image035|
-
-#. Change the default terminal text to **Pass**. This is the terminal using the color green
-#. Change the new terminal text to **Fail**.
-#. Toggle the Terminal Endpoints order so the **Fail** Terminal is on the **bottom**.
-
-    |image036|
-
-#. Click **Set Default**
-#. Change the default to **Fail**
+#. Enter Name **header_sso**
+#. Change radio button for Type to **HTTP Headers**
+#. In the **SSO Headers** section, enter **userID** in the Header Name Field
 #. Click **Save**
 
-    |image037|
+   |image10|
 
-#. Click the **+(Plus Symbol)** inside of the Macro's fallback branch.
+#. Verify the **header_sso** object was created and click **Save & Next**
 
-    |image038|
+   |image11|
+   
+   
+Section 2.4 - Applications
+------------------------------------------------
 
-#. Click the **Endpoint Security (Server-Side)** tab
-#. Select **Client OS**
-#. Click **Add Item**
+In this section you will define a second application with subpaths.  
 
-    |image039|
+Task 1 - Configure Application header.acme.com
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+#. Click **Add** to create a new application
+
+   |image12|
+
+#. Toggle **Advanced Setting** to **ON** in the top left corner to see additional properties
+#. Enter Name **header.acme.com**
+#. Enter FQDN **header.acme.com**
+#. Enter Subpath Pattern **/admin.php**
+#. Under Pool Configuration, you will create a node by entering **10.1.20.6** in the IP Address/Node name field. **Note** This may already exist in the drop down menu.
+#. Verify the pool member properties of Port **443** and Protocol **HTTPS**
 #. Click **Save**
 
-    |image040|
+	.. note:: Subpaths are used in Application Groups to define contextual access on 	portions of an application (separate from the default contextual Access Policy).  	If necessary, an application can be split up into multiple Application Groups to 	meet an organization's access control needs.
 
-#. We able to only allow Windows hosts to connect.  Click **Pass** on  the Windows RT branch.
+    |image13|
 
-    |image041|
+#. Verify **header.acme.com** was created and click **Save & Next**
 
-#. Select **Fail**
+   |image14|
+
+
+
+Section 2.5 - Application Groups
+------------------------------------------------
+
+In this section you will configure two Application groups to enforce different policies on parts of the header.acme.com website.  
+
+Task 1 - Create header-ad Group
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#. Click **Add**
+ 
+  |image15|
+
+#. Enter Name **header-ad**
+#. Under Applications List, select **/** and click the arrow to move it into the Selected box
+#. Click **Save** 
+ 
+   |image16|
+
+
+Task 2 - Create header-ocsp Group
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#. Click **Add** to create a second application group
+
+   |image17|
+
+#. Enter Name **header-ocsp**
+#. Under Applications List, select **/admin.php** and click the arrow to move it into the Selected box
+#. Click **Save** 
+
+   |image18|
+ 
+#. Verify both applications groups have been created.
+#. Click **Save & Next**
+
+   |image19|
+
+Section 2.6 - Webtop
+------------------------------------------------
+
+In this section you will verify that two applications are added to the **Webtop Sections**     
+
+Task 1 - Verify applications
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#. Ensure that both applications are listed under **Webtop Sections** and click **Save & Next**
+
+   |image20|
+
+   
+Section 2.7 - Contextual Access
+------------------------------------------------
+
+In this section you will configure Contextual Access for the previously created Application Groups
+
+
+Task 1 - Configure Contextual Access for header_ad Group
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#. Click **Add**
+
+   |image21|
+
+#. Enter Name **header-ad**
+#. Select **Application Group** from the Resource Type dropdown
+#. Select **header-ad** from the Resource dropdown
+#. Select **ad** from the Primary Authentication dropdown
+#. Select **header_sso** from the HTTP_Header dropdown
+#. Enter **Domain Admins** in the Primary Authentication filter Group Name
+#. Click **Add** beside Domain Admins
 #. Click **Save**
 
-    |image042|
+   |image22|
 
-#. Click the **Fail** Terminal on the Windows branch.
+Task 2 - Configure Contextual Access for header-ocsp Group
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    |image043|
+#. Click **Add**
 
-#. Select **Pass**
+   |image23|
+
+#. Enter Name **header-ocsp**
+#. Select **Application Group** from the Resource Type dropdown
+#. Select **header-ocsp** from the Resource dropdown
+#. Select **ad** from the Primary Authentication dropdown
+#. Select **header_sso** from the HTTP_Header dropdown
+#. Enter **Domain Admins** in the Primary Authentication filter Group Name
+#. Click **Add** beside Domain Admins
+
+   |image24|
+
+#. Check **Additional Checks**
+#. Click **Add** under Additional Checks
+
+   |image25|
+
+#. Enter Name **webadmin-group**
+#. Check **User Group Check**
+#. Enter **Website Admin** in the Primary Authentication filter Group Name
+#. Click **Add** beside Website Admin
+
+   |image26|
+
+#. Select **Step Up** from the Match Action dropdown
+#. Select **ocsp** from the Step Up Authentication dropdown
 #. Click **Save**
 
-    |image044|
 
-#. Click the **+(Plus Symbol)** inside of the Windows branch.
+   |image27|
 
-    |image045|
+#. Click **Save** again to save the Contextual Access Properties for ocsp-header
 
-#. Click the **Endpoint Security (Client-side)** tab.
-#. Select **Firewall**
-#. Click **Add Item**
+   |image28|
 
-    |image046|
+#. Click **Deploy** located under the ribbon. Deployment will take a few moments.
 
-#. Leave the defaults.  Click **Save**
+   |image29|
+   
+   
+Section 2.8 - Testing
+-------------------------
 
-    |image047|
+In this section you will use user1's credentials to default website header.acme.com.  However, when you attempt to access the admin page you will be prompted for certificate based authentication.  After a successful login you will close your browser and login to default website using user2's credentials.  User2 will be denied due to not having the correct AD groups.
 
-#. Now add your completed Macro to the Policy by clicking the **+(Plus Symbol)** between the Start Item and Logon Page action.
+.. warning::
+   You must use **Firefox** for testing!
 
-    |image048|
+Task 1 - Login to header.acme.com using user1
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. A new tab has appeared now that a Macro has been configured.  Click the **Macros** tab
-#. Select **Posture Assessments**
-#. Click **Add Item**
+#. Open Firefox
+#. Access the site https://iap1.acme.com
+#. At the logon page enter the Username: **user1** and Password: **user1**
+#. Click **Logon**
 
-    |image049|
+   |image30|
 
+#. Click the **header.acme.com** tile    
 
-Task 2.5: Endings
-~~~~~~~~~~~~~~~~~~~
-
-Endings allow an administrator to customize APM's response by introducing redirects rather than generic Allow or Deny action.   We will explore added a redirect to our policy to see it's behavior during testing.
-
-#. Click **Edit Endings**
-
-    |image050|
-
-#. Click **Add Ending**
-
-    |image051|
-
-#. Select the **Redirect** radio button
-#. Enter the URL **https://www.f5.com**
-#. Update the color #16 Violet
-#. Enter the Name **Redirect** for the Redirect Terminal
-#. Click **Save**
-
-    |image052|
-
-#. Select the **Deny** Terminal off the AD Auth Action fallback branch
-
-    |image053|
-
-#. Select the **Redirect** Terminal
-#. Click **Save**
-
-    |image054|
-
-#.  We now a have completed Policy.  Click **Apply Access Policy** in the top left.
-
-    |image055|
+   |image31|
 
 
-Task 2.6 Testing
-~~~~~~~~~~~~~~~~~~
+#. Notice the custom header **UserID** has a value of user1
 
-#. Open a new browser tab and then navigate to https://server1.acme.com.  You will be redirected to /my.policy and the first thing that happens in our policy is the Windows and Firewall Check.  You can see these are being performed as the agent software is being triggered when the screen states **Awaiting Connection...** and then transitions to **Checking for security software**.
+   |image32|
 
-    |image056|
+#. Access the **admin** portion of the website https://header.acme.com/admin.php
+#. Select the certificate **user1**
+#. Click **OK**
 
-    |image057|
+   |image34|
 
-#. After posture assessment has been successful performed the logon screen will appear.
+#. You should be successfully logged into the **admin** portion of the site.
 
-    |image058|
+   |image33|
 
-#. we are going to first test if the redirect works by failing Active Directory Authentication.  Enter the username: test and password:test and attempt to logon.  Repeat this step two more times because the AD auth agent by default requires three failed logon attempts before sending the user down the fallback branch.
+#. Close the browser completely.
 
-    |image059|
+Task 2 - Login to header.acme.com using user2
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#.  One authentication has been failed 3 times you are directed to https://www.f5.com as expected.
+#. Open a new browser window.
+#. Access the site https://iap1.acme.com
+#. At the logon page enter the Username: **user2** and Password: **user2**
+#. Click **Logon**
 
-    |image060|
+   |image35|
 
-#.  The session has been closed by the redirect Action.  Navigate back to https://server1.acme.com
-#.  At the logon page enter the Username:**user1** and Password:**user1**
-#.  Click **Logon**
+#. Notice the missing basic.acme tile. User2 is not a member of the required group **Sales Engineering** to view the application
+#. Click the **header.acme.com** tile     
 
-    |image061|
+   |image36|
 
-#.  After successful authentication you are presented the Message box with the text **learning APM**.  Click **Continue**.
+#. Notice the custom header **UserID** has a value of user2
 
-    |image062|
+   |image37|
 
-#. User1 has successfully authenticated through the policy and now granted access to their resource.
+#. Access the **admin** portion of the website https://header.acme.com/admin.php
+#. You receive a **Access Denied** page due to not having the correct group membership **Website Admin**
 
-    |image063|
+   |image38|
+
+#. This concludes lab 2.
+
+   |image100|
 
 
-Lab Cleanup
-------------------------
+.. |image1| image:: media/lab02/image001.png
+.. |image2| image:: media/lab02/image002.png
+	:width: 800px
+.. |image3| image:: media/lab02/image003.png
+	:width: 1000px
+.. |image4| image:: media/lab02/image004.png
+.. |image4-1| image:: media/lab02/image004-1.png
+.. |image5| image:: media/lab02/image005.png
+.. |image6| image:: media/lab02/image006.png
+.. |image7| image:: media/lab02/image007.png
+.. |image8| image:: media/lab02/image008.png
+.. |image9| image:: media/lab02/image009.png
+.. |image10| image:: media/lab02/image010.png
+.. |image11| image:: media/lab02/image011.png
+.. |image12| image:: media/lab02/image012.png
+.. |image13| image:: media/lab02/image013.png
+.. |image14| image:: media/lab02/image014.png
+.. |image15| image:: media/lab02/image015.png
+.. |image16| image:: media/lab02/image016.png
+.. |image17| image:: media/lab02/image017.png
+.. |image18| image:: media/lab02/image018.png
+.. |image19| image:: media/lab02/image019.png
+.. |image20| image:: media/lab02/image020.png
+.. |image21| image:: media/lab02/image021.png
+.. |image22| image:: media/lab02/image022.png
+.. |image23| image:: media/lab02/image023.png
+.. |image24| image:: media/lab02/image024.png
+.. |image25| image:: media/lab02/image025.png
+.. |image26| image:: media/lab02/image026.png
+.. |image27| image:: media/lab02/image027.png
+.. |image28| image:: media/lab02/image028.png
+.. |image29| image:: media/lab02/image029.png
+.. |image30| image:: media/lab02/image030.png
+.. |image31| image:: media/lab02/image031.png
+.. |image32| image:: media/lab02/image032.png
+.. |image33| image:: media/lab02/033.png
+.. |image34| image:: media/lab02/034.png
+.. |image35| image:: media/lab02/image035.png
+.. |image36| image:: media/lab02/image036.png
+.. |image37| image:: media/lab02/image037.png
+.. |image38| image:: media/lab02/image038.png
+.. |image100| image:: media/lab02/image100.png
 
-#. From a browser on the jumphost navigate to https://portal.f5lab.local
 
-#. Click the **Classes** tab at the top of the page.
 
-    |image002|
 
-#. Scroll down the page until you see **101 Intro to Access Foundational Concepts** on the left
 
-   |image003|
 
-#. Hover over tile **Visual Policy Editor (VPE) Overview**. A start and stop icon should appear within the tile.  Click the **Stop** Button to trigger the automation to remove any prebuilt objects from the environment
 
-   |image998|
 
-#. The screen should refresh displaying the progress of the automation within 30 seconds.  Scroll to the bottom of the automation workflow to ensure all requests succeeded.  If you experience errors try running the automation a second time or open an issue on the `Access Labs Repo <https://github.com/f5devcentral/access-labs>`__.
 
-   |image999|
 
-#. This concludes the lab.
 
-   |image000|
 
-.. |image000| image:: ./media/lab02/000.png
-.. |image001| image:: ./media/lab02/001.png
-.. |image002| image:: ./media/lab02/002.png
-.. |image003| image:: ./media/lab02/003.png
-.. |image004| image:: ./media/lab02/004.png
-.. |image005| image:: ./media/lab02/005.png
-.. |image006| image:: ./media/lab02/006.png
-.. |image007| image:: ./media/lab02/007.png
-.. |image008| image:: ./media/lab02/008.png
-.. |image009| image:: ./media/lab02/009.png
-.. |image010| image:: ./media/lab02/010.png
-.. |image011| image:: ./media/lab02/011.png
-.. |image012| image:: ./media/lab02/012.png
-.. |image013| image:: ./media/lab02/013.png
-.. |image014| image:: ./media/lab02/014.png
-.. |image015| image:: ./media/lab02/015.png
-.. |image016| image:: ./media/lab02/016.png
-.. |image017| image:: ./media/lab02/017.png
-.. |image018| image:: ./media/lab02/018.png
-.. |image019| image:: ./media/lab02/019.png
-.. |image020| image:: ./media/lab02/020.png
-.. |image022| image:: ./media/lab02/022.png
-.. |image023| image:: ./media/lab02/023.png
-.. |image024| image:: ./media/lab02/024.png
-.. |image025| image:: ./media/lab02/025.png
-.. |image026| image:: ./media/lab02/026.png
-.. |image027| image:: ./media/lab02/027.png
-.. |image028| image:: ./media/lab02/028.png
-.. |image029| image:: ./media/lab02/029.png
-.. |image030| image:: ./media/lab02/030.png
-.. |image031| image:: ./media/lab02/031.png
-.. |image032| image:: ./media/lab02/032.png
-.. |image033| image:: ./media/lab02/033.png
-.. |image034| image:: ./media/lab02/034.png
-.. |image035| image:: ./media/lab02/035.png
-.. |image036| image:: ./media/lab02/036.png
-.. |image037| image:: ./media/lab02/037.png
-.. |image038| image:: ./media/lab02/038.png
-.. |image039| image:: ./media/lab02/039.png
-.. |image040| image:: ./media/lab02/040.png
-.. |image041| image:: ./media/lab02/041.png
-.. |image042| image:: ./media/lab02/042.png
-.. |image043| image:: ./media/lab02/043.png
-.. |image044| image:: ./media/lab02/044.png
-.. |image045| image:: ./media/lab02/045.png
-.. |image046| image:: ./media/lab02/046.png
-.. |image047| image:: ./media/lab02/047.png
-.. |image048| image:: ./media/lab02/048.png
-.. |image049| image:: ./media/lab02/049.png
-.. |image050| image:: ./media/lab02/050.png
-.. |image051| image:: ./media/lab02/051.png
-.. |image052| image:: ./media/lab02/052.png
-.. |image053| image:: ./media/lab02/053.png
-.. |image054| image:: ./media/lab02/054.png
-.. |image055| image:: ./media/lab02/055.png
-.. |image056| image:: ./media/lab02/056.png
-.. |image057| image:: ./media/lab02/057.png
-.. |image058| image:: ./media/lab02/058.png
-.. |image059| image:: ./media/lab02/059.png
-.. |image060| image:: ./media/lab02/060.png
-.. |image061| image:: ./media/lab02/061.png
-.. |image062| image:: ./media/lab02/062.png
-.. |image063| image:: ./media/lab02/063.png
-.. |image064| image:: ./media/lab02/064.png
-.. |image998| image:: ./media/lab02/998.png
-.. |image999| image:: ./media/lab02/999.png
+
+
+
+
+
+
+
+
+
+	
+	
+
+
+
+
+
+
