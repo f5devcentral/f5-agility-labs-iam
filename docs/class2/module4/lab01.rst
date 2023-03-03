@@ -1,551 +1,915 @@
-Lab 1: Azure AD Easy Button integration
-=============================================
+Lab 1: Deploy an API Protection Profile
+===========================================
 
-.. warning :: If you have any feedback on this guide, please raise an issue at https://github.com/f5devcentral/f5-agility-labs-iam/issues .
+Section 1.1 - Setup Lab Environment
+-----------------------------------
 
-In this lab, students will learn how to leverage Azure AD as an IDaaS provider while using APM as a SAML SP. Since v15.1, F5 has offered a "Guided Configuration" template to make this integration easier for administrators. This lab guide will also be accessible via a bookmark on the Win10 Edge and Chrome browsers.
+To access your dedicated student lab environment, you will need a web browser and Remote Desktop Protocol (RDP) client software. The web browser will be used to access the Unified Demo Framework (UDF) Training Portal. The RDP client will be used to connect to the jumphost, where you will be able to access the BIG-IP management interfaces (HTTPS, SSH).
 
-This template:
+#. Click **DEPLOYMENT** located on the top left corner to display the environment
 
-#. Publishes on-prem apps
-#. Enables Single Sign-on
-#. Interconnects (SAML binding) APM with an Azure AD tenant
+#. Click **ACCESS** next to jumphost.f5lab.local
 
-.. note :: You will notice we never connect directly to the Azure AD interface. APM will use Microsoft's Graph API to configure the AAD tenant accordingly.
+   |image200|
 
-   |image001|
+#. Select your RDP resolution.
 
-The video below illustrates the APM & Azure AD integration. This is **not** the **lab video**. It's simply a demo of the use-case.
+#. The RDP client on your local host establishes a RDP connection to the Jumphost.
 
-.. raw:: html
+#. Login with the following credentials:
 
-    <div style="text-align: center; margin-bottom: 2em;">
-    <iframe width="896" height="504" src="https://www.youtube.com/embed/6NDUaDz7NQE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    </div>
+         - User: **f5lab\\user1**
+         - Password: **user1**
 
-Section 1.1 - Check the Lab Architecture
---------------------------------------------
+#. After successful logon the Chrome browser will auto launch opening the site https://portal.f5lab.local.  This process usually takes 30 seconds after logon.
 
-In this lab, we will protect 3 apps:
+	|image201|
 
-#. 2 internal apps
-   
-   #. ``Vanilla`` Application hosted in IIS
-   #. ``Skyblue`` Application hosted in IIS
+#. Click the **Classes** tab at the top of the page.
 
-#. 1 cloud app hosted in Azure cloud
+#. Scroll down the page until you see **304 API Protection** on the left
 
-   #. ``Wordpress-UDF`` hosted in Azure cloud
+   |image202|
 
-   |image002|
+#. Hover over tile **Deploy an API Protection Profile**. A start and stop icon should appear within the tile.  Click the **Play** Button to start the automation to build the environment
 
+   |image203|
 
-Architecture of Internal Apps
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#. The screen should refresh displaying the progress of the automation within 30 seconds.  Scroll to the bottom of the automation workflow to ensure all requests succeeded.  If you you experience errors try running the automation a second time or open an issue on the `Access Labs Repo <https://github.com/f5devcentral/access-labs>`__.
 
-Bluesky application
-*******************
-
-This application resides on-prem in IIS. Its FQDN is ``https://bluesky.f5access.onmicrosoft.com`` 
-
-This application is not **authenticated**, meaning there is no **Single Sign-On** required in front of this app.
-
-   |image003|
+   |image204|
 
 
-Vanilla application
-*******************
-
-This application also resides on-prem in IIS. Its FQDN is ``https://vanilla.f5access.onmicrosoft.com`` 
-
-This application is **authenticated** by Kerberos so a **Single Sign-On** will be required to connect to this app.
-
-   |image004|
-
-
-
-Task 1  - Check IIS configuration (Optional)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-#. RDP to IIS with ``f5access\user`` as user, and ``user`` as password
-#. Click ``IIS manager`` icon in the taskbar
-
-   |image005|
-
-#. In the Connections tree, expand ``IIS``, ``Sites``, click ``vanilla``, and finally, double-click ``Authentication``
-
-   |image006|
-
-#. You'll notice ``Anonymous Auth`` is **Disabled** and ``Windows Authentication`` is **Enabled**
-
-   |image007|
-
-.. note :: In the next class we will configure APM to publish, protect and SSO to internal apps. Feel free to close your RDP session to the IIS Server.
-
-
-Architecture of Cloud App
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. note :: Since customers often have a mixture of authenticated and non-authenticated apps running on-prem and in the public cloud, this lab utilizes an Application hosted in Azure that doesn't leverage APM for authentication. This application does leverage Azure AD and is meant simply to illustrate the user-experience with such a mixture of application types. This wordpress application is already up and running in Azure Cloud at this address ``https://wordpress-apm-aad.azurewebsites.net/``
-
-   |image008|
-
-
-#. This Wordpress application is an Azure App Service.
-
-   |image009|
-
-#. This App Service is already bound with our demo Azure AD tenant.
-
-   |image010|
-
-
-Section 1.2 - Deploy APM to protect Bluesky App
+Section 1.2 - Implement Course-Graing Access Control
 --------------------------------------------------------
 
-In this section, we will publish the ``Bluesky`` application hosted on-prem.
 
 
-Task 1 - Publish and protect Bluesky app
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Task 1 - Create a Provider
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Let's start with the ``Bluesky`` application. Reminder, Bluesky does not have any ``Authentication`` enabled. 
+The cornerstone of the API protection profile is the ability to authorize users using JWT. Unlike Guided Configuration that creates the JWT Provider for you based on a few defined parameters, you must create the provider manually.
 
-#. Either access TMUI via UDF > Access > BIG-IP > TMUI or RDP to win10 (user/user) and launch Edge or Chrome. Using the BIG-IP bookmark, connect to the BIG-IP user interface (admin/admin)
-#. In ``Access`` > ``Guided Configuration``, select ``Microsoft Integration`` > ``Azure AD application`` 
+#. Navigate to Access >> Federation >> OAuth Client/Resource Server >> Provider. Click the **+ (Plus Symbol)**
 
+   |image3|
 
-|image011|
+#. Configure the following parameters:
 
+   - Name: **api-as-provider**
+   - Trusted Certificate Authorities: **ca.acme.com.**
+   - OpenID URL: replace f5-oauth.local with **as.acme.com**
 
-Task 2 - Configuration Properties
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#. Click **Discover**
 
-#. Click ``Next`` and start the configuration
-#. Configure the page as below
+   |image4|
 
-   #. Configuration Name : ``IIS-Bluesky-<My Name>``  Why my name ? This app will be created in Azure AD tenant and we need to differentiate all apps. Example : ``IIS-Bluesky-ChrisMi`` The chance of name conflicts increases with the number of students so if possible, please at least use your first name and two characters of your last name. You can leave ``SSO``, ``Endpoint Checks``, and ``Additional Checks`` at their defaults (not selected.)
-   #. In ``Azure Service Account Details``, Select ``Copy Account Info form Existing Configuration``, and select ``IIS-baseline``, then click ``Copy``
+#. The Authentication URI, Token URI, Token Validation Scope URI, UserInfo URI and keys should be updated.
 
-      |image012|
+   |image5|
 
+#. Click **Save**
 
-    
-      .. note:: In the real world, this is where you'd configure the application settings from the Azure Service Application created for APM. You have to create an Azure Application so that APM gets access to Microsoft Graph API. Due to **security best practices**, we won't show the application secret in this lab.
 
-      .. note:: For those curious, the steps to create this Azure applications are below
+Task 2 - Create a JWT Provider
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-         #. In Azure AD, create a service application under your organization's tenant directory using App Registration.
-         #. Register the App as Azure AD only single-tenant.
-         #. Request permissions for Microsoft Graph APIs and assign the following permissions to the application:
-            
-            #. Application.ReadWrite.All
-            #. Application.ReadWrite.OwnedBy
-            #. Directory.Read.All
-            #. Group.Read.All
-            #. Policy.Read.All
-            #. Policy.ReadWrite.ApplicationConfiguration
-            #. User.Read.All
-         #. Grant admin consent for your organization's directory.
-         #. Copy the Client ID, Client Secret, and Tenant ID and add them to the Azure AD Application configuration.
+#. Navigate to Access >> Federation >> JSON Web Token >> Provider List. Click the **+ (Plus Symbol)**.
 
-   #. In the guided configuration UI, Click the ``Test Connection`` button and the result should yield --> Connection is valid
+   |image9|
 
-      |image013|
+#. Enter the name: **as-jwt-provider**
 
-    #. Click ``Save & Next``
+#. Click **Add** so api-as-provider is added to list of providers
 
+#. Click **Save**
 
-Task 3 - Service Provider
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   |image10|
 
-#. Configure the page as below
 
-   #. Host ``bluesky.f5access.onmicrosoft.com``
-   #. Entity ID is auto-filled ``https://bluesky.f5access.onmicrosoft.com/IIS-Bluesky-my name>``
+Task 3 - Create an API Protection Profile
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-      |image014|
+#. Navigate to API Protection >> Profile. Click the **+ (plus symbol)**
 
-   #. Click ``Save & Next``
+   |image11|
 
+   .. note:: The JSON file is located on the jumpbox in c:\\access-labs\\class3\\module4\\student_files
 
-Task 4 - Azure Active Directory
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#. Enter the following parameters:
 
-#. Double-click the ``F5 BIG-IP APM Azure AD...`` template
+   - Name: **api-protection**
+   - OpenAPI File: **Active Directory OpenAPI.json**
+   - DNS Resolver: **internal-dns-resolver**
+   - Authorization: **OAuth 2.0**
 
-   .. note :: As you notice, there are several templates available for different applications. In this lab, we will publish a generic app so we select the first template.
+#. Click **Add**
 
-#. In the new screen, configure as below
+#. Click **Save**
 
-   #. Signing Key : ``default.key``
-   #. Signing Certificate : ``default.crt``
-   #. Signing Key Passphrase : ``F5twister$``
+   |image12|
 
-      |image015|
 
-    
-   #. In ``User And User Groups``, click ``Add``
-
-      .. note :: We have to assign Azure AD users/group to this app, so that they can be allowed to connect to it.
-
-      #. In the list, click ``Assign`` for the user ``user1``. If you can't find it, search for it in the ``search`` field.
-         
-
-         |image016|
-
-                
-      #. Click ``Close``
-      #. You can see ``user1`` in the list.
-
-         |image017|
-
- 
-      #. Click ``Save & Next``
-
-Task 5 - Virtual Server Properties
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-#. Configure the VS as below
-
-   #. IP address : ``10.1.10.104``
-   #. The ``ClientSSL`` profile is selected by default so let's use that one. We'll get a TLS warning in the browser, but it doesn't matter for this lab.
-
-      |image018|
-
-#. Click ``Save & Next``
-
-
-Task 6 - Pool Properties
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-#. Leave the ``Select a Pool` setting as ``Create New``
-#. In Pool Servers, select ``/Common/10.1.20.9`` from the drop-down menu. This is the Lab's IIS server whose config you may have viewed earlier. 
-#. Click ``Save & Next``
-
-   |image019|
-
-Task 7 - Session Management Properties
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-#. Nothing to change, click ``Save & Next``
-
-
-Task 8 - Deploy your app template
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-#. Click ``Deploy``
-
-   |image020|
-
-
-#. Behind the scenes, the deployment creates an ``Azure Enterprise Application`` for ``Bluesky``. We can see it in ``Azure portal`` (you don't have access in this lab). With this Enterprise Application, Azure knows where to redirect the user after they're authenticated. This app will also have the certificate and key used to sign the SAML assertion.
-
-   |image021|
-#. Click ``Finish`` and ``OK`` on the Confirmation Pop-Up Dialog Box.
-
-Task 9 - Test your deployment
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-#. RDP to Win10 machine as ``user`` and password ``user``
-#. Open ``Google Chrome`` or the ``Microsoft Edge`` browser - both icons are on the Desktop and the Taskbar
-#. From the bookmarks list/toolbar, choose ``Bluesky`` and ignore the inevitable cert warnings.
-#. You will be redirected to Azure AD login page. Login as ``user1@f5access.onmicrosoft.com`` and hit ``Next``. The password is stored in a text file named ``azure_ad_creds.txt`` on the Win10 Desktop.
-
-   .. warning :: Don't reset or change the password.
-
-   |image022|
-
-#. After being successfully authenticated by Azure AD, you're redirected to APM with a SAML assertion. After validating this assertion, APM allows you to access the Bluesky application. You'll want to keep your RDP session to ``Win10`` open since you'll use it again for subsequent testing.
-
-   |image023|
-
-Section 1.3 - Deploy APM to protect the Vanilla App
---------------------------------------------------------
-
-In this section, we will publish the ``Vanilla`` application which like bluesky, is hosted on-prem.
-
-
-Task 1 - Publish and protect Vanilla app
+Task 4 - Explore the Path Configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Unlike Bluesky, the Vanilla application has ``Authentication`` enabled via Kerberos and because APM won't have access to an Azure AD user's password, we'll need to enable and leverage ``Kerberos Constrained Delegation``. 
+#. Note the Spec file contained a single path of /user but it supports four different request methods.
 
-#. As before, Connect to the BIG-IP GUI directly from UDF or via Win10 with admin/admin.
-#. In ``Access`` > ``Guided Configuration``, select ``Microsoft Integration`` > ``Azure AD application`` 
+#. The API server that all requests will be sent to is http://adapi.f5lab.local:81
 
-   .. note :: As you'll notice, we only deploy one application per Guided Config template.
-
-   |image011|
+   |image13|
 
 
-Task 2 - Configuration Properties
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-#. Click ``Next`` and start the configuration
-#. Configure the page as below
-
-   #. Configuration Name : ``IIS-Vanilla-<My Name>``  Just like before, please try to use a unique string for My Name, IE your first name and first two characters of your last name. IIS-Vanilla-ChrisMi is an example name.  
-   #. Enable ``Single Sign-on (SSO)``
-
-      |image024|
-      
-
-   #. In ``Azure Service Account Details``, Select ``Copy Account Info form Existing Configuration``, and select ``IIS-baseline``, then click ``Copy``
-
-      |image025|
-    
-      .. note:: Just like before, a real-world deployment would require an administrator to obtain these values via the Azure Service App created for APM. This Azure Application must be created so that APM can access the Microsoft Graph API. 
-
-      .. note:: The steps to create this Azure applications are below
-
-         #. In Azure AD, create a service application under your organization's tenant directory using App Registration.
-         #. Register the App as Azure AD only single-tenant.
-         #. Request permissions for Microsoft Graph APIs and assign the following permissions to the application:
-            
-            #. Application.ReadWrite.All
-            #. Application.ReadWrite.OwnedBy
-            #. Directory.Read.All
-            #. Group.Read.All
-            #. Policy.Read.All
-            #. Policy.ReadWrite.ApplicationConfiguration
-            #. User.Read.All
-         #. Grant admin consent for your organization's directory.
-         #. Copy the Client ID, Client Secret, and Tenant ID and add them to the Azure AD Application configuration.
-
-   #. In the Guided Config GUI, Click the ``Test Connection`` button which should yield --> Connection is valid
-
-      |image026|
-
-
-   #. Click ``Save & Next``
-
-
-Task 3 - Service Provider
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-#. Configure the page as below
-
-   #. Host ``vanilla.f5access.onmicrosoft.com``
-   #. The Entity ID is auto-filled ``https://vanilla.f5access.onmicrosoft.com/IIS-Bluesky-my name>``
-
-
-      |image027|
-
-   #. Click ``Save & Next``
-
-
-Task 4 - Azure Active Directory
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-#. Double click the  ``F5 BIG-IP APM Azure AD...`` template
-
-   .. note :: As you can notice, there are several templates available for different applications. Here, in this lab, we will publish a generic app. So we select the first template.
-
-#. Click ``Add``
-#. In the new screen, configure as below.
-
-   #. Signing Key : ``default.key``
-   #. Signing Certificate : ``default.crt``
-   #. Signing Key Passphrase : ``F5twister$``
-
-      |image028|
-
-
-   #. In ``User And User Groups``, click ``Add``
-
-      .. note :: We have to assign Azure AD users/group to this app, so that they can be allowed to connect to it.
-
-      #. In the list, click ``Assign`` for the user ``user1``. If you can't find it, search for it in the ``search`` field.
-         
-         |image029|
-
-      #. Click ``Close``
-      #. You can see ``user1`` in the list.
-
-         |image030|
-
-
-      #. Click ``Save & Next``
-
-Task 5 - Virtual Server Properties
+Task 5 - Associate a JWT Provider
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Configure the VS as below
+#. Click **Access Control** from the top ribbon
 
-   #. IP address : ``10.1.10.103``
-   #. Since we'll use the already-selected, existing ``ClientSSL`` profile, you don't have to do anything for the Client SSL Profile section. We'll get a TLS warning in the browser, but it doesn't matter for this lab.
+#. Click **Edit (Per Request Policy)**
+
+   |image14|
+
+#. Notice the same paths displayed in the API Protection profile appear here. Currently there is no fine-grained access control.  We will implement it later in the lab.
+
+#. Click the **+ (plus symbol)** next the Subroutine **OAuth Scope Check AuthZ** to expand its properties:
+
+   |image15|
+
+   .. note:: The OAuth scope agent currently has a red asterisk since no provider is associated with it.
+
+#. Click **OAuth Scope**
+
+   |image16|
+
+#. Enter the following parameters:
+
+   - Token Validation Mode: **Internal**
+   - JWT Provider List: **as-jwt-provider**
+   - Response: **api-protection_auto_response1**
+
+#. Click **Save**
+
+   |image17|
 
 
-      |image031|
-
-#. Click ``Save & Next``
-
-
-Task 6 - Pool Properties
+Task 6 - Create a virtual server
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. For ``Select a Pool``, leave ``Create New`` selected
-#. In Pool Servers, select ``/Common/10.1.20.9`` This is once again the lab's IIS server whose config you investigated earlier. 
-#. Click ``Save & Next``
+#. Navigate to Local Traffic >> Virtual Servers >> Virtual Server List.  Click the **+ (plus symbol)**
 
-   |image032|
+   |image19|
 
+#. Enter the following parameters:
 
-Task 7 - Single Sign-On Settings
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   - Name: **api.acme.com**
+   - Destination Address/Mask: **10.1.10.102**
+   - Service Port: **443**
+   - HTTP Profile (Client): **http**
+   - SSL Profile(Client): **acme.com**
+   - Source Address Translation: **Auto Map**
+   - API Protection: **api-protection**
 
-#. Check the ``Advanced Settings`` box so it's ``On``
-#. Check the ``Single Sign-On box.
-#. In ``Selected Single Sign-on Type``, select ``Kerberos``, and select ``Create New`` for ``SSO Configuration Object``
+#. Click **Finished**
 
-   |image033|
-
-#. In ``Credentials Source``, fill as below
-
-    #. Username Source : Change this value to ``session.logon.last.username``
-    #. Clear out the text in  ``User Realm Source``. The domain is similar between Azure AD and on-prem AD so we don't need a realm variable.
-
-#. In ``SSO Method Configuration``, fill as below
-
-    #. Kerberos Realm : ``f5access.onmicrosoft.com``
-    #. Account name : ``host/apm-deleg.f5access.onmicrosoft.com``
-    #. Account Password : ``F5twister$`` (You'll be asked to enter this password twice for confirmation)
-    #. KDC : ``10.1.20.8``
-    #. UPN Support : ``Enabled``
-    #. SPN Pattern : ``HTTP/%s@f5access.onmicrosoft.com``
-
-      |image034|
+   |image20|
+   |image22|
 
 
-#. Leave the other settings at their default values and Click ``Save & Next``
+Task 7 - Import Postman Collections
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#. From the Jumpbox, open **Postman** via the desktop shortcut or toolbar at the bottom
+
+    |image106|
+
+#. Click **Yes** if prompted for "Do you want to allow this app to make changes to your device?"
+
+    |image107|
+
+#. Click **Import** located on the top left of the Postman application
+
+    |image108|
+
+#.  Click **Upload Files**
+
+    |image109|
+
+#. Navigate to C:\\access-labs\\class3\\module4\\student_files, select **student-class3-module4-lab01.postman_collection.json**, and click **Open**
+
+    |image110|
+
+#.  Click **Import**
+
+    |image111|
+
+#. A collection called **student-class3-module4-lab01** will appear on the left side in Postman
 
 
-
-Task 8 - Session Management Properties
+Task 8 - Retreive your OAuth clientID
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Nothing to change, click ``Save & Next``
+#. Expand the **student-class3-module4-lab01** Collection
 
-Task 9 - Deploy your app template
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#. Select the request **Request1: Retrieve Postman ClientID**
 
-#. Click ``Deploy`` and after patiently waiting, click ``Finish`` and ``OK`` on thhe Pop-Up Dialog Box once the deployment is successful
+#. Click **Send**
 
-   |image035|
-
-#. Behind the scenes, the deployment creates an ``Azure Enterprise Application`` for ``Bluesky``. We can see it in ``Azure portal`` (you don't have access in this lab). With this Enterprise Application, Azure knows where to redirect the user after they're authenticated. This app will also have the certificate and key used to sign the SAML assertion.
-
-   |image036|
+   |image112|
 
 
+#. You receive a **200 OK** with a response body.  The clientID is now stored as a Postman Variable to be used in future requests.  Your ClientID will not be the same as displayed in the screenshot below.
+
+   |image113|
+
+Task 9 - Attempt to Retrieve User1\'s Attributes without JWT
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#. Select the request **Request 2: Retrieve User Attributes without JWT**
+
+#. Click **Send**
+
+#. You receive a **403 Forbidden** response status code since you do not have a valid JWT
+
+   |image26|
+
+Task 10 -  Retrieve User1\'s Attributes with a JWT
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#. Select the request **Request 3: Retrieve User Attributes with JWT**
+
+#. Select the **Authorization** tab
+
+#. Click **Get New Access Token**
+
+   |image27|
+
+#. Login using Username: **user1**, Password: **user1**
+
+   |image28|
+
+#. Click **Use Token**.
+
+   |image29|
+
+#. Notice the **Access Token** field is now populated
+
+   |image34|
+
+#. Click **Send**
+
+#. You receive a **200 OK** response status code with attributes for user1 in the body of the response
+
+   |image31|
+
+
+Task 11 - Set a Valid User Attribute
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#. Select the request **Request 4: Update a Valid User Attribute**
+
+#. Select the **Authorization** tab
+
+#. Select the previously created **User1** token from the **Available Tokens** dropdown
+
+   |image33|
+
+#. The **Token** field is now populated
+
+   |image34|
+
+#. Click **Send**
+
+   .. note:: If you receive a 403 response status code, request a new token.  You can change the name of the token request prior to sending by setting the Token Name. You can delete expired tokens by clicking the Available Tokens dropdown, clicking Manage Tokens, and then clicking the trashcan next to the Token.
+
+#. You receive a **200 OK** response status code with a response body that contains user1's employeeNumber **123456**
+
+   |image35|
+
+
+Task 12 - Set an Nonexistent User's Attribute
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#. Select the request **Request 5: Update a Nonexistent User\'s Attribute**
+
+#. Select the **Authorization** tab
+
+#. Select the previously created **User1** token from the **Available Tokens** dropdown
+
+#. The **Token** field is now populated
+
+#. Click **Send**
+
+   .. note:: If you receive a 403 response status code, request a new token.  You can change the name of the token request prior to sending by setting the Token Name. You can delete expired tokens by clicking the Available Tokens dropdown, clicking Manage Tokens, and then clicking the trashcan next to the Token.
+
+#. You receive a **2O0 OK** response status code. The request successfully passed through the API Gateway, but the server failed to process the request.
+
+|image37|
+
+
+Task 13 - Update a Valid User with PUT
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#. Select the request **Request 6: Update a Valid User's Attribute with PUT**
+
+#. Select the **Authorization** tab
+
+#. Select the previously created **User1** token from the **Available Tokens** dropdown
+
+#. The **Token** field is now populated
+
+#. Click **Send**
+
+#. You receive a **403 Forbidden** response status code. This is expected because the PUT Method was not specified in the API Protection Profile for the path /user
+
+   |image39|
+
+
+Task 14 - Create a User
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#. Select the request **Request 7: Create a User**
+
+#. Select the **Authorization** tab
+
+#. Select the previously created **User1** token from the **Available Tokens** dropdown
+
+   |image33|
+
+#. Click **Send**
+
+#. You receive a **200 OK** response status code with a response body that contains Bob Smith's user attributes
+
+   |image46|
+
+
+Task 15 - Request invalid endpoint
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#. Select the request **Request 8: Request Invalid Endpoint**
+
+#. Select the **Authorization** tab
+
+#. Select the previously created **User1** token from the **Available Tokens** dropdown
+
+#. The **Token** field is now populated
+
+#. Click **Send**
+
+#. You receive a **403 Forbidden** response status code. This is expected because the path /hacker/attack was not specified in the API Protection Profile
+
+   |image39|
 
 
 
-Task 10 - Test your deployment
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Section 1.3 - Implement Fine-Grained Access Controls
+-----------------------------------------------------------
 
-#. If you closed your RDP session to Win10, pleae re-connect as ``user`` and password ``user``
-#. Open ``Google Chrome`` or ``Microsoft Edge`` - the icons are on the Desktop and the Taskbar
-#. From the bookmarks menu/toolbar, select ``Vanilla`` and ignore the Cert Errors.
-#. Since you already logged into Azure AD when accessing ``BlueSky``, you may notice you didn't need to sign-in again and were automatically taken into the application. Your previous assertion was still validated but it was done transparently. If you were sent to Azure AD again for authenticaton, please use the same credentials as before: ``user1@f5access.onmicrosoft.com`` and the password is stored in a text file named ``azure_ad_creds.txt`` on the Win10 Desktop.
+Up to this point any authenticated user to the API is authorized to use them. In this section we will restrict user1's ability to create users, but will still be able to modify a user's employee number.
 
-   |image037|
+Task 1 - Retrieve Group Membership Subsession Variable
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-
-   
-
-#. Reminder: Since APM doesn't have a SAML user's password if it isn't the IdP, it performs server-side ``Single Sign-on`` with the Vanilla application via ``Kerberos Constrained Delegation`` in which it requests a Kerberos Ticket on behalf of the user leveraging the username found in the SAML Assertion sent by Azure AD.
-
-   |image038|
-  
-#. In your already-open browser, Click the ``Bluesky`` bookmark. You'll notice you were automatically authenticated with your already-existing Azure AD session. 
-#. Optional: enable ``Inspect mode`` in Edge or ``Dev Tools`` in Chrome, and follow the SAML redirections to understand the workflow.
-
-Section 1.4 - Leverage Azure AD to protect Cloud Apps
---------------------------------------------------------
-
-In this lab, we will verify that ``user1`` can access any cloud app federated with Azure AD.
-
-As mentioned earlier, customers often deploy applications ``on-prem`` and in ``public clouds``. If the customer uses **Azure AD as their IDaaS**, it will federate all cloud apps within this Azure AD tenant.
-
-As an example, we've configured a ``Wordpress Cloud Application``. This application is **federated** with our Azure AD tenant.
-
-Since everything is handled between the App and Azure AD, you have **nothing** to configure on the APM side. In the Azure portal, we configured ``OAuth`` for the cloud app so that every user attempting to access this App would be redirected to Azure AD for Authentication. 
-
-   |image039|
+   .. note:: In order to implement fine-grained control the session variables that contain the data must be known. This first session shows you how to display the session variables and their values.
 
 
-#. If not already connected, RDP to Win10 as ``user`` and password ``user``
-#. Open ``Google Chrome`` or ``Microsoft Edge`` - icons are on the Desktop and Taskbar
-#. Click on the bookmarks menu/toolbar and select ``Wordpress Cloud App``
-#. Just like before, you'll only be redirected to the Azure AD login page if your prior session expired. Accessing this app can take a while so be patient. Pay special attention to the address bar and you'll notice the redirects during the authentication process. If prompted for creds, Login as ``user1@f5access.onmicrosoft.com`` and the password is stored in a text file named ``azure_ad_creds.txt`` on the Win10 Desktop.
-#. After Azure AD authenticates (either transparently or via login,) you're redirected to the ``cloud app`` in Azure cloud, and can access to Wordpress-UDF application.
+#. From the Jumpbox desktop click on the **BIG-IP1** Putty icon
 
-   |image040|
+   |image47|
+
+#. Enter the command **sessiondump --delete all** to remove any existing APM sessions
+
+   |image41|
+
+#. Enter the command **tailf /var/log/apm**.  Hit enter a few times to create some space on the screen
+
+   |image84|
+
+#. From Postman, Select the request **Request 3: Retrieve User Attributes with JWT**.  The Authorization field should already be populated with User1's token.
+
+#. Click **Send**
+
+#. You receive a **200 OK** response status code with attributes for user1 in the body of the response
+
+   |image31|
+
+   .. Note:: Your SessionID will be different
+
+#. Return to the CLI and examine the logs. You will see a message about a new subsession being created. Copy the subsession ID
+
+   |image85|
+
+#. Exit the logs using Ctrl+Z
+
+#. Enter the command **sessiondump -subkeys <subsessionID>**
+
+   |image86|
+
+#.  Scroll through input until you find the session variable for **subsession.oauth.scope.last.jwt.groups**
+
+   |image87|
 
 
-Section 1.5 - Clean up the Lab
---------------------------------------------------------
-
-.. warning :: In order to keep the Azure AD tenant clean, it is important you delete your application in the Guided Configuration, when your demo is finished.
-
-#. In Guided Configuration menu, click on the ``Undeploy`` icon for IIS-Bluesky, then ``OK``. After it finishes, do the same for IIS-Vanilla. You don't need to do anything for IIS-baseline.
-
-   |image041|
-   
-#. After undeploying has finished, click on the ``Delete`` icon for each app, then ``OK``. 
-
-   |image042|
-
-.. note :: Thanks a lot, you cleaned up your config on both sides (APM and AAD). FYI, all old deployments will be deleted automatically in Azure AD.
+Task 2 - Edit the per-request policy
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
+#. Return to BIG-IP1's management interface and navigate to Access  >> API Protection >> Profile.  Click **Profile** to modify the previously created API protection Profile (not the + Plus symbol)
 
-.. |image001| image:: media/lab01/001.png
-.. |image002| image:: media/lab01/002.png
-.. |image003| image:: media/lab01/003.png
-.. |image004| image:: media/lab01/004.png
-.. |image005| image:: media/lab01/005.png
-.. |image006| image:: media/lab01/006.png
-.. |image007| image:: media/lab01/007.png
-.. |image008| image:: media/lab01/008.png
-.. |image009| image:: media/lab01/009.png
-.. |image010| image:: media/lab01/010.png
-.. |image011| image:: media/lab01/011.png
-.. |image012| image:: media/lab01/012.png
-.. |image013| image:: media/lab01/013.png
-.. |image014| image:: media/lab01/014.png
-.. |image015| image:: media/lab01/015.png
-.. |image016| image:: media/lab01/016.png
-.. |image017| image:: media/lab01/017.png
-.. |image018| image:: media/lab01/018.png
-.. |image019| image:: media/lab01/019.png
-.. |image020| image:: media/lab01/020.png
-.. |image021| image:: media/lab01/021.png
-.. |image022| image:: media/lab01/022.png
-.. |image023| image:: media/lab01/023.png
-.. |image024| image:: media/lab01/024.png
-.. |image025| image:: media/lab01/025.png
-.. |image026| image:: media/lab01/026.png
-.. |image027| image:: media/lab01/027.png
-.. |image028| image:: media/lab01/028.png
-.. |image029| image:: media/lab01/029.png
-.. |image030| image:: media/lab01/030.png
-.. |image031| image:: media/lab01/031.png
-.. |image032| image:: media/lab01/032.png
-.. |image033| image:: media/lab01/033.png
-.. |image034| image:: media/lab01/034.png
-.. |image035| image:: media/lab01/035.png
-.. |image036| image:: media/lab01/036.png
-.. |image037| image:: media/lab01/037.png
-.. |image038| image:: media/lab01/038.png
-.. |image039| image:: media/lab01/039.png
-.. |image040| image:: media/lab01/040.png  
-.. |image041| image:: media/lab01/041.png
-.. |image042| image:: media/lab01/042.png
-  
-   
+#. Click **Edit** Under Per-Request Policy
+
+   |image49|
+
+#. Click the **Allow** terminal located at the end of the **POST /user** branch
+
+   |image72|
+
+#. Select **Reject**
+#. Click **Save**
+
+   |image60|
+
+#. Click the **+ (Plus Symbol)** on the POST /user branch
+
+   |image50|
+
+#. Click the **General Purpose** tab
+
+#. Select **Empty**
+
+#. Click **Add Item**
+
+   |image51|
+
+#. Enter the name **Claim Check**
+
+   |image53|
+
+#. Click the **Branch Rules** tab
+
+#. Click the **Add Branch Rule**
+
+   |image52|
+
+#. Enter Name **CreateUser**
+
+#. Click **Change**
+
+   |image54|
+
+#. Click the **Advanced** tab
+
+#. Enter the string in the notes section to restrict access to only members of the **CreateUser** Group. Make sure the " characters are properly formatted after pasting. If they aren't, simply delete and re-enter them manually.
+
+#. Click **Finished**
+
+   .. Note::
+
+	expr {[mcget {subsession.oauth.scope.last.jwt.groups}] contains "CreateUser"}
+
+   |image55|
+
+#. Click **Save**
+
+   |image56|
+
+#. Click **Reject** on the CreateUser Branch to permit access
+
+   |image57|
+
+#. Select **Allow**
+
+#. Click **Save**
+
+   |image58|
+
+#. Review the Policy Flow
+
+   |image61|
+
+Task 3 - Test the Fine-Grained Access Control with user1
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+#. From Postman select the request **Request 7: Create User**
+
+#. Select the **Authorization** Tab
+
+#. Select the previously created **User1** token from the **Available Tokens** dropdown
+
+#. The **Token** field is now populated
+
+#. Click **Send**
+
+#. You receive a **403 Forbidden** response status code when using user1. User1 does not contain the proper claim data.
+
+   |image26|
+
+
+Task 4 - Test the Fine-Grained Access Control with user2
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#. Select the request **Request 7: Create User**
+
+#. Select the **Authorization** tab
+
+#. Ensure the Token Name is set to **user2**
+#. Click **Get New Access Token**
+
+   |image044|
+
+#. Login using Username: **user2**, Password: **user2**
+
+   |image62|
+
+#. Ensure the **User2** Token is selected
+#. Click **Use Token** at the top right.
+
+   |image206|
+
+
+#. The **Token** field is now populated
+#. Click **Send**
+
+#. You receive a **200 OK** response status code when using user2. User2 does contain the proper claim data
+
+   |image46|
+
+
+Section 1.4 - Implement Rate Limiting
+----------------------------------------
+
+The API Protection Profile allows a BIG-IP administrator to throttle the amount of connections to an API through the use of Key Names.
+
+Task 1 - Test pre-rate limiting Access
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#. Click the **arrow** located to the right of the student-class3-module4-lab01 collection.
+
+#. Click **Run**
+
+   |image104|
+
+#. Deselect all requests except **Request 3: Retrieve User Attributes with JWT**
+
+#. Set the iterations to **100**
+
+#. Click the blue **Run Student-class3-module4-la...** button
+
+   |image105|
+
+#. You receive a **200 OK** for every request. Leave Runner open
+
+   |image92|
+
+
+Task 2 - Define the rate limiting keys
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#. Navigate to API Protection >> Profile.  Click **Profile** to modify the previously created API protection Profile.  Not the + Plus symbol.
+
+   |image48|
+
+#. Click **api-protection**
+
+   |image64|
+
+#. Click **Rate Limiting** from the top ribbon
+
+
+   |image69|
+
+   .. Note ::  The API protection profile default settings contains five Key Names created, but their values are empty.  Additional Keys can be created if necessary
+
+#. Click **api-protection_auto_rate_limiting_key1**
+
+   |image70|
+
+#. Enter the Key Value **%{subsession.oauth.scope.last.jwt.user}**
+
+#. Click **Edit**
+
+   |image71|
+
+#. Click **api-protection_auto_rate_limiting_key2**
+
+#. Enter the Key Value **%{subsession.oauth.scope.last.jwt.groupid}**
+
+#. Click **Edit**
+
+   |image73|
+
+#. Click **api-protection_auto_rate_limiting_key3**
+
+#. Enter the Key Value **%{subsession.oauth.scope.last.jwt.client}**
+
+#. Click **Edit**
+
+   |image75|
+
+#. Click **api-protection_auto_rate_limiting_key4**
+
+#. Enter the Key Value **%{subsession.oauth.scope.last.jwt.tier}**
+
+#. Click **Edit**
+
+   |image77|
+
+#. Click **api-protection_auto_rate_limiting_key5**
+
+#. Enter the Key Value **%{subsession.oauth.scope.last.jwt.org}**
+
+#. Click **Edit**
+
+   |image79|
+
+#. Click **Save**
+
+   |image80|
+
+Task 3 - Create a Rate Limiting Policy
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#. Click **Create** in the rate limiting section
+
+   |image81|
+
+#. Enter the Name **acme-rate-limits**
+
+#. Move all five keys under **Selected Keys**
+
+#. Enter **10** for the number of requests per minute
+
+#. Enter **5** for the number requests per second
+
+#. Click **Add**.
+
+   |image82|
+
+#. Click **Save**
+
+   |image83|
+
+
+Task 4 - Apply the Rate Limiting Policy
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#. Click **Access Control** from the ribbon
+
+   |image93|
+
+#. Click **Edit** Per Request Policy
+
+   |image94|
+
+#. Click the **+ (Plus Symbol)** on the **Out** branch of the **OAuth Scope Check AuthZ** Macro
+
+   |image95|
+
+#. Click the **Traffic Management** tab
+
+#. Select **API Rate Limiting**
+
+#. Click **Add Item**
+
+   |image96|
+
+#. Click **Add new entry**
+
+#. Select **acme-rate-limits**
+
+#. Click **Save**
+
+   |image97|
+
+#. Verify the Rate Limiting agent now appears in the appropriate location
+
+   |image98|
+
+
+Task 5 - Test Rate Limiting
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+#. Return to Postman
+
+#. Click **Run Again** to rerun the request an additional 100 times.
+
+   |image103|
+
+#. On the 6th request you begin to receive a **429 Too Many Requests** response status code
+
+   |image99|
+
+
+Section 1.5 - Onboard a New API
+----------------------------------------
+
+Organizations change. With this change, new APIs are introduced requiring modifications to the API Gateway. In this section you will learn how to add additional paths.
+
+Task 1 - Verify no access to API
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#. From Postman, select the request **Request 9: Create DNS Entry**
+
+#. Select the **Authorization** tab
+
+#. Select the previously created **User1** token from the **Available Tokens** dropdown
+
+#. The **Token** field is now populated
+
+#. Click **Send**
+
+#. You receive a **403 Forbidden** response status code because the the new API has not been published at the Gateway. 
+
+    .. warning: If you executed this step too quickly after the prior 1.6 lab, you may still be rate limited and need to wait a minute.
+
+
+Task 2 - Add the new API path
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#. From the browser, navigate to API Protection >> Profile.  Click **Profile** to modify the previously created API protection Profile (not the + Plus symbol)
+
+   |image48|
+
+#. Click **api-protection**
+
+   |image64|
+
+#. Click **Paths**
+
+   |image65|
+
+#. Click **Create**
+
+   |image66|
+
+#. The URI **/dns**
+
+#. Select the Method **POST**
+
+#. Click **Add**
+
+   |image67|
+
+#. Click **Save**
+
+   |image68|
+
+
+Task 3 - Test Access to the new path
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+#. From Postman, select the request **Request 9: Create DNS Entry**
+
+#. You receive a **200 OK** that the endpoint is now published.
+
+|image102|
+
+
+.. |image0| image:: media/lab01/image000.png
+	:width: 800px
+.. |image1| image:: media/lab01/image001.png
+.. |image2| image:: media/lab01/image002.png
+.. |image3| image:: media/lab01/image003.png
+.. |image4| image:: media/lab01/004.png
+.. |image5| image:: media/lab01/005.png
+.. |image6| image:: media/lab01/image006.png
+	:width: 800px
+.. |image7| image:: media/lab01/image007.png
+.. |image8| image:: media/lab01/image008.png
+.. |image9| image:: media/lab01/image009.png
+.. |image10| image:: media/lab01/image010.png
+.. |image11| image:: media/lab01/image011.png
+.. |image12| image:: media/lab01/image012.png
+	:width: 800px
+.. |image13| image:: media/lab01/013.png
+	:width: 800px
+.. |image14| image:: media/lab01/image014.png
+	:width: 800px
+.. |image15| image:: media/lab01/015.png
+	:width: 800px
+.. |image16| image:: media/lab01/image016.png
+	:width: 800px
+.. |image17| image:: media/lab01/image017.png
+	:width: 800px
+.. |image18| image:: media/lab01/image018.png
+.. |image19| image:: media/lab01/image019.png
+.. |image20| image:: media/lab01/image020.png
+.. |image21| image:: media/lab01/image021.png
+	:width: 700px
+.. |image22| image:: media/lab01/image022.png
+.. |image24| image:: media/lab01/024.png
+.. |image26| image:: media/lab01/026.png
+.. |image27| image:: media/lab01/027.png
+	:width: 600px
+.. |image28| image:: media/lab01/image028.png
+.. |image29| image:: media/lab01/029.png
+.. |image31| image:: media/lab01/031.png
+.. |image32| image:: media/lab01/image032.png
+.. |image33| image:: media/lab01/033.png
+	:width: 800px
+.. |image34| image:: media/lab01/034.png
+.. |image35| image:: media/lab01/image035.png
+.. |image36| image:: media/lab01/image036.png
+.. |image37| image:: media/lab01/037.png
+.. |image38| image:: media/lab01/image038.png
+.. |image39| image:: media/lab01/039.png
+.. |image40| image:: media/lab01/image040.png
+.. |image41| image:: media/lab01/image041.png
+.. |image42| image:: media/lab01/image042.png
+.. |image43| image:: media/lab01/image043.png
+.. |image044| image:: media/lab01/044.png
+.. |image45| image:: media/lab01/image045.png
+.. |image46| image:: media/lab01/046.png
+.. |image47| image:: media/lab01/image047.png
+.. |image48| image:: media/lab01/image048.png
+.. |image49| image:: media/lab01/049.png
+.. |image50| image:: media/lab01/050.png
+.. |image51| image:: media/lab01/image051.png
+.. |image52| image:: media/lab01/image052.png
+.. |image53| image:: media/lab01/image053.png
+.. |image54| image:: media/lab01/image054.png
+.. |image55| image:: media/lab01/image055.png
+.. |image56| image:: media/lab01/image056.png
+	:width: 800px
+.. |image57| image:: media/lab01/057.png
+.. |image58| image:: media/lab01/image058.png
+.. |image59| image:: media/lab01/image059.png
+.. |image60| image:: media/lab01/image060.png
+.. |image61| image:: media/lab01/061.png
+	:width: 800px
+.. |image62| image:: media/lab01/image062.png
+.. |image63| image:: media/lab01/image063.png
+.. |image64| image:: media/lab01/064.png
+.. |image65| image:: media/lab01/065.png
+.. |image66| image:: media/lab01/066.png
+	:width: 800px
+.. |image67| image:: media/lab01/067.png
+.. |image68| image:: media/lab01/068.png
+.. |image69| image:: media/lab01/image069.png
+	:width: 800px
+.. |image70| image:: media/lab01/image070.png
+	:width: 1000px
+.. |image71| image:: media/lab01/image071.png
+.. |image72| image:: media/lab01/072.png
+.. |image73| image:: media/lab01/image073.png
+.. |image75| image:: media/lab01/image075.png
+.. |image77| image:: media/lab01/image077.png
+.. |image79| image:: media/lab01/image079.png
+.. |image80| image:: media/lab01/image080.png
+	:width: 1200px
+.. |image81| image:: media/lab01/image081.png
+	:width: 1000px
+.. |image82| image:: media/lab01/image082.png
+	:width: 800px
+.. |image83| image:: media/lab01/image083.png
+	:width: 1200px
+.. |image84| image:: media/lab01/image084.png
+	:width: 800px
+.. |image85| image:: media/lab01/image085.png
+	:width: 1200px
+.. |image86| image:: media/lab01/image086.png
+	:width: 1200px
+.. |image87| image:: media/lab01/image087.png
+	:width: 1200px
+.. |image90| image:: media/lab01/image090.png
+	:width: 800px
+.. |image91| image:: media/lab01/image091.png
+	:width: 800px
+.. |image92| image:: media/lab01/092.png
+.. |image93| image:: media/lab01/image093.png
+	:width: 800px
+.. |image94| image:: media/lab01/image094.png
+	:width: 800px
+.. |image95| image:: media/lab01/095.png
+	:width: 800px
+.. |image96| image:: media/lab01/image096.png
+	:width: 800px
+.. |image97| image:: media/lab01/image097.png
+	:width: 800px
+.. |image98| image:: media/lab01/098.png
+	:width: 800px
+.. |image99| image:: media/lab01/099.png
+	:width: 800px
+.. |image101| image:: media/lab01/101.png
+.. |image103| image:: media/lab01/103.png
+.. |image102| image:: media/lab01/102.png
+.. |image104| image:: media/lab01/104.png
+.. |image105| image:: media/lab01/105.png
+.. |image106| image:: media/lab01/106.png
+.. |image107| image:: media/lab01/107.png
+.. |image108| image:: media/lab01/108.png
+.. |image109| image:: media/lab01/109.png
+.. |image110| image:: media/lab01/110.png
+.. |image111| image:: media/lab01/111.png
+.. |image112| image:: media/lab01/112.png
+.. |image113| image:: media/lab01/113.png
+.. |image200| image:: media/lab01/200.png
+.. |image201| image:: media/lab01/201.png
+.. |image202| image:: media/lab01/202.png
+.. |image203| image:: media/lab01/203.png
+.. |image204| image:: media/lab01/204.png
+.. |image206| image:: media/lab01/206.png
 
 

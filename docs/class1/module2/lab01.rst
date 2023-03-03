@@ -1,21 +1,38 @@
-Lab 1: Building a Basic Access Policy
-=====================================
+Lab 1: SAML IdP Access Guided Configuration (AGC) Lab
+======================================================
 
-Objectives
-----------
-In this lab we will work through the building blocks of Access Policy Manager. Much like the majority of the other modules around LTM they are policy based meaning you are binding a Profile
-to the virtual server in question that you want to provide enhanced functionality. In this case those come in the form of Per-Session and Per-Request Policies
+The purpose of this lab is to configure and test SAML Federation Services.
 
-Setup Lab Environment
------------------------------------
+Students will leverage Access Guided Configuration (AGC) to
+configure the various aspects of a SAML Identity Provider (IdP), import and bind
+to a SAML Service Provider (SP) and test IdP-Initiated SAML Federation.
+
+
+Objective:
+------------
+
+-  Gain an understanding of SAML Federation configurations and
+   their component parts through Access Guided Configuration (AGC)
+
+-  Gain an understanding of the access flow for IDP & SP Initiated SAML
+
+Lab Requirements:
+-----------------
+
+-  All Lab requirements will be noted in the tasks that follow
+
+-  Estimated completion time: 25-30 minutes
+
+Task 1 - Setup Lab environment
+---------------------------------
 
 To access your dedicated student lab environment, you will need a web browser and Remote Desktop Protocol (RDP) client software. The web browser will be used to access the Unified Demo Framework (UDF) Training Portal. The RDP client will be used to connect to the jumphost, where you will be able to access the BIG-IP management interfaces (HTTPS, SSH).
 
 #. Click **DEPLOYMENT** located on the top left corner to display the environment
 
-#. Click **ACCESS** next to jumphost.f5lab.local
+#. Click **ACCESS** next to jumpbox.f5lab.local
 
-   |accessjh|
+   |image999|
 
 #. Select your RDP resolution.
 
@@ -28,280 +45,443 @@ To access your dedicated student lab environment, you will need a web browser an
 
 #. After successful logon the Chrome browser will auto launch opening the site https://portal.f5lab.local.  This process usually takes 30 seconds after logon.
 
+
 #. Click the **Classes** tab at the top of the page.
 
-	|accessportal|
-
-
-#. Scroll down the page until you see **102 Access Building Blocks** on the left
-
-   |102intro|
-
-#. Hover over tile **Building a Basic Acces Policy**. A start and stop icon should appear within the tile.  Click the **Play** Button to start the automation to build the environment
-
-   +---------------+-------------+
-   | |lab01|       | |lab01fly|  |
-   +---------------+-------------+
-
-#. After the click it may take up to 30 seconds before you see processing
-
-   |process|
-
-#. Scroll to the bottom of the automation workflow to ensure all requests succeeded.  If you experience errors try running the automation a second time or open an issue on the `Access Labs Repo <https://github.com/f5devcentral/access-labs>`__.
-
-   |issues|
-
-
-Intro to Access Profiles and Policies
------------------------------------------------
-Access Policy Manager (APM) provides two types of policies.
-
-**Per-session policy**
-
-    The per-session policy runs when a client initiates a session. (A per-session policy is also known as an access policy.) Depending on the actions you include in the access policy, it can authenticate the user and perform other actions that populate session variables with data for use throughout the session.
-
-**Per-request policy**
-
-    After a session starts, a per-request policy runs each time the client makes an HTTP or HTTPS request. Because of this behavior, a per-request policy is particularly useful in the context of a Zero Trust scenario, where the client requires re-verification on every request. A per-request policy can include a subroutine, which starts a subsession. Multiple subsessions can exist at one time. You cannot use subroutines in macros within per-request policies.
-
-You can associate one access policy and one per-request policy with a virtual server.
-
-**Access Session**
-
-    An access session is recorded when a client initiates a connection through a per-session policy.  Once an access session is established it has a set of timeouts set within the Access profile.  A session will terminate if it reaches a timeout or the client ends the session.  An access session is now not limited by a license but by the platform running APM.  For more information on APM licensing see `K15624537: BIG-IP APM Licensing for BIG-IP Standard Platforms <https://support.f5.com/csp/article/K15624537>`_
-
-**Subsession**
-
-    A subsession is part of the per-request policy framework.  It starts when a subroutine (within a per-request policy) runs and continues until reaching the maximum lifetime specified in the subroutine properties, or until the session terminates. A subsession populates subsession variables that are available for the duration of the subsession. Subsession variables and events that occur during a subsession are logged.
-
-    Multiple subsessions can exist at the same time. The maximum number of subsessions allowed varies across platforms. The total number of subsessions is limited by the session limits in APM (128 * max sessions). Creating a subsession does not count against the license limit.
-
-
-
-Objectives
-----------
-
-The lab has a pre-configured test Virtual Server which will be used throughout the lab.  You will use the Visual Policy Editor (VPE) to create and attach a simple Access Profile which performs user authentication.
-
-Lab Requirements
-----------------
-
--  A pre existing virtual server at 10.1.10.101 or https://app.acme.com
-
-Task 1: Define an Authentication Server
----------------------------------------
-
-Before we can create an access profile, we must create the necessary AAA
-server profile for our Active Directory.
-
-#. Click the bigip1 bookmark from within Chrome and login to the BIG-IP, admin/admin
-
-#. From the main screen, browse to **Access > Authentication > Active
-   Directory**
-
-#. Click **Create...** in the upper right-hand corner
-
-#. Configure the new server profile as follows:
-
-    +------------------+---------------------------+
-    |Name:             | **lab\_sso\_ad\_server**  |
-    +------------------+---------------------------+
-    |Domain Name:      | **f5lab.local**           |
-    +------------------+---------------------------+
-    |Server Connection:| **Direct**                |
-    +------------------+---------------------------+
-    |Domain Controller:| **10.1.20.7**             |
-    +------------------+---------------------------+
-    |User Name:        | **admin**                 |
-    +------------------+---------------------------+
-    |Password:         | **admin**                 |
-    +------------------+---------------------------+
-
-
-#. Click **Finished**
-
-    .. Note:: If you wish you can simply use the **app-ad-servers**.
-
-
-Task 2: Create a Simple Access Profile
---------------------------------------
-
-#. Navigate to **Access > Profiles / Policies > Access Profiles
-   (Per-Session Policies)**
-
-   |Lab1-Image1|
-
-#. From the Access Profiles screen, click **Create...** in the upper
-   right-hand corner
-
-#. In the Name field, enter **mycccesspolicy** and for the **Profile Type**,
-   select the dropdown and choose **All**
-
-   |Lab1-Image2|
-
-#. Under "Language Settings", choose **English** and click the
-    **<<** button to slide over to the **Accepted Languages** column.
-
-   |Lab1-Image3|
-
-#. Click **Finished**, which will bring you back to the Access Profiles
-   screen.
-
-#. On the Access Profiles screen, click the **Edit** link under the
-   Per-Session Policy column.
-
-   |Lab1-Image4|
-
-   The Visual Policy Editor (VPE) will open in a new tab.
-
-#. On the VPE page, click the **+** icon on the **fallback** path,
-   to the right of the **Start** object.
-
-   |Lab1-Image5|
-
-#. On the popup menu, choose the **Logon Page** radio button under the
-   Logon tab and click **Add Item**
-
-   |Lab1-Image6|
-
-   |Lab1-Image7|
-
-#. Accept the defaults and click **Save**
-
-    Now let's authenticate the client using the credentials to be provided via the **Logon Page** object.
-
-#. Between the **Logon Page** and **Deny** objects, click the **+**
-   icon, select **AD Auth** found under the **Authentication** tab,
-   and click the **Add Item** button
-
-   |Lab1-Image8|
-
-   |Lab1-Image9|
-
-#. Accept the default for the **Name** and in the **Server** drop-down
-   menu select the AD server created above:
-   **/Common/lab\_sso\_ad\_server**, then click **Save**
-
-   |Lab1-Image10|
-
-#. On the **Successful** branch between the **AD Auth** and **Deny**
-   objects, click on the word **Deny** to change the ending
-
-   |Lab1-Image11|
-
-#. Change the **Successful** branch ending to **Allow**, then click **Save**
-
-   |Lab1-Image12|
-
-   |Lab1-Image13|
-
-#. In the upper left-hand corner of the screen, click on the **Apply
-   Access Policy** link, then close the window using the **Close**
-   button in the upper right-hand. Click **Yes** when asked **Do you
-   want to close this tab?**
-
-   |Lab1-Image14|
-
-   |Lab1-Image15|
-
-Task 3: Associate Access Policy to Virtual Servers
---------------------------------------------------
-
-Now that we have created an access policy, we must apply it to the
-appropriate virtual server to be able to use it.
-
-#. Navigate to **Local Traffic** --> **Virtual Servers** --> **Virtual Server List** and click the name of the virtual server created previously:  **app-https**
-
-#. Scroll down to the **Access Policy** section, for the **Access
-   Profile** dropdown, select **myaccesspolicy**
-
-   |Lab1-Image16|
-
-#. Click **Update** at the bottom of the screen
-
-Task 4: Testing
-----------------
-
-Now you are ready to test.
-
-#. Open a new browser window and open the URL for the virtual server that has the access policy applied:
-
-   **https://app.acme.com**
-
-   You will be presented with a login window
-
-   |Lab1-Image17|
-
-#. Enter the following credentials and click **Logon**:
-
-    +------------+-----------+
-    | Username:  |**user1**  |
-    +------------+-----------+
-    | Password:  |**user1**  |
-    +------------+-----------+
-
-You will see a screen similar to the following:
-
-   |Lab1-Image18|
-
-
-Task 5: Troubleshooting tips
-----------------------------
-
-You can view active sessions by navigating Access/Overview/Active Sessions
-
-You will see a screen similar to the following:
-
-Click on the session id for the active session. If the session is active it will show up as a green in the status.
-
-|Lab1-Image19|
-
-Click on the "session ID" next to the active session. Note every session has a unique session id. Associated with it.
-This can be used for troubleshooting specific authentication problem.
-
-Once you click on the session id you will be presented with a screen that is similar to the following.
-
-|Lab1-Image20|
-
-Note that the screen will show all of the log messages associated with the session. This becomes useful if there is a problem authenticating users.
-
-The default log level shows limited "informational" messages but you can enable debug logging in the event that you need to increase the verbosity of the logging
-on the APM policy. Note you should always turn off debug logging when you are finished with trouble shooting as debug level logging can
-generate a lot of messages that will fill up log files and could lead to disk issues in the event that logging is set to log to the
-local Big-IP.
-
-Please review the following support article that details how to enable debug logging.
-
-https://support.f5.com/csp/article/K45423041
-
-Lab 1 is now complete.
-
-
-
-.. |Lab1-Image1| image:: ./media/Lab1-Image1.png
-.. |Lab1-Image2| image:: ./media/Lab1-Image2.png
-.. |Lab1-Image3| image:: ./media/Lab1-Image3.png
-.. |Lab1-Image4| image:: ./media/Lab1-Image4.png
-.. |Lab1-Image5| image:: ./media/Lab1-Image5.png
-.. |Lab1-Image6| image:: ./media/Lab1-Image6.png
-.. |Lab1-Image7| image:: ./media/Lab1-Image7.png
-.. |Lab1-Image8| image:: ./media/Lab1-Image8.png
-.. |Lab1-Image9| image:: ./media/Lab1-Image9.png
-.. |Lab1-Image10| image:: ./media/Lab1-Image10.png
-.. |Lab1-Image11| image:: ./media/Lab1-Image11.png
-.. |Lab1-Image12| image:: ./media/Lab1-Image12.png
-.. |Lab1-Image13| image:: ./media/Lab1-Image13.png
-.. |Lab1-Image14| image:: ./media/Lab1-Image14.png
-.. |Lab1-Image15| image:: ./media/Lab1-Image15.png
-.. |Lab1-Image16| image:: ./media/Lab1-Image16.png
-.. |Lab1-Image17| image:: ./media/Lab1-Image17.png
-.. |Lab1-Image18| image:: ./media/Lab1-Image18.png
-.. |Lab1-Image19| image:: ./media/Lab1-Image19.png
-.. |Lab1-Image20| image:: ./media/Lab1-Image20.png
-.. |accessjh| image:: ./media/accessjh.png
-.. |accessportal| image:: ./media/accessportal.png
-.. |102intro| image:: ./media/102intro.png
-.. |lab01| image:: ./media/lab01.png
-.. |lab01fly| image:: ./media/lab01fly.png
-.. |process| image:: ./media/process.png
-.. |issues| image:: ./media/issues.png
+	|image998|
+
+#. Scroll down the page until you see **202 - Federation** on the left
+
+   |image997|
+
+#. Hover over tile **SAML IdP Access Guided Configuration(AGC) Lab**. A start and stop icon should appear within the tile.  Click the **Play** Button to start the automation to build the environment
+
+   |image996|
+
+#. The screen should refresh displaying the progress of the automation within 30 seconds.  Scroll to the bottom of the automation workflow to ensure all requests succeeded.  If you you experience errors try running the automation a second time or open an issue on the `Access Labs Repo <https://github.com/f5devcentral/access-labs>`__.
+
+   |image995|
+
+TASK 2 - Configure a SAML Identity Provider (IdP) via AGC
+-------------------------------------------------------------
+
++----------------------------------------------------------------------------------------------+
+| 1. Login to your lab provided **Virtual Edition BIG-IP**  by clicking **bigip1** in the      |
+|                                                                                              |
+|    shortcut toolbar from the Jumphost.  Username: **admin**, Password: **admin**.            |
+|                                                                                              |
+| **Note:** *Many of the lab steps will need to be run from the Jumphost. This is to support*  |
+|                                                                                              |
+| *file imports and various other tasks.*                                                      |
++----------------------------------------------------------------------------------------------+
+| |image001|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 2. Navigate to **Access -> Guided Configuration** in the left-hand menu.                     |
++----------------------------------------------------------------------------------------------+
+| |image002|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 3. Once **Guided Configuration** loads, click on **Federation** and then in the resulting    |
+|                                                                                              |
+|    **Federation** sub-menu click, **SAML Identity Provider Federation for Applications**.    |
++----------------------------------------------------------------------------------------------+
+| |image003|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 4. In the resulting **SAML Identity Provider Federation for Applications** window,           |
+|                                                                                              |
+|    review the **IdP-Initiated SAML flow** and then click the **right arrow**.                |
++----------------------------------------------------------------------------------------------+
+| |image004|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 5. Review the **SP-Initiated SAML flow** and then scroll down to the bottom of the window.   |
++----------------------------------------------------------------------------------------------+
+| |image005|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 6. Review the configuration objects to be created and the click **Next**.                    |
++----------------------------------------------------------------------------------------------+
+| |image006|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
+TASK 3 - Configure the Identity Provider
+-------------------------------------------------------------
+
++----------------------------------------------------------------------------------------------+
+| 1. In the **Identity Provider Properties** section, enter the following values in the fields |
+|                                                                                              |
+|    provided:                                                                                 |
+|                                                                                              |
+|    * In the **Configuration Name** field input **idp.acme.com**.                             |
+|                                                                                              |
+|    * In the **Entity ID** field input **https://idp.acme.com**.                              |
+|                                                                                              |
+| 2. In the **Assertion Properties** section, use the dropdowns to select the following:       |
+|                                                                                              |
+|    * For the **Signing Key** select **idp.acme.com**.                                        |
+|                                                                                              |
+|    * For the **Signing Certificate** select **idp.acme.com**.                                |
+|                                                                                              |
+| 3. Click **Save & Next**.                                                                    |
++----------------------------------------------------------------------------------------------+
+| |image007|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
+TASK 4 - Configure the Virtual Server
+-------------------------------------------------------------
+
++----------------------------------------------------------------------------------------------+
+| 1. In the **Virtual Server Properties** section, enter the following values in the fields    |
+|                                                                                              |
+|    provided:                                                                                 |
+|                                                                                              |
+|    * In the **Destination Address** field input **10.1.10.102**.                             |
+|                                                                                              |
+|    * In the **Service Port** field input **443** **HTTPS**                                   |
+|                                                                                              |
+|    * In the **Redirect Port** field input **80** **HTTP**                                    |
+|                                                                                              |
+| 2. In the **Client SSL Profile** section, use the arrows to move only the                    |
+|                                                                                              |
+|    **wildcard.acme.com** profile to the right-hand column as shown.                          |
+|                                                                                              |
+| 3. Click **Save & Next**.                                                                    |
++----------------------------------------------------------------------------------------------+
+| |image008|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
+TASK 5 - Configure Authentication
+-------------------------------------------------------------
+
++----------------------------------------------------------------------------------------------+
+| 1. In the **Authentication Properties** section, use the dropdowns to select the following:  |
+|                                                                                              |
+|    * For the **Choose Authentication Server Type** select **Active Directory**.              |
+|                                                                                              |
+|    * For the **Choose Authentication Server** select **f5lab.local**.                        |
+|                                                                                              |
+| 2. **Check** the **Active Directory Query Properties** checkbox.                             |
+|                                                                                              |
+| 3. Input **%{session.logon.last.username}** in **Search Filter** field. Your cursor will be  |
+|                                                                                              |
+|    next to the existing **sAMAccountName=**.                                                 |
+|                                                                                              |
+| 4. In the **Required Attributes** section, use the arrows to move only the                   |
+|                                                                                              |
+|    **memberOf** attribute to the right-hand column as shown.                                 |
+|                                                                                              |
+| 5. Scroll to the bottom of the window and click **Save & Next**.                             |
++----------------------------------------------------------------------------------------------+
+| |image009|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
+TASK 6 - Configure MFA
+-------------------------------------------------------------
+
++----------------------------------------------------------------------------------------------+
+| 1. In the Multi Factor Authentication winodw, click **Save & Next**.                         |
+|                                                                                              |
+| **Note:** *Multiple MFA options can be easily integrated with TMOS.*                         |
++----------------------------------------------------------------------------------------------+
+| |image010|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
+TASK 7: Configure Applications
+-------------------------------------------------------------
+
++----------------------------------------------------------------------------------------------+
+| 1. In the **Application Properties** section, use the **Select method to configure your**    |
+|                                                                                              |
+|    **application** dropdown to choose **Metadata**.                                          |
+|                                                                                              |
+| **Note:** *Multiple applications are available to be configured with more continually added* |
++----------------------------------------------------------------------------------------------+
+| |image011|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 2. In the updated **Application Properties** window, click the **Choose File** button, browse|
+|                                                                                              |
+|    the **Jumphost** desktop and select the **sp_acme_com.xml** file.                         |
+|                                                                                              |
+| 3. For the **Application Name**, input **sp.acme.com**                                       |
+|                                                                                              |
+| 4. For the **Webtop Caption**, make sure the value is **sp.partner.com**                     |
+|                                                                                              |
+| 5. Scroll to the bottom of the window and click **Save**.                                    |
++----------------------------------------------------------------------------------------------+
+| |image012|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 6. Review the **Configured Application List** and then click **Save & Next**.                |
++----------------------------------------------------------------------------------------------+
+| |image013|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
+TASK 8 - Configure Endpoint Checks
+-------------------------------------------------------------
+
++----------------------------------------------------------------------------------------------+
+| 1. In the **Endpoints Checks Properties** window, click **Save & Next**.                     |
+|                                                                                              |
+| **Note:** *Endpoints checks can also be configured to protect application access.  The*      |
+|                                                                                              |
+| *Access 302 Lab, hosted at this year's Agility will have additional details.*                |
++----------------------------------------------------------------------------------------------+
+| |image014|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
+TASK 9 - Configure Customization
+-------------------------------------------------------------
+
++----------------------------------------------------------------------------------------------+
+| 1. Review the Customization options, then scroll to the bottom of the window and click       |
+|                                                                                              |
+|    **Save & Next**.                                                                          |
+|                                                                                              |
+| **Note:** *Unlike iApps, Access basic customizations are part of AGC.*                       |
++----------------------------------------------------------------------------------------------+
+| |image015|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
+
+TASK 10 - Configure Logon Protection
+-------------------------------------------------------------
+
++----------------------------------------------------------------------------------------------+
+| 1. In the **Logon Protection Properties** window, click **Save & Next**.                     |
+|                                                                                              |
+| **Note:** *Logon Page Protection enables Datasafe to further protect logon pages and*        |
+|                                                                                              |
+| *defend against malicious in-browser attacks*.                                               |
++----------------------------------------------------------------------------------------------+
+| |image016|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
+TASK 11: Configure Session Management
+-------------------------------------------------------------
+
++----------------------------------------------------------------------------------------------+
+| 1. Review the Session Managment settings, in the **Timeout Settings** section then scroll to |
+|                                                                                              |
+|    the bottom of the window and click **Save & Next**.                                       |
++----------------------------------------------------------------------------------------------+
+| |image017|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
+TASK 12: Review the Summary and Deploy
+-------------------------------------------------------------
+
++----------------------------------------------------------------------------------------------+
+| 1. Review the Summary, then scroll to the bottom of the window and click **Deploy**.         |
++----------------------------------------------------------------------------------------------+
+| |image018|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 2. Once the application is deployed, scroll to the bottom and click **Finish**.              |
++----------------------------------------------------------------------------------------------+
+| |image019|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 3. Review the Access Guided Confguration window, **Status** for **idp.acme.com** is          |
+|                                                                                              |
+|    **DEPLOYED**.                                                                             |
++----------------------------------------------------------------------------------------------+
+| |image020|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
+TASK: 13: Testing the SAML Identity Provider (IdP)
+-------------------------------------------------------------
+
++----------------------------------------------------------------------------------------------+
+| 1. Open Firefox from the Jumphost desktop and navigate to https://idp.acme.com               |
+|                                                                                              |
+| 2. Once the page loads, enter **user1** for username and **user1** for password  in the      |
+|                                                                                              |
+|    logon form and click the logon button.                                                    |
+|                                                                                              |
+| **Note:** *If you have issues, open Firefox in a New Private Window (Incognito/Safe Mode)*   |
++----------------------------------------------------------------------------------------------+
+| |image021|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 3. On the presented webtop, click the **sp.acme.com** link in the **Applications and**       |
+|                                                                                              |
+|    **Links** section.                                                                        |
++----------------------------------------------------------------------------------------------+
+| |image023|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 4. The **Application** will now open if successfully configured.  Close the                  |
+|                                                                                              |
+|    Application window, navigate to the **F5 Dynamic Webtop** tab/window and click **Logout**.|
++----------------------------------------------------------------------------------------------+
+| |image024|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
+
+TASK 14: Lab CleanUp
+-------------------------------------------------------------
+
+
++----------------------------------------------------------------------------------------------+
+| 1. Navigate to **Access -> Guided Configuration** in the left-hand menu.                     |
++----------------------------------------------------------------------------------------------+
+| |image002|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 2. Click the **Undeploy** button                                                             |
++----------------------------------------------------------------------------------------------+
+| |image025|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 3. Click **OK** when asked, "Are you sure you want to undeploy this configuration?"          |
++----------------------------------------------------------------------------------------------+
+| |image026|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 4. Click the **Delete** button once the deployment is undeployed                             |
++----------------------------------------------------------------------------------------------+
+| |image027|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 5. Click **OK** when asked, "Are you sure you want to delete this configuration?"            |
++----------------------------------------------------------------------------------------------+
+| |image028|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 6. The Configuration section should now be empty                                             |
++----------------------------------------------------------------------------------------------+
+| |image029|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 7. From a browser on the jumphost navigate to https://portal.f5lab.local                     |
+|                                                                                              |
+| 8. Click the **Classes** tab at the top of the page.                                         |
++----------------------------------------------------------------------------------------------+
+| |image998|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 9. Scroll down the page until you see **202 - Federation** on the left                       |
++----------------------------------------------------------------------------------------------+
+| |image997|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------+
+| 10. Hover over the tile **SAML IdP Access Guided Configuration(AGC) Lab**. A start and stop  |
+| icon should appear within the tile.  Click the **Stop** Button to start the automation to    |
+| delete any prebuilt objects                                                                  |
++----------------------------------------------------------------------------------------------+
+| |image045|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 11. The screen should refresh displaying the progress of the automation within 30 seconds.   |
+| Scroll to the bottom of the automation workflow to ensure all requests succeeded.            |
+| If you you experience errors try running the automation a second time or open an issue on    |
+| the `Access Labs Repo <https://github.com/f5devcentral/access-labs>`__.                      |
+|                                                                                              |
++----------------------------------------------------------------------------------------------+
+| |image044|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
++----------------------------------------------------------------------------------------------+
+| 12. This concludes Lab1.                                                                     |
+|                                                                                              |
++----------------------------------------------------------------------------------------------+
+| |image000|                                                                                   |
++----------------------------------------------------------------------------------------------+
+
+
+.. |image000| image:: ./media/lab01/000.png
+   :width: 800px
+.. |image001| image:: ./media/lab01/lab1-001.png
+   :width: 800px
+.. |image002| image:: ./media/lab01/lab1-002.png
+   :width: 800px
+.. |image003| image:: ./media/lab01/lab1-003.png
+   :width: 800px
+.. |image004| image:: ./media/lab01/lab1-004.png
+   :width: 800px
+.. |image005| image:: ./media/lab01/lab1-005.png
+   :width: 800px
+.. |image006| image:: ./media/lab01/lab1-006.png
+   :width: 800px
+.. |image007| image:: ./media/lab01/007.png
+   :width: 800px
+.. |image008| image:: ./media/lab01/lab1-008.png
+   :width: 800px
+.. |image009| image:: ./media/lab01/lab1-009.png
+   :width: 800px
+.. |image010| image:: ./media/lab01/lab1-010.png
+   :width: 800px
+.. |image011| image:: ./media/lab01/lab1-011.png
+   :width: 800px
+.. |image012| image:: ./media/lab01/012.png
+   :width: 800px
+.. |image013| image:: ./media/lab01/013.png
+   :width: 800px
+.. |image014| image:: ./media/lab01/lab1-014.png
+   :width: 800px
+.. |image015| image:: ./media/lab01/lab1-015.png
+   :width: 800px
+.. |image016| image:: ./media/lab01/lab1-016.png
+   :width: 800px
+.. |image017| image:: ./media/lab01/lab1-017.png
+   :width: 800px
+.. |image018| image:: ./media/lab01/018.png
+   :width: 800px
+.. |image019| image:: ./media/lab01/019.png
+   :width: 800px
+.. |image020| image:: ./media/lab01/020.png
+   :width: 800px
+.. |image021| image:: ./media/lab01/021.png
+   :width: 800px
+.. |image023| image:: ./media/lab01/023.png
+   :width: 800px
+.. |image024| image:: ./media/lab01/024.png
+   :width: 800px
+.. |image025| image:: ./media/lab01/025.png
+   :width: 800px
+.. |image026| image:: ./media/lab01/026.png
+   :width: 800px
+.. |image027| image:: ./media/lab01/027.png
+   :width: 800px
+.. |image028| image:: ./media/lab01/028.png
+   :width: 800px
+.. |image029| image:: ./media/lab01/029.png
+   :width: 800px
+.. |image044| image:: ./media/lab01/044.png
+   :width: 800px
+.. |image045| image:: ./media/lab01/045.png
+   :width: 800px
+.. |image995| image:: ./media/lab01/995.png
+   :width: 800px
+.. |image996| image:: ./media/lab01/996.png
+   :width: 800px
+.. |image997| image:: ./media/lab01/997.png
+   :width: 800px
+.. |image998| image:: ./media/lab01/998.png
+   :width: 800px
+.. |image999| image:: ./media/lab01/999.png
+   :width: 800px
