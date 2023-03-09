@@ -23,8 +23,8 @@ Virtual Desktop Infrastructure (VDI)
    :caption: Version 16.1 Labs:
    :glob:
 
-   module2/intro.rst
-   module2/lab*
+   module1/intro.rst
+   module1/lab*
 
 102 - Federation (F5 APM as Idp (Identity Provider) and SP (Service Provider))
 -------------------------------------------------------------------------------
@@ -32,8 +32,8 @@ Virtual Desktop Infrastructure (VDI)
    :maxdepth: 1
    :glob:
 
-   module3/intro.rst
-   module3/lab*
+   module2/intro.rst
+   module2/lab*
 
     
 103 - Microsoft Integration (AzureAD Easy button)
@@ -42,8 +42,8 @@ Virtual Desktop Infrastructure (VDI)
    :maxdepth: 1
    :glob:
 
-   module4/intro.rst
-   module4/lab*
+   module3/intro.rst
+   module3/lab*
    
    
 104 - Citrix integration
@@ -52,7 +52,7 @@ Virtual Desktop Infrastructure (VDI)
    :maxdepth: 1
    :glob:
 
-   module5/intro.rst
+   module4/intro.rst
 
 105 - VMware Horizon integration
 ---------------------------------------------------
@@ -60,4 +60,4 @@ Virtual Desktop Infrastructure (VDI)
    :maxdepth: 1
    :glob:
 
-   module6/intro.rst
+   module5/intro.rst
