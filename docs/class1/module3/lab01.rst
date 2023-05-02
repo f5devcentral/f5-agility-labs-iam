@@ -68,7 +68,7 @@ Task 1  - Check IIS configuration (Optional)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-#. RDP to IIS with ``f5access\user`` as user, and ``user`` as password
+#. RDP to IIS with ``f5access\user1`` as user, and ``user1`` as password
 #. Click ``IIS manager`` icon in the taskbar
 
    |image005|
@@ -248,7 +248,7 @@ Task 8 - Deploy your app template
 Task 9 - Test your deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. RDP to Win10 machine as ``user`` and password ``user``
+#. RDP to Win10 machine as ``user1`` and password ``user1``
 #. Open ``Google Chrome`` or the ``Microsoft Edge`` browser - both icons are on the Desktop and the Taskbar
 #. From the bookmarks list/toolbar, choose ``Bluesky`` and ignore the inevitable cert warnings.
 #. You will be redirected to Azure AD login page. Login as ``user1@f5access.onmicrosoft.com`` and hit ``Next``. The password is stored in a text file named ``azure_ad_creds.txt`` on the Win10 Desktop.
