@@ -1,43 +1,12 @@
 200 Series: Assisted Deployment Use Cases
 ======================================================
 
-This lab documents provides foundational concepts for understanding Access Policy Manager's (APM) common features.
+This lab documents provides foundational concepts for understanding Access Policy Manager's (APM) common features for implementing API protection solution. 
 
+In our lab we will explore the APM role for API protection in addition to Bot defense and AWAF solutions. 
 
-201 - Zero Trust - Identity Aware Proxy
---------------------------------------------------------  
-
-
-.. toctree::
-   :maxdepth: 1
-   :caption: Version 15.1 Labs:
-   :glob:
-
-   module1/intro.rst
-   module1/lab*
-
-
-.. toctree::
-   :maxdepth: 1
-   :caption: Version 16.1 Labs:
-   :glob:
-
-   module2/intro.rst
-   module2/lab*
-
-
-202 - Federation
------------------------
-.. toctree::
-   :maxdepth: 1
-   :glob:
-
-   module3/intro.rst
-   module3/lab*
-
-    
-203 - Microsoft Integration
------------------------------
+201 - API Protection
+----------------------
 .. toctree::
    :maxdepth: 1
    :glob:
