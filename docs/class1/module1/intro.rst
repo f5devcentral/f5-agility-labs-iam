@@ -28,8 +28,7 @@ The following components have been included in your lab environment:
 Lab Components
 --------------------
 
-The following table lists VLANS, IP Addresses and Credentials for all
-components:
+The following table lists VLANS, IP Addresses and Credentials for all components:
 
 
 +------------------------+-------------------------+-----------------------------+
@@ -118,6 +117,7 @@ components:
 |                        |    - 10.1.20.8          |                             |
 |                        |    - 10.1.20.18         |                             |
 +------------------------+-------------------------+-----------------------------+
+
 
 .. |image000| image:: media/intro/000.png
 
