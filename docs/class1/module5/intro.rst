@@ -4,7 +4,8 @@ Lab 1: VMware Horizon integration
 
 UDF Blueprint:
 ---------------
-https://udf.f5.com/b/d0cdf4d9-1624-4727-a6c3-ae6885ac1dc2#documentation
+https://udf.f5.com/b/d68f4a6c-31cf-4b9a-8224-80ebba818a16#documentation
+
 
 
 .. image:: pictures/pcoip-proxy-config-example-updated_1.png
@@ -13,6 +14,8 @@ https://udf.f5.com/b/d0cdf4d9-1624-4727-a6c3-ae6885ac1dc2#documentation
    :class: with-shadow
    
 .. Note:: For this Horizon Environment to Stabilize it takes approx 20 minutes after starting the deployment for all of the horizon brokers/agents to normalize.
+    
+
 
 .. Note:: VMware UAGs are not apart of this lab.
 
@@ -23,15 +26,9 @@ Lab devices:
 +---------------------------------+------------+
 | Hostname                        | IP address |
 +=================================+============+
-| horizon-internal.horizon.local  | 10.1.20.50 |
+| horizon-ltm.f5demos.local       | 10.1.20.100|
 +---------------------------------+------------+
-| horizon-apm.horizon.local       | 10.1.20.51 |
-+---------------------------------+------------+
-| horizon-dns.horizon.local       | 10.1.20.54 |
-+---------------------------------+------------+
-| workspace.horizon.local         | 10.1.20.55 |
-+---------------------------------+------------+
-| horizon-jwt.horizon.local       | 10.1.20.56 |
+| horizon-apm.f5demos.local       | 10.1.20.105|
 +---------------------------------+------------+
 
 
@@ -39,15 +36,15 @@ Lab devices:
 Demo script:
 ---------------
 
-1. RDP to External Client machine as "Administrator" and password "obtained from Details tab"
-2. Launch Chrome browser
-3. write the URL (https://horizon-apm.horizon.local) to access through F5 APM.
-4. Authenticate to APM with "horizon\horizon_user" and password "H0rIzoN!"
-5. Then click on RDP resource. 
-6. Logout from the start menu if you click on the Windows machine in VMware page.
+1. After Starting the Lab  and is fully started WAIT 5 minutes for everything to boot completely and stabalize (this will ensure ansible code will execute correctly)
+2. Launch the Ansible Builders Web Shell  -  Ansible Builder --> Access --> Web Shell
+3. Change directory to the provisioning folder -
+        cd /git/f5-bd-horizon-lab-udf/
+4. Launch Code to start building process (this can take 10-20 minutes) -
+        ansible-playbook setup_horizon.yaml
 
 You can make a demo with Horizon VMware view client:
 
-1. Click on VMware view client and add server (horizon-apm.horizon.local)
+1. Click on VMware view client and add server (horizon-apm.f5demos.local)
 2. Login as "horizon\horizon_user" and password "H0rIzoN!"
 3. Click on any apps or desktop.
