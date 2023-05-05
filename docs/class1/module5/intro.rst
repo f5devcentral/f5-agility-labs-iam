@@ -46,5 +46,5 @@ Demo script:
 You can make a demo with Horizon VMware view client:
 
 1. Click on VMware view client and add server (horizon-apm.f5demos.local)
-2. Login as "horizon\horizon_user" and password "H0rIzoN!"
+2. Login as "horizon_user" and password "H0rIzoN!"
 3. Click on any apps or desktop.
