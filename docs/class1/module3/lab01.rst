@@ -112,7 +112,7 @@ Task 1 - Publish and protect Bluesky app
 
 Let's start with the ``Bluesky`` application. Reminder, Bluesky does not have any ``Authentication`` enabled. 
 
-#. Either access TMUI via UDF > Access > BIG-IP > TMUI or RDP to win10 (user/user) and launch Edge or Chrome. Using the BIG-IP bookmark, connect to the BIG-IP user interface (admin/admin)
+#. Either access TMUI via UDF > Access > BIG-IP > TMUI or RDP to win10 (user1/user1) and launch Edge or Chrome. Using the BIG-IP bookmark, connect to the BIG-IP user interface (admin/admin)
 #. In ``Access`` > ``Guided Configuration``, select ``Microsoft Integration`` > ``Azure AD application`` 
 
 
@@ -221,7 +221,7 @@ Task 6 - Pool Properties
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #. Leave the ``Select a Pool` setting as ``Create New``
-#. In Pool Servers, select ``/Common/10.1.20.9`` from the drop-down menu. This is the Lab's IIS server whose config you may have viewed earlier. 
+#. In Pool Servers, select ``/Common/10.1.20.29`` from the drop-down menu. This is the Lab's IIS server whose config you may have viewed earlier. 
 #. Click ``Save & Next``
 
    |image019|
@@ -387,7 +387,7 @@ Task 6 - Pool Properties
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #. For ``Select a Pool``, leave ``Create New`` selected
-#. In Pool Servers, select ``/Common/10.1.20.9`` This is once again the lab's IIS server whose config you investigated earlier. 
+#. In Pool Servers, select ``/Common/10.1.20.29`` This is once again the lab's IIS server whose config you investigated earlier. 
 #. Click ``Save & Next``
 
    |image032|
@@ -412,7 +412,7 @@ Task 7 - Single Sign-On Settings
     #. Kerberos Realm : ``f5access.onmicrosoft.com``
     #. Account name : ``host/apm-deleg.f5access.onmicrosoft.com``
     #. Account Password : ``F5twister$`` (You'll be asked to enter this password twice for confirmation)
-    #. KDC : ``10.1.20.8``
+    #. KDC : ``10.1.20.28``
     #. UPN Support : ``Enabled``
     #. SPN Pattern : ``HTTP/%s@f5access.onmicrosoft.com``
 
@@ -446,7 +446,7 @@ Task 9 - Deploy your app template
 Task 10 - Test your deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. If you closed your RDP session to Win10, pleae re-connect as ``user`` and password ``user``
+#. If you closed your RDP session to Win10, pleae re-connect as ``user1`` and password ``user1``
 #. Open ``Google Chrome`` or ``Microsoft Edge`` - the icons are on the Desktop and the Taskbar
 #. From the bookmarks menu/toolbar, select ``Vanilla`` and ignore the Cert Errors.
 #. Since you already logged into Azure AD when accessing ``BlueSky``, you may notice you didn't need to sign-in again and were automatically taken into the application. Your previous assertion was still validated but it was done transparently. If you were sent to Azure AD again for authenticaton, please use the same credentials as before: ``user1@f5access.onmicrosoft.com`` and the password is stored in a text file named ``azure_ad_creds.txt`` on the Win10 Desktop.
