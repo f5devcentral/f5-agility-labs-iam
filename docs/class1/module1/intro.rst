@@ -43,6 +43,7 @@ The following table lists VLANS, IP Addresses and Credentials for all components
 |                        |                         | f5lab\\admin   |     admin  | 
 +------------------------+-------------------------+----------------+------------+
 |Azure logins            |  user1@f5access.onmicrosoft.com          | user1      |
+|                        +------------------------------------------+------------+
 |                        |  user@f5access.onmicrosoft.com           | user       |
 +------------------------+-------------------------+----------------+------------+
 | bigip1.f5lab.local     | - Management 10.1.1.4   |  admin         |  admin     |
