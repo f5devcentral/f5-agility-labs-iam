@@ -43,7 +43,7 @@ Task 1 - Create a DNS Resolver
 #. Add a Nameserver by entering Address **10.1.20.7** and click **Add**
 #. Click **Finished**
 
-   |image6|
+   |dnsresolver|
 
 
 Task 2 - Create a ServerSide SSL Profile
