@@ -36,11 +36,14 @@ The following table lists VLANS, IP Addresses and Credentials for all components
 +========================+=========================+================+============+
 | jumpbox.f5lab.local    | - Management 10.1.1.10  | Username       | Password   |
 |                        | - External   10.1.10.10 +----------------+------------+
-|                        | - Internal   10.1.20.10 | f5lab\\user1   |     user1  |                  
+|                        | - Internal   10.1.20.10 | f5lab\\user1   |     user1  |                   
 |                        |                         +----------------+------------+
 |                        |                         | f5lab\\user2   |     user2  |
 |                        |                         +----------------+------------+    
 |                        |                         | f5lab\\admin   |     admin  | 
++------------------------+-------------------------+----------------+------------+
+|Azure logins            |  user1@f5access.onmicrosoft.com          | user1      |
+|                        |  user@f5access.onmicrosoft.com           | user       |
 +------------------------+-------------------------+----------------+------------+
 | bigip1.f5lab.local     | - Management 10.1.1.4   |  admin         |  admin     |
 |                        | - External              +----------------+------------+
