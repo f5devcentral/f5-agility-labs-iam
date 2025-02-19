@@ -249,15 +249,15 @@ Click **Finished**
 
    |image34|
 
-#. After clicking Finish, you should be at the screen below. Click **Save**.
+22. After clicking Finish, you should be at the screen below. Click **Save**.
 
    |image35|
 
-#. Next you will add two message boxes to the flow. One after the Access_Allowed flow, and another after the Fallback flow. Click the **+** sign next to Access_Allowed flow. For ease, type in message in the search box to bring up the Message Box. Select **Message Box**, and click **Add Item**
+23. Next you will add two message boxes to the flow. One after the Access_Allowed flow, and another after the Fallback flow. Click the **+** sign next to Access_Allowed flow. For ease, type in message in the search box to bring up the Message Box. Select **Message Box**, and click **Add Item**
 
    |iamge36|
 
-#. In the Message box properties, copy and paste the following  
+24. In the Message box properties, copy and paste the following  
 
 **Title:** Access Allowed 
 
@@ -267,11 +267,11 @@ Click **Save**
 
    |image37|
 
-#. Add another **Message box** for the fallback branch. 
+25. Add another **Message box** for the fallback branch. 
 
    |image38|
 
-#. In the Message Box properties copy and paste the following 
+26. In the Message Box properties copy and paste the following 
 
 **Title:** Access Denied 
 
@@ -281,43 +281,43 @@ Click **Save**
 
    |image39|
 
-#. The policy endings are currently set to Allow. We will need to adjust these appropriately. Click on **Edit Terminals**. 
+27. The policy endings are currently set to Allow. We will need to adjust these appropriately. Click on **Edit Terminals**. 
 
    |image40|
 
-#. In the Terminal properties, click on **Add Terminal**. Change the **Name** of the first terminal, Terminal 1 to **Reject**. Change the second terminal Name from Out to **Allow**. Click **Save**. 
+28. In the Terminal properties, click on **Add Terminal**. Change the **Name** of the first terminal, Terminal 1 to **Reject**. Change the second terminal Name from Out to **Allow**. Click **Save**. 
 
    |image41|
 
-#. Double click on the Allow ending after Message Box (1) and change it to **Reject**. Click **Save**. Do the same thing for the third Allow. 
+29. Double click on the Allow ending after Message Box (1) and change it to **Reject**. Click **Save**. Do the same thing for the third Allow. 
 
    |image42|
 
    |image43|
 
-#. The completed subroutine should look like the screenshot below 
+30. The completed subroutine should look like the screenshot below 
 
    |image44|
 
-#. We will now attach the subroutine to the main Per-Request policy. Click the **+** sign after the word fallback in the main policy. 
+31. We will now attach the subroutine to the main Per-Request policy. Click the **+** sign after the word fallback in the main policy. 
 
    |image45|
 
 
 
-#. In the **Group/Resource** box, go the last tab, **Subroutines**. Select the subroutine call **ad_connector**, and click on **Add Item**. 
+32. In the **Group/Resource** box, go the last tab, **Subroutines**. Select the subroutine call **ad_connector**, and click on **Add Item**. 
 
    |image47|
 
-#. Next we will need to add a Category Lookup for the URI. Click on the + sign between Start and ad_connector. Search for Category Lookup and add the item to the policy. 
+33. Next we will need to add a Category Lookup for the URI. Click on the + sign between Start and ad_connector. Search for Category Lookup and add the item to the policy. 
 
    |image48|
 
-#. In the Category Lookup property window, change the Categorization Input to User HTTP URI (cannot be used for SSL Bypass decisions). Click Save. 
+34. In the Category Lookup property window, change the Categorization Input to User HTTP URI (cannot be used for SSL Bypass decisions). Click Save. 
 
    |image49|
 
-#. Double check the terminal endings. Does Reject flow into the Reject ending? Does the Allow/Out flow in to Allow ending? If not adjust the terminal endings so they match the flow. See the screenshot below for reference. 
+35. Double check the terminal endings. Does Reject flow into the Reject ending? Does the Allow/Out flow in to Allow ending? If not adjust the terminal endings so they match the flow. See the screenshot below for reference. 
 
    |image50|
 
