@@ -293,7 +293,7 @@ Guided Configurations are predefined templates using iApp. To modify the policy 
 
    |image35|
 
-#. Click on **Properties** tab, uncheck the **Strict Updates** box, and click **Update** 
+2. Click on **Properties** tab, uncheck the **Strict Updates** box, and click **Update** 
 
    |image36|
 
@@ -316,11 +316,11 @@ This will open the Visual Policy Editor. Expand OAuth Scope Check AuthZ subrouti
 
    |image39|
 
-#. Select **OAuth Client**, and then click on **Add Item** 
+3. Select **OAuth Client**, and then click on **Add Item** 
 
    |image39-2|
 
-#. In the **OAuth Client Properties** set the following configurations: 
+4. In the **OAuth Client Properties** set the following configurations: 
 
 **Server:** /Common/api-client-resource-server 
 **OpenID Connect:** Enabled 
@@ -329,7 +329,7 @@ Click **Save**
 
    |image40|
 
-#. We will need to adjust the OAuth Scope for External to point to api-resource-server. 
+5. We will need to adjust the OAuth Scope for External to point to api-resource-server. 
 
 Click on **OAuth Scope (External)**
 
