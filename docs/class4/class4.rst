@@ -13,3 +13,5 @@ This lab documents provides foundational concepts for understanding Access Polic
    
    module1/intro.rst
    module1/lab*
+
+   test
