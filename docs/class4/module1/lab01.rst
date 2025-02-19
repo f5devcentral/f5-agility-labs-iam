@@ -64,11 +64,11 @@ In this lab we will review the Client Application settings. These settings defin
 
    |image6|
 
-**General Properties** we gave the client application a **Name**.
+**General Properties** - we gave the client application a **Name**.
 
-**Application Name** The name of the application. This will be displayed during the authenticate request. You'll see this demonstrated in later part of the lab. 
+**Application Name** - The name of the application. This will be displayed during the authenticate request. You'll see this demonstrated in later part of the lab. 
 
-**Caption** is a required field. In the lab we put the name of the application, you may want to use a short description of your application. 
+**Caption** - is a required field. In the lab we put the name of the application, you may want to use a short description of your application. 
 
    |image7|
 
@@ -200,13 +200,16 @@ Confirm the swagger file has been added successfully.
 
 **Click Save & Next**  
 
+
 #. On the next page **API Protection Configuration**, you can view the paths, methods, descriptions from the swagger file imported from the previous step.  
 
 You should see a list of the API end points. Click **Save & Next**.
 
    |image25|
 
+
 #. In the **Responses** section, under **API Protection Response** this page shows you the responses that are used when requests are denied.
+
 
 Review the responses, and then click **Save & Next**.
 
@@ -345,11 +348,13 @@ Task 9 - Testing our Policy
 
    |image43|
 
+
 #. Click on **Test API** folder, click on **List Available Pets**
 
 Notice in the Auth Type, we set it to Inherit auth from parent which has no authentication. 
 
    |image44|
+
 
 #. Click on the **Send**, to send a GET request to the API endpoint. 
 
@@ -431,6 +436,7 @@ The request is blocked. This is because we applied a security policy to block th
 .. |image22| image:: media/lab01/image22.png
       :width: 600px
 .. |image23| image:: media/lab01/image23.png
+      :width: 400px
 .. |image23-2| image:: media/lab01/image23-2.png
 .. |image24| image:: media/lab01/image24.png
 .. |image24-2| image:: media/lab01/image24-2.png
@@ -467,7 +473,7 @@ The request is blocked. This is because we applied a security policy to block th
 .. |image49| image:: media/lab01/image49.png
       :width: 600px
 .. |image50| image:: media/lab01/image50.png
-      :width: 600px
+      :width: 400px
 .. |image51| image:: media/lab01/image51.png
 .. |image52| image:: media/lab01/image52.png
 .. |image53| image:: media/lab01/image53.png
