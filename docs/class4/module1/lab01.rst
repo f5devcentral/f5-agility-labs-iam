@@ -403,6 +403,7 @@ The request is blocked. This is because we applied a security policy to block th
 #. This concludes the lab.
 
 .. |image1| image:: media/lab01/image1.png
+      :width: 600px
 .. |image2| image:: media/lab01/image2.png
 .. |image3| image:: media/lab01/image3.png
 .. |image4| image:: media/lab01/image4.png
