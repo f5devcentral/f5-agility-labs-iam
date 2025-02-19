@@ -403,7 +403,7 @@ The request is blocked. This is because we applied a security policy to block th
 
 11. In the **Token Details** screen, click on **Use Token** button 
 
-**NOTE:** You can copy the long code in Access Token, go to jwt.io, and paste the code to have the code decoded. The payload of the JWT token is encrypted. 
+**NOTE:** You can copy the encrypted Access token, go to jwt.io, and paste the token to have the code decoded. The payload of the JWT token should be encrypted.
 
    |image52|
 
