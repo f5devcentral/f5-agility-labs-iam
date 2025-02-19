@@ -398,17 +398,17 @@ Task 6 - Test the policy
 
 #. Open Google Chrome. In the browser bookmark bar, there are shortcuts to App1 and App2.   
 
-In the OPA policy, the users below have access to the specific apps.  
-
-Test logging on as user1 to App1. Were you successful? Why? 
-
-Try logging as user2 to App1. Were you successful? Why? 
+In the OPA policy, the users below have access to the specific apps. 
 
 **Username:** user1
 **Password:** user@dMin_1234
 
 **Username:** user2
 **Password:** user@dMin_1234 
+
+Test logging on as user1 to App1. Were you successful? Why? 
+
+Try logging as user2 to App1. Were you successful? Why? 
 
 
 2. This concludes lab 2.
