@@ -13,3 +13,12 @@ This lab documents provides foundational concepts for understanding Access Polic
    
    module2/intro.rst
    module2/lab*
+
+302 - Leavering BIG-IP Access to Improve Your Zero Trust Architecture
+---------------------------------------------------------------------
+.. toctree::
+   :maxdepth: 1
+   :glob:
+
+   module1/intro.rst
+   module1/lab*
