@@ -150,7 +150,7 @@ In this lab we will review the OAuth Server Profile configuration. The OAuth Ser
 
 #. Click on **api-client-resource-server**
 
-   |image 18|
+   |image18|
 
 #. Review the OAuth Server settings.
 
@@ -228,9 +228,9 @@ In this lab set the following configurations:
 
    |image28|
 
-Under the **OAuth Policy Settings:** select Enable  
+Under the **OAuth Policy Settings:** select **Enable**  
 
-   ..note:: 
+.. note:: 
       This will expand the OAuth Server Settings. 
 
    |image29|
@@ -391,7 +391,7 @@ The request is blocked. This is because we applied a security policy to block th
 
 #. In the **Token Details** screen, click on **Use Token** button 
 
-.. note:: You can copy the long code in Access Token and go to 
+.. note:: **NOTE:** You can copy the long code in Access Token, go to jwt.io, and paste the code to have the code decoded. The payload of the JWT token is encrypted. 
 
    |image52|
 
@@ -405,10 +405,14 @@ The request is blocked. This is because we applied a security policy to block th
 .. |image1| image:: media/lab01/image1.png
       :width: 600px
 .. |image2| image:: media/lab01/image2.png
+      :width: 600px
 .. |image3| image:: media/lab01/image3.png
+      :width: 600px
 .. |image4| image:: media/lab01/image4.png
+      :width: 600px
 .. |image5| image:: media/lab01/image5.png
 .. |image6| image:: media/lab01/image6.png
+      :width: 600px
 .. |image7| image:: media/lab01/image7.png
 .. |image8| image:: media/lab01/image8.png
 .. |image9| image:: media/lab01/image9.png
@@ -425,6 +429,7 @@ The request is blocked. This is because we applied a security policy to block th
 .. |image20| image:: media/lab01/image20.png
 .. |image21| image:: media/lab01/image21.png
 .. |image22| image:: media/lab01/image22.png
+      :width: 600px
 .. |image23| image:: media/lab01/image23.png
 .. |image23-2| image:: media/lab01/image23-2.png
 .. |image24| image:: media/lab01/image24.png
@@ -432,12 +437,15 @@ The request is blocked. This is because we applied a security policy to block th
 .. |image25| image:: media/lab01/image25.png
 .. |image26| image:: media/lab01/image26.png
 .. |image27| image:: media/lab01/image27.png
+      :width: 600px
 .. |image28| image:: media/lab01/image28.png
 .. |image29| image:: media/lab01/image29.png
+      :width: 600px
 .. |image29-2| image:: media/lab01/image29-2.png
 .. |image30| image:: media/lab01/image30.png
 .. |image31| image:: media/lab01/image31.png
 .. |image32| image:: media/lab01/image32.png
+      :width: 600px
 .. |image33| image:: media/lab01/image33.png
 .. |image34| image:: media/lab01/image34.png
 .. |image35| image:: media/lab01/image35.png
@@ -455,8 +463,11 @@ The request is blocked. This is because we applied a security policy to block th
 .. |image46| image:: media/lab01/image46.png
 .. |image47| image:: media/lab01/image47.png
 .. |image48| image:: media/lab01/image48.png
+      :width: 600px
 .. |image49| image:: media/lab01/image49.png
+      :width: 600px
 .. |image50| image:: media/lab01/image50.png
+      :width: 600px
 .. |image51| image:: media/lab01/image51.png
 .. |image52| image:: media/lab01/image52.png
 .. |image53| image:: media/lab01/image53.png
