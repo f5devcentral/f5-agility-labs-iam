@@ -260,7 +260,7 @@ Click on **Save & Next**
 
    |image30|
 
-#. On the **Virtual Server** page, under **Virtual Server Properties**, you can define if you would like the security policy to be assigned to an existing virtual server or create a new virtual server. 
+9. On the **Virtual Server** page, under **Virtual Server Properties**, you can define if you would like the security policy to be assigned to an existing virtual server or create a new virtual server. 
 
 In this lab we will assign the policy to an existing virtual server. 
 
@@ -278,7 +278,7 @@ Confirm your policy looks like the screen shot below. Click on **Save & Next**.
 
    |image33|
 
-#. In the **Summary** page gives you a summary of the policy Guided Configuration is building for you.  
+10. In the **Summary** page gives you a summary of the policy Guided Configuration is building for you.  
 
  Click on **Deploy**.
 
