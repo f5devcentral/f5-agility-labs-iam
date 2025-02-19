@@ -30,7 +30,7 @@ From the course, click Deployment tab.
 
     |image1|
 
-Under System column, click on Access, and select the resolution size to download remote desktop file to access the Client Workstation. 
+Under Systems column, click on Access, and select the resolution size to download a remote desktop file to access the Client Workstation. 
 
     |image2|
 
