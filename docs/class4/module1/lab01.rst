@@ -332,15 +332,16 @@ Click **Save**
 
 
    |image40|
-   
+
 
 5. We will need to adjust the OAuth Scope for External to point to api-resource-server. 
 
-Click on **OAuth Scope (External)**
+   Click on **OAuth Scope (External)**
 
    |image41|
 
-#. Click on the drop-down box next to Server and select **/Common/api-resource-server**
+
+6. Click on the drop-down box next to Server and select **/Common/api-resource-server**
 
 Click **Save**
 
@@ -363,27 +364,27 @@ Notice in the Auth Type, we set it to Inherit auth from parent which has no auth
    |image44|
 
 
-#. Click on the **Send**, to send a GET request to the API endpoint. 
+3. Click on the **Send**, to send a GET request to the API endpoint. 
 
    |image45|
 
 The request is blocked. This is because we applied a security policy to block the request for unauthorized user. Let's apply authentication and observe the request.  
 
-#. In the **Type** box, click the drop down box and select **OAuth 2.0**. 
+4. In the **Type** box, click the drop down box and select **OAuth 2.0**. 
 
    |image46|
 
-#. In the Current Token window scroll down to the bottom of the section, till you see the **Get New Access Token** button. 
+5. In the Current Token window scroll down to the bottom of the section, till you see the **Get New Access Token** button. 
 
    |image47|
 
-#. Before clicking the Get New Access Token, let's Clear cookies. Click on **Clear cookies** button. 
+6. Before clicking the Get New Access Token, let's Clear cookies. Click on **Clear cookies** button. 
 
-#. Now click on **Get New Access Token** button. 
+7. Now click on **Get New Access Token** button. 
 
    |image48|
 
-#. In the Secure Logon Page type in the following credential  
+8. In the Secure Logon Page type in the following credential  
 
 
 **Username:** user1 
@@ -391,28 +392,28 @@ The request is blocked. This is because we applied a security policy to block th
 
    |image49|
 
-#. After successful login, you will be prompted for Authorization Request which shows what permissions is being granted. Click **Authorize**. 
+9. After successful login, you will be prompted for Authorization Request which shows what permissions is being granted. Click **Authorize**. 
 
 .. note:: Recall the OAuth Client Application setup earlier in the lab where we define the application name as Demo API? This is where that name is displayed.
 
    |image50|
 
-#. If you like, you may click Proceed in the Get a new access token screen, else give it a couple of seconds, and it should automatically close. 
+10. If you like, you may click Proceed in the Get a new access token screen, else give it a couple of seconds, and it should automatically close. 
 
    |image51|
 
-#. In the **Token Details** screen, click on **Use Token** button 
+11. In the **Token Details** screen, click on **Use Token** button 
 
 .. note:: **NOTE:** You can copy the long code in Access Token, go to jwt.io, and paste the code to have the code decoded. The payload of the JWT token is encrypted. 
 
    |image52|
 
-#. Back in Postman Scratch pad, click on **Send**, to make the API call. Observe the request is now successful.  
+12. Back in Postman Scratch pad, click on **Send**, to make the API call. Observe the request is now successful.  
 
    |image53|
 
 
-#. This concludes the lab.
+13. This concludes the lab.
 
 .. |image1| image:: media/lab01/image1.png
       :width: 600px
