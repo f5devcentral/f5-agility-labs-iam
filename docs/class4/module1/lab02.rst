@@ -358,17 +358,17 @@ Click **Finish**
    |image55|
    |image56|
 
-#. Create a pool to assign to the virtual server. We will omit creating a node, as one is already pre-defined because it's a shared backend server running multiple applications for this lab environment.  
+4. Create a pool to assign to the virtual server. We will omit creating a node, as one is already pre-defined because it's a shared backend server running multiple applications for this lab environment.  
 
 Click on **Pools** --> **Pool List**
 
    |image57|
 
-#. Click **Create**
+5. Click **Create**
 
    |image58|
 
-#. Set the following configuration settings for the pool  
+6. Set the following configuration settings for the pool  
 
 **Name:** backend_pool 
 
@@ -385,11 +385,11 @@ Click **Finished**
 
    |image59|
 
-#. Attach the pool to the virtual server. Click on **Virtual Server** --> **Virtual Server List** --> Click on **opa_access_vs** virtual server. 
+7. Attach the pool to the virtual server. Click on **Virtual Server** --> **Virtual Server List** --> Click on **opa_access_vs** virtual server. 
 
    |image60|
 
-#. Click on the **Resources** tab of the Virtual Server, click on the drop down arrow for **Default Pool**, and select **backend_pool**. Click **Update**. 
+8. Click on the **Resources** tab of the Virtual Server, click on the drop down arrow for **Default Pool**, and select **backend_pool**. Click **Update**. 
 
    |image61|
 
@@ -411,7 +411,7 @@ Try logging as user2 to App1. Were you successful? Why?
 **Password:** user@dMin_1234 
 
 
-#. This concludes lab 2.
+2. This concludes lab 2.
 
 
 
