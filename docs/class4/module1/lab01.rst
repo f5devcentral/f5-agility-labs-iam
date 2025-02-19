@@ -176,6 +176,7 @@ With the previous steps completed, you will now create a security policy using t
 
 #. The API Protection Properties page is where you can upload a swagger file with the API definition of your application, set an authorization method, and specify optional settings you would like to configure like Use Rate Limiting. When selected an additional configuration menu will be added to the Guided Configuration banner menu.  
 
+
 In this lab, set the following configurations.  
 
 **Configuration Name:** security_policy 
