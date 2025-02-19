@@ -38,22 +38,25 @@ At the logon prompt, enter the following credential to log into the workstation.
 
 **Windows Credential**  
 
-Username: user 
-Password: user 
+**Username:** user 
+
+**Password:** user 
 
 Once you're logged in, open Chrome browser, click on BIG-IP from the shortcut bar, and log into the BIG-IP to start the lab. 
 
 **BIG-IP Credential** 
 
-Username: admin 
-Password: admin 
+**Username:** admin 
+
+**Password:** admin 
 
 If you're not able to use an RDP session, you can use Guacamole from the Super Jump Host
 
 **Guacamole**
 
-Username: guacadmin
-Password: guacadmin
+**Username:** guacadmin
+
+**Password:** guacadmin
 
 .. |image1| image:: media/lab/image1.png
 .. |image2| image:: media/lab/image2.png
