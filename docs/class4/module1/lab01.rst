@@ -323,11 +323,16 @@ This will open the Visual Policy Editor. Expand OAuth Scope Check AuthZ subrouti
 4. In the **OAuth Client Properties** set the following configurations: 
 
 **Server:** /Common/api-client-resource-server 
+
 **OpenID Connect:** Enabled 
+
 **Scope:** api_access profile address 
+
 Click **Save** 
 
+
    |image40|
+   
 
 5. We will need to adjust the OAuth Scope for External to point to api-resource-server. 
 
