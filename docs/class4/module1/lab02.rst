@@ -27,7 +27,7 @@ Task 1 - Creating a Per-Session Policy
 You will create a Per-Session Policy that allows all access. This allows us to establish a session for connectivity and then apply a more granular per-request policy to process the authentication and authorization to the individual applications.  
 
 
-#. In the BIG-IP GUI --> Click on **Access** --> Click on **Profiles/Policies** --> Click **Access Profiles (Per-Session Policies)**  
+#. In the BIG-IP GUI --> Click on **Access** --> Click on **Profiles/Policies** --> Click **Access Profiles (Per-Session Policies)**
 
    |image1|
 
@@ -53,7 +53,8 @@ The rest of the settings, we will keep the default settings. Click **Finished**.
    |image4|
 
 
-#. Edit the Per-Session policy to allow all access 
+#. Edit the Per-Session policy to allow all access
+
 
 
    |image5|
