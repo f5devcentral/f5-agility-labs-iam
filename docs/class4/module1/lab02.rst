@@ -38,9 +38,13 @@ You will create a Per-Session Policy that allows all access. This allows us to e
 #. In the new Per-Session policy, add the following configurations:
 
 **Name:** opa_access_connector 
+
 **Profile:** All 
+
 **Profile Scope:** Profile 
+
 **Language Settings:** Select English and move it to left (scroll down to the bottom of the page) 
+
 
 The rest of the settings, we will keep the default settings. Click **Finished**. 
 
@@ -48,7 +52,9 @@ The rest of the settings, we will keep the default settings. Click **Finished**.
 
    |image4|
 
+
 #. Edit the Per-Session policy to allow all access 
+
 
    |image5|
 

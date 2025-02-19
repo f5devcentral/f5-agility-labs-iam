@@ -8,14 +8,23 @@ Lab 1 we will be performing a few tasks that will create and use a JWE to access
 Tasks
 ------
 Task 1 - Configure a JWE token for access 
+
 Task 2 - Create a Client Application to serve as an OAuth Client 
+
 Task 3 - Create a Resource Server  
+
 Task 4 - Create a OAuth Profile 
+
 Task 5 - Create an OAuth Server to grant authentication 
+
 Task 6 - Create an Advanced Web Application Firewall policy to protect APIs via 	OpenAPI file
+
 Task 7 - Disable Strict Update
+
 Task 8 - Add Client Application to Access API profile
+
 Task 9 - Test the policy 
+
 
 Expected time to complete: **40 minutes**
 
