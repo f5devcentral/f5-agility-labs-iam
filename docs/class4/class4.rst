@@ -1,5 +1,5 @@
 300 Series: Advanced Use Cases & Solutions
-======================================================
+==========================================
 
 This lab documents provides foundational concepts for understanding Access Policy Manager's (APM) common features.
 
