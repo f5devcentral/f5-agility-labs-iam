@@ -203,6 +203,7 @@ Confirm the swagger file has been added successfully.
 
 #. On the next page **API Protection Configuration**, you can view the paths, methods, descriptions from the swagger file imported from the previous step.  
 
+
 You should see a list of the API end points. Click **Save & Next**.
 
    |image25|
