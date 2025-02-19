@@ -80,8 +80,8 @@ Under **Security Settings**, **Grant Type**, define what a client will use for a
 
 **Authentication Type** - The authentication type is set to secret. When a client application is registered with the OAuth authorization server, it is issued a client ID and a client secret. These credentials are used to identify and authenticate the client application to the authorization server.  
 
-   ..NOTE::
-      It is common to use an enterprise identity provider or a social media platform to authenticate and authorize users via OpenID Connector (OIDC) protocol. In this lab the BIG-IP is acting as an authentication and authorization server in the OAuth flow. This configuration will be covered in Task 5.
+
+**NOTE:** It is common to use an enterprise identity provider or a social media platform to authenticate and authorize users via OpenID Connector (OIDC) protocol. In this lab the BIG-IP is acting as an authentication and authorization server in the OAuth flow. This configuration will be covered in Task 5.
 
 **Scopes** - Adding scope helps improve our security by adding a more precise or fine-grained control over what a user is allowed to access. These scopes have been preconfigured for this lab exercise. 
 
@@ -235,8 +235,7 @@ In this lab set the following configurations:
 
 Under the **OAuth Policy Settings:** select **Enable**  
 
-.. note:: 
-      This will expand the OAuth Server Settings. 
+**NOTE:** This will expand the OAuth Server Settings. 
 
    |image29|
 
@@ -394,7 +393,7 @@ The request is blocked. This is because we applied a security policy to block th
 
 9. After successful login, you will be prompted for Authorization Request which shows what permissions is being granted. Click **Authorize**. 
 
-.. note:: Recall the OAuth Client Application setup earlier in the lab where we define the application name as Demo API? This is where that name is displayed.
+**NOTE** Recall the OAuth Client Application setup earlier in the lab where we define the application name as Demo API? This is where that name is displayed.
 
    |image50|
 
@@ -404,7 +403,7 @@ The request is blocked. This is because we applied a security policy to block th
 
 11. In the **Token Details** screen, click on **Use Token** button 
 
-.. note:: **NOTE:** You can copy the long code in Access Token, go to jwt.io, and paste the code to have the code decoded. The payload of the JWT token is encrypted. 
+**NOTE:** You can copy the long code in Access Token, go to jwt.io, and paste the code to have the code decoded. The payload of the JWT token is encrypted. 
 
    |image52|
 
