@@ -150,7 +150,7 @@ Task 4 - Create Per-request policy
 
   |image15|
 
-#. In the new Per-Request policy, set the following configurations. 
+3. In the new Per-Request policy, set the following configurations. 
 
 **Name:** opa_access_prp 
 
@@ -165,44 +165,45 @@ Click **Finished**
 
    |image16|
 
-#. Click on **Edit**  
+4. Click on **Edit**  
 
    |image17|
 
-#. Create a subroutine for Logon, Authentication, and HTTP Connector. Click on **Add New Subroutine** 
+5. Create a subroutine for Logon, Authentication, and HTTP Connector. Click on **Add New Subroutine** 
 
    |image18|
 
-#. In the subroutine box type the name **ad_connector** and click **Save** 
+6. In the subroutine box type the name **ad_connector** and click **Save** 
  
    |image19|
 
-#. Expand **Subroutine: ad_connector** by click on the **+** sign 
+7. Expand **Subroutine: ad_connector** by click on the **+** sign 
 
    |image20|
 
-#. Click on the **+** sign to add a resource to the policy 
+8. Click on the **+** sign to add a resource to the policy 
 
    |image21|
 
 
-#. There are couple of ways to find Group/Resources to add to the Visual Policy Editor. This first method we’ll use the search feature. In the search box, type the word variable to search for “Variable Assign” resource. We will create a variable assign to retrieve the application uri into the per-request path. 
+9. There are couple of ways to find Group/Resources to add to the Visual Policy Editor. This first method we’ll use the search feature. In the search box, type the word variable to search for “Variable Assign” resource. We will create a variable assign to retrieve the application uri into the per-request path. 
 
-#. Click on **Variable Assign** to select the resource, and click **Add Item** 
+
+10. Click on **Variable Assign** to select the resource, and click **Add Item** 
 
    |image22|
 
-#. In the **Variable Assign** properties, click on **Add new entry**, and then click on **change** in the variable Assignment section. 
+11. In the **Variable Assign** properties, click on **Add new entry**, and then click on **change** in the variable Assignment section. 
 
    |image23|
 
-#. In the **Custom Variable** box on the left-hand side type in the following variable 
+12. In the **Custom Variable** box on the left-hand side type in the following variable 
 
    subsession.server.custom_landinguri 
 
    |image24|
 
-#. In the **Custom Expression** box on the right-hand side click on the drop down box and select **Session Variable**, and enter the following variable  
+13. In the **Custom Expression** box on the right-hand side click on the drop down box and select **Session Variable**, and enter the following variable  
 
    perflow.category_lookup.result.url 
 
@@ -216,32 +217,33 @@ Click **Finished**
 
    |image27|
 
-#. Click on the **+** sign located after Variable Assign to add another resource. 
+14. Click on the **+** sign located after Variable Assign to add another resource. 
 
    |image28|
 
-#. Another method to find Group/Resources is to click through the tabs for the pertinent resource. The next item we need to add is Ad Auth. Click on **Authentication** tab, and select **AD Auth**. Click **Add Item**.  
+15. Another method to find Group/Resources is to click through the tabs for the pertinent resource. The next item we need to add is Ad Auth. Click on **Authentication** tab, and select **AD Auth**. Click **Add Item**.  
 
    |image29|
 
-#. In the AD Auth properties window, click on the drop down arrow next to **Server**, and select **/Common/oauth_as.app/oauth_as_ad-server**. Click **Save**. 
+16. In the AD Auth properties window, click on the drop down arrow next to **Server**, and select **/Common/oauth_as.app/oauth_as_ad-server**. Click **Save**. 
 
    |image30|
 
-#. Search for **HTTP Connector** resource, and add it to the Visual Policy Editor. 
+17. Search for **HTTP Connector** resource, and add it to the Visual Policy Editor. 
 
    |image31|
 
-#. In the HTTP Connector properties, click on the **HTTP Connector Request** and select **/Common/opa_request** 
+18. In the HTTP Connector properties, click on the **HTTP Connector Request** and select **/Common/opa_request** 
 
    |image32|
 
-#. Click on Branch Rules tab, in the **Name** field, change it to **Access_Allowed**, and then click on **change** link in the Expression box. 
+19. Click on Branch Rules tab, in the **Name** field, change it to **Access_Allowed**, and then click on **change** link in the Expression box. 
 
    |image33|
 
-#. In the next window, click on the **Advanced** tab.  
-#. Remove the expression inside the box, and replace it with the following expression. Click **Finish** 
+20. In the next window, click on the **Advanced** tab.  
+
+21. Remove the expression inside the box, and replace it with the following expression. Click **Finish** 
 
    expr { [mcget {subsession.http_connector.body.result}] == true }
 
