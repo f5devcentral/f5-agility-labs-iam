@@ -202,7 +202,7 @@ Confirm the swagger file has been added successfully.
 **Click Save & Next**  
 
 
-#. On the next page **API Protection Configuration**, you can view the paths, methods, descriptions from the swagger file imported from the previous step.  
+5. On the next page **API Protection Configuration**, you can view the paths, methods, descriptions from the swagger file imported from the previous step.  
 
 
 You should see a list of the API end points. Click **Save & Next**.
@@ -210,20 +210,20 @@ You should see a list of the API end points. Click **Save & Next**.
    |image25|
 
 
-#. In the **Responses** section, under **API Protection Response** this page shows you the responses that are used when requests are denied.
+6. In the **Responses** section, under **API Protection Response** this page shows you the responses that are used when requests are denied.
 
 
 Review the responses, and then click **Save & Next**.
 
    |image26|
 
-#. On the Web Application Security Policy Properties page you can set the enforcement mode of the security policy whether you want to start Blocking immediately or in Transparent mode.  
+7. On the Web Application Security Policy Properties page you can set the enforcement mode of the security policy whether you want to start Blocking immediately or in Transparent mode.  
 
 In this lab we will set the policy to **Blocking**. Click **Save & Next**. 
 
    |image27|
 
-#. On the **Provider** page, under **OAuth General Properties** you can define the **OAuth Authorization Server**. This is the authorization server endpoint where BIG-IP APM can go to retrieve a token on behalf of the client. 
+8. On the **Provider** page, under **OAuth General Properties** you can define the **OAuth Authorization Server**. This is the authorization server endpoint where BIG-IP APM can go to retrieve a token on behalf of the client. 
 
 In this lab set the following configurations: 
 
