@@ -53,17 +53,17 @@ The rest of the settings, we will keep the default settings. Click **Finished**.
    |image4|
 
 
-#. Edit the Per-Session policy to allow all access
+4. Edit the Per-Session policy to allow all access
 
 
 
    |image5|
 
-#. In the Visual Policy Editor --> Click **Deny Ending**, and change it to **Allow** --> Click **Save**
+5. In the Visual Policy Editor --> Click **Deny Ending**, and change it to **Allow** --> Click **Save**
 
    |image6|
 
-#. The policy should look the like the diagram below.  Click on the **Apply Access Policy** button at the top left hand corner. Close the policy using the green **Close** button at the top right hand corner 
+6. The policy should look the like the diagram below.  Click on the **Apply Access Policy** button at the top left hand corner. Close the policy using the green **Close** button at the top right hand corner 
 
    |image7|
 
@@ -82,8 +82,11 @@ Task 2 - Create HTTP Connector Transport
 #. In the new HTTP Connector Transport Properties, set the following configurations:  
 
 **Name:** connector_transport 
+
 **DNS Resolver:** select **/Common/f5-aws-dns** from the drop down list 
+
 Keep the default settings for the rest of fields, and click **Save**. 
+
 
     |image10|
 
@@ -101,11 +104,17 @@ Task 3 - Create HTTP Connector Request
 #. Under **General Properties**, set the following configurations: 
 
 **Name:** opa_call 
+
 **HTTP Connector Transport:** select **/Common/connector_transport** from the drop list 
+
 **URL:** http://10.1.20.12:8181/v1/data/backend/access/allow 
+
 **Method:** POST 
+
 **Request Headers:** Content-Type: application/json 
+
 **Request Body:**  
+
 
 Insert the following into the Request Body.
 
@@ -122,8 +131,11 @@ Insert the following into the Request Body.
       } 
 
    }
+
 **Response Action:** Select **Parse** from the drop down list
+
 Click **Save** 
+
 
    |image13|
 
@@ -141,10 +153,15 @@ Task 4 - Create Per-request policy
 #. In the new Per-Request policy, set the following configurations. 
 
 **Name:** opa_access_prp 
+
 **Policy Type:** All 
+
 **Incomplete Action:** Deny 
+
 **Language:** select English, and move it under the Accepted Language column 
+
 Click **Finished**
+
 
    |image16|
 
@@ -316,14 +333,23 @@ Task 5 - Create a Virtual Server
 #. Set the following configurations for the virtual server.  
 
 **Name:** opa_access_vs 
+
 **Destination Address/Mask:** 10.1.10.101 
+
 **Service Port:** 443 
+
 **HTTP Profile (Client):** http 
+
 **SSL Profile Client:** clientssl-insecure-compatible 
+
 **Source Address Translation:** Auto Map 
+
 **Access Profile:** opa_access_connector 
+
 **Per-Request Policy:** opa_access_prp 
+
 Click **Finish**
+
 
    |image53|
    |image54|
@@ -343,11 +369,17 @@ Click on **Pools** --> **Pool List**
 #. Set the following configuration settings for the pool  
 
 **Name:** backend_pool 
+
 **Health Monitors:** http 
+
 **Node List:** click the drop down list, and select **10.1.20.5** 
+
 **Service Port:** 8888 
+
 Click **Add** 
+
 Click **Finished**
+
 
    |image59|
 
