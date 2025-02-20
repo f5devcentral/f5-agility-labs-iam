@@ -22,7 +22,7 @@ configuring Access solutions your own environment.
 |repoinfo|
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
    :caption: Contents:
    :glob:
 
