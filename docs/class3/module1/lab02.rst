@@ -24,7 +24,7 @@ Expected time to complete: **40 minutes**
 Task 1 - Creating a Per-Session Policy
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You will create a Per-Session Policy that allows all access. This allows us to establish a session for connectivity and then apply a more granular per-request policy to process the authentication and authorization to the individual applications.  
+   You will create a Per-Session Policy that allows all access. This allows us to establish a session for connectivity and then apply a more granular per-request policy to process the authentication and authorization to the individual applications.  
 
 
 #. In the BIG-IP GUI --> Click on **Access** --> Click on **Profiles/Policies** --> Click **Access Profiles (Per-Session Policies)**
@@ -37,16 +37,16 @@ You will create a Per-Session Policy that allows all access. This allows us to e
 
 #. In the new Per-Session policy, add the following configurations:
 
-**Name:** opa_access_connector 
+   **Name:** opa_access_connector 
 
-**Profile:** All 
+   **Profile:** All 
 
-**Profile Scope:** Profile 
+   **Profile Scope:** Profile 
 
-**Language Settings:** Select English and move it to left (scroll down to the bottom of the page) 
+   **Language Settings:** Select English and move it to left (scroll down to the bottom of the page) 
 
 
-The rest of the settings, we will keep the default settings. Click **Finished**. 
+   The rest of the settings, we will keep the default settings. Click **Finished**. 
 
    |image3|
 
@@ -81,11 +81,11 @@ Task 2 - Create HTTP Connector Transport
 
 #. In the new HTTP Connector Transport Properties, set the following configurations:  
 
-**Name:** connector_transport 
+   **Name:** connector_transport 
 
-**DNS Resolver:** select **/Common/f5-aws-dns** from the drop down list 
+   **DNS Resolver:** select **/Common/f5-aws-dns** from the drop down list 
 
-Keep the default settings for the rest of fields, and click **Save**. 
+   Keep the default settings for the rest of fields, and click **Save**. 
 
 
     |image10|
@@ -103,17 +103,17 @@ Task 3 - Create HTTP Connector Request
 
 #. Under **General Properties**, set the following configurations: 
 
-**Name:** opa_call 
+   **Name:** opa_call 
 
-**HTTP Connector Transport:** select **/Common/connector_transport** from the drop list 
+   **HTTP Connector Transport:** select **/Common/connector_transport** from the drop list 
 
-**URL:** http://10.1.20.12:8181/v1/data/backend/access/allow 
+   **URL:** http://10.1.20.12:8181/v1/data/backend/access/allow 
 
-**Method:** POST 
+   **Method:** POST 
 
-**Request Headers:** Content-Type: application/json 
+   **Request Headers:** Content-Type: application/json 
 
-**Request Body:**  
+   **Request Body:**  
 
 
 Insert the following into the Request Body.
@@ -131,10 +131,11 @@ Insert the following into the Request Body.
       } 
 
    }
+.. **Response Action:** Select **Parse** from the drop down list
 
-**Response Action:** Select **Parse** from the drop down list
+   **Response Action:** Select **Parse** from the drop down list
 
-Click **Save** 
+   Click **Save** 
 
 
    |image13|
@@ -152,15 +153,15 @@ Task 4 - Create Per-request policy
 
 3. In the new Per-Request policy, set the following configurations. 
 
-**Name:** opa_access_prp 
+   **Name:** opa_access_prp 
 
-**Policy Type:** All 
+   **Policy Type:** All 
 
-**Incomplete Action:** Deny 
+   **Incomplete Action:** Deny 
 
-**Language:** select English, and move it under the Accepted Language column 
+   **Language:** select English, and move it under the Accepted Language column 
 
-Click **Finished**
+   Click **Finished**
 
 
    |image16|
@@ -186,7 +187,7 @@ Click **Finished**
    |image21|
 
 
-9. There are couple of ways to find Group/Resources to add to the Visual Policy Editor. This first method we’ll use the search feature. In the search box, type the word variable to search for “Variable Assign” resource. We will create a variable assign to retrieve the application uri into the per-request path. 
+9. There are couple of ways to find Group/Resources to add to the Visual Policy Editor. This first method we’ll use the search feature. In the search box, type the word variable to search for “Variable Assign” resource. We will create a variable to retrieve the application uri into the per-request path. 
 
 
 10. Click on **Variable Assign** to select the resource, and click **Add Item** 
@@ -208,6 +209,7 @@ Click **Finished**
    perflow.category_lookup.result.url 
 
    |image25|
+
 
    The finished variable should look like the following screenshot. Click **Finished**. 
 
@@ -255,13 +257,13 @@ Click **Finished**
 
 23. Next you will add two message boxes to the flow. One after the Access_Allowed flow, and another after the Fallback flow. Click the **+** sign next to Access_Allowed flow. For ease, type in message in the search box to bring up the Message Box. Select **Message Box**, and click **Add Item**
 
-   |iamge36|
+   |image36|
 
 24. In the Message box properties, copy and paste the following  
 
-**Title:** Access Allowed 
+   **Title:** Access Allowed 
 
-**Description (optional):** User %{subsession.last.logon.username} is allowed to access Application %{subsession.server.custom_landinguri} 
+   **Description (optional):** User %{subsession.last.logon.username} is allowed to access Application %{subsession.server.custom_landinguri} 
 
 Click **Save** 
 
@@ -273,11 +275,11 @@ Click **Save**
 
 26. In the Message Box properties copy and paste the following 
 
-**Title:** Access Denied 
+   **Title:** Access Denied 
 
-**Description (optional):** User %{subsession.last.logon.username} is not allowed to access Application %{subsession.server.custom_landinguri} 
+   **Description (optional):** User %{subsession.last.logon.username} is not allowed to access Application %{subsession.server.custom_landinguri} 
 
-Click **Save** 
+   Click **Save** 
 
    |image39|
 
@@ -313,7 +315,7 @@ Click **Save**
 
    |image48|
 
-34. In the Category Lookup property window, change the Categorization Input to User HTTP URI (cannot be used for SSL Bypass decisions). Click Save. 
+34. In the Category Lookup property window, change the **Categorization Input** to User HTTP URI (cannot be used for SSL Bypass decisions). Click **Save**. 
 
    |image49|
 
