@@ -32,7 +32,7 @@ Expected time to complete: **40 minutes**
 Task  1 - Configure a JWE token for access
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In this lab we will review the configuration of a JSON web token key. These settings define when a JWE token is generated, which  Key Encryption Algorithm and what Content Encryption Algorithm to use for the key, along with the certificate use to sign the key. 
+In this lab we will review the configuration of a JSON web token key. These settings define when a JWE token is generated, which  Key Encryption Algorithm and what Content Encryption Algorithm to use for the key, along with the certificate use to verify the key. 
 
 We start configurating the access token first, then we will integrate these settings into the rest of the APM OAuth workflow.  
 
