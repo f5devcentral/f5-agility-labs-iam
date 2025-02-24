@@ -340,7 +340,6 @@ Click **Save**
    |image45|
 
 
-
 36. In the **Group/Resource** box, go the last tab, **Subroutines**. Select the subroutine call **ad_connector**, and click on **Add Item**. 
 
    |image47|
