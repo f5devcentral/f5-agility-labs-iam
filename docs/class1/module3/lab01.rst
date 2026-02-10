@@ -5,6 +5,8 @@ Lab 1: Azure AD Easy Button integration
 
 In this lab, students will learn how to leverage Azure AD as an IDaaS provider while using APM as a SAML SP. Since v15.1, F5 has offered a "Guided Configuration" template to make this integration easier for administrators. This lab guide will also be accessible via a bookmark on the Win10 Edge and Chrome browsers.
 
+You should have received an invitation to the F5Access tenant via the e-mail you used to register for this course. Please inform the instructor if you haven't received that e-mail.
+
 This template:
 
 #. Publishes on-prem apps
