@@ -117,7 +117,7 @@ Task 1 - Publish and protect Bluesky app
 Let's start with the ``Bluesky`` application. Reminder, Bluesky does not have any ``Authentication`` enabled. 
 
 #. Either access TMUI via UDF > Access > BIG-IP > TMUI or RDP to win10 (user1/user1) and launch Edge or Chrome. Using the BIG-IP bookmark, connect to the BIG-IP user interface (admin/admin)
-#. In ``Access`` > ``Guided Configuration``, select ``Microsoft Integration`` > ``Entra ID application`` 
+#. In ``Access`` > ``Guided Configuration``, select ``Microsoft Integration`` > ``Azure AD application`` 
 
 
 |image011|
@@ -277,7 +277,7 @@ Task 1 - Publish and protect Vanilla app
 Unlike Bluesky, the Vanilla application has ``Authentication`` enabled via Kerberos and because APM won't have access to an Entra ID user's password, we'll need to enable and leverage ``Kerberos Constrained Delegation``. 
 
 #. As before, Connect to the BIG-IP GUI directly from UDF or via Win10 with admin/admin.
-#. In ``Access`` > ``Guided Configuration``, select ``Microsoft Integration`` > ``Entra ID application`` 
+#. In ``Access`` > ``Guided Configuration``, select ``Microsoft Integration`` > ``Azure AD application`` 
 
    .. note :: As you'll notice, we only deploy one application per Guided Config template.
 
