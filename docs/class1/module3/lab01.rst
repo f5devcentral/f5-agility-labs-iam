@@ -332,7 +332,7 @@ Task 3 - Service Provider
 #. Configure the page as below
 
    #. Host ``vanilla.f5access.onmicrosoft.com``
-   #. The Entity ID is auto-filled ``https://vanilla.f5access.onmicrosoft.com/IIS-Bluesky-my name>``
+   #. The Entity ID is auto-filled ``https://vanilla.f5access.onmicrosoft.com/IIS-Vanilla-my name>``
 
 
       |image027|
