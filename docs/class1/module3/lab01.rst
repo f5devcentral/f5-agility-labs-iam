@@ -416,7 +416,7 @@ Task 7 - Single Sign-On Settings
     #. Kerberos Realm : ``f5access.onmicrosoft.com``
     #. Account name : ``host/apm-deleg.f5access.onmicrosoft.com``
     #. Account Password : ``F5twister$`` (You'll be asked to enter this password twice for confirmation)
-    #. KDC : ``10.1.20.28``
+    #. KDC : ``10.1.20.8``
     #. UPN Support : ``Enabled``
     #. SPN Pattern : ``HTTP/%s@f5access.onmicrosoft.com``
 
