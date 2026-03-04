@@ -1,9 +1,9 @@
-Lab 1: Azure AD Easy Button integration
+Lab 1: Entra ID Easy Button integration
 =============================================
 
 .. warning :: If you have any feedback on this guide, please raise an issue at https://github.com/f5devcentral/f5-agility-labs-iam/issues .
 
-In this lab, students will learn how to leverage Azure AD as an IDaaS provider while using APM as a SAML SP. Since v15.1, F5 has offered a "Guided Configuration" template to make this integration easier for administrators. This lab guide will also be accessible via a bookmark on the Win10 Edge and Chrome browsers. 
+In this lab, students will learn how to leverage Entra ID as an IDaaS provider while using APM as a SAML SP. Since v15.1, F5 has offered a "Guided Configuration" template to make this integration easier for administrators. This lab guide will also be accessible via a bookmark on the Win10 Edge and Chrome browsers. 
 
 All lab participants have been added to the F5 Access Tenant as external users. You should have received an e-mail sent to the address with which you registered for this course. If you didn't receive this e-mail, please inform your instructor.
 
@@ -13,13 +13,13 @@ This template:
 
 #. Publishes on-prem apps
 #. Enables Single Sign-on
-#. Interconnects (SAML binding) APM with an Azure AD tenant
+#. Interconnects (SAML binding) APM with an Entra ID tenant
 
-.. note :: You will notice we never connect directly to the Azure AD interface. APM will use Microsoft's Graph API to configure the AAD tenant accordingly.
+.. note :: You will notice we never connect directly to the Entra ID interface. APM will use Microsoft's Graph API to configure the AAD tenant accordingly.
 
    |image001|
 
-The video below illustrates the APM & Azure AD integration. This is **not** the **lab video**. It's simply a demo of the use-case.
+The video below illustrates the APM & Entra ID integration. This is **not** the **lab video**. It's simply a demo of the use-case.
 
 .. raw:: html
 
@@ -91,7 +91,7 @@ Task 1  - Check IIS configuration (Optional)
 Architecture of Cloud App
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. note :: Since customers often have a mixture of authenticated and non-authenticated apps running on-prem and in the public cloud, this lab utilizes an Application hosted in Azure that doesn't leverage APM for authentication. This application does leverage Azure AD and is meant simply to illustrate the user-experience with such a mixture of application types. This wordpress application is already up and running in Azure Cloud at this address ``https://wordpress-apm-aad.azurewebsites.net/``
+.. note :: Since customers often have a mixture of authenticated and non-authenticated apps running on-prem and in the public cloud, this lab utilizes an Application hosted in Azure that doesn't leverage APM for authentication. This application does leverage Entra ID and is meant simply to illustrate the user-experience with such a mixture of application types. This wordpress application is already up and running in Azure Cloud at this address ``https://wordpress-apm-aad.azurewebsites.net/``
 
    |image008|
 
@@ -100,7 +100,7 @@ Architecture of Cloud App
 
    |image009|
 
-#. This App Service is already bound with our demo Azure AD tenant.
+#. This App Service is already bound with our demo Entra ID tenant.
 
    |image010|
 
@@ -117,7 +117,7 @@ Task 1 - Publish and protect Bluesky app
 Let's start with the ``Bluesky`` application. Reminder, Bluesky does not have any ``Authentication`` enabled. 
 
 #. Either access TMUI via UDF > Access > BIG-IP > TMUI or RDP to win10 (user1/user1) and launch Edge or Chrome. Using the BIG-IP bookmark, connect to the BIG-IP user interface (admin/admin)
-#. In ``Access`` > ``Guided Configuration``, select ``Microsoft Integration`` > ``Azure AD application`` 
+#. In ``Access`` > ``Guided Configuration``, select ``Microsoft Integration`` > ``Entra ID application`` 
 
 
 |image011|
@@ -129,7 +129,7 @@ Task 2 - Configuration Properties
 #. Click ``Next`` and start the configuration
 #. Configure the page as below
 
-   #. Configuration Name : ``IIS-Bluesky-<My Name>``  Why my name ? This app will be created in Azure AD tenant and we need to differentiate all apps. Example : ``IIS-Bluesky-ChrisMi`` The chance of name conflicts increases with the number of students so if possible, please at least use your first name and two characters of your last name. You can leave ``SSO``, ``Endpoint Checks``, and ``Additional Checks`` at their defaults (not selected.)
+   #. Configuration Name : ``IIS-Bluesky-<My Name>``  Why my name ? This app will be created in Entra ID tenant and we need to differentiate all apps. Example : ``IIS-Bluesky-ChrisMi`` The chance of name conflicts increases with the number of students so if possible, please at least use your first name and two characters of your last name. You can leave ``SSO``, ``Endpoint Checks``, and ``Additional Checks`` at their defaults (not selected.)
    #. In ``Azure Service Account Details``, Select ``Copy Account Info form Existing Configuration``, and select ``IIS-baseline``, then click ``Copy``
 
       |image012|
@@ -140,8 +140,8 @@ Task 2 - Configuration Properties
 
       .. note:: For those curious, the steps to create this Azure applications are below
 
-         #. In Azure AD, create a service application under your organization's tenant directory using App Registration.
-         #. Register the App as Azure AD only single-tenant.
+         #. In Entra ID, create a service application under your organization's tenant directory using App Registration.
+         #. Register the App as Entra ID only single-tenant.
          #. Request permissions for Microsoft Graph APIs and assign the following permissions to the application:
             
             #. Application.ReadWrite.All
@@ -152,7 +152,7 @@ Task 2 - Configuration Properties
             #. Policy.ReadWrite.ApplicationConfiguration
             #. User.Read.All
          #. Grant admin consent for your organization's directory.
-         #. Copy the Client ID, Client Secret, and Tenant ID and add them to the Azure AD Application configuration.
+         #. Copy the Client ID, Client Secret, and Tenant ID and add them to the Entra ID Application configuration.
 
    #. In the guided configuration UI, Click the ``Test Connection`` button and the result should yield --> Connection is valid
 
@@ -177,7 +177,7 @@ Task 3 - Service Provider
 Task 4 - Azure Active Directory
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Double-click the ``F5 BIG-IP APM Azure AD...`` template
+#. Double-click the ``F5 BIG-IP APM Entra ID...`` template
 
    .. note :: As you notice, there are several templates available for different applications. In this lab, we will publish a generic app so we select the first template.
 
@@ -192,7 +192,7 @@ Task 4 - Azure Active Directory
     
    #. In ``User And User Groups``, click ``Add``
 
-      .. note :: We have to assign Azure AD users/group to this app, so that they can be allowed to connect to it.
+      .. note :: We have to assign Entra ID users/group to this app, so that they can be allowed to connect to it.
 
       #. In the list, click ``Assign`` for the user ``user1``. If you can't find it, search for it in the ``search`` field.
          
@@ -255,13 +255,13 @@ Task 9 - Test your deployment
 #. RDP to Win10 machine as ``user1`` and password ``user1``
 #. Open ``Google Chrome`` or the ``Microsoft Edge`` browser - both icons are on the Desktop and the Taskbar
 #. From the bookmarks list/toolbar, choose ``Bluesky`` and ignore the inevitable cert warnings.
-#. You will be redirected to Azure AD login page. Login as ``user1@f5access.onmicrosoft.com`` and hit ``Next``. The password is stored in a text file named ``azure_ad_creds.txt`` on the Win10 Desktop.
+#. You will be redirected to Entra ID login page. Login as ``user1@f5access.onmicrosoft.com`` and hit ``Next``. The password is stored in a text file named ``azure_ad_creds.txt`` on the Win10 Desktop.
 
    .. warning :: Don't reset or change the password.
 
    |image022|
 
-#. After being successfully authenticated by Azure AD, you're redirected to APM with a SAML assertion. After validating this assertion, APM allows you to access the Bluesky application. You'll want to keep your RDP session to ``Win10`` open since you'll use it again for subsequent testing.
+#. After being successfully authenticated by Entra ID, you're redirected to APM with a SAML assertion. After validating this assertion, APM allows you to access the Bluesky application. You'll want to keep your RDP session to ``Win10`` open since you'll use it again for subsequent testing.
 
    |image023|
 
@@ -274,10 +274,10 @@ In this section, we will publish the ``Vanilla`` application which like bluesky,
 Task 1 - Publish and protect Vanilla app
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Unlike Bluesky, the Vanilla application has ``Authentication`` enabled via Kerberos and because APM won't have access to an Azure AD user's password, we'll need to enable and leverage ``Kerberos Constrained Delegation``. 
+Unlike Bluesky, the Vanilla application has ``Authentication`` enabled via Kerberos and because APM won't have access to an Entra ID user's password, we'll need to enable and leverage ``Kerberos Constrained Delegation``. 
 
 #. As before, Connect to the BIG-IP GUI directly from UDF or via Win10 with admin/admin.
-#. In ``Access`` > ``Guided Configuration``, select ``Microsoft Integration`` > ``Azure AD application`` 
+#. In ``Access`` > ``Guided Configuration``, select ``Microsoft Integration`` > ``Entra ID application`` 
 
    .. note :: As you'll notice, we only deploy one application per Guided Config template.
 
@@ -304,8 +304,8 @@ Task 2 - Configuration Properties
 
       .. note:: The steps to create this Azure applications are below
 
-         #. In Azure AD, create a service application under your organization's tenant directory using App Registration.
-         #. Register the App as Azure AD only single-tenant.
+         #. In Entra ID, create a service application under your organization's tenant directory using App Registration.
+         #. Register the App as Entra ID only single-tenant.
          #. Request permissions for Microsoft Graph APIs and assign the following permissions to the application:
             
             #. Application.ReadWrite.All
@@ -316,7 +316,7 @@ Task 2 - Configuration Properties
             #. Policy.ReadWrite.ApplicationConfiguration
             #. User.Read.All
          #. Grant admin consent for your organization's directory.
-         #. Copy the Client ID, Client Secret, and Tenant ID and add them to the Azure AD Application configuration.
+         #. Copy the Client ID, Client Secret, and Tenant ID and add them to the Entra ID Application configuration.
 
    #. In the Guided Config GUI, Click the ``Test Connection`` button which should yield --> Connection is valid
 
@@ -343,7 +343,7 @@ Task 3 - Service Provider
 Task 4 - Azure Active Directory
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Double click the  ``F5 BIG-IP APM Azure AD...`` template
+#. Double click the  ``F5 BIG-IP APM Entra ID...`` template
 
    .. note :: As you can notice, there are several templates available for different applications. Here, in this lab, we will publish a generic app. So we select the first template.
 
@@ -359,7 +359,7 @@ Task 4 - Azure Active Directory
 
    #. In ``User And User Groups``, click ``Add``
 
-      .. note :: We have to assign Azure AD users/group to this app, so that they can be allowed to connect to it.
+      .. note :: We have to assign Entra ID users/group to this app, so that they can be allowed to connect to it.
 
       #. In the list, click ``Assign`` for the user ``user1``. If you can't find it, search for it in the ``search`` field.
          
@@ -409,7 +409,7 @@ Task 7 - Single Sign-On Settings
 #. In ``Credentials Source``, fill as below
 
     #. Username Source : Change this value to ``session.logon.last.username``
-    #. Clear out the text in  ``User Realm Source``. The domain is similar between Azure AD and on-prem AD so we don't need a realm variable.
+    #. Clear out the text in  ``User Realm Source``. The domain is similar between Entra ID and on-prem AD so we don't need a realm variable.
 
 #. In ``SSO Method Configuration``, fill as below
 
@@ -453,30 +453,30 @@ Task 10 - Test your deployment
 #. If you closed your RDP session to Win10, pleae re-connect as ``user1`` and password ``user1``
 #. Open ``Google Chrome`` or ``Microsoft Edge`` - the icons are on the Desktop and the Taskbar
 #. From the bookmarks menu/toolbar, select ``Vanilla`` and ignore the Cert Errors.
-#. Since you already logged into Azure AD when accessing ``BlueSky``, you may notice you didn't need to sign-in again and were automatically taken into the application. Your previous assertion was still validated but it was done transparently. If you were sent to Azure AD again for authenticaton, please use the same credentials as before: ``user1@f5access.onmicrosoft.com`` and the password is stored in a text file named ``azure_ad_creds.txt`` on the Win10 Desktop.
+#. Since you already logged into Entra ID when accessing ``BlueSky``, you may notice you didn't need to sign-in again and were automatically taken into the application. Your previous assertion was still validated but it was done transparently. If you were sent to Entra ID again for authenticaton, please use the same credentials as before: ``user1@f5access.onmicrosoft.com`` and the password is stored in a text file named ``azure_ad_creds.txt`` on the Win10 Desktop.
 
    |image037|
 
 
    
 
-#. Reminder: Since APM doesn't have a SAML user's password if it isn't the IdP, it performs server-side ``Single Sign-on`` with the Vanilla application via ``Kerberos Constrained Delegation`` in which it requests a Kerberos Ticket on behalf of the user leveraging the username found in the SAML Assertion sent by Azure AD.
+#. Reminder: Since APM doesn't have a SAML user's password if it isn't the IdP, it performs server-side ``Single Sign-on`` with the Vanilla application via ``Kerberos Constrained Delegation`` in which it requests a Kerberos Ticket on behalf of the user leveraging the username found in the SAML Assertion sent by Entra ID.
 
    |image038|
   
-#. In your already-open browser, Click the ``Bluesky`` bookmark. You'll notice you were automatically authenticated with your already-existing Azure AD session. 
+#. In your already-open browser, Click the ``Bluesky`` bookmark. You'll notice you were automatically authenticated with your already-existing Entra ID session. 
 #. Optional: enable ``Inspect mode`` in Edge or ``Dev Tools`` in Chrome, and follow the SAML redirections to understand the workflow.
 
-Section 1.4 - Leverage Azure AD to protect Cloud Apps
+Section 1.4 - Leverage Entra ID to protect Cloud Apps
 --------------------------------------------------------
 
-In this lab, we will verify that ``user1`` can access any cloud app federated with Azure AD.
+In this lab, we will verify that ``user1`` can access any cloud app federated with Entra ID.
 
-As mentioned earlier, customers often deploy applications ``on-prem`` and in ``public clouds``. If the customer uses **Azure AD as their IDaaS**, it will federate all cloud apps within this Azure AD tenant.
+As mentioned earlier, customers often deploy applications ``on-prem`` and in ``public clouds``. If the customer uses **Entra ID as their IDaaS**, it will federate all cloud apps within this Entra ID tenant.
 
-As an example, we've configured a ``Wordpress Cloud Application``. This application is **federated** with our Azure AD tenant.
+As an example, we've configured a ``Wordpress Cloud Application``. This application is **federated** with our Entra ID tenant.
 
-Since everything is handled between the App and Azure AD, you have **nothing** to configure on the APM side. In the Azure portal, we configured ``OAuth`` for the cloud app so that every user attempting to access this App would be redirected to Azure AD for Authentication. 
+Since everything is handled between the App and Entra ID, you have **nothing** to configure on the APM side. In the Azure portal, we configured ``OAuth`` for the cloud app so that every user attempting to access this App would be redirected to Entra ID for Authentication. 
 
    |image039|
 
@@ -484,8 +484,8 @@ Since everything is handled between the App and Azure AD, you have **nothing** t
 #. If not already connected, RDP to Win10 as ``user`` and password ``user``
 #. Open ``Google Chrome`` or ``Microsoft Edge`` - icons are on the Desktop and Taskbar
 #. Click on the bookmarks menu/toolbar and select ``Wordpress Cloud App``
-#. Just like before, you'll only be redirected to the Azure AD login page if your prior session expired. Accessing this app can take a while so be patient. Pay special attention to the address bar and you'll notice the redirects during the authentication process. If prompted for creds, Login as ``user1@f5access.onmicrosoft.com`` and the password is stored in a text file named ``azure_ad_creds.txt`` on the Win10 Desktop.
-#. After Azure AD authenticates (either transparently or via login,) you're redirected to the ``cloud app`` in Azure cloud, and can access to Wordpress-UDF application.
+#. Just like before, you'll only be redirected to the Entra ID login page if your prior session expired. Accessing this app can take a while so be patient. Pay special attention to the address bar and you'll notice the redirects during the authentication process. If prompted for creds, Login as ``user1@f5access.onmicrosoft.com`` and the password is stored in a text file named ``azure_ad_creds.txt`` on the Win10 Desktop.
+#. After Entra ID authenticates (either transparently or via login,) you're redirected to the ``cloud app`` in Azure cloud, and can access to Wordpress-UDF application.
 
    |image040|
 
@@ -493,7 +493,7 @@ Since everything is handled between the App and Azure AD, you have **nothing** t
 Section 1.5 - Clean up the Lab
 --------------------------------------------------------
 
-.. warning :: In order to keep the Azure AD tenant clean, it is important you delete your application in the Guided Configuration, when your demo is finished.
+.. warning :: In order to keep the Entra ID tenant clean, it is important you delete your application in the Guided Configuration, when your demo is finished.
 
 #. In Guided Configuration menu, click on the ``Undeploy`` icon for IIS-Bluesky, then ``OK``. After it finishes, do the same for IIS-Vanilla. You don't need to do anything for IIS-baseline.
 
@@ -503,7 +503,7 @@ Section 1.5 - Clean up the Lab
 
    |image042|
 
-.. note :: Thanks a lot, you cleaned up your config on both sides (APM and AAD). FYI, all old deployments will be deleted automatically in Azure AD.
+.. note :: Thanks a lot, you cleaned up your config on both sides (APM and AAD). FYI, all old deployments will be deleted automatically in Entra ID.
 
 
 
