@@ -3,11 +3,7 @@ Lab 1: Entra ID Easy Button integration
 
 .. warning :: If you have any feedback on this guide, please raise an issue at https://github.com/f5devcentral/f5-agility-labs-iam/issues .
 
-In this lab, students will learn how to leverage Entra ID as an IDaaS provider while using APM as a SAML SP. Since v15.1, F5 has offered a "Guided Configuration" template to make this integration easier for administrators. This lab guide will also be accessible via a bookmark on the Win10 Edge and Chrome browsers. 
-
-All lab participants have been added to the F5 Access Tenant as external users. You should have received an e-mail sent to the address with which you registered for this course. If you didn't receive this e-mail, please inform your instructor.
-
-You should have received an invitation to the F5Access tenant via the e-mail you used to register for this course. Please inform the instructor if you haven't received that e-mail.
+In this lab, students will learn how to leverage Entra ID as an IDaaS provider while using APM as a SAML SP. Since v15.1, F5 has offered a "Guided Configuration" template to make this integration easier for administrators. This lab guide will also be accessible via a bookmark on the Win11 Edge and Chrome browsers. 
 
 This template:
 
@@ -68,7 +64,7 @@ This application is **authenticated** by Kerberos so a **Single Sign-On** will b
 
 
 
-Task 1  - Check IIS configuration (Optional)
+Task 1 (Optional)  - Check IIS configuration (Optional)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -116,7 +112,7 @@ Task 1 - Publish and protect Bluesky app
 
 Let's start with the ``Bluesky`` application. Reminder, Bluesky does not have any ``Authentication`` enabled. 
 
-#. Either access TMUI via UDF > Access > BIG-IP > TMUI or RDP to win10 (user1/user1) and launch Edge or Chrome. Using the BIG-IP bookmark, connect to the BIG-IP user interface (admin/admin)
+#. Either access TMUI via UDF > Access > BIG-IP > TMUI or RDP to win11 (f5access\user/user) and launch Edge or Chrome. You can also login using Guacamole via the SuperJump Host (Access > Superjump > Guacamole (user/user) Using the BIG-IP bookmark, connect to the BIG-IP user interface (admin/admin)
 #. In ``Access`` > ``Guided Configuration``, select ``Microsoft Integration`` > ``Azure AD application`` 
 
 
