@@ -13,7 +13,7 @@ This template:
 
 .. note :: You will notice we never connect directly to the Entra ID interface. APM will use Microsoft's Graph API to configure the AAD tenant accordingly.
 
-   |image001|
+   |image1001|
 
 The video below illustrates the APM & Entra ID integration. This is **not** the **lab video**. It's simply a demo of the use-case.
 
