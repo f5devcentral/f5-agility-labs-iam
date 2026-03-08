@@ -68,7 +68,7 @@ Task 1 (Optional)  - Check IIS configuration (Optional)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-#. RDP to IIS with ``f5access\user1`` as user, and ``user1`` as password
+#. RDP to IIS with ``f5access\\user`` as user, and ``user`` as password
 #. Click ``IIS manager`` icon in the taskbar
 
    |image005|
@@ -112,7 +112,7 @@ Task 1 - Publish and protect Bluesky app
 
 Let's start with the ``Bluesky`` application. Reminder, Bluesky does not have any ``Authentication`` enabled. 
 
-#. Either access TMUI via UDF > Access > BIG-IP > TMUI or RDP to win11 (f5access\user/user) and launch Edge or Chrome. You can also login using Guacamole via the SuperJump Host (Access > Superjump > Guacamole (user/user) Using the BIG-IP bookmark, connect to the BIG-IP user interface (admin/admin)
+#. Either access TMUI via UDF > Access > BIG-IP > TMUI or RDP to win11 (f5access\\user/user) and launch Edge or Chrome. You can also login using Guacamole via the SuperJump Host (Access > Superjump > Guacamole (user/user) Using the BIG-IP bookmark, connect to the BIG-IP user interface (admin/admin)
 #. In ``Access`` > ``Guided Configuration``, select ``Microsoft Integration`` > ``Azure AD application`` 
 
 
