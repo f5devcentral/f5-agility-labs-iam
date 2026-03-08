@@ -186,18 +186,18 @@ Task 4 - Azure Active Directory
       |image015|
 
     
-   #. In ``User And User Groups``, click ``Add``
+   #. In ``User And User Groups``, click ``Assign``
 
-      .. note :: We have to assign Entra ID users/group to this app, so that they can be allowed to connect to it.
+      .. note :: We have to assign Entra ID users/group to this app, so that they can be allowed to connect to it. Changes made here automatically configure app permissions in Entra ID.
 
-      #. In the list, click ``Assign`` for the user ``user1``. If you can't find it, search for it in the ``search`` field.
+      #. In the list, click ``Assign`` for the user ``user``. If you can't find it, search for it in the ``search`` field. 
          
 
          |image016|
 
                 
       #. Click ``Close``
-      #. You can see ``user1`` in the list.
+      #. You can see ``user`` in the list.
 
          |image017|
 
@@ -221,7 +221,7 @@ Task 6 - Pool Properties
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #. Leave the ``Select a Pool` setting as ``Create New``
-#. In Pool Servers, select ``/Common/10.1.20.29`` from the drop-down menu. This is the Lab's IIS server whose config you may have viewed earlier. 
+#. In Pool Servers, select ``/Common/10.1.20.29`` from the drop-down menu. This is the Lab's IIS server whose config you may have viewed earlier. You don't need to click the add button. Simply selecting from the drop-down with result in the pool member being added. 
 #. Click ``Save & Next``
 
    |image019|
@@ -248,16 +248,16 @@ Task 8 - Deploy your app template
 Task 9 - Test your deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. RDP to Win10 machine as ``user1`` and password ``user1``
+#. RDP to the Win11 machine as ``f5access\user`` and password ``user`` or use Guacamole.
 #. Open ``Google Chrome`` or the ``Microsoft Edge`` browser - both icons are on the Desktop and the Taskbar
 #. From the bookmarks list/toolbar, choose ``Bluesky`` and ignore the inevitable cert warnings.
-#. You will be redirected to Entra ID login page. Login as ``user1@f5access.onmicrosoft.com`` and hit ``Next``. The password is stored in a text file named ``azure_ad_creds.txt`` on the Win10 Desktop.
+#. You will be redirected to Entra ID login page. Login as ``user@f5access.onmicrosoft.com`` and hit ``Next``. The password is stored in a text file named ``azure_ad_creds.txt`` on the Win11 Desktop.
 
    .. warning :: Don't reset or change the password.
 
    |image022|
 
-#. After being successfully authenticated by Entra ID, you're redirected to APM with a SAML assertion. After validating this assertion, APM allows you to access the Bluesky application. You'll want to keep your RDP session to ``Win10`` open since you'll use it again for subsequent testing.
+#. After being successfully authenticated by Entra ID, you're redirected to APM with a SAML assertion. After validating this assertion, APM allows you to access the Bluesky application. You'll want to keep your RDP session to ``Win11`` open since you'll use it again for subsequent testing.
 
    |image023|
 
@@ -272,7 +272,7 @@ Task 1 - Publish and protect Vanilla app
 
 Unlike Bluesky, the Vanilla application has ``Authentication`` enabled via Kerberos and because APM won't have access to an Entra ID user's password, we'll need to enable and leverage ``Kerberos Constrained Delegation``. 
 
-#. As before, Connect to the BIG-IP GUI directly from UDF or via Win10 with admin/admin.
+#. As before, Connect to the BIG-IP GUI directly from UDF or via Win11 with admin/admin.
 #. In ``Access`` > ``Guided Configuration``, select ``Microsoft Integration`` > ``Azure AD application`` 
 
    .. note :: As you'll notice, we only deploy one application per Guided Config template.
@@ -339,11 +339,10 @@ Task 3 - Service Provider
 Task 4 - Azure Active Directory
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Double click the  ``F5 BIG-IP APM Entra ID...`` template
+#. Double click the  ``F5 BIG-IP APM Azure AD...`` template
 
    .. note :: As you can notice, there are several templates available for different applications. Here, in this lab, we will publish a generic app. So we select the first template.
 
-#. Click ``Add``
 #. In the new screen, configure as below.
 
    #. Signing Key : ``default.key``
@@ -357,12 +356,12 @@ Task 4 - Azure Active Directory
 
       .. note :: We have to assign Entra ID users/group to this app, so that they can be allowed to connect to it.
 
-      #. In the list, click ``Assign`` for the user ``user1``. If you can't find it, search for it in the ``search`` field.
+      #. In the list, click ``Assign`` for the user ``user``. If you can't find it, search for it in the ``search`` field.
          
          |image029|
 
       #. Click ``Close``
-      #. You can see ``user1`` in the list.
+      #. You can see ``user`` in the list.
 
          |image030|
 
@@ -446,10 +445,10 @@ Task 9 - Deploy your app template
 Task 10 - Test your deployment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. If you closed your RDP session to Win10, pleae re-connect as ``user1`` and password ``user1``
+#. If you closed your RDP session to Win11, pleae re-connect as ``user`` and password ``user``
 #. Open ``Google Chrome`` or ``Microsoft Edge`` - the icons are on the Desktop and the Taskbar
 #. From the bookmarks menu/toolbar, select ``Vanilla`` and ignore the Cert Errors.
-#. Since you already logged into Entra ID when accessing ``BlueSky``, you may notice you didn't need to sign-in again and were automatically taken into the application. Your previous assertion was still validated but it was done transparently. If you were sent to Entra ID again for authenticaton, please use the same credentials as before: ``user1@f5access.onmicrosoft.com`` and the password is stored in a text file named ``azure_ad_creds.txt`` on the Win10 Desktop.
+#. Since you already logged into Entra ID when accessing ``BlueSky``, you may notice you didn't need to sign-in again and were automatically taken into the application. Your previous assertion was still validated but it was done transparently. If you were sent to Entra ID again for authenticaton, please use the same credentials as before: ``user1@f5access.onmicrosoft.com`` and the password is stored in a text file named ``azure_ad_creds.txt`` on the Win11 Desktop.
 
    |image037|
 
@@ -477,10 +476,10 @@ Since everything is handled between the App and Entra ID, you have **nothing** t
    |image039|
 
 
-#. If not already connected, RDP to Win10 as ``user`` and password ``user``
+#. If not already connected, RDP to Win11 as ``user`` and password ``user``
 #. Open ``Google Chrome`` or ``Microsoft Edge`` - icons are on the Desktop and Taskbar
 #. Click on the bookmarks menu/toolbar and select ``Wordpress Cloud App``
-#. Just like before, you'll only be redirected to the Entra ID login page if your prior session expired. Accessing this app can take a while so be patient. Pay special attention to the address bar and you'll notice the redirects during the authentication process. If prompted for creds, Login as ``user1@f5access.onmicrosoft.com`` and the password is stored in a text file named ``azure_ad_creds.txt`` on the Win10 Desktop.
+#. Just like before, you'll only be redirected to the Entra ID login page if your prior session expired. Accessing this app can take a while so be patient. Pay special attention to the address bar and you'll notice the redirects during the authentication process. If prompted for creds, Login as ``user@f5access.onmicrosoft.com`` and the password is stored in a text file named ``azure_ad_creds.txt`` on the Win10 Desktop.
 #. After Entra ID authenticates (either transparently or via login,) you're redirected to the ``cloud app`` in Azure cloud, and can access to Wordpress-UDF application.
 
    |image040|
@@ -503,7 +502,7 @@ Section 1.5 - Clean up the Lab
 
 
 
-.. |image001| image:: media/lab01/001.png
+.. |image001| image:: media/lab01/1001.png
 .. |image002| image:: media/lab01/002.png
 .. |image003| image:: media/lab01/003.png
 .. |image004| image:: media/lab01/004.png
@@ -535,7 +534,7 @@ Section 1.5 - Clean up the Lab
 .. |image030| image:: media/lab01/030.png
 .. |image031| image:: media/lab01/031.png
 .. |image032| image:: media/lab01/032.png
-.. |image033| image:: media/lab01/033.png
+.. |image033| image:: media/lab01/1020.png
 .. |image034| image:: media/lab01/034.png
 .. |image035| image:: media/lab01/035.png
 .. |image036| image:: media/lab01/036.png
