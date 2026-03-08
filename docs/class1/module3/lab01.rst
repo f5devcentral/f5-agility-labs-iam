@@ -68,7 +68,7 @@ Task 1 (Optional)  - Check IIS configuration (Optional)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-#. RDP to IIS with ``f5access\\user`` as user, and ``user`` as password
+#. RDP to IIS with ``f5access\user`` as user, and ``user`` as password
 #. Click ``IIS manager`` icon in the taskbar
 
    |image005|
