@@ -221,7 +221,7 @@ Task 6 - Pool Properties
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #. Leave the ``Select a Pool` setting as ``Create New``
-#. In Pool Servers, select ``/Common/10.1.20.29`` from the drop-down menu. This is the Lab's IIS server whose config you may have viewed earlier. You don't need to click the add button. Simply selecting from the drop-down with result in the pool member being added. 
+#. In Pool Servers, select ``/Common/10.1.20.9`` from the drop-down menu. This is the Lab's IIS server whose config you may have viewed earlier. You don't need to click the add button. Simply selecting from the drop-down with result in the pool member being added. 
 #. Click ``Save & Next``
 
    |image019|
@@ -448,7 +448,7 @@ Task 10 - Test your deployment
 #. If you closed your RDP session to Win11, pleae re-connect as ``user`` and password ``user``
 #. Open ``Google Chrome`` or ``Microsoft Edge`` - the icons are on the Desktop and the Taskbar
 #. From the bookmarks menu/toolbar, select ``Vanilla`` and ignore the Cert Errors.
-#. Since you already logged into Entra ID when accessing ``BlueSky``, you may notice you didn't need to sign-in again and were automatically taken into the application. Your previous assertion was still validated but it was done transparently. If you were sent to Entra ID again for authenticaton, please use the same credentials as before: ``user1@f5access.onmicrosoft.com`` and the password is stored in a text file named ``azure_ad_creds.txt`` on the Win11 Desktop.
+#. Since you already logged into Entra ID when accessing ``BlueSky``, you may notice you didn't need to sign-in again and were automatically taken into the application. Your previous assertion was still validated but it was done transparently. If you were sent to Entra ID again for authenticaton, please use the same credentials as before: ``user@f5access.onmicrosoft.com`` and the password is stored in a text file named ``azure_ad_creds.txt`` on the Win11 Desktop.
 
    |image037|
 
@@ -465,7 +465,7 @@ Task 10 - Test your deployment
 Section 1.4 - Leverage Entra ID to protect Cloud Apps
 --------------------------------------------------------
 
-In this lab, we will verify that ``user1`` can access any cloud app federated with Entra ID.
+In this lab, we will verify that ``user`` can access any cloud app federated with Entra ID.
 
 As mentioned earlier, customers often deploy applications ``on-prem`` and in ``public clouds``. If the customer uses **Entra ID as their IDaaS**, it will federate all cloud apps within this Entra ID tenant.
 
